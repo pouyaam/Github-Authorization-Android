@@ -30,10 +30,10 @@ class LoginUriActivity : Activity() {
                 val accessTokenJob = CoroutineScope(Dispatchers.IO).launch {
                     val response = accessTokenDataSource.accessToken(
                         RequestAccessToken(
-                            "$CLIENT_ID",
-                            "$CLIENT_SECRET",
+                            CLIENT_ID,
+                            CLIENT_SECRET,
                             code,
-                            "$REDIRECT_URI",
+                            REDIRECT_URI,
                             "0"
                         )
                     ).await()
