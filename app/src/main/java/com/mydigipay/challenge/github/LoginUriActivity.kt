@@ -1,19 +1,15 @@
 package com.mydigipay.challenge.github
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import com.mydigipay.challenge.network.oauth.RequestAccessToken
-import com.mydigipay.challenge.repository.oauth.AccessTokenDataSource
-import com.mydigipay.challenge.repository.token.TokenRepository
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.login_uri_activity.*
 import kotlinx.coroutines.*
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class LoginUriActivity : Activity() {
-    private val tokenRepository: TokenRepository by inject()
-    private val accessTokenDataSource: AccessTokenDataSource by inject()
 
+class LoginUriActivity : AppCompatActivity() {
+    private lateinit var viewModel: LoginUriViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_uri_activity)
@@ -21,29 +17,18 @@ class LoginUriActivity : Activity() {
 
     override fun onResume() {
         super.onResume()
-
-        val intent = intent
+        viewModel = getViewModel()
         if (Intent.ACTION_VIEW == intent.action) {
-            val uri = intent.data
-            val code = uri?.getQueryParameter("code") ?: ""
-            code.takeIf { it.isNotEmpty() }?.let { code ->
+            val code = intent.data?.getQueryParameter(KEY_CODE) ?: ""
+            code.takeIf { code.isNotEmpty() }?.let { code ->
                 val accessTokenJob = CoroutineScope(Dispatchers.IO).launch {
-                    val response = accessTokenDataSource.accessToken(
-                        RequestAccessToken(
-                            CLIENT_ID,
-                            CLIENT_SECRET,
-                            code,
-                            REDIRECT_URI,
-                            "0"
-                        )
-                    ).await()
-
-                    tokenRepository.saveToken(response.accessToken).await()
+                    val response = viewModel.fetchAccescToken(code).await()
+                    viewModel.saveToken(response.accessToken).await()
                 }
 
                 accessTokenJob.invokeOnCompletion {
                     CoroutineScope(Dispatchers.Main).launch {
-                        token.text = tokenRepository.readToken().await()
+                        token.text = viewModel.getToken().await()
                         this.cancel()
                         accessTokenJob.cancelAndJoin()
                     }
@@ -52,5 +37,9 @@ class LoginUriActivity : Activity() {
         }
 
 
+    }
+
+    companion object {
+        const val KEY_CODE = "code"
     }
 }
