@@ -48,6 +48,6 @@ val networkModule = module {
     }
 
     single {
-        TokenRepositoryImpl(get()) as TokenRepository
+        TokenRepositoryImpl(get(), get()) as TokenRepository
     }
 }

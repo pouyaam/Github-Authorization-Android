@@ -8,6 +8,7 @@ import retrofit2.Callback
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
+import kotlin.coroutines.resume
 
 suspend fun <T, R> Call<T>.awaitResult(map: (T) -> R): Result<R> =
     suspendCancellableCoroutine { continuation ->
