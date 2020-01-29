@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.presentation
+package com.mydigipay.challenge.presentation.model
 
 import java.io.Serializable
 

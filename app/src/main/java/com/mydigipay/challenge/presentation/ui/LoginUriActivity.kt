@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.presentation
+package com.mydigipay.challenge.presentation.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +11,7 @@ import com.github.mohammadsianaki.core.model.ErrorHolder
 import com.github.mohammadsianaki.core.model.ResourcesState
 import com.mydigipay.challenge.github.R
 import com.mydigipay.challenge.github.databinding.LoginUriActivityBinding
+import com.mydigipay.challenge.presentation.model.AccessTokenModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 

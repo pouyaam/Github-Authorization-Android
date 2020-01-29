@@ -3,8 +3,8 @@ package com.mydigipay.challenge.domain.interactors
 import com.github.mohammadsianaki.core.model.Result
 import com.mydigipay.challenge.domain.entities.AccessTokenEntity
 import com.mydigipay.challenge.domain.repositories.token.TokenRepository
-import com.mydigipay.challenge.presentation.AccessTokenRequestConfigs
-import com.mydigipay.challenge.presentation.LoginUriViewModel
+import com.mydigipay.challenge.presentation.model.AccessTokenRequestConfigs
+import com.mydigipay.challenge.presentation.ui.LoginUriViewModel
 
 class GetAccessTokenUsecase(private val repository: TokenRepository) :
     Usecase<Result<AccessTokenEntity>>() {
