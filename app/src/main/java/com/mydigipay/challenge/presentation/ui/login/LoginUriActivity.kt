@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.presentation.ui
+package com.mydigipay.challenge.presentation.ui.login
 
 import android.content.Intent
 import android.os.Bundle

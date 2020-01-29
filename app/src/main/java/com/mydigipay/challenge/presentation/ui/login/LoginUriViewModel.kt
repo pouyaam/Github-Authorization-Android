@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.presentation.ui
+package com.mydigipay.challenge.presentation.ui.login
 
 import android.util.Log
 import androidx.lifecycle.LiveData

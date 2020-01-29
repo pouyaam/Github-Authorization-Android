@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mydigipay.challenge.github">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name="com.mydigipay.challenge.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name="com.mydigipay.challenge.App">
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.mydigipay.challenge.presentation.ui.github.GithubActivity"
+            android:label="@string/title_activity_github"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name="com.mydigipay.challenge.presentation.MainActivity"
             android:label="@string/app_name"
@@ -20,16 +26,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.mydigipay.challenge.presentation.ui.LoginUriActivity">
+        <activity android:name="com.mydigipay.challenge.presentation.ui.login.LoginUriActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="challenge" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

@@ -6,7 +6,7 @@ import com.mydigipay.challenge.data.TokenRepositoryImpl
 import com.mydigipay.challenge.di.accessTokenModule
 import com.mydigipay.challenge.di.networkModule
 import com.mydigipay.challenge.domain.interactors.GetAccessTokenUsecase
-import com.mydigipay.challenge.presentation.ui.LoginUriViewModel
+import com.mydigipay.challenge.presentation.ui.login.LoginUriViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
@@ -25,7 +25,11 @@ class App : Application() {
     }
 
     val appModule = module {
-        viewModel { LoginUriViewModel(get()) }
+        viewModel {
+            LoginUriViewModel(
+                get()
+            )
+        }
         factory { TokenRepositoryImpl(get(), get()) }
         factory { GetAccessTokenUsecase(get()) }
         single(named(APPLICATION_CONTEXT)) { applicationContext }
