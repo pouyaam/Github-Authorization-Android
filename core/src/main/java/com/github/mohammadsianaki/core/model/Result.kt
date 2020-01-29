@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.core.model
+package com.github.mohammadsianaki.core.model
 
 sealed class Result<out T> {
     data class Success<T>(val value: T) : Result<T>()

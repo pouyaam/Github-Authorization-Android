@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.core.model
+package com.github.mohammadsianaki.core.model
 
 data class Resource<out T>(
     val resourcesState: ResourcesState,

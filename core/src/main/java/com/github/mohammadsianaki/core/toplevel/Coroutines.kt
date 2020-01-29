@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.core.toplevel
+package com.github.mohammadsianaki.core.toplevel
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

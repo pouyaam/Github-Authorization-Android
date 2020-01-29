@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.core.extenstion
+package com.github.mohammadsianaki.core.extenstion
 
 import android.view.View
 

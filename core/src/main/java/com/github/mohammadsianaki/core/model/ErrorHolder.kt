@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.core.model
+package com.github.mohammadsianaki.core.model
 
 sealed class ErrorHolder(override val message: String) : Throwable(message) {
     data class NetworkConnection(

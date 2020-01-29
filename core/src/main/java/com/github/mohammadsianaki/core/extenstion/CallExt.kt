@@ -1,14 +1,13 @@
-package com.mydigipay.challenge.core.extenstion
+package com.github.mohammadsianaki.core.extenstion
 
-import com.mydigipay.challenge.core.model.ErrorHolder
-import com.mydigipay.challenge.core.model.Result
+import com.github.mohammadsianaki.core.model.ErrorHolder
+import com.github.mohammadsianaki.core.model.Result
 import kotlinx.coroutines.suspendCancellableCoroutine
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
-import kotlin.coroutines.resume
 
 suspend fun <T, R> Call<T>.awaitResult(map: (T) -> R): Result<R> =
     suspendCancellableCoroutine { continuation ->
