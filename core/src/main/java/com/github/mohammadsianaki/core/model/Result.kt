@@ -14,3 +14,22 @@ inline fun <R, T> Result<T>.fold(
         is Result.Failure -> ifFailure(error)
     }
 }
+
+inline fun <R1, R2> Result<R1>.flatMap(action: (R1) -> Result<R2>): Result<R2> =
+    when (this) {
+        is Result.Success -> action(this.value)
+        is Result.Failure -> this
+    }
+
+inline fun <R1, R2> Result<R1>.map(action: (R1) -> R2): Result<R2> =
+    when (this) {
+        is Result.Success -> Result.Success(action(this.value))
+        is Result.Failure -> this
+    }
+
+fun <R, T : R> Result<T>.getOrDefault(defaultValue: R): R {
+    return when (this) {
+        is Result.Success -> value
+        is Result.Failure -> defaultValue
+    }
+}
