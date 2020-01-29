@@ -3,8 +3,9 @@ package com.mydigipay.challenge.github
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import kotlinx.android.synthetic.main.login_uri_activity.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 
@@ -21,22 +22,12 @@ class LoginUriActivity : AppCompatActivity() {
         if (Intent.ACTION_VIEW == intent.action) {
             val code = intent.data?.getQueryParameter(KEY_CODE) ?: ""
             code.takeIf { code.isNotEmpty() }?.let { code ->
-                val accessTokenJob = CoroutineScope(Dispatchers.IO).launch {
-                    val response = viewModel.fetchAccescToken(code).await()
-                    viewModel.saveToken(response.accessToken).await()
-                }
-
-                accessTokenJob.invokeOnCompletion {
-                    CoroutineScope(Dispatchers.Main).launch {
-                        token.text = viewModel.getToken().await()
-                        this.cancel()
-                        accessTokenJob.cancelAndJoin()
-                    }
+                lifecycleScope.launch {
+                    viewModel.fetchAccessToken(code)
+                    token.text = viewModel.getToken()
                 }
             } ?: run { finish() }
         }
-
-
     }
 
     companion object {

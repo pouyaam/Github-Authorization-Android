@@ -1,34 +1,49 @@
 package com.mydigipay.challenge.github
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.mydigipay.challenge.core.model.fold
+import com.mydigipay.challenge.core.toplevel.awaitIO
 import com.mydigipay.challenge.network.oauth.RequestAccessToken
-import com.mydigipay.challenge.network.oauth.ResponseAccessToken
 import com.mydigipay.challenge.repository.oauth.AccessTokenDataSource
 import com.mydigipay.challenge.repository.token.TokenRepository
-import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.launch
 
 class LoginUriViewModel(
     private val tokenRepository: TokenRepository,
     private val accessTokenDataSource: AccessTokenDataSource
 ) : ViewModel() {
 
-    fun fetchAccescToken(code: String): Deferred<ResponseAccessToken> {
-        return accessTokenDataSource.accessToken(
-            RequestAccessToken(
-                CLIENT_ID,
-                CLIENT_SECRET,
-                code,
-                REDIRECT_URI,
-                "0"
+    suspend fun fetchAccessToken(code: String) {
+        viewModelScope.launch {
+            awaitIO {
+                accessTokenDataSource.accessToken(
+                    RequestAccessToken(
+                        CLIENT_ID,
+                        CLIENT_SECRET,
+                        code,
+                        REDIRECT_URI,
+                        "0"
+                    )
+                )
+            }.fold(
+                ifSuccess = {
+                    saveToken(it.accessToken)
+                },
+                ifFailure = {
+
+                }
             )
-        )
+        }
     }
 
-    fun saveToken(accessToken: String): Deferred<Unit> {
-        return tokenRepository.saveToken(accessToken)
+    suspend fun saveToken(accessToken: String) {
+        viewModelScope.launch {
+            awaitIO {
+                awaitIO { tokenRepository.saveToken(accessToken) }
+            }
+        }
     }
 
-    fun getToken(): Deferred<String> {
-        return tokenRepository.readToken()
-    }
+    suspend fun getToken(): String = tokenRepository.readToken()
 }
