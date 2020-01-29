@@ -2,7 +2,7 @@ package com.mydigipay.challenge.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.mydigipay.challenge.domain.repositories.token.TokenRepository
-import com.mydigipay.challenge.domain.repositories.token.TokenRepositoryImpl
+import com.mydigipay.challenge.data.TokenRepositoryImpl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

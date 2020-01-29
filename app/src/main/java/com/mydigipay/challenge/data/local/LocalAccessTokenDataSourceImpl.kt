@@ -1,6 +1,7 @@
-package com.mydigipay.challenge.domain.repositories.token.local
+package com.mydigipay.challenge.data.local
 
 import android.content.SharedPreferences
+import com.mydigipay.challenge.domain.repositories.token.LocalAccessTokenDataSource
 
 private const val TOKEN = "TOKEN"
 

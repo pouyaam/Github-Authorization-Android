@@ -1,8 +1,8 @@
 package com.mydigipay.challenge.di
 
-import com.mydigipay.challenge.data.AccessTokenService
-import com.mydigipay.challenge.domain.repositories.token.remote.RemoteAccessTokenDataSource
-import com.mydigipay.challenge.domain.repositories.token.remote.RemoteAccessTokenDataSourceImpl
+import com.mydigipay.challenge.data.api.AccessTokenService
+import com.mydigipay.challenge.domain.repositories.token.RemoteAccessTokenDataSource
+import com.mydigipay.challenge.data.RemoteAccessTokenDataSourceImpl
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit

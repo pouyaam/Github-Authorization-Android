@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.mydigipay.challenge.github.R
-import kotlinx.android.synthetic.main.login_uri_activity.*
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -25,7 +24,6 @@ class LoginUriActivity : AppCompatActivity() {
             code.takeIf { code.isNotEmpty() }?.let { code ->
                 lifecycleScope.launch {
                     viewModel.fetchAccessToken(code)
-                    token.text = viewModel.getToken()
                 }
             } ?: run { finish() }
         }

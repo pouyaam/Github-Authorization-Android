@@ -3,16 +3,12 @@ package com.mydigipay.challenge.domain.repositories.token
 import com.github.mohammadsianaki.core.model.Result
 import com.mydigipay.challenge.domain.entities.AccessTokenEntity
 
-interface TokenRepository {
-    suspend fun fetchAccessToken(
+interface RemoteAccessTokenDataSource {
+    suspend fun getAccessToken(
         clientId: String,
         clientSecret: String,
         code: String,
-        redirectUri: String,
+        redirectUrl: String,
         state: String
     ): Result<AccessTokenEntity>
-
-    suspend fun saveAccessToken(token: String)
-
-    suspend fun readAccessToken(): String
 }
