@@ -5,7 +5,10 @@ import androidx.preference.PreferenceManager
 import com.mydigipay.challenge.data.TokenRepositoryImpl
 import com.mydigipay.challenge.di.accessTokenModule
 import com.mydigipay.challenge.di.networkModule
+import com.mydigipay.challenge.domain.interactors.GetAccessTokenUsecase
+import com.mydigipay.challenge.presentation.LoginUriViewModel
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -22,7 +25,9 @@ class App : Application() {
     }
 
     val appModule = module {
+        viewModel { LoginUriViewModel(get()) }
         factory { TokenRepositoryImpl(get(), get()) }
+        factory { GetAccessTokenUsecase(get()) }
         single(named(APPLICATION_CONTEXT)) { applicationContext }
         single { PreferenceManager.getDefaultSharedPreferences(get()) }
     }

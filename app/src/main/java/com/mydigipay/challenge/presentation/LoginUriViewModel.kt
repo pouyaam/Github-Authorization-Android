@@ -1,5 +1,6 @@
 package com.mydigipay.challenge.presentation
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -34,6 +35,7 @@ class LoginUriViewModel(
                 },
                 ifFailure = {
                     it?.let {
+                        Log.d("<<<", it.message)
                         liveData.value = Resource(ResourcesState.Failure, null, it)
                     }
                 }
