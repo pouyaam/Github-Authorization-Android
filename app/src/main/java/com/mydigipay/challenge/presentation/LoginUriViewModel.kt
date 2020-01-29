@@ -3,7 +3,6 @@ package com.mydigipay.challenge.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.mohammadsianaki.core.toplevel.awaitIO
-import com.mydigipay.challenge.domain.repositories.oauth.AccessTokenDataSource
 import com.mydigipay.challenge.domain.repositories.token.TokenRepository
 import kotlinx.coroutines.launch
 
