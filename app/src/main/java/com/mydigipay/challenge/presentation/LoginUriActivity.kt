@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.observe
 import com.mydigipay.challenge.github.R
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -26,6 +27,9 @@ class LoginUriActivity : AppCompatActivity() {
                     viewModel.fetchAccessToken(code)
                 }
             } ?: run { finish() }
+        }
+        viewModel.getLiveData().observe(this) {
+
         }
     }
 
