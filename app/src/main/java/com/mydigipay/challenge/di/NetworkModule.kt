@@ -1,8 +1,8 @@
-package com.mydigipay.challenge.network.di
+package com.mydigipay.challenge.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.mydigipay.challenge.repository.token.TokenRepository
-import com.mydigipay.challenge.repository.token.TokenRepositoryImpl
+import com.mydigipay.challenge.domain.repositories.token.TokenRepository
+import com.mydigipay.challenge.domain.repositories.token.TokenRepositoryImpl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -34,7 +34,7 @@ val networkModule = module {
             .readTimeout(get(named(READ_TIMEOUT)), TimeUnit.MILLISECONDS)
             .writeTimeout(get(named(WRITE_TIMEOUT)), TimeUnit.MILLISECONDS)
             .connectTimeout(get(named(CONNECTION_TIMEOUT)), TimeUnit.MILLISECONDS)
-            .addInterceptor(get())
+            .addInterceptor(get<HttpLoggingInterceptor>())
             .build()
     }
 

@@ -1,10 +1,10 @@
-package com.mydigipay.challenge.app
+package com.mydigipay.challenge
 
 import android.app.Application
 import androidx.preference.PreferenceManager
-import com.mydigipay.challenge.network.di.accessTokenModule
-import com.mydigipay.challenge.network.di.networkModule
-import com.mydigipay.challenge.repository.token.TokenRepositoryImpl
+import com.mydigipay.challenge.di.accessTokenModule
+import com.mydigipay.challenge.di.networkModule
+import com.mydigipay.challenge.domain.repositories.token.TokenRepositoryImpl
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.core.qualifier.named

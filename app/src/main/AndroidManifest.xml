@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="com.mydigipay.challenge.app.App">
+        android:name="com.mydigipay.challenge.App">
         <activity
-            android:name="com.mydigipay.challenge.github.MainActivity"
+            android:name="com.mydigipay.challenge.github.com.mydigipay.challenge.presentation.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.mydigipay.challenge.github.LoginUriActivity">
+        <activity android:name="com.mydigipay.challenge.github.com.mydigipay.challenge.presentation.LoginUriActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
