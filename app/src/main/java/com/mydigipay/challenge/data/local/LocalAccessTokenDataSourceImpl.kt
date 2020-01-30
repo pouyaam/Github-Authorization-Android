@@ -11,6 +11,5 @@ class LocalAccessTokenDataSourceImpl(private val sharedPreferences: SharedPrefer
     override suspend fun saveToken(token: String) =
         awaitIO { sharedPreferences.edit().apply { putString(TOKEN, token) }.apply() }
 
-    override suspend fun readToken(): String =
-        awaitIO { sharedPreferences.getString(TOKEN, "") ?: "" }
+    override fun readToken(): String = sharedPreferences.getString(TOKEN, "") ?: ""
 }

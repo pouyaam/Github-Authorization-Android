@@ -14,5 +14,5 @@ interface TokenRepository {
 
     suspend fun saveAccessToken(token: String)
 
-    suspend fun readAccessToken(): String
+    fun readAccessToken(): String
 }

@@ -37,7 +37,7 @@ class TokenRepositoryImpl(
         localAccessTokenDataSource.saveToken(token)
     }
 
-    override suspend fun readAccessToken(): String {
+    override fun readAccessToken(): String {
         return localAccessTokenDataSource.readToken()
     }
 }
