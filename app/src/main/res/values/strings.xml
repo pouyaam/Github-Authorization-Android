@@ -4,4 +4,8 @@
     <string name="authorize">AUTHORIZE</string>
     <string name="title_activity_github">GithubActivity</string>
     <string name="action_search">Search</string>
+    <string name="issues">Issues</string>
+    <string name="stragazers">Stragazers</string>
+    <string name="forks">Forks</string>
+    <string name="watchers">Watchers</string>
 </resources>
