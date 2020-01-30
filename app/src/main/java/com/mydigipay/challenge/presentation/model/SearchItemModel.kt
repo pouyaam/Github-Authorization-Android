@@ -1,5 +1,7 @@
 package com.mydigipay.challenge.presentation.model
 
+import com.mydigipay.challenge.presentation.core.ItemModel
+
 data class SearchItemModel(
     var id: Int = 0,
     var nodeId: String? = null,
@@ -24,4 +26,4 @@ data class SearchItemModel(
     var masterBranch: String? = null,
     var defaultBranch: String? = null,
     var score: Double = 0.0
-)
+) : ItemModel

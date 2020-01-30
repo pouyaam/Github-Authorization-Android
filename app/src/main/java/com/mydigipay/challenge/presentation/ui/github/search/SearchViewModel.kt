@@ -1,9 +1,7 @@
 package com.mydigipay.challenge.presentation.ui.github.search
 
+import com.mydigipay.challenge.presentation.core.ListViewModel
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.mohammadsianaki.core.model.Resource
 import com.github.mohammadsianaki.core.model.ResourcesState
@@ -14,10 +12,9 @@ import com.mydigipay.challenge.presentation.model.SearchItemModel
 import com.mydigipay.challenge.presentation.model.toSearchItemModel
 import kotlinx.coroutines.launch
 
-class SearchViewModel(private val searchRepositoriesUsecase: SearchRepositoriesUsecase) :
-    ViewModel() {
-
-    private val liveData: MutableLiveData<Resource<List<SearchItemModel>>> = MutableLiveData()
+class SearchViewModel(
+    private val searchRepositoriesUsecase: SearchRepositoriesUsecase
+) : ListViewModel<SearchItemModel>() {
 
     fun performSearch(query: String) {
         liveData.value = Resource(ResourcesState.Loading)
@@ -40,9 +37,6 @@ class SearchViewModel(private val searchRepositoriesUsecase: SearchRepositoriesU
             )
         }
     }
-
-    fun getLiveData(): LiveData<Resource<List<SearchItemModel>>> = liveData
-
     companion object {
         const val KEY_QUERY = "key-query"
     }

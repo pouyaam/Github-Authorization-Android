@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ListFragment">
+    tools:context="com.mydigipay.challenge.presentation.core.ListFragment">
 
     <include layout="@layout/layout_page_with_no_data" />
 

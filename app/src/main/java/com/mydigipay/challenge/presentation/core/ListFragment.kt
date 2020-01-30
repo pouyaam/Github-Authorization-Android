@@ -1,3 +1,5 @@
+package com.mydigipay.challenge.presentation.core
+
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -5,10 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mohammadsianaki.core.extenstion.hide
 import com.github.mohammadsianaki.core.extenstion.show
+import com.github.mohammadsianaki.core.model.Resource
 import com.github.mohammadsianaki.core.ui.BaseFragment
 import com.mydigipay.challenge.github.R
-import com.mydigipay.challenge.presentation.core.BaseRecyclerAdapter
-import com.mydigipay.challenge.presentation.core.ItemModel
 import kotlinx.android.synthetic.main.list_fragment.*
 
 abstract class ListFragment<Item : ItemModel, VM : ListViewModel<Item>> :
@@ -25,8 +26,7 @@ abstract class ListFragment<Item : ItemModel, VM : ListViewModel<Item>> :
         initUi()
     }
 
-    private fun initUi() {
-        recyclerAdapter = BaseRecyclerAdapter()
+    protected open fun initUi() {
         recyclerView = recycler_view
         recyclerView?.apply {
             adapter = recyclerAdapter
@@ -41,11 +41,8 @@ abstract class ListFragment<Item : ItemModel, VM : ListViewModel<Item>> :
         super.onDestroyView()
     }
 
-    protected open fun handleData(data: List<ItemModel>?) {
-        hideLoading()
-        showRecyclerView()
-    }
-
     protected fun hideRecyclerView() = recyclerView?.hide()
     protected fun showRecyclerView() = recyclerView?.show()
+    protected abstract fun renderUI(resource: Resource<List<Item>>?)
+    protected abstract fun handleData(data: List<Item>?)
 }

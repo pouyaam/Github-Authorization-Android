@@ -10,7 +10,6 @@ import com.github.mohammadsianaki.core.extenstion.hide
 import com.github.mohammadsianaki.core.extenstion.inflate
 import com.github.mohammadsianaki.core.extenstion.show
 import com.github.mohammadsianaki.core.model.ErrorHolder
-import com.github.mohammadsianaki.core.model.Resource
 
 abstract class BaseFragment : Fragment() {
     abstract val layoutId: Int
@@ -42,8 +41,6 @@ abstract class BaseFragment : Fragment() {
         errorViewGroup = null
         super.onDestroyView()
     }
-
-    protected abstract fun <T> renderUI(resource: Resource<T>?)
 
     protected open fun initEmptyView(container: ViewGroup) {
         emptyViewGroup?.addView(
