@@ -9,5 +9,18 @@
         android:id="@+id/searchFragment"
         android:name="com.mydigipay.challenge.presentation.ui.github.search.SearchFragment"
         android:label="search_fragment"
-        tools:layout="@layout/search_fragment" />
+        tools:layout="@layout/search_fragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.mydigipay.challenge.presentation.ui.github.detail.DetailFragment"
+        android:label="detail_fragment"
+        tools:layout="@layout/detail_fragment" >
+        <argument
+            android:name="fullName"
+            app:argType="string" />
+    </fragment>
 </navigation>
