@@ -12,6 +12,7 @@ import com.github.mohammadsianaki.core.model.ResourcesState
 import com.mydigipay.challenge.github.R
 import com.mydigipay.challenge.github.databinding.LoginUriActivityBinding
 import com.mydigipay.challenge.presentation.model.AccessTokenModel
+import com.mydigipay.challenge.presentation.ui.github.GithubActivity
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -62,7 +63,9 @@ class LoginUriActivity : AppCompatActivity() {
 
     private fun handleData(data: AccessTokenModel?) {
         data?.let {
-            binding.itemData = it
+            startActivity(Intent(this, GithubActivity::class.java)).also {
+                finish()
+            }
             Log.d("<<<activity", "$it")
         }
     }
