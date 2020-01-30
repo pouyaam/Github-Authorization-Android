@@ -69,7 +69,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_issues"
                         style="@style/InfoStyle"
-                        android:text="@{itemData.openIssuesCount}" />
+                        android:text="@{String.valueOf(itemData.openIssuesCount)}" />
 
                 </LinearLayout>
 
@@ -89,7 +89,7 @@
                         android:id="@+id/tv_stars"
                         style="@style/InfoStyle"
                         android:layout_width="match_parent"
-                        android:text="@{itemData.stargazersCount}" />
+                        android:text="@{String.valueOf(itemData.stargazersCount)}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -105,7 +105,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_forks"
                         style="@style/InfoStyle"
-                        android:text="@{itemData.forksCount}" />
+                        android:text="@{String.valueOf(itemData.forksCount)}" />
 
 
                 </LinearLayout>
@@ -125,7 +125,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_watchers"
                         style="@style/InfoStyle"
-                        android:text="@{itemData.watchersCount}" />
+                        android:text="@{String.valueOf(itemData.watchersCount)}" />
                 </LinearLayout>
 
             </LinearLayout>
