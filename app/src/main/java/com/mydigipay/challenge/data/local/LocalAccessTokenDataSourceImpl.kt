@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import com.github.mohammadsianaki.core.toplevel.awaitIO
 import com.mydigipay.challenge.domain.repositories.token.LocalAccessTokenDataSource
 
-private const val TOKEN = "TOKEN"
+const val TOKEN = "TOKEN"
 
 class LocalAccessTokenDataSourceImpl(private val sharedPreferences: SharedPreferences) :
     LocalAccessTokenDataSource {
