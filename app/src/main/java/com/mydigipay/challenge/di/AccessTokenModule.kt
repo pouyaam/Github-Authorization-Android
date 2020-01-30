@@ -1,7 +1,7 @@
 package com.mydigipay.challenge.di
 
-import com.mydigipay.challenge.data.RemoteAccessTokenDataSourceImpl
-import com.mydigipay.challenge.data.api.AccessTokenService
+import com.mydigipay.challenge.data.repository.token.RemoteAccessTokenDataSourceImpl
+import com.mydigipay.challenge.data.api.token.AccessTokenService
 import com.mydigipay.challenge.data.local.LocalAccessTokenDataSourceImpl
 import com.mydigipay.challenge.domain.repositories.token.LocalAccessTokenDataSource
 import com.mydigipay.challenge.domain.repositories.token.RemoteAccessTokenDataSource
@@ -12,7 +12,9 @@ import retrofit2.Retrofit
 val accessTokenModule = module {
     factory { get<Retrofit>(named(RETROFIT)).create(AccessTokenService::class.java) }
     factory {
-        RemoteAccessTokenDataSourceImpl(get()) as RemoteAccessTokenDataSource
+        RemoteAccessTokenDataSourceImpl(
+            get()
+        ) as RemoteAccessTokenDataSource
     }
     factory {
         LocalAccessTokenDataSourceImpl(get()) as LocalAccessTokenDataSource

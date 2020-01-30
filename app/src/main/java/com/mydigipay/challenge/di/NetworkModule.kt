@@ -1,7 +1,7 @@
 package com.mydigipay.challenge.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.mydigipay.challenge.data.TokenRepositoryImpl
+import com.mydigipay.challenge.data.repository.token.TokenRepositoryImpl
 import com.mydigipay.challenge.data.api.TokenInterceptor
 import com.mydigipay.challenge.domain.repositories.token.TokenRepository
 import okhttp3.OkHttpClient
@@ -54,6 +54,9 @@ val networkModule = module {
     }
 
     single {
-        TokenRepositoryImpl(get(), get()) as TokenRepository
+        TokenRepositoryImpl(
+            get(),
+            get()
+        ) as TokenRepository
     }
 }

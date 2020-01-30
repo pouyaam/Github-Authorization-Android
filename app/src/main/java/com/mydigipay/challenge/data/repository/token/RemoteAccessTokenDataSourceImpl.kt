@@ -1,11 +1,11 @@
-package com.mydigipay.challenge.data
+package com.mydigipay.challenge.data.repository.token
 
 import com.github.mohammadsianaki.core.extenstion.awaitResult
 import com.github.mohammadsianaki.core.model.Result
-import com.mydigipay.challenge.data.api.AccessTokenService
-import com.mydigipay.challenge.data.api.RequestAccessToken
-import com.mydigipay.challenge.domain.entities.AccessTokenEntity
+import com.mydigipay.challenge.data.api.token.AccessTokenService
+import com.mydigipay.challenge.data.api.token.RequestAccessToken
 import com.mydigipay.challenge.data.toAccessTokenEntity
+import com.mydigipay.challenge.domain.entities.AccessTokenEntity
 import com.mydigipay.challenge.domain.repositories.token.RemoteAccessTokenDataSource
 
 class RemoteAccessTokenDataSourceImpl(private val accessTokenService: AccessTokenService) :

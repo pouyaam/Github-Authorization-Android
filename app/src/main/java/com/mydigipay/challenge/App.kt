@@ -2,7 +2,7 @@ package com.mydigipay.challenge
 
 import android.app.Application
 import androidx.preference.PreferenceManager
-import com.mydigipay.challenge.data.TokenRepositoryImpl
+import com.mydigipay.challenge.data.repository.token.TokenRepositoryImpl
 import com.mydigipay.challenge.di.accessTokenModule
 import com.mydigipay.challenge.di.networkModule
 import com.mydigipay.challenge.domain.interactors.GetAccessTokenUsecase
@@ -30,7 +30,12 @@ class App : Application() {
                 get()
             )
         }
-        factory { TokenRepositoryImpl(get(), get()) }
+        factory {
+            TokenRepositoryImpl(
+                get(),
+                get()
+            )
+        }
         factory { GetAccessTokenUsecase(get()) }
         single(named(APPLICATION_CONTEXT)) { applicationContext }
         single { PreferenceManager.getDefaultSharedPreferences(get()) }

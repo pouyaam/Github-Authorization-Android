@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.data
+package com.mydigipay.challenge.data.repository.token
 
 import android.util.Log
 import com.github.mohammadsianaki.core.model.Result
