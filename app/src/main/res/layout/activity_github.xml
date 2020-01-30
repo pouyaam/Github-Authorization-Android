@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.mydigipay.challenge.presentation.ui.github.GithubActivity">
 
+    <include layout="@layout/layout_page_with_no_data" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment"

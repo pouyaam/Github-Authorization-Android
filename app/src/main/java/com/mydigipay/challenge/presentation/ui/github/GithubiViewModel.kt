@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.presentation.ui.login
+package com.mydigipay.challenge.presentation.ui.github
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -10,15 +10,15 @@ import com.github.mohammadsianaki.core.model.ResourcesState
 import com.github.mohammadsianaki.core.model.fold
 import com.github.mohammadsianaki.core.toplevel.awaitIO
 import com.mydigipay.challenge.domain.interactors.GetAccessTokenUsecase
-import com.mydigipay.challenge.presentation.CLIENT_ID
-import com.mydigipay.challenge.presentation.CLIENT_SECRET
-import com.mydigipay.challenge.presentation.REDIRECT_URI
 import com.mydigipay.challenge.presentation.model.AccessTokenModel
 import com.mydigipay.challenge.presentation.model.AccessTokenRequestConfigs
 import com.mydigipay.challenge.presentation.model.toAccessTokenModel
+import com.mydigipay.challenge.presentation.ui.CLIENT_ID
+import com.mydigipay.challenge.presentation.ui.CLIENT_SECRET
+import com.mydigipay.challenge.presentation.ui.REDIRECT_URI
 import kotlinx.coroutines.launch
 
-class LoginUriViewModel(
+class GithubiViewModel(
     private val usecase: GetAccessTokenUsecase
 ) : ViewModel() {
 

@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.presentation
+package com.mydigipay.challenge.presentation.ui
 
 import androidx.lifecycle.ViewModel
 import com.mydigipay.challenge.domain.repositories.token.TokenRepository
