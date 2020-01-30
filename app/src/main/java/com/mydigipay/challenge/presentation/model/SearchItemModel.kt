@@ -1,11 +1,11 @@
-package com.mydigipay.challenge.domain.entities
+package com.mydigipay.challenge.presentation.model
 
-data class ItemEntity(
+data class SearchItemModel(
     var id: Int = 0,
     var nodeId: String? = null,
     var name: String? = null,
     var fullName: String? = null,
-    var remoteOwnerEntity: OwnerEntity? = null,
+    var searchOwnerModel: SearchOwnerModel? = null,
     var isPrivate: Boolean = false,
     var htmlUrl: String? = null,
     var description: String? = null,

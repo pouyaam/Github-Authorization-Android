@@ -3,7 +3,7 @@ package com.mydigipay.challenge.data.api.github
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class RemoteItemEntity(
+class RemoteSearchItemEntity(
     @SerializedName("id")
     @Expose
     var id: Int = 0,

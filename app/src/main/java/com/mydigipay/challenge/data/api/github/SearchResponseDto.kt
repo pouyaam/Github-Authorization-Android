@@ -12,5 +12,5 @@ data class SearchResponseDto(
     val isIncompleteResults: Boolean = false,
     @SerializedName("items")
     @Expose
-    val remoteItemEntities: List<RemoteItemEntity>? = null
+    val remoteSearchItemEntities: List<RemoteSearchItemEntity>? = null
 )

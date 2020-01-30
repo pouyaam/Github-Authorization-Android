@@ -1,6 +1,6 @@
-package com.mydigipay.challenge.domain.entities
+package com.mydigipay.challenge.presentation.model
 
-data class OwnerEntity(
+data class SearchOwnerModel(
     var login: String? = null,
     var id: Int = 0,
     var nodeId: String? = null,
