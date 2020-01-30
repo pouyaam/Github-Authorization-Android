@@ -30,6 +30,13 @@ class SearchFragment : ListFragment<SearchItemModel, SearchViewModel>(),
     override fun renderUI(resource: Resource<List<SearchItemModel>>?) {
         resource?.let {
             when (resource.resourcesState) {
+                ResourcesState.Loading -> {
+                    hideRecyclerView()
+                    hideEmptyView()
+                    hideErrorView()
+                    showLoading()
+                    Log.d("<<<SearchFragment>>>", "loading")
+                }
                 ResourcesState.Success -> {
                     hideLoading()
                     hideEmptyView()
@@ -39,20 +46,12 @@ class SearchFragment : ListFragment<SearchItemModel, SearchViewModel>(),
                     Log.d("<<<SearchFragment>>>", "success : ${it.data?.size}")
                 }
                 ResourcesState.Failure -> {
-                    hideRecyclerView()
-                    hideEmptyView()
-                    hideErrorView()
-                    showLoading()
-                    Log.d("<<<SearchFragment>>>", "failure : ${it.failure}")
-                }
-                ResourcesState.Loading -> {
-                    Log.d("<<<SearchFragment>>>", "loading")
                     hideLoading()
                     hideRecyclerView()
                     hideEmptyView()
                     showErrorView(resource.failure)
+                    Log.d("<<<SearchFragment>>>", "failure : ${it.failure}")
                 }
-
             }
         }
     }
