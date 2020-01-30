@@ -1,6 +1,5 @@
 package com.mydigipay.challenge.presentation.core
 
-import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseRecyclerAdapter<T : ItemModel> : RecyclerView.Adapter<BaseViewHolder<T>>() {
@@ -14,6 +13,4 @@ abstract class BaseRecyclerAdapter<T : ItemModel> : RecyclerView.Adapter<BaseVie
     override fun getItemCount(): Int = items.size
     override fun onBindViewHolder(holder: BaseViewHolder<T>, position: Int) =
         holder.bind(items[position])
-
-    abstract fun makeViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<T>
 }

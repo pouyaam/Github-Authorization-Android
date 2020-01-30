@@ -7,6 +7,10 @@
         <variable
             name="itemData"
             type="com.mydigipay.challenge.presentation.model.SearchItemModel" />
+
+        <variable
+            name="itemClickListener"
+            type="com.mydigipay.challenge.presentation.core.OnRecyclerItemClickListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

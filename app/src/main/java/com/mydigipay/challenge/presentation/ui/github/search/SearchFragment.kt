@@ -9,6 +9,7 @@ import com.github.mohammadsianaki.core.extenstion.observe
 import com.github.mohammadsianaki.core.model.Resource
 import com.github.mohammadsianaki.core.model.ResourcesState
 import com.mydigipay.challenge.github.R
+import com.mydigipay.challenge.presentation.core.BaseRecyclerAdapter
 import com.mydigipay.challenge.presentation.core.ListFragment
 import com.mydigipay.challenge.presentation.model.SearchItemModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -80,4 +81,5 @@ class SearchFragment : ListFragment<SearchItemModel, SearchViewModel>(),
     }
 
     override fun onQueryTextChange(newText: String?) = true
+    override val recyclerAdapter: BaseRecyclerAdapter<SearchItemModel> = SearchAdapter()
 }

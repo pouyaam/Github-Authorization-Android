@@ -17,7 +17,7 @@ abstract class ListFragment<Item : ItemModel, VM : ListViewModel<Item>> :
 
     override val layoutId: Int = R.layout.list_fragment
     private var recyclerView: RecyclerView? = null
-    protected lateinit var recyclerAdapter: BaseRecyclerAdapter<Item>
+    protected abstract val recyclerAdapter: BaseRecyclerAdapter<Item>
     protected lateinit var viewModel: VM
 
 
