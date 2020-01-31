@@ -20,7 +20,10 @@
         android:label="detail_fragment"
         tools:layout="@layout/detail_fragment" >
         <argument
-            android:name="fullName"
+            android:name="owner"
+            app:argType="string" />
+        <argument
+            android:name="repo"
             app:argType="string" />
     </fragment>
 </navigation>

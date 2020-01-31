@@ -88,7 +88,10 @@ class SearchFragment : ListFragment<SearchItemModel, SearchViewModel>(),
     private fun onSearchResultClicked() = object : OnRecyclerItemClickListener<SearchItemModel> {
         override fun onItemClicked(item: SearchItemModel) {
             findNavController().navigate(
-                SearchFragmentDirections.actionSearchFragmentToDetailFragment(item.fullName ?: "")
+                SearchFragmentDirections.actionSearchFragmentToDetailFragment(
+                    item.searchOwnerModel?.login ?: "",
+                    item.name ?: ""
+                )
             )
         }
     }
