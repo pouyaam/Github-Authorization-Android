@@ -9,6 +9,6 @@ class GithubRepositoryImpl(private val remoteGithubDataSource: RemoteGithubDataS
     GithubRepository {
 
     override suspend fun performSearch(query: String): Result<List<SearchItemEntity>?> {
-        return remoteGithubDataSource.perormSearch(query)
+        return remoteGithubDataSource.performSearch(query)
     }
 }
