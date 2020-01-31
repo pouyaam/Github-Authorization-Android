@@ -40,4 +40,5 @@ fun SearchItemEntity.toSearchItemModel() = SearchItemModel(
 fun SearchOwnerEntity.toSearchOwnerModel() =
     SearchOwnerModel(login, id, nodeId, avatarUrl, gravatarId, url, receivedEventsUrl, type)
 
-fun CommitEntity.toCommitItemModel() = CommitItemModel(message)
+fun CommitEntity.toCommitItemModel() =
+    CommitItemModel(message, this.author.email, this.author.name, this.author.date)
