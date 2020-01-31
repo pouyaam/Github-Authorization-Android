@@ -18,7 +18,7 @@ import com.mydigipay.challenge.presentation.ui.CLIENT_SECRET
 import com.mydigipay.challenge.presentation.ui.REDIRECT_URI
 import kotlinx.coroutines.launch
 
-class GithubiViewModel(
+class GithubViewModel(
     private val usecase: GetAccessTokenUsecase
 ) : ViewModel() {
 

@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = getViewModel()
-        viewModel.readToekn().takeIf { it.isNotEmpty() }?.let { token ->
+        viewModel.readToken().takeIf { it.isNotEmpty() }?.let { token ->
             startActivity(Intent(this, GithubActivity::class.java))
             finish()
         } ?: run {

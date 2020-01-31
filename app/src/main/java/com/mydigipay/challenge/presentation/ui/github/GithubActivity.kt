@@ -18,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class GithubActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: GithubiViewModel
+    private lateinit var viewModel: GithubViewModel
     private lateinit var loading: ProgressBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

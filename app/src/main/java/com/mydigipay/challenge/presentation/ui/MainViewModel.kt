@@ -5,5 +5,5 @@ import com.mydigipay.challenge.domain.repositories.token.TokenRepository
 
 class MainViewModel(private val tokenRepository: TokenRepository) : ViewModel() {
 
-    fun readToekn() = tokenRepository.readAccessToken()
+    fun readToken() = tokenRepository.readAccessToken()
 }
