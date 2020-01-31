@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="itemData"
+            type="com.mydigipay.challenge.presentation.model.CommitItemModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/double_margin"
+        android:orientation="vertical"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="3dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_margin="@dimen/double_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{itemData.message}" />
+    </com.google.android.material.card.MaterialCardView>
+</layout>
