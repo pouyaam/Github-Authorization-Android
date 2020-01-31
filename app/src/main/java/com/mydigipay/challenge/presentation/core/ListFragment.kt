@@ -6,13 +6,14 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mohammadsianaki.core.extenstion.hide
+import com.github.mohammadsianaki.core.extenstion.observe
 import com.github.mohammadsianaki.core.extenstion.show
 import com.github.mohammadsianaki.core.model.Resource
 import com.github.mohammadsianaki.core.ui.BaseFragment
 import com.mydigipay.challenge.github.R
 import kotlinx.android.synthetic.main.list_fragment.*
 
-abstract class ListFragment<Item : ItemModel, VM : ListViewModel<Item>> :
+abstract class ListFragment<Item : ItemModel, Parameters, VM : ListViewModel<Item, Parameters>> :
     BaseFragment() {
 
     override val layoutId: Int = R.layout.list_fragment
@@ -24,6 +25,13 @@ abstract class ListFragment<Item : ItemModel, VM : ListViewModel<Item>> :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUi()
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = makeViewModel()
+        viewModel.makeData()
+        observe(viewModel.getLiveData()) { resource -> renderUI(resource) }
     }
 
     protected open fun initUi() {
@@ -45,4 +53,5 @@ abstract class ListFragment<Item : ItemModel, VM : ListViewModel<Item>> :
     protected fun showRecyclerView() = recyclerView?.show()
     protected abstract fun renderUI(resource: Resource<List<Item>>?)
     protected abstract fun handleData(data: List<Item>?)
+    protected abstract fun makeViewModel(): VM
 }

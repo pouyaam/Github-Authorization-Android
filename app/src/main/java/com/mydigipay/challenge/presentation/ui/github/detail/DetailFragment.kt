@@ -1,27 +1,16 @@
 package com.mydigipay.challenge.presentation.ui.github.detail
 
-import android.os.Bundle
 import android.util.Log
-import com.github.mohammadsianaki.core.extenstion.observe
 import com.github.mohammadsianaki.core.model.Resource
 import com.github.mohammadsianaki.core.model.ResourcesState
 import com.mydigipay.challenge.presentation.core.BaseRecyclerAdapter
 import com.mydigipay.challenge.presentation.core.ListFragment
 import com.mydigipay.challenge.presentation.model.CommitItemModel
-import com.mydigipay.challenge.presentation.model.RepoFullNameModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class DetailFragment : ListFragment<CommitItemModel, DetailViewModel>() {
+class DetailFragment : ListFragment<CommitItemModel, DetailFragmentArgs, DetailViewModel>() {
 
     override val recyclerAdapter: BaseRecyclerAdapter<CommitItemModel> = DetailAdapter()
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = getViewModel()
-        val (owner, name) = DetailFragmentArgs.fromBundle(requireArguments())
-        viewModel.getCommits(RepoFullNameModel(owner, name))
-        observe(viewModel.getLiveData()) { resource -> renderUI(resource) }
-    }
 
     override fun renderUI(resource: Resource<List<CommitItemModel>>?) {
         resource?.let {
@@ -65,4 +54,5 @@ class DetailFragment : ListFragment<CommitItemModel, DetailViewModel>() {
         }
     }
 
+    override fun makeViewModel(): DetailViewModel = getViewModel()
 }

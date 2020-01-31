@@ -1,6 +1,5 @@
 package com.mydigipay.challenge.presentation.ui.github.search
 
-import com.mydigipay.challenge.presentation.core.ListViewModel
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.github.mohammadsianaki.core.model.Resource
@@ -8,15 +7,16 @@ import com.github.mohammadsianaki.core.model.ResourcesState
 import com.github.mohammadsianaki.core.model.fold
 import com.github.mohammadsianaki.core.toplevel.awaitIO
 import com.mydigipay.challenge.domain.interactors.SearchRepositoriesUsecase
+import com.mydigipay.challenge.presentation.core.ListViewModel
 import com.mydigipay.challenge.presentation.model.SearchItemModel
 import com.mydigipay.challenge.presentation.model.toSearchItemModel
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
     private val searchRepositoriesUsecase: SearchRepositoriesUsecase
-) : ListViewModel<SearchItemModel>() {
+) : ListViewModel<SearchItemModel, String>() {
 
-    fun performSearch(query: String) {
+    private fun performSearch(query: String) {
         liveData.value = Resource(ResourcesState.Loading)
         viewModelScope.launch {
             awaitIO {
@@ -39,5 +39,11 @@ class SearchViewModel(
     }
     companion object {
         const val KEY_QUERY = "key-query"
+    }
+
+    override fun makeData(params: String?) {
+        params?.let {
+            performSearch(params)
+        }
     }
 }

@@ -14,10 +14,10 @@ import com.mydigipay.challenge.presentation.model.toCommitItemModel
 import kotlinx.coroutines.launch
 
 class DetailViewModel(private val getCommitsUsecase: GetCommitsUsecase) :
-    ListViewModel<CommitItemModel>() {
+    ListViewModel<CommitItemModel, DetailFragmentArgs>() {
 
 
-    fun getCommits(repoFullNameModel: RepoFullNameModel) {
+    private fun getCommits(repoFullNameModel: RepoFullNameModel) {
         viewModelScope.launch {
             awaitIO {
                 getCommitsUsecase.execute(mapOf(KEY_REPO_FULL_NAME to repoFullNameModel))
@@ -38,5 +38,9 @@ class DetailViewModel(private val getCommitsUsecase: GetCommitsUsecase) :
 
     companion object {
         const val KEY_REPO_FULL_NAME = "key-arg"
+    }
+
+    override fun makeData(params: DetailFragmentArgs?) {
+        getCommits(RepoFullNameModel(params?.owner ?: "", params?.repo ?: ""))
     }
 }

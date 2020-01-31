@@ -6,7 +6,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.findNavController
-import com.github.mohammadsianaki.core.extenstion.observe
 import com.github.mohammadsianaki.core.model.Resource
 import com.github.mohammadsianaki.core.model.ResourcesState
 import com.mydigipay.challenge.github.R
@@ -16,17 +15,12 @@ import com.mydigipay.challenge.presentation.core.OnRecyclerItemClickListener
 import com.mydigipay.challenge.presentation.model.SearchItemModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class SearchFragment : ListFragment<SearchItemModel, SearchViewModel>(),
+class SearchFragment : ListFragment<SearchItemModel, String, SearchViewModel>(),
     SearchView.OnQueryTextListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-    }
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = getViewModel()
-        observe(viewModel.getLiveData()) { resource -> renderUI(resource) }
     }
 
     override fun renderUI(resource: Resource<List<SearchItemModel>>?) {
@@ -77,7 +71,7 @@ class SearchFragment : ListFragment<SearchItemModel, SearchViewModel>(),
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        query?.let { viewModel.performSearch(query) }
+        query?.let { viewModel.makeData(query) }
         return false
     }
 
@@ -95,4 +89,6 @@ class SearchFragment : ListFragment<SearchItemModel, SearchViewModel>(),
             )
         }
     }
+
+    override fun makeViewModel(): SearchViewModel = getViewModel()
 }
