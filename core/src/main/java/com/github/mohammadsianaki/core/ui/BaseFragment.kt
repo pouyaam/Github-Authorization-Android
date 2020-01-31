@@ -20,8 +20,7 @@ abstract class BaseFragment : Fragment(), NetworkListener {
     private var loadingView: View? = null
     private var emptyViewGroup: ViewGroup? = null
     private var errorViewGroup: ViewGroup? = null
-    protected open fun retryLoadData(): () -> Unit = {}
-    protected open fun networkChangeAction(): (Boolean) -> Unit = {}
+    protected abstract fun retryLoadData()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,7 +78,7 @@ abstract class BaseFragment : Fragment(), NetworkListener {
             }
             errorViewGroup?.addView(layoutInflater.inflate(layoutId, null, false))
             errorViewGroup?.findViewById<View>(R.id.retry)?.setOnClickListener {
-                retryLoadData().invoke()
+                retryLoadData()
             }
             errorViewGroup?.show()
             it
@@ -87,7 +86,4 @@ abstract class BaseFragment : Fragment(), NetworkListener {
     }
 
     protected fun hideErrorView() = errorViewGroup?.hide()
-    override fun onNetworkChanged(isConnected: Boolean) {
-        networkChangeAction().invoke(isConnected)
-    }
 }

@@ -49,6 +49,16 @@ abstract class ListFragment<Item : ItemModel, Parameters, VM : ListViewModel<Ite
         super.onDestroyView()
     }
 
+    override fun onNetworkChanged(connected: Boolean) {
+        if (connected) {
+            viewModel.makeData()
+        }
+    }
+
+    override fun retryLoadData() {
+        viewModel.makeData()
+    }
+
     protected fun hideRecyclerView() = recyclerView?.hide()
     protected fun showRecyclerView() = recyclerView?.show()
     protected abstract fun renderUI(resource: Resource<List<Item>>?)
