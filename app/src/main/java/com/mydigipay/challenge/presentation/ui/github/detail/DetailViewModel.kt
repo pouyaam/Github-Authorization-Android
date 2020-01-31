@@ -40,7 +40,7 @@ class DetailViewModel(private val getCommitsUsecase: GetCommitsUsecase) :
         const val KEY_REPO_FULL_NAME = "key-arg"
     }
 
-    override fun makeData(params: DetailFragmentArgs?) {
-        getCommits(RepoFullNameModel(params?.owner ?: "", params?.repo ?: ""))
+    override fun makeData(params: DetailFragmentArgs) {
+        getCommits(RepoFullNameModel(params.owner, params.repo))
     }
 }

@@ -41,9 +41,7 @@ class SearchViewModel(
         const val KEY_QUERY = "key-query"
     }
 
-    override fun makeData(params: String?) {
-        params?.let {
-            performSearch(params)
-        }
+    override fun makeData(params: String) {
+        performSearch(params)
     }
 }
