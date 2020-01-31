@@ -22,9 +22,9 @@ class DetailViewModel(private val getCommitsUsecase: GetCommitsUsecase) :
             awaitIO {
                 getCommitsUsecase.execute(mapOf(KEY_REPO_FULL_NAME to repoFullNameModel))
             }.fold(
-                ifSuccess = { item ->
+                ifSuccess = { items ->
                     liveData.value =
-                        Resource(ResourcesState.Success, listOf(item.toCommitItemModel()))
+                        Resource(ResourcesState.Success, items.map { it.toCommitItemModel() })
                 },
                 ifFailure = {
                     it?.let {

@@ -17,7 +17,9 @@ class RemoteGithubDataSourceImpl(private val githubService: GithubService) :
             .awaitResult { responseDto -> responseDto.remoteSearchItemEntities?.map { it.toSearchItemEntity() } }
     }
 
-    override suspend fun getDetails(repo: String, owner: String): Result<CommitEntity> {
-        return githubService.getCommits(repo, owner).awaitResult { it.commit.toCommitEntity() }
+    override suspend fun getDetails(repo: String, owner: String): Result<List<CommitEntity>> {
+        return githubService.getCommits(repo, owner).awaitResult { dtoItems ->
+            dtoItems.map { it.commit.toCommitEntity() }
+        }
     }
 }

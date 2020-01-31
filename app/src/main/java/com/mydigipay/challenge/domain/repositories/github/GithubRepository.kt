@@ -6,5 +6,5 @@ import com.mydigipay.challenge.domain.entities.SearchItemEntity
 
 interface GithubRepository {
     suspend fun performSearch(query: String): Result<List<SearchItemEntity>?>
-    suspend fun getCommitsForRepo(owner: String, repo: String): Result<CommitEntity>
+    suspend fun getCommitsForRepo(owner: String, repo: String): Result<List<CommitEntity>>
 }

@@ -13,7 +13,7 @@ class GithubRepositoryImpl(private val remoteGithubDataSource: RemoteGithubDataS
         return remoteGithubDataSource.performSearch(query)
     }
 
-    override suspend fun getCommitsForRepo(owner: String, repo: String): Result<CommitEntity> {
+    override suspend fun getCommitsForRepo(owner: String, repo: String): Result<List<CommitEntity>> {
         return remoteGithubDataSource.getDetails(owner, repo)
     }
 }
