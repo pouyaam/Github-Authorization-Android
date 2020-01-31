@@ -11,5 +11,5 @@ interface GithubService {
     fun performSearch(@Query("q") query: String): Call<SearchResponseDto>
 
     @GET("/repos/{owner}/{repo}/commits")
-    fun getCommits(@Path("owner") owner: String, @Path("repo") repo: String): Call<CommitsReoponseDto>
+    fun getCommits(@Path("owner") owner: String, @Path("repo") repo: String, @Query("sha") branch: String = "master"): Call<CommitsReoponseDto>
 }

@@ -14,6 +14,6 @@ class GithubRepositoryImpl(private val remoteGithubDataSource: RemoteGithubDataS
     }
 
     override suspend fun getCommitsForRepo(owner: String, repo: String): Result<CommitEntity> {
-        return remoteGithubDataSource.getDetails(repo, owner)
+        return remoteGithubDataSource.getDetails(owner, repo)
     }
 }
