@@ -1,5 +1,6 @@
 package com.mydigipay.challenge.presentation.ui.github.detail
 
+import android.os.Bundle
 import android.util.Log
 import com.github.mohammadsianaki.core.model.Resource
 import com.github.mohammadsianaki.core.model.ResourcesState
@@ -11,6 +12,11 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 class DetailFragment : ListFragment<CommitItemModel, DetailFragmentArgs, DetailViewModel>() {
 
     override val recyclerAdapter: BaseRecyclerAdapter<CommitItemModel> = DetailAdapter()
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.makeData(DetailFragmentArgs.fromBundle(requireArguments()))
+    }
 
     override fun renderUI(resource: Resource<List<CommitItemModel>>?) {
         resource?.let {
@@ -55,4 +61,11 @@ class DetailFragment : ListFragment<CommitItemModel, DetailFragmentArgs, DetailV
     }
 
     override fun makeViewModel(): DetailViewModel = getViewModel()
+    override fun retryLoadData() {
+        viewModel.makeData(DetailFragmentArgs.fromBundle(requireArguments()))
+    }
+
+    override fun onNetworkChanged(connected: Boolean) {
+        viewModel.makeData(DetailFragmentArgs.fromBundle(requireArguments()))
+    }
 }

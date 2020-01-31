@@ -30,7 +30,6 @@ abstract class ListFragment<Item : ItemModel, Parameters, VM : ListViewModel<Ite
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = makeViewModel()
-        viewModel.makeData()
         observe(viewModel.getLiveData()) { resource -> renderUI(resource) }
     }
 
@@ -47,16 +46,6 @@ abstract class ListFragment<Item : ItemModel, Parameters, VM : ListViewModel<Ite
         recyclerView?.adapter = null
         recyclerView = null
         super.onDestroyView()
-    }
-
-    override fun onNetworkChanged(connected: Boolean) {
-        if (connected) {
-            viewModel.makeData()
-        }
-    }
-
-    override fun retryLoadData() {
-        viewModel.makeData()
     }
 
     protected fun hideRecyclerView() = recyclerView?.hide()

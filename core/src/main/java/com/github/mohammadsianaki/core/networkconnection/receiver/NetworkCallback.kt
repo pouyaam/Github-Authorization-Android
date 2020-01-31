@@ -25,7 +25,7 @@ object NetworkCallback : ConnectivityManager.NetworkCallback() {
         observers.forEach { it.onNetworkChanged(isConnected) }
     }
 
-    fun addNeworkListener(listener: NetworkListener) = observers.add(listener)
+    fun addNetworkListener(listener: NetworkListener) = observers.add(listener)
 
     fun removeNetworkListener(listener: NetworkListener) = observers.remove(listener)
 }

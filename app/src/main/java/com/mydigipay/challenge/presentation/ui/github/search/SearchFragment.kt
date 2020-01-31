@@ -18,6 +18,8 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 class SearchFragment : ListFragment<SearchItemModel, String, SearchViewModel>(),
     SearchView.OnQueryTextListener {
 
+    private var searchView: SearchView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -67,7 +69,13 @@ class SearchFragment : ListFragment<SearchItemModel, String, SearchViewModel>(),
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
-        (menu.findItem(R.id.action_search).actionView as SearchView).setOnQueryTextListener(this)
+        searchView = (menu.findItem(R.id.action_search).actionView as SearchView)
+        searchView?.setOnQueryTextListener(this)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        searchView = null
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -91,4 +99,14 @@ class SearchFragment : ListFragment<SearchItemModel, String, SearchViewModel>(),
     }
 
     override fun makeViewModel(): SearchViewModel = getViewModel()
+    override fun retryLoadData() {
+        viewModel.makeData(searchView?.query.toString())
+    }
+
+    override fun onNetworkChanged(connected: Boolean) {
+        val query = searchView?.query.toString()
+        if (connected && query.isNotEmpty()) {
+            viewModel.makeData(query)
+        }
+    }
 }

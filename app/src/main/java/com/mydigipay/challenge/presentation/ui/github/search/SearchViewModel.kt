@@ -17,8 +17,8 @@ class SearchViewModel(
 ) : ListViewModel<SearchItemModel, String>() {
 
     private fun performSearch(query: String) {
-        liveData.value = Resource(ResourcesState.Loading)
         viewModelScope.launch {
+            liveData.value = Resource(ResourcesState.Loading)
             awaitIO {
                 searchRepositoriesUsecase.execute(mapOf(KEY_QUERY to query))
             }.fold(

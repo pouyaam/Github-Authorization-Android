@@ -29,7 +29,7 @@ object ReceiverManager :
                     NetworkCallback
                 )
             }
-            NetworkCallback.addNeworkListener(networkListener)
+            NetworkCallback.addNetworkListener(networkListener)
         } else {
             activity.registerReceiver(
                 connectivityReceiver,

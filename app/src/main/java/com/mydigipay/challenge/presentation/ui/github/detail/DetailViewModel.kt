@@ -19,6 +19,7 @@ class DetailViewModel(private val getCommitsUsecase: GetCommitsUsecase) :
 
     private fun getCommits(repoFullNameModel: RepoFullNameModel) {
         viewModelScope.launch {
+            liveData.value = Resource(ResourcesState.Loading)
             awaitIO {
                 getCommitsUsecase.execute(mapOf(KEY_REPO_FULL_NAME to repoFullNameModel))
             }.fold(
