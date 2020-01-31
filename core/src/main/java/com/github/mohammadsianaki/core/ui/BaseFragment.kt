@@ -10,8 +10,10 @@ import com.github.mohammadsianaki.core.extenstion.hide
 import com.github.mohammadsianaki.core.extenstion.inflate
 import com.github.mohammadsianaki.core.extenstion.show
 import com.github.mohammadsianaki.core.model.ErrorHolder
+import com.github.mohammadsianaki.core.networkconnection.NetworkListener
+import com.github.mohammadsianaki.core.networkconnection.manager.ReceiverManager
 
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment(), NetworkListener {
     abstract val layoutId: Int
     private val emptyViewLayoutId: Int = R.layout.layout_empty_view
     private val errorViewLayoutId: Int = R.layout.layout_error_view
@@ -19,6 +21,7 @@ abstract class BaseFragment : Fragment() {
     private var emptyViewGroup: ViewGroup? = null
     private var errorViewGroup: ViewGroup? = null
     protected open fun retryLoadData(): () -> Unit = {}
+    protected open fun networkChangeAction(): (Boolean) -> Unit = {}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +34,16 @@ abstract class BaseFragment : Fragment() {
             emptyViewGroup = findViewById(R.id.emptyView)
             initEmptyView(container)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ReceiverManager.registerNetworkChangeReceiver(requireActivity(), this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        ReceiverManager.unregisterNetworkChangeReceiver(requireActivity(), this)
     }
 
     override fun onDestroyView() {
@@ -74,4 +87,7 @@ abstract class BaseFragment : Fragment() {
     }
 
     protected fun hideErrorView() = errorViewGroup?.hide()
+    override fun onNetworkChanged(isConnected: Boolean) {
+        networkChangeAction().invoke(isConnected)
+    }
 }
