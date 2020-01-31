@@ -1,6 +1,7 @@
 package com.mydigipay.challenge.presentation.model
 
 import com.mydigipay.challenge.domain.entities.AccessTokenEntity
+import com.mydigipay.challenge.domain.entities.CommitEntity
 import com.mydigipay.challenge.domain.entities.SearchItemEntity
 import com.mydigipay.challenge.domain.entities.SearchOwnerEntity
 
@@ -38,3 +39,5 @@ fun SearchItemEntity.toSearchItemModel() = SearchItemModel(
 
 fun SearchOwnerEntity.toSearchOwnerModel() =
     SearchOwnerModel(login, id, nodeId, avatarUrl, gravatarId, url, receivedEventsUrl, type)
+
+fun CommitEntity.toCommitItemModel() = CommitItemModel(message)
