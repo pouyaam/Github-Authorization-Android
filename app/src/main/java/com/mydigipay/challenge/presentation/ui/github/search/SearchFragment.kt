@@ -79,7 +79,9 @@ class SearchFragment : ListFragment<SearchItemModel, String, SearchViewModel>(),
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        query?.let { viewModel.makeData(query) }
+        if (query != null && query.isNotEmpty() && query.isNotBlank()) {
+            viewModel.makeData(query)
+        }
         return false
     }
 
@@ -104,8 +106,8 @@ class SearchFragment : ListFragment<SearchItemModel, String, SearchViewModel>(),
     }
 
     override fun onNetworkChanged(connected: Boolean) {
-        val query = searchView?.query.toString()
-        if (connected && query.isNotEmpty()) {
+        val query = searchView?.query?.toString()
+        if (connected && query != null && query.isNotEmpty() && query.isNotBlank()) {
             viewModel.makeData(query)
         }
     }
