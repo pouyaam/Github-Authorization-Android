@@ -1,11 +1,11 @@
 package com.mydigipay.challenge.data
 
+import com.mydigipay.challenge.data.api.github.RemoteAuthorXEntity
+import com.mydigipay.challenge.data.api.github.RemoteCommitEntity
 import com.mydigipay.challenge.data.api.github.RemoteOwnerEntity
 import com.mydigipay.challenge.data.api.github.RemoteSearchItemEntity
 import com.mydigipay.challenge.data.api.token.ResponseAccessToken
-import com.mydigipay.challenge.domain.entities.AccessTokenEntity
-import com.mydigipay.challenge.domain.entities.SearchItemEntity
-import com.mydigipay.challenge.domain.entities.SearchOwnerEntity
+import com.mydigipay.challenge.domain.entities.*
 
 fun ResponseAccessToken.toAccessTokenEntity() =
     AccessTokenEntity(
@@ -42,3 +42,9 @@ fun RemoteSearchItemEntity.toSearchItemEntity() = SearchItemEntity(
     defaultBranch,
     score
 )
+
+fun RemoteCommitEntity.toCommitEntity() =
+    CommitEntity(message, author.toAuthorEntity(), commentCount)
+
+
+fun RemoteAuthorXEntity.toAuthorEntity() = CommitAuthorEntity(name, email, date)
