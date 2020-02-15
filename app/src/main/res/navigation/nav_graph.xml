@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/home">
+
+    <fragment
+        android:id="@+id/home"
+        android:name="com.mydigipay.challenge.ui.home.HomeFragment">
+
+        <argument
+            android:name="code"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="string" />
+
+        <deepLink
+            android:id="@+id/loginDeepLink"
+            app:uri="omidgitapp://authorization/?code={code}" />
+    </fragment>
+
+
+</navigation>
