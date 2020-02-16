@@ -10,8 +10,8 @@
     android:padding="@dimen/space_1">
 
     <TextView
-        android:id="@+id/txtRepoName"
-        style="@style/Title"
+        android:id="@+id/txtCommitMessage"
+        style="@style/SmallTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
@@ -26,15 +26,34 @@
         tools:text="title" />
 
     <TextView
-        android:id="@+id/txtRepoDescriptions"
+        android:id="@+id/txtCommitSha"
         style="@style/Body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
         android:gravity="start"
+        android:lines="1"
+        android:maxLines="1"
         android:padding="@dimen/space_2"
         android:paddingStart="@dimen/space_2"
         android:paddingEnd="@dimen/space_2"
         android:textDirection="locale"
-        app:layout_constraintTop_toBottomOf="@id/txtRepoName"
+        app:layout_constraintTop_toBottomOf="@id/txtCommitMessage"
+        tools:text="title" />
+
+    <TextView
+        android:id="@+id/txtCommitDescriptions"
+        style="@style/SmallBody"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:lines="1"
+        android:maxLines="1"
+        android:padding="@dimen/space_2"
+        android:paddingStart="@dimen/space_2"
+        android:paddingEnd="@dimen/space_2"
+        android:textDirection="locale"
+        app:layout_constraintTop_toBottomOf="@id/txtCommitSha"
         tools:text="title" />
 </androidx.constraintlayout.widget.ConstraintLayout>

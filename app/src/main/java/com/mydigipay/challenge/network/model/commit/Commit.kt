@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.network.repository
+package com.mydigipay.challenge.network.model.commit
 
 import com.google.gson.annotations.SerializedName
 

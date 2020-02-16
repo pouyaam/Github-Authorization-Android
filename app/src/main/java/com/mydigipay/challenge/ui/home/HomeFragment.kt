@@ -10,26 +10,28 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mydigipay.challenge.extentions.showToast
 import com.mydigipay.challenge.github.R
+import com.mydigipay.challenge.utils.GITHUB_CODE_URL
+import com.mydigipay.challenge.utils.githubCode
+import com.mydigipay.challenge.utils.token
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
 
-    companion object {
-        const val CLIENT_ID = "Iv1.c47d8ef013a73506"
-        const val CLIENT_SECRET = "608e0cd66e141bb63804b07c2a866f472b188aa2"
-        const val REDIRECT_URI = "omidgitapp://authorization/"
-    }
-
     private val viewModel by viewModel<HomeViewModel>()
 
     private val adapter by lazy {
         RepositoryListAdapter(context!!, onRepositoryClicked = {
-
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeToCommits(
+                    it.owner.login,
+                    it.name
+                )
+            )
         })
     }
 
@@ -42,28 +44,27 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.code = HomeFragmentArgs.fromBundle(arguments!!).code
+        Log.i("GitToken", token.toString())
+        githubCode = HomeFragmentArgs.fromBundle(arguments!!).code
 
-        viewModel.data.observe(viewLifecycleOwner, Observer { state ->
+        viewModel.homeState.observe(viewLifecycleOwner, Observer { state ->
             repositoriesContainer.isVisible = state.requiredCode.not()
             authorize.isVisible = state.requiredCode
             state.repositories.takeIf { it.isNotEmpty() }?.let {
                 adapter.items = it.toMutableList()
-                Log.i("GitToken", it.toString())
+                Log.i("repositories", it.toString())
             }
         })
         recyclerRepositories.apply {
-            layoutManager = LinearLayoutManager(context!!)
+            layoutManager = LinearLayoutManager(this@HomeFragment.context!!)
             adapter = this@HomeFragment.adapter
         }
 
 
-        authorize.setOnClickListener { view ->
-            val url =
-                "https://github.com/login/oauth/authorize?client_id=$CLIENT_ID&redirect_uri=$REDIRECT_URI&scope=repo user&state=0"
-            val i = Intent(Intent.ACTION_VIEW)
-            i.data = Uri.parse(url)
-            startActivity(i)
+        authorize.setOnClickListener {
+            startActivity(
+                Intent(Intent.ACTION_VIEW).apply { data = Uri.parse(GITHUB_CODE_URL) }
+            )
         }
     }
 

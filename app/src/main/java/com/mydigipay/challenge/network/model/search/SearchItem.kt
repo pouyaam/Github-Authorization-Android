@@ -1,7 +1,8 @@
-package com.mydigipay.challenge.network.repository
+package com.mydigipay.challenge.network.model.search
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.mydigipay.challenge.network.model.user.User
 
 class SearchItem(
     @SerializedName("id")
@@ -18,7 +19,7 @@ class SearchItem(
     var fullName: String? = null,
     @SerializedName("owner")
     @Expose
-    var remoteOwnerEntity: Owner? = null,
+    var remoteOwnerEntity: User? = null,
     @SerializedName("private")
     @Expose
     var isPrivate: Boolean = false,

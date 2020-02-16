@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.network.repository
+package com.mydigipay.challenge.network.model.search
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

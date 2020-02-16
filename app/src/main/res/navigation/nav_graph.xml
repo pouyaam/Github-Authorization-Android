@@ -7,16 +7,44 @@
     <fragment
         android:id="@+id/home"
         android:name="com.mydigipay.challenge.ui.home.HomeFragment">
+        <action
+            android:id="@+id/action_home_to_commits"
+            app:destination="@id/commits">
+            <argument
+                android:name="owner"
+                app:argType="string" />
+            <argument
+                android:name="repo"
+                app:argType="string" />
+        </action>
 
         <argument
             android:name="code"
             android:defaultValue="@null"
-            app:nullable="true"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true" />
 
         <deepLink
             android:id="@+id/loginDeepLink"
             app:uri="omidgitapp://authorization/?code={code}" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/commits"
+        android:name="com.mydigipay.challenge.ui.commits.CommitsFragment">
+
+        <argument
+            android:name="owner"
+            app:argType="string" />
+        <argument
+            android:name="repo"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.mydigipay.challenge.ui.profile.ProfileFragment">
+
     </fragment>
 
 

@@ -1,56 +1,42 @@
 package com.mydigipay.challenge.ui.home
 
-import android.util.Log
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import com.mydigipay.challenge.base.RequiredCodeException
+import com.mydigipay.challenge.utils.Coroutines
+import com.mydigipay.challenge.utils.githubCode
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 
+@ExperimentalCoroutinesApi
+@FlowPreview
 class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
 
-    var code: String? = null
-        set(value) {
-            if (value != null) {
-                field = value
-                Log.i("HomeViewModel", "Code:$value")
-            }
-        }
-
-    init {
-        code = homeRepository.code
-    }
 
     private val viewState = HomeViewState()
+    val homeState = MutableLiveData<HomeViewState>(viewState)
 
-    val data by lazy {
-        Transformations.map(
-            liveData {
-                code ?: run {
-                    emit(RepositoryResult.Failure(RequiredCodeException()))
-                    return@liveData
-                }
-                emit(RepositoryResult.Loading)
-                emit(homeRepository.getRepositories(code!!))
-            }
-        ) {
-            handleResult(it)
-        }
+    init {
+        loadRepositories()
     }
 
-
-    private fun handleResult(it: RepositoryResult): HomeViewState {
-        return when (it) {
-            is RepositoryResult.Loading -> viewState.copy(isLoading = true)
-            is RepositoryResult.Success -> viewState.copy(
-                isLoading = false,
-                repositories = it.data,
-                error = null
-            )
-            is RepositoryResult.Failure -> viewState.copy(
-                isLoading = false,
-                requiredCode = homeRepository.code == null,
-                error = it.error
-            )
+    private fun loadRepositories() {
+        Coroutines.ioThenMain({ homeRepository.getRepositories() }) {
+            onExecute { homeState.value = viewState.copy(isLoading = true) }
+            finally { homeState.value = viewState.copy(isLoading = false) }
+            onComplete {
+                homeState.value = viewState.copy(
+                    isLoading = false,
+                    repositories = it,
+                    error = null
+                )
+            }
+            onError {
+                homeState.value = viewState.copy(
+                    isLoading = false,
+                    requiredCode = githubCode == null,
+                    error = it
+                )
+            }
         }
     }
 

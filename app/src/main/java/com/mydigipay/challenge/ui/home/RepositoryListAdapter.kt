@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mydigipay.challenge.github.R
-import com.mydigipay.challenge.network.repository.Repository
+import com.mydigipay.challenge.network.model.repository.Repository
 import kotlinx.android.synthetic.main.item_repository_list.view.*
 
 

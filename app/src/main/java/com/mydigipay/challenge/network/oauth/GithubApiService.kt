@@ -1,10 +1,9 @@
 package com.mydigipay.challenge.network.oauth
 
-import com.mydigipay.challenge.network.repository.CommitWrapper
-import com.mydigipay.challenge.network.repository.Repository
-import com.mydigipay.challenge.network.repository.SearchResponse
+import com.mydigipay.challenge.network.model.commit.CommitWrapper
+import com.mydigipay.challenge.network.model.repository.Repository
+import com.mydigipay.challenge.network.model.user.User
 import kotlinx.coroutines.Deferred
-import retrofit2.Call
 import retrofit2.http.*
 
 interface GithubApiService {
@@ -14,12 +13,18 @@ interface GithubApiService {
 
 
     @GET("/user/repos")
-    fun getRepositories(): Call<List<Repository>>
+    fun getRepositories(): Deferred<List<Repository>>
 
     @GET("/repos/{owner}/{repo}/commits")
     fun getCommits(
         @Path("owner") owner: String,
         @Path("repo") repo: String,
         @Query("sha") branch: String = "master"
-    ): Call<List<CommitWrapper>>
+    ): Deferred<List<CommitWrapper>>
+
+    @GET("/user")
+    fun getUserProfile(): Deferred<User>
+
+    @PATCH("/user")
+    fun updateUserProfile(@Body userInfo: Map<String, Any>): Deferred<User>
 }

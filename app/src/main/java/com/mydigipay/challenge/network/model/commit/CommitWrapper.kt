@@ -1,6 +1,7 @@
-package com.mydigipay.challenge.network.repository
+package com.mydigipay.challenge.network.model.commit
 
 import com.google.gson.annotations.SerializedName
+import com.mydigipay.challenge.network.model.user.User
 
 data class CommitWrapper(
     @SerializedName("sha")
@@ -12,6 +13,6 @@ data class CommitWrapper(
     @SerializedName("description")
     val description: String,
     @SerializedName("owner")
-    val owner: Owner
+    val owner: User
 
 )

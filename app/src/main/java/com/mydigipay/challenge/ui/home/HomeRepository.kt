@@ -1,10 +1,8 @@
 package com.mydigipay.challenge.ui.home
 
-import com.mydigipay.challenge.ui.home.RepositoryResult
+import com.mydigipay.challenge.base.Authorizer
+import com.mydigipay.challenge.network.model.repository.Repository
 
 interface HomeRepository {
-    var code: String?
-    suspend fun saveToken(token: String)
-    suspend fun getRepositories(code: String): RepositoryResult
-    suspend fun getToken(code: String): Boolean
+    suspend fun getRepositories(): List<Repository>
 }

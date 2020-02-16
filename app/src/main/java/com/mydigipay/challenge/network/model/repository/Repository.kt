@@ -1,6 +1,7 @@
-package com.mydigipay.challenge.network.repository
+package com.mydigipay.challenge.network.model.repository
 
 import com.google.gson.annotations.SerializedName
+import com.mydigipay.challenge.network.model.user.User
 
 data class Repository(
     @SerializedName("name")
@@ -10,6 +11,6 @@ data class Repository(
     @SerializedName("description")
     val description: String,
     @SerializedName("owner")
-    val owner: Owner
+    val owner: User
 
 )

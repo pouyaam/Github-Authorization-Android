@@ -1,10 +1,16 @@
 package com.mydigipay.challenge.network.di
 
+import android.app.Application
+import android.content.Context
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.mydigipay.challenge.app.APPLICATION_CONTEXT
 import com.mydigipay.challenge.github.BuildConfig
-import com.mydigipay.challenge.utils.getToken
+import com.mydigipay.challenge.github.R
+import com.mydigipay.challenge.ui.commits.CommitRepository
+import com.mydigipay.challenge.ui.commits.CommitRepositoryImpl
 import com.mydigipay.challenge.ui.home.HomeRepository
 import com.mydigipay.challenge.ui.home.HomeRepositoryImpl
+import com.mydigipay.challenge.utils.token
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -14,6 +20,8 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
+import java.net.UnknownHostException
 import java.util.concurrent.TimeUnit
 
 const val OK_HTTP = "OK_HTTP"
@@ -39,7 +47,7 @@ val networkModule = module {
             .writeTimeout(get(named(WRITE_TIMEOUT)), TimeUnit.MILLISECONDS)
             .connectTimeout(get(named(CONNECTION_TIMEOUT)), TimeUnit.MILLISECONDS)
             .addLogger()
-            .addInterceptor()
+            .addInterceptor(get(named(APPLICATION_CONTEXT)) as Context)
             .addInterceptor(get())
             .build()
     }
@@ -55,7 +63,10 @@ val networkModule = module {
 
 
     single {
-        HomeRepositoryImpl(get(), get()) as HomeRepository
+        HomeRepositoryImpl(get()) as HomeRepository
+    }
+    single {
+        CommitRepositoryImpl(get()) as CommitRepository
     }
 }
 
@@ -68,15 +79,15 @@ fun OkHttpClient.Builder.addLogger() = apply {
     }
 }
 
-fun OkHttpClient.Builder.addInterceptor() = apply {
+fun OkHttpClient.Builder.addInterceptor(context: Context) = apply {
     addInterceptor { chain ->
-        //        try {
-        handleChain(chain)
-//        } catch (ioException: UnknownHostException) {
-//            throw  IOException(application.getString(R.string.connectionError), ioException)
-//        } catch (ioException: IOException) {
-//            throw  IOException(application.getString(R.string.socketError), ioException)
-//        }
+        try {
+            handleChain(chain)
+        } catch (ioException: UnknownHostException) {
+            throw  IOException(context.getString(R.string.connectionError), ioException)
+        } catch (ioException: IOException) {
+            throw  IOException(context.getString(R.string.socketError), ioException)
+        }
     }
 }
 
@@ -91,7 +102,7 @@ private fun handleChain(chain: Interceptor.Chain): Response {
 
 
 private fun Request.Builder.addToken() = apply {
-    getToken()?.takeIf { it.isNotEmpty() }?.let {
+    token?.takeIf { it.isNotEmpty() }?.let {
         addHeader("Authorization", "token $it")
     }
 }

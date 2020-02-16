@@ -2,4 +2,6 @@
     <string name="app_name">Github Login</string>
     <string name="action_settings">Settings</string>
     <string name="authorize">AUTHORIZE</string>
+    <string name="connectionError">Check your Internet and try again</string>
+    <string name="socketError">Unknown Connection Error</string>
 </resources>
