@@ -1,4 +1,4 @@
-package  com.mydigipay.challenge.repository
+package  com.mydigipay.challenge.utils
 
 import android.annotation.SuppressLint
 import android.content.Context

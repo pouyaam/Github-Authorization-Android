@@ -2,22 +2,18 @@ package com.mydigipay.challenge.network.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.mydigipay.challenge.github.BuildConfig
-import com.mydigipay.challenge.github.R
-import com.mydigipay.challenge.repository.getToken
-import com.mydigipay.challenge.repository.token.LoginRepository
-import com.mydigipay.challenge.repository.token.LoginRepositoryImpl
+import com.mydigipay.challenge.utils.getToken
+import com.mydigipay.challenge.ui.home.HomeRepository
+import com.mydigipay.challenge.ui.home.HomeRepositoryImpl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.qualifier.named
-import org.koin.core.scope.Scope
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
-import java.net.UnknownHostException
 import java.util.concurrent.TimeUnit
 
 const val OK_HTTP = "OK_HTTP"
@@ -59,7 +55,7 @@ val networkModule = module {
 
 
     single {
-        LoginRepositoryImpl(get(), get()) as LoginRepository
+        HomeRepositoryImpl(get(), get()) as HomeRepository
     }
 }
 

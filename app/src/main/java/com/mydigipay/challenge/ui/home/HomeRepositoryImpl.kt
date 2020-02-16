@@ -1,42 +1,41 @@
-package com.mydigipay.challenge.repository.token
+package com.mydigipay.challenge.ui.home
 
 import android.content.SharedPreferences
 import com.mydigipay.challenge.base.FinishException
 import com.mydigipay.challenge.network.oauth.GithubApiService
 import com.mydigipay.challenge.network.oauth.RequestAccessToken
-import com.mydigipay.challenge.repository.getToken
-import com.mydigipay.challenge.repository.saveAuthorization
-import com.mydigipay.challenge.ui.home.HomeFragment
-import com.mydigipay.challenge.ui.home.LoginResult
-import kotlinx.coroutines.CoroutineScope
+import com.mydigipay.challenge.utils.getToken
+import com.mydigipay.challenge.utils.saveAuthorization
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import retrofit2.await
 
 private const val CODE = "CODE"
 
-class LoginRepositoryImpl(
+class HomeRepositoryImpl(
     private val sharedPreferences: SharedPreferences,
     private val githubApiService: GithubApiService
-) : LoginRepository {
-    override var code: String?
+) : HomeRepository {
+    override var code: String? = null
         get() = sharedPreferences.getString(CODE, null)
         set(value) {
             value ?: return
+            if (value == field)
+                return
             sharedPreferences.edit().putString(CODE, value).apply()
         }
 
     override suspend fun saveToken(token: String) =
-        CoroutineScope(Dispatchers.IO).async {
+        withContext(Dispatchers.IO) {
             saveAuthorization(token)
-        }.await()
+        }
 
 
-    override suspend fun getRepositories(code: String): LoginResult =
+    override suspend fun getRepositories(code: String): RepositoryResult =
         try {
-            LoginResult.Success(githubApiService.getRepositories().await())
+            this.code = code
+            RepositoryResult.Success(githubApiService.getRepositories().await())
         } catch (t: Throwable) {
             if (t is HttpException)
                 when (t.code()) {
@@ -56,7 +55,7 @@ class LoginRepositoryImpl(
 
     override suspend fun getToken(code: String) =
         code.takeIf { it.isNotEmpty() }?.let {
-            withContext(CoroutineScope(Dispatchers.IO).coroutineContext) {
+            withContext(Dispatchers.IO) {
                 getToken() ?: githubApiService.accessToken(
                     RequestAccessToken(
                         HomeFragment.CLIENT_ID,

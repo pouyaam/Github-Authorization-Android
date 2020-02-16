@@ -32,6 +32,7 @@ class RepositoryListAdapter(
 
         fun bind(repo: Repository, position: Int) {
             itemView.txtRepoName.text = repo.fullName
+            itemView.txtRepoDescriptions.text = repo.description
             itemView.tag = position
         }
     }

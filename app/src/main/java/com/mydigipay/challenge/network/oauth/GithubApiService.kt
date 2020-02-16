@@ -1,5 +1,6 @@
 package com.mydigipay.challenge.network.oauth
 
+import com.mydigipay.challenge.network.repository.CommitWrapper
 import com.mydigipay.challenge.network.repository.Repository
 import com.mydigipay.challenge.network.repository.SearchResponse
 import kotlinx.coroutines.Deferred
@@ -15,10 +16,10 @@ interface GithubApiService {
     @GET("/user/repos")
     fun getRepositories(): Call<List<Repository>>
 
-//    @GET("/repos/{owner}/{repo}/commits")
-//    fun getCommits(
-//        @Path("owner") owner: String,
-//        @Path("repo") repo: String,
-//        @Query("sha") branch: String = "master"
-//    ): Call<List<CommitsReoponseDto>>
+    @GET("/repos/{owner}/{repo}/commits")
+    fun getCommits(
+        @Path("owner") owner: String,
+        @Path("repo") repo: String,
+        @Query("sha") branch: String = "master"
+    ): Call<List<CommitWrapper>>
 }

@@ -14,7 +14,7 @@
         android:name="com.mydigipay.challenge.app.App"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name="com.mydigipay.challenge.github.MainActivity"
+            android:name="com.mydigipay.challenge.github.com.mydigipay.challenge.base.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
 
