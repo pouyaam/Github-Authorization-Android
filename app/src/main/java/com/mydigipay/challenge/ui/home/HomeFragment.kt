@@ -49,7 +49,6 @@ class HomeFragment : Fragment() {
             authorize.isVisible = state.requiredCode
             state.repositories.takeIf { it.isNotEmpty() }?.let {
                 adapter.items = it.toMutableList()
-                showToast("Token: $it")
                 Log.i("GitToken", it.toString())
             }
         })

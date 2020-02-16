@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import com.mydigipay.challenge.base.ViewState
 import com.mydigipay.challenge.network.repository.Repository
 
-data class LoginViewState(
+data class HomeViewState(
     val isLoading: Boolean = false,
     @SerializedName("results")
     val repositories: List<Repository> = listOf(),

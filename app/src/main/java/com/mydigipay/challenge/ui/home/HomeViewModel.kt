@@ -5,9 +5,8 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.mydigipay.challenge.base.RequiredCodeException
-import com.mydigipay.challenge.repository.token.LoginRepository
 
-class HomeViewModel(private val loginRepository: LoginRepository) : ViewModel() {
+class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
 
     var code: String? = null
         set(value) {
@@ -18,20 +17,20 @@ class HomeViewModel(private val loginRepository: LoginRepository) : ViewModel() 
         }
 
     init {
-        code = loginRepository.code
+        code = homeRepository.code
     }
 
-    private val viewState = LoginViewState()
+    private val viewState = HomeViewState()
 
     val data by lazy {
         Transformations.map(
             liveData {
                 code ?: run {
-                    emit(LoginResult.Failure(RequiredCodeException()))
+                    emit(RepositoryResult.Failure(RequiredCodeException()))
                     return@liveData
                 }
-                emit(LoginResult.Loading)
-                emit(loginRepository.getRepositories(code!!))
+                emit(RepositoryResult.Loading)
+                emit(homeRepository.getRepositories(code!!))
             }
         ) {
             handleResult(it)
@@ -39,17 +38,17 @@ class HomeViewModel(private val loginRepository: LoginRepository) : ViewModel() 
     }
 
 
-    private fun handleResult(it: LoginResult): LoginViewState {
+    private fun handleResult(it: RepositoryResult): HomeViewState {
         return when (it) {
-            is LoginResult.Loading -> viewState.copy(isLoading = true)
-            is LoginResult.Success -> viewState.copy(
+            is RepositoryResult.Loading -> viewState.copy(isLoading = true)
+            is RepositoryResult.Success -> viewState.copy(
                 isLoading = false,
                 repositories = it.data,
                 error = null
             )
-            is LoginResult.Failure -> viewState.copy(
+            is RepositoryResult.Failure -> viewState.copy(
                 isLoading = false,
-                requiredCode = loginRepository.code == null,
+                requiredCode = homeRepository.code == null,
                 error = it.error
             )
         }
