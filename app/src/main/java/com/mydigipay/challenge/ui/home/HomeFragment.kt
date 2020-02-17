@@ -12,10 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mydigipay.challenge.extentions.githubApiDialog
 import com.mydigipay.challenge.github.R
-import com.mydigipay.challenge.utils.GITHUB_CODE_URL
-import com.mydigipay.challenge.utils.githubCode
-import com.mydigipay.challenge.utils.token
+import com.mydigipay.challenge.utils.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -45,7 +44,9 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.i("GitToken", token.toString())
-        githubCode = HomeFragmentArgs.fromBundle(arguments!!).code
+        HomeFragmentArgs.fromBundle(arguments!!).code?.let {
+            githubCode = it
+        }
 
         viewModel.homeState.observe(viewLifecycleOwner, Observer { state ->
             repositoriesContainer.isVisible = state.requiredCode.not()
@@ -63,9 +64,20 @@ class HomeFragment : Fragment() {
 
         authorize.setOnClickListener {
             startActivity(
-                Intent(Intent.ACTION_VIEW).apply { data = Uri.parse(GITHUB_CODE_URL) }
+                Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse(GITHUB_CODE_URL.format(githubClinetId))
+                }
             )
         }
+        fabProfile.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeToProfile())
+        }
+
+        if (githubClinetId == null || githubClinetSecret == null)
+            activity!!.githubApiDialog { id, secret ->
+                githubClinetId = id
+                githubClinetSecret = secret
+            }
     }
 
 }

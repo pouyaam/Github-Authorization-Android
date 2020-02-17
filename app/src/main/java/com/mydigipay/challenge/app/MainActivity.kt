@@ -27,20 +27,19 @@ class MainActivity : AppCompatActivity() {
     private fun initEvents() {
         EventBus.instance.collectEventOnMainThread<NetworkErrorEvent> { event ->
             if (event.throwable is HttpException)
-                event.throwable.cast<HttpException>().handle { }
+                event.throwable.cast<HttpException>().handle(event.onRetry)
 
         }
     }
 
-    fun HttpException.handle(
-        onRetry: () -> Unit
-    ) {
+    fun HttpException.handle(onRetry: (() -> Unit)? = null) {
         when (code()) {
             401 -> {
                 Coroutines.io {
                     githubApiService.accessToken(RequestAccessToken.DEFAULT).await().accessToken
-                        .let {
-                            token = it; onRetry()
+                        ?.let {
+                            token = it
+                            onRetry?.invoke()
                         }
                 }
             }

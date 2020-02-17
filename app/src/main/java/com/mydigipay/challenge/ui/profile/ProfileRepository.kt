@@ -4,5 +4,5 @@ import com.mydigipay.challenge.network.model.user.User
 
 interface ProfileRepository  {
     suspend fun getProfile(): User
-    suspend fun updateUserProfile(userInfo: Map<String, Any>): User
+    suspend fun updateUserProfile(userInfo: Map<String, String>): User
 }

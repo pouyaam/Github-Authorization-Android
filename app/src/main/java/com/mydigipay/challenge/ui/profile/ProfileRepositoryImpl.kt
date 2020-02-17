@@ -9,6 +9,6 @@ class ProfileRepositoryImpl(val githubApiService: GithubApiService) : ProfileRep
         githubApiService.getUserProfile().await()
 
 
-    override suspend fun updateUserProfile(userInfo: Map<String, Any>) =
+    override suspend fun updateUserProfile(userInfo: Map<String, String>) =
         githubApiService.updateUserProfile(userInfo).await()
 }

@@ -1,9 +1,9 @@
 package com.mydigipay.challenge.network.oauth
 
 import com.google.gson.annotations.SerializedName
-import com.mydigipay.challenge.app.App.Companion.CLIENT_ID
-import com.mydigipay.challenge.app.App.Companion.CLIENT_SECRET
 import com.mydigipay.challenge.app.App.Companion.REDIRECT_URI
+import com.mydigipay.challenge.utils.githubClinetId
+import com.mydigipay.challenge.utils.githubClinetSecret
 import com.mydigipay.challenge.utils.githubCode
 
 data class RequestAccessToken(
@@ -14,7 +14,7 @@ data class RequestAccessToken(
     var clientSecret: String,
 
     @SerializedName("code")
-    var code: String,
+    var code: String?,
 
     @SerializedName("redirect_uri")
     var redirectUri: String,
@@ -23,6 +23,6 @@ data class RequestAccessToken(
     var state: String
 ) {
     companion object {
-        val DEFAULT = RequestAccessToken(CLIENT_ID, CLIENT_SECRET, githubCode!!, REDIRECT_URI, "0")
+        val DEFAULT = RequestAccessToken(githubClinetId!!, githubClinetSecret!!, githubCode, REDIRECT_URI, "0")
     }
 }

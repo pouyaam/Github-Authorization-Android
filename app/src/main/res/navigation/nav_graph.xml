@@ -17,6 +17,10 @@
                 android:name="repo"
                 app:argType="string" />
         </action>
+        <action
+            android:id="@+id/action_home_to_profile"
+            app:destination="@id/profile">
+        </action>
 
         <argument
             android:name="code"

@@ -1,35 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/space_3">
 
 
-    <ImageView
-        android:id="@+id/imgProfileAvatar"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="@dimen/space_4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/imgProfileAvatar"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="@dimen/space_4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imgEditName"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgProfileAvatar" />
+        <ImageView
+            android:id="@+id/imgEditName"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/space_2"
+            android:background="?selectableItemBackground"
+            android:padding="@dimen/space_2"
+            android:src="@drawable/ic_edit"
+            android:tag="name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgProfileAvatar" />
 
-    <TextView
-        android:id="@+id/txtProfileName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/imgEditName"
-        app:layout_constraintBottom_toBottomOf="@id/imgEditName"
-        app:layout_constraintEnd_toStartOf="@id/imgEditName"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/txtProfileName"
+            style="@style/Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:tag="name"
+            app:layout_constraintBottom_toBottomOf="@id/imgEditName"
+            app:layout_constraintEnd_toStartOf="@id/imgEditName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imgEditName" />
+
+        <ImageView
+            android:id="@+id/imgEditCompany"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/space_3"
+            android:background="?selectableItemBackground"
+            android:padding="@dimen/space_2"
+            android:src="@drawable/ic_edit"
+            android:tag="company"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgEditName" />
+
+        <TextView
+            android:id="@+id/txtProfileCompany"
+            style="@style/Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:tag="company"
+            app:layout_constraintBottom_toBottomOf="@id/imgEditCompany"
+            app:layout_constraintEnd_toStartOf="@id/imgEditCompany"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imgEditCompany" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/imgEditBlog"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/space_3"
+            android:background="?selectableItemBackground"
+            android:padding="@dimen/space_2"
+            android:src="@drawable/ic_edit"
+            android:tag="blog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgEditCompany" />
+
+        <TextView
+            android:id="@+id/txtProfileBlog"
+            style="@style/Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:tag="blog"
+            app:layout_constraintBottom_toBottomOf="@id/imgEditBlog"
+            app:layout_constraintEnd_toStartOf="@id/imgEditBlog"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imgEditBlog" />
+
+        <ImageView
+            android:id="@+id/imgEditLocation"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/space_3"
+            android:background="?selectableItemBackground"
+            android:padding="@dimen/space_2"
+            android:src="@drawable/ic_edit"
+            android:tag="location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgEditBlog" />
+
+        <TextView
+            android:id="@+id/txtProfileLocation"
+            style="@style/Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:tag="location"
+            app:layout_constraintBottom_toBottomOf="@id/imgEditLocation"
+            app:layout_constraintEnd_toStartOf="@id/imgEditLocation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imgEditLocation" />
+
+        <ImageView
+            android:id="@+id/imgEditEmail"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/space_3"
+            android:background="?selectableItemBackground"
+            android:padding="@dimen/space_2"
+            android:src="@drawable/ic_edit"
+            android:tag="email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgEditLocation" />
+
+        <TextView
+            android:id="@+id/txtProfileEmail"
+            style="@style/Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autoLink="email"
+            android:tag="email"
+            app:layout_constraintBottom_toBottomOf="@id/imgEditEmail"
+            app:layout_constraintEnd_toStartOf="@id/imgEditEmail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imgEditEmail" />
+
+        <ImageView
+            android:id="@+id/imgEditBio"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/space_3"
+            android:background="?selectableItemBackground"
+            android:padding="@dimen/space_2"
+            android:src="@drawable/ic_edit"
+            android:tag="bio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgEditEmail" />
+
+        <TextView
+            android:id="@+id/txtProfileBio"
+            style="@style/Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:tag="bio"
+            app:layout_constraintBottom_toBottomOf="@id/imgEditBio"
+            app:layout_constraintEnd_toStartOf="@id/imgEditBio"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imgEditBio" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

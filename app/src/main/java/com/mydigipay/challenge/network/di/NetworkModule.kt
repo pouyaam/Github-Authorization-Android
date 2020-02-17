@@ -10,6 +10,8 @@ import com.mydigipay.challenge.ui.commits.CommitRepository
 import com.mydigipay.challenge.ui.commits.CommitRepositoryImpl
 import com.mydigipay.challenge.ui.home.HomeRepository
 import com.mydigipay.challenge.ui.home.HomeRepositoryImpl
+import com.mydigipay.challenge.ui.profile.ProfileRepository
+import com.mydigipay.challenge.ui.profile.ProfileRepositoryImpl
 import com.mydigipay.challenge.utils.token
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -24,6 +26,7 @@ import java.io.IOException
 import java.net.UnknownHostException
 import java.util.concurrent.TimeUnit
 
+const val OK_HTTP_LOGGER = "OK_HTTP_LOGGER"
 const val OK_HTTP = "OK_HTTP"
 const val RETROFIT = "RETROFIT"
 const val READ_TIMEOUT = "READ_TIMEOUT"
@@ -35,20 +38,19 @@ val networkModule = module {
     single(named(WRITE_TIMEOUT)) { 10 * 1000 }
     single(named(CONNECTION_TIMEOUT)) { 10 * 1000 }
 
-    factory<Interceptor> {
+    factory<HttpLoggingInterceptor>(named(OK_HTTP_LOGGER)) {
         HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.HEADERS)
             .setLevel(HttpLoggingInterceptor.Level.BODY)
     }
 
-    factory(named(OK_HTTP)) {
+    single (named(OK_HTTP)) {
         OkHttpClient.Builder()
             .readTimeout(get(named(READ_TIMEOUT)), TimeUnit.MILLISECONDS)
             .writeTimeout(get(named(WRITE_TIMEOUT)), TimeUnit.MILLISECONDS)
             .connectTimeout(get(named(CONNECTION_TIMEOUT)), TimeUnit.MILLISECONDS)
-            .addLogger()
             .addInterceptor(get(named(APPLICATION_CONTEXT)) as Context)
-            .addInterceptor(get())
+            .addInterceptor(get(named(OK_HTTP_LOGGER)))
             .build()
     }
 
@@ -67,6 +69,9 @@ val networkModule = module {
     }
     single {
         CommitRepositoryImpl(get()) as CommitRepository
+    }
+    single {
+        ProfileRepositoryImpl(get()) as ProfileRepository
     }
 }
 

@@ -25,6 +25,7 @@ object Coroutines {
             EventBus.instance.send(NetworkErrorEvent(exception, onRetry = {
                 ioThenMain(work, completionBlock)
             }))
+
             if (exception is HttpException && exception.code() == 401)
                 return@CoroutineExceptionHandler
 

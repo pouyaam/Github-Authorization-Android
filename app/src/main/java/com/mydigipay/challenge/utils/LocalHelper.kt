@@ -5,11 +5,13 @@ import android.content.Context
 import android.content.SharedPreferences
 
 const val CODE = "CODE"
+const val CLIENT_ID = "CLIENT_ID"
+const val CLIENT_SECRECT = "CLIENT_SECRECT"
 const val AUTH_CODE = "auth2"
 lateinit var sharedPreferences: SharedPreferences
 
 
- var token: String?
+var token: String?
     get() = getStringPreference(AUTH_CODE)
     set(value) {
         value ?: run {
@@ -22,7 +24,7 @@ lateinit var sharedPreferences: SharedPreferences
         )
     }
 
- var githubCode: String?
+var githubCode: String?
     get() = getStringPreference(CODE)
     set(value) {
         value ?: run {
@@ -31,6 +33,32 @@ lateinit var sharedPreferences: SharedPreferences
         }
         putStringPreference(
             CODE,
+            value
+        )
+    }
+
+var githubClinetId: String?
+    get() = getStringPreference(CLIENT_ID)
+    set(value) {
+        value ?: run {
+            removeStringPreference(CLIENT_ID)
+            return
+        }
+        putStringPreference(
+            CLIENT_ID,
+            value
+        )
+    }
+
+var githubClinetSecret: String?
+    get() = getStringPreference(CLIENT_SECRECT)
+    set(value) {
+        value ?: run {
+            removeStringPreference(CLIENT_SECRECT)
+            return
+        }
+        putStringPreference(
+            CLIENT_SECRECT,
             value
         )
     }

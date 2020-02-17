@@ -4,4 +4,11 @@
     <string name="authorize">AUTHORIZE</string>
     <string name="connectionError">Check your Internet and try again</string>
     <string name="socketError">Unknown Connection Error</string>
+    <string name="clientIdTitle">Client Id</string>
+    <string name="ClientSecretTitle">Client Secret</string>
+    <string name="enterAllData">Enter All Data</string>
+    <string name="apiDialogTitle">Github Api</string>
+    <string name="apiDialogMessage">Enter your Github Api Information</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 </resources>

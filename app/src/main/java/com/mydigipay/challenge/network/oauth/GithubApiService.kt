@@ -26,5 +26,5 @@ interface GithubApiService {
     fun getUserProfile(): Deferred<User>
 
     @PATCH("/user")
-    fun updateUserProfile(@Body userInfo: Map<String, Any>): Deferred<User>
+    fun updateUserProfile(@Body userInfo: Map<String, String>): Deferred<User>
 }
