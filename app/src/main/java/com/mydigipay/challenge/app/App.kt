@@ -8,6 +8,7 @@ import com.mydigipay.challenge.ui.commits.CommitsViewModel
 import com.mydigipay.challenge.ui.home.HomeRepositoryImpl
 import com.mydigipay.challenge.ui.home.HomeViewModel
 import com.mydigipay.challenge.ui.profile.ProfileViewModel
+import com.mydigipay.challenge.utils.EventBus
 import com.mydigipay.challenge.utils.initPreferenceUtils
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
@@ -35,6 +36,7 @@ class App : Application() {
 
     val appModule = module {
         factory { HomeRepositoryImpl(get()) }
+        single { EventBus.instance }
         single(named(APPLICATION_CONTEXT)) { applicationContext }
         single { PreferenceManager.getDefaultSharedPreferences(get()) }
         viewModel { HomeViewModel(get()) }

@@ -11,4 +11,7 @@
     <string name="apiDialogMessage">Enter your Github Api Information</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="accept">Accept</string>
+    <string name="retry">Retry</string>
+    <string name="network_problem">Network Problem</string>
 </resources>

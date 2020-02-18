@@ -41,7 +41,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         imgEditLocation.setOnClickListener(this)
         imgEditBio.setOnClickListener(this)
         viewModel.profileState.observe(viewLifecycleOwner, Observer { state ->
-            imgProfileAvatar.loadWithCircularCrop(state.user.avatarUrl)
+            imgProfileAvatar.loadWithCircularCrop(state.user.avatarUrl, R.drawable.ic_user)
             txtProfileName.titledText = state.user.name
             txtProfileCompany.titledText = state.user.company
             txtProfileBlog.titledText = state.user.blog

@@ -17,7 +17,7 @@ class CommitsViewModel(private val commitRepository: CommitRepository) : ViewMod
     }
 
     private fun loadCommits() {
-        Coroutines.ioThenMain({ commitRepository.getCommits(owner, repo) }) {
+        Coroutines.ioThenMain(work = { commitRepository.getCommits(owner, repo) }) {
             onExecute { commitState.value = viewState.copy(isLoading = true) }
             finally { commitState.value = viewState.copy(isLoading = false) }
             onComplete {

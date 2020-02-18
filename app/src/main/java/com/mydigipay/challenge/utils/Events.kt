@@ -6,4 +6,4 @@ class NetworkErrorEvent(
     val onCancle: (() -> Unit)? = null
 )
 
-class FetchTokenEvent(val onToken: (token: String) -> Unit)
+

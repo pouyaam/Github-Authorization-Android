@@ -19,7 +19,7 @@ class ProfileViewModel(private val profileRepository: ProfileRepository) : ViewM
     }
 
     private fun loadProfile() {
-        Coroutines.ioThenMain({ profileRepository.getProfile() }) {
+        Coroutines.ioThenMain(work = { profileRepository.getProfile() }) {
             onExecute { profileState.value = profileState.value!!.copy(isLoading = true) }
             finally { profileState.value = profileState.value!!.copy(isLoading = false) }
             onComplete {
@@ -36,7 +36,7 @@ class ProfileViewModel(private val profileRepository: ProfileRepository) : ViewM
     }
 
     fun requestUpdate(key: String, value: String) {
-        Coroutines.ioThenMain({ profileRepository.updateUserProfile(mapOf(key to value)) }) {
+        Coroutines.ioThenMain(work = { profileRepository.updateUserProfile(mapOf(key to value)) }) {
             onExecute { profileState.value = profileState.value!!.copy(isLoading = true) }
             finally { profileState.value = profileState.value!!.copy(isLoading = false) }
             onComplete {

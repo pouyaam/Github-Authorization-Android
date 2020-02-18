@@ -1,7 +1,12 @@
 package com.mydigipay.challenge.utils
 
+import com.mydigipay.challenge.network.oauth.GithubApiService
+import com.mydigipay.challenge.network.oauth.RequestAccessToken
 import kotlinx.coroutines.*
+import org.koin.core.KoinComponent
 import retrofit2.HttpException
+import java.io.IOException
+import java.net.UnknownHostException
 
 @UseExperimental(FlowPreview::class)
 typealias CompletionBlock<T> = Coroutines.Request<T>.() -> Unit
@@ -9,39 +14,80 @@ typealias CompletionBlock<T> = Coroutines.Request<T>.() -> Unit
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-object Coroutines {
+object Coroutines : KoinComponent {
 
-    fun <T : Any> io(work: suspend (() -> T?)): Job = CoroutineScope(Dispatchers.IO).launch {
-        work()
+    private val githubApiService: GithubApiService = getKoin().get()
+    private val eventBus: EventBus = getKoin().get()
+
+    fun <T : Any> io(parentJob: Job? = null, work: suspend (() -> T?)): Job {
+        val job = parentJob ?: Job()
+        CoroutineScope(Dispatchers.IO + job).async {
+            work()
+        }
+        return job
     }
 
     fun <T : Any?> ioThenMain(
+        parentJob: Job? = null,
         work: suspend (() -> T),
         completionBlock: CompletionBlock<T>? = null
     ): Job {
         val callback = Request<T>().apply { completionBlock?.let { it() } }
-
         val handler = CoroutineExceptionHandler { _, exception ->
-            EventBus.instance.send(NetworkErrorEvent(exception, onRetry = {
-                ioThenMain(work, completionBlock)
-            }))
-
-            if (exception is HttpException && exception.code() == 401)
+            if (handleGlobalException(exception, work, completionBlock))
                 return@CoroutineExceptionHandler
-
             callback.invoke(exception)
             callback.invokeFinally()
         }
-        return CoroutineScope(Dispatchers.Main + handler).launch {
+        val job = parentJob ?: Job()
+        CoroutineScope(Dispatchers.Main + handler).launch {
             callback.invokeOnExecute()
-            val data = CoroutineScope(Dispatchers.IO).async {
+            val data = CoroutineScope(Dispatchers.IO + job).async {
                 return@async work()
             }.await()
             callback.invoke(data)
             callback.invokeFinally()
         }
+        return job
     }
 
+    private fun <T : Any?> handleGlobalException(
+        exception: Throwable,
+        work: suspend () -> T,
+        completionBlock: CompletionBlock<T>?
+    ): Boolean {
+        if (exception is HttpException) {
+            return exception.handle(onRetry = {
+                ioThenMain(work = work, completionBlock = completionBlock)
+            })
+        } else if (exception is UnknownHostException || exception is IOException) {
+            eventBus.send(NetworkErrorEvent(exception, onRetry = {
+                ioThenMain(work = work, completionBlock = completionBlock)
+            }))
+            return true
+        }
+
+        return false
+    }
+
+    private fun HttpException.handle(
+        parentJob: Job? = null,
+        onRetry: (() -> Unit)? = null
+    ): Boolean {
+        return when (code()) {
+            401 -> {
+                io(parentJob) {
+                    githubApiService.accessToken(RequestAccessToken.DEFAULT).await().accessToken
+                        ?.let {
+                            token = it
+                            onRetry?.invoke()
+                        }
+                }
+                true
+            }
+            else -> false
+        }
+    }
 
     class Request<T> {
         private var onComplete: ((T) -> Unit)? = null

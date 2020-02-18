@@ -27,7 +27,7 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
             )
             return
         }
-        Coroutines.ioThenMain({ homeRepository.getRepositories() }) {
+        Coroutines.ioThenMain(work = { homeRepository.getRepositories() }) {
             onExecute { homeState.value = homeState.value!!.copy(isLoading = true) }
             finally { homeState.value = homeState.value!!.copy(isLoading = false) }
             onComplete {
