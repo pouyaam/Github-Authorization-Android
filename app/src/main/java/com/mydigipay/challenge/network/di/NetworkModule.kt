@@ -38,19 +38,17 @@ val networkModule = module {
     single(named(WRITE_TIMEOUT)) { 10 * 1000 }
     single(named(CONNECTION_TIMEOUT)) { 10 * 1000 }
 
-    factory<HttpLoggingInterceptor>(named(OK_HTTP_LOGGER)) {
-        HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.HEADERS)
-            .setLevel(HttpLoggingInterceptor.Level.BODY)
+    factory(named(OK_HTTP_LOGGER)) {
+        HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
     }
 
-    single (named(OK_HTTP)) {
+    single(named(OK_HTTP)) {
         OkHttpClient.Builder()
             .readTimeout(get(named(READ_TIMEOUT)), TimeUnit.MILLISECONDS)
             .writeTimeout(get(named(WRITE_TIMEOUT)), TimeUnit.MILLISECONDS)
             .connectTimeout(get(named(CONNECTION_TIMEOUT)), TimeUnit.MILLISECONDS)
             .addInterceptor(get(named(APPLICATION_CONTEXT)) as Context)
-            .addInterceptor(get(named(OK_HTTP_LOGGER)))
+            .addInterceptor(get<HttpLoggingInterceptor>(named(OK_HTTP_LOGGER)))
             .build()
     }
 

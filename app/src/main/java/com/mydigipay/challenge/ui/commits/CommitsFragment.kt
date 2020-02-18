@@ -1,11 +1,9 @@
 package com.mydigipay.challenge.ui.commits
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -16,7 +14,6 @@ import kotlinx.android.synthetic.main.fragment_commits.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class CommitsFragment : Fragment() {
-
 
     private val viewModel by viewModel<CommitsViewModel>()
 
@@ -41,7 +38,6 @@ class CommitsFragment : Fragment() {
         viewModel.commitState.observe(viewLifecycleOwner, Observer { state ->
             state.commits.takeIf { it.isNotEmpty() }?.let {
                 adapter.originalData = it.toMutableList()
-                Log.i("GitToken", it.toString())
             }
         })
         recyclerCommits.apply {
