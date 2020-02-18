@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mydigipay.challenge.github.R
 import com.mydigipay.challenge.network.model.commit.CommitWrapper
 import com.mydigipay.challenge.network.model.commit.Committer
-import com.mydigipay.challenge.network.model.repository.Repository
 import kotlinx.android.synthetic.main.item_commit_list.view.*
 
 

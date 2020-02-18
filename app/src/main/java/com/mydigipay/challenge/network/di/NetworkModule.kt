@@ -1,6 +1,5 @@
 package com.mydigipay.challenge.network.di
 
-import android.app.Application
 import android.content.Context
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.mydigipay.challenge.app.APPLICATION_CONTEXT
