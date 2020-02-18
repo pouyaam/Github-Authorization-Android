@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/home">
+
+    <fragment
+        android:id="@+id/home"
+        android:name="com.mydigipay.challenge.ui.home.HomeFragment">
+        <action
+            android:id="@+id/action_home_to_commits"
+            app:destination="@id/commits">
+            <argument
+                android:name="owner"
+                app:argType="string" />
+            <argument
+                android:name="repo"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_home_to_profile"
+            app:destination="@id/profile">
+        </action>
+
+        <argument
+            android:name="code"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+
+        <deepLink
+            android:id="@+id/loginDeepLink"
+            app:uri="omidgitapp://authorization/?code={code}" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/commits"
+        android:name="com.mydigipay.challenge.ui.commits.CommitsFragment">
+
+        <argument
+            android:name="owner"
+            app:argType="string" />
+        <argument
+            android:name="repo"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.mydigipay.challenge.ui.profile.ProfileFragment">
+
+    </fragment>
+
+
+</navigation>
