@@ -7,11 +7,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.miguelcatalan.materialsearchview.MaterialSearchView
 import com.mydigipay.challenge.extentions.githubApiDialog
 import com.mydigipay.challenge.github.R
 import com.mydigipay.challenge.utils.*
@@ -19,7 +22,6 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
-
 
     private val viewModel by viewModel<HomeViewModel>()
 
@@ -52,7 +54,7 @@ class HomeFragment : Fragment() {
             repositoriesContainer.isVisible = state.requiredCode.not()
             authorize.isVisible = state.requiredCode
             state.repositories.takeIf { it.isNotEmpty() }?.let {
-                adapter.items = it.toMutableList()
+                adapter.originalData = it.toMutableList()
                 Log.i("repositories", it.toString())
             }
         })
@@ -72,12 +74,31 @@ class HomeFragment : Fragment() {
         fabProfile.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeToProfile())
         }
+        initSearch()
+
 
         if (githubClinetId == null || githubClinetSecret == null)
             activity!!.githubApiDialog { id, secret ->
                 githubClinetId = id
                 githubClinetSecret = secret
             }
+    }
+
+    private fun initSearch() {
+        searchView.post { searchView.showSearch() }
+        searchView.findViewById<View>(com.miguelcatalan.materialsearchview.R.id.action_up_btn)
+            .isVisible = false
+        searchView.setOnQueryTextListener(object : MaterialSearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let { adapter.filter(it) }
+                return true
+            }
+
+        })
     }
 
 }

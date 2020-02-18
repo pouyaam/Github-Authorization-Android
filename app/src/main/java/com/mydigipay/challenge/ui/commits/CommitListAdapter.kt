@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mydigipay.challenge.github.R
 import com.mydigipay.challenge.network.model.commit.CommitWrapper
 import com.mydigipay.challenge.network.model.commit.Committer
+import com.mydigipay.challenge.network.model.repository.Repository
 import kotlinx.android.synthetic.main.item_commit_list.view.*
 
 
@@ -17,6 +18,23 @@ class CommitListAdapter(
     val onCommitClicked: (CommitWrapper) -> Unit
 
 ) : RecyclerView.Adapter<CommitListAdapter.CommitHolder>(), View.OnClickListener {
+
+    var originalData: List<CommitWrapper> = items.toMutableList()
+        set(value) {
+            if (value == field)
+                return
+            field = value
+            items = value.toMutableList()
+        }
+
+    fun filter(query: String) {
+        if (query.isBlank()) {
+            items = originalData.toMutableList()
+            return
+        }
+        items =
+            originalData.filter { it.commit.message.contains(query, true) }.toMutableList()
+    }
 
     var items: MutableList<CommitWrapper> = items
         set(value) {

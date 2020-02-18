@@ -16,7 +16,22 @@ class RepositoryListAdapter(
     val onRepositoryClicked: (Repository) -> Unit
 
 ) : RecyclerView.Adapter<RepositoryListAdapter.RepositoryHolder>(), View.OnClickListener {
+    var originalData: List<Repository> = items.toMutableList()
+        set(value) {
+            if (value == field)
+                return
+            field = value
+            items = value.toMutableList()
+        }
 
+    fun filter(query: String) {
+        if (query.isBlank()) {
+            items = originalData.toMutableList()
+            return
+        }
+        items =
+            originalData.filter { it.fullName.contains(query, true) }.toMutableList()
+    }
     var items: MutableList<Repository> = items
         set(value) {
             if (value == field)
@@ -24,6 +39,7 @@ class RepositoryListAdapter(
             field = value
             notifyDataSetChanged()
         }
+
 
     inner class RepositoryHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {
