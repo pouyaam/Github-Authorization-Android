@@ -2,6 +2,7 @@ package com.mydigipay.challenge.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.mydigipay.challenge.base.BaseViewModel
 import com.mydigipay.challenge.utils.Coroutines
 import com.mydigipay.challenge.utils.githubClinetId
 import com.mydigipay.challenge.utils.githubClinetSecret
@@ -11,7 +12,7 @@ import kotlinx.coroutines.FlowPreview
 
 @ExperimentalCoroutinesApi
 @FlowPreview
-class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
+class HomeViewModel(private val homeRepository: HomeRepository) : BaseViewModel() {
 
     val homeState = MutableLiveData<HomeViewState>(HomeViewState())
 
@@ -44,7 +45,7 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
                     error = it
                 )
             }
-        }
+        }.also { addToUnsubscribe(it) }
     }
 
 

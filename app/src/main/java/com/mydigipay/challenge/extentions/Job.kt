@@ -7,3 +7,9 @@ fun Job.cancleTree() {
     cancelChildren()
     cancel()
 }
+
+fun List<Job>.clearAllDisposables() {
+    forEach {
+        it.cancleTree()
+    }
+}

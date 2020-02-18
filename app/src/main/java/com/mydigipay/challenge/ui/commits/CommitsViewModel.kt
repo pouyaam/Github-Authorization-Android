@@ -1,11 +1,11 @@
 package com.mydigipay.challenge.ui.commits
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.mydigipay.challenge.base.BaseViewModel
 import com.mydigipay.challenge.utils.Coroutines
 import kotlin.properties.Delegates
 
-class CommitsViewModel(private val commitRepository: CommitRepository) : ViewModel() {
+class CommitsViewModel(private val commitRepository: CommitRepository) : BaseViewModel() {
 
     private val viewState = CommitViewState()
     var owner by Delegates.notNull<String>()
@@ -33,6 +33,6 @@ class CommitsViewModel(private val commitRepository: CommitRepository) : ViewMod
                     error = it
                 )
             }
-        }
+        }.also { addToUnsubscribe(it) }
     }
 }

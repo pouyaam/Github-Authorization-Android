@@ -2,6 +2,7 @@ package com.mydigipay.challenge.ui.profile
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.mydigipay.challenge.base.BaseViewModel
 import com.mydigipay.challenge.network.model.user.User
 import com.mydigipay.challenge.utils.Coroutines
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -9,8 +10,7 @@ import kotlinx.coroutines.FlowPreview
 
 @ExperimentalCoroutinesApi
 @UseExperimental(FlowPreview::class)
-class ProfileViewModel(private val profileRepository: ProfileRepository) : ViewModel() {
-
+class ProfileViewModel(private val profileRepository: ProfileRepository) : BaseViewModel() {
 
     val profileState = MutableLiveData<ProfileViewState>(ProfileViewState())
 
@@ -32,7 +32,7 @@ class ProfileViewModel(private val profileRepository: ProfileRepository) : ViewM
             onError {
                 profileState.value = profileState.value!!.copy(isLoading = false, error = it)
             }
-        }
+        }.also { addToUnsubscribe(it) }
     }
 
     fun requestUpdate(key: String, value: String) {
@@ -49,6 +49,6 @@ class ProfileViewModel(private val profileRepository: ProfileRepository) : ViewM
             onError {
                 profileState.value = profileState.value!!.copy(isLoading = false, error = it)
             }
-        }
+        }.also { addToUnsubscribe(it) }
     }
 }
