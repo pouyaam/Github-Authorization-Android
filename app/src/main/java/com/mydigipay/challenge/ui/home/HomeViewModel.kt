@@ -1,7 +1,6 @@
 package com.mydigipay.challenge.ui.home
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.mydigipay.challenge.base.BaseViewModel
 import com.mydigipay.challenge.utils.Coroutines
 import com.mydigipay.challenge.utils.githubClinetId
