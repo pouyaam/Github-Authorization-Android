@@ -1,9 +1,7 @@
 package com.mydigipay.challenge.github
 
-import android.content.Context
 import androidx.preference.PreferenceManager
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.mydigipay.challenge.app.APPLICATION_CONTEXT
 import com.mydigipay.challenge.network.di.*
 import com.mydigipay.challenge.network.oauth.GithubApiService
 import com.mydigipay.challenge.ui.commits.CommitRepository

@@ -1,9 +1,7 @@
 package com.mydigipay.challenge.ui.profile
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.mydigipay.challenge.base.BaseViewModel
-import com.mydigipay.challenge.network.model.user.User
 import com.mydigipay.challenge.utils.Coroutines
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview

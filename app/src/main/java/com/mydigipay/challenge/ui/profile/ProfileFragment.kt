@@ -1,13 +1,9 @@
 package com.mydigipay.challenge.ui.profile
 
-import android.app.AlertDialog
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
@@ -17,7 +13,6 @@ import com.mydigipay.challenge.extentions.loadWithCircularCrop
 import com.mydigipay.challenge.github.R
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.lang.Exception
 
 class ProfileFragment : Fragment(), View.OnClickListener {
 
