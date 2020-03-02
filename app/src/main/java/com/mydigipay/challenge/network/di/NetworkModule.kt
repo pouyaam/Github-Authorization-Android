@@ -16,6 +16,7 @@ const val RETROFIT = "RETROFIT"
 const val READ_TIMEOUT = "READ_TIMEOUT"
 const val WRITE_TIMEOUT = "WRITE_TIMEOUT"
 const val CONNECTION_TIMEOUT = "CONNECTION_TIMEOUT"
+
 val networkModule = module {
 
     single(named(READ_TIMEOUT)) { 30 * 1000 }
