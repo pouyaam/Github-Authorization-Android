@@ -26,7 +26,7 @@ class LoginUriActivity : Activity() {
             val code = uri?.getQueryParameter("code") ?: ""
             code.takeIf { it.isNotEmpty() }?.let { code ->
                 val accessTokenJob = CoroutineScope(Dispatchers.IO).launch {
-                    val response = tokenRepository.accessToken(
+                    tokenRepository.accessToken(
                         RequestAccessToken(
                             CLIENT_ID,
                             CLIENT_SECRET,
@@ -35,8 +35,6 @@ class LoginUriActivity : Activity() {
                             "0"
                         )
                     )
-
-                    tokenRepository.saveToken(response.accessToken)
                 }
 
                 accessTokenJob.invokeOnCompletion {
