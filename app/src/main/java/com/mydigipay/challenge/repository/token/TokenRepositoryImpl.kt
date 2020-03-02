@@ -1,18 +1,19 @@
 package com.mydigipay.challenge.repository.token
 
 import android.content.SharedPreferences
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
+import androidx.core.content.edit
+import kotlinx.coroutines.*
 
 private const val TOKEN = "TOKEN"
 
 class TokenRepositoryImpl(private val sharedPreferences: SharedPreferences) : TokenRepository {
-    override fun saveToken(token: String): Deferred<Unit> =
-        CoroutineScope(Dispatchers.IO).async { sharedPreferences.edit().apply { putString(TOKEN, token) }.apply() }
+
+    override suspend fun saveToken(token: String)=
+        withContext(Dispatchers.IO) {
+            sharedPreferences.edit(commit = true) { putString(TOKEN, token) }
+        }
 
 
-    override fun readToken(): Deferred<String> =
-        CoroutineScope(Dispatchers.IO).async { sharedPreferences.getString(TOKEN, "") ?: "" }
+    override suspend fun readToken()=
+        withContext(Dispatchers.IO) { sharedPreferences.getString(TOKEN, "") ?: "" }
 }

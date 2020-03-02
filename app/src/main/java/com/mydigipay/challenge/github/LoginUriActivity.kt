@@ -38,12 +38,12 @@ class LoginUriActivity : Activity() {
                         )
                     )
 
-                    tokenRepository.saveToken(response.accessToken).await()
+                    tokenRepository.saveToken(response.accessToken)
                 }
 
                 accessTokenJob.invokeOnCompletion {
                     CoroutineScope(Dispatchers.Main).launch {
-                        token.text = tokenRepository.readToken().await()
+                        token.text = tokenRepository.readToken()
                         this.cancel()
                         accessTokenJob.cancelAndJoin()
                     }
