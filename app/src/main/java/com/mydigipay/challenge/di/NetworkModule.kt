@@ -1,7 +1,5 @@
-package com.mydigipay.challenge.network.di
+package com.mydigipay.challenge.di
 
-import com.mydigipay.challenge.repository.token.TokenRepository
-import com.mydigipay.challenge.repository.token.TokenRepositoryImpl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -44,9 +42,5 @@ val networkModule = module {
             .baseUrl("http://api.github.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-    }
-
-    single<TokenRepository> {
-        TokenRepositoryImpl(get())
     }
 }
