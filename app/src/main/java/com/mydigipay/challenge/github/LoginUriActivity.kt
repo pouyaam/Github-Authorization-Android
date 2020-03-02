@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import com.mydigipay.challenge.network.oauth.RequestAccessToken
-import com.mydigipay.challenge.repository.oauth.AccessTokenDataSource
 import com.mydigipay.challenge.repository.token.TokenRepository
 import kotlinx.android.synthetic.main.login_uri_activity.*
 import kotlinx.coroutines.*
@@ -12,7 +11,6 @@ import org.koin.android.ext.android.inject
 
 class LoginUriActivity : Activity() {
     private val tokenRepository: TokenRepository by inject()
-    private val accessTokenDataSource: AccessTokenDataSource by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +26,7 @@ class LoginUriActivity : Activity() {
             val code = uri?.getQueryParameter("code") ?: ""
             code.takeIf { it.isNotEmpty() }?.let { code ->
                 val accessTokenJob = CoroutineScope(Dispatchers.IO).launch {
-                    val response = accessTokenDataSource.accessToken(
+                    val response = tokenRepository.accessToken(
                         RequestAccessToken(
                             CLIENT_ID,
                             CLIENT_SECRET,
