@@ -1,7 +1,7 @@
 package com.mydigipay.challenge.di
 
-import com.mydigipay.challenge.repository.token.TokenRepository
-import com.mydigipay.challenge.repository.token.TokenRepositoryImpl
+import com.mydigipay.challenge.data.repository.token.TokenRepository
+import com.mydigipay.challenge.data.repository.token.TokenRepositoryImpl
 import org.koin.dsl.module
 
 val repositoryModule = module {
