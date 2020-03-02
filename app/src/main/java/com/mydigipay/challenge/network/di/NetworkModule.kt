@@ -42,7 +42,6 @@ val networkModule = module {
             .client(get(named(OK_HTTP)))
             .baseUrl("http://api.github.com")
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
     }
 

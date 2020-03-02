@@ -36,7 +36,7 @@ class LoginUriActivity : Activity() {
                             REDIRECT_URI,
                             "0"
                         )
-                    ).await()
+                    )
 
                     tokenRepository.saveToken(response.accessToken).await()
                 }
