@@ -1,25 +1,23 @@
 package com.mydigipay.challenge.di
 
+import com.mydigipay.challenge.di.Qualifiers.CONNECTION_TIMEOUT
 import com.mydigipay.challenge.di.Qualifiers.LOGGING_INTERCEPTOR
+import com.mydigipay.challenge.di.Qualifiers.READ_TIMEOUT
+import com.mydigipay.challenge.di.Qualifiers.WRITE_TIMEOUT
 import com.mydigipay.challenge.util.ktx.logD
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-const val READ_TIMEOUT = "READ_TIMEOUT"
-const val WRITE_TIMEOUT = "WRITE_TIMEOUT"
-const val CONNECTION_TIMEOUT = "CONNECTION_TIMEOUT"
-
 val networkModule = module {
 
-    single(named(READ_TIMEOUT)) { 30 * 1000 }
-    single(named(WRITE_TIMEOUT)) { 10 * 1000 }
-    single(named(CONNECTION_TIMEOUT)) { 10 * 1000 }
+    single(READ_TIMEOUT) { 30 * 1000 }
+    single(WRITE_TIMEOUT) { 10 * 1000 }
+    single(CONNECTION_TIMEOUT) { 10 * 1000 }
 
     single<Interceptor>(LOGGING_INTERCEPTOR) {
         HttpLoggingInterceptor(
@@ -40,9 +38,9 @@ val networkModule = module {
 
     single {
         OkHttpClient.Builder()
-            .readTimeout(get(named(READ_TIMEOUT)), TimeUnit.MILLISECONDS)
-            .writeTimeout(get(named(WRITE_TIMEOUT)), TimeUnit.MILLISECONDS)
-            .connectTimeout(get(named(CONNECTION_TIMEOUT)), TimeUnit.MILLISECONDS)
+            .readTimeout(get(READ_TIMEOUT), TimeUnit.MILLISECONDS)
+            .writeTimeout(get(WRITE_TIMEOUT), TimeUnit.MILLISECONDS)
+            .connectTimeout(get(CONNECTION_TIMEOUT), TimeUnit.MILLISECONDS)
             .addInterceptor(get<Interceptor>(LOGGING_INTERCEPTOR))
             .build()
     }
