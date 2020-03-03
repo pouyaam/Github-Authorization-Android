@@ -3,6 +3,7 @@ package com.mydigipay.challenge.github
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import com.mydigipay.challenge.R
 import com.mydigipay.challenge.data.network.api.oauth.RequestAccessToken
 import com.mydigipay.challenge.data.repository.token.TokenRepository
 import kotlinx.android.synthetic.main.login_uri_activity.*
