@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
 
 abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompatActivity() {
 
@@ -42,5 +43,12 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompa
     abstract fun oneTimeEvent()
 
     abstract fun everyTimeEvent()
+
+    fun getCurrentFragment(): Fragment? {
+        return supportFragmentManager
+            .findFragmentById(navigationId)
+            ?.childFragmentManager
+            ?.primaryNavigationFragment
+    }
 
 }
