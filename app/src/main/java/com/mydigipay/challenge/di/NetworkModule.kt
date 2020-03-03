@@ -15,9 +15,9 @@ import java.util.concurrent.TimeUnit
 
 val networkModule = module {
 
-    single(READ_TIMEOUT) { 30 * 1000 }
-    single(WRITE_TIMEOUT) { 10 * 1000 }
-    single(CONNECTION_TIMEOUT) { 10 * 1000 }
+    single(READ_TIMEOUT) { 30 * 1000L }
+    single(WRITE_TIMEOUT) { 10 * 1000L }
+    single(CONNECTION_TIMEOUT) { 10 * 1000L }
 
     single<Interceptor>(LOGGING_INTERCEPTOR) {
         HttpLoggingInterceptor(
