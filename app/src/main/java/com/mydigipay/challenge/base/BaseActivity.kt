@@ -6,7 +6,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
+import androidx.navigation.Navigation
 import com.mydigipay.challenge.data.network.ConnectionLiveData
+import com.mydigipay.challenge.util.addNavigatorOn
 
 abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompatActivity() {
 
@@ -24,8 +26,13 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompa
         super.onCreate(savedInstanceState)
         initBinding()
         bindObservables()
+        initNavigator()
         checkInternetConnection()
         oneTimeEvent()
+    }
+
+    private fun initNavigator() {
+        addNavigatorOn(viewModel,  Navigation.findNavController(this, navigationId))
     }
 
     private fun checkInternetConnection() {

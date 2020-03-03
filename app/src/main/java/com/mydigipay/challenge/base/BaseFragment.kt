@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.mydigipay.challenge.util.addNavigatorOn
 
 abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment() {
 
@@ -25,12 +27,18 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
         init(inflater, container)
         initBinding()
         bindObservables()
+        initNavigator()
         oneTimeEvent()
         return binding?.root ?: View(context)
     }
 
     private fun init(inflater: LayoutInflater, container: ViewGroup?) {
         binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
+    }
+
+    private fun initNavigator() {
+        addNavigatorOn(viewModel, findNavController())
+        sharedViewModel?.let { addNavigatorOn(it, findNavController()) }
     }
 
     override fun onStart() {
