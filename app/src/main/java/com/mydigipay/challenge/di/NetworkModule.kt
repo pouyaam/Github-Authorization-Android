@@ -1,5 +1,7 @@
 package com.mydigipay.challenge.di
 
+import com.mydigipay.challenge.di.Qualifiers.LOGGING_INTERCEPTOR
+import com.mydigipay.challenge.util.ktx.logD
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,10 +21,21 @@ val networkModule = module {
     single(named(WRITE_TIMEOUT)) { 10 * 1000 }
     single(named(CONNECTION_TIMEOUT)) { 10 * 1000 }
 
-    factory<Interceptor> {
-        HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.HEADERS)
-            .setLevel(HttpLoggingInterceptor.Level.BODY)
+    single<Interceptor>(LOGGING_INTERCEPTOR) {
+        HttpLoggingInterceptor(
+            object : HttpLoggingInterceptor.Logger {
+                override fun log(message: String) {
+                    logD(
+                        """
+                            Network ->
+                            $message
+                        """.trimIndent()
+                    )
+                }
+            }
+        ).apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
     }
 
     single {
@@ -30,7 +43,7 @@ val networkModule = module {
             .readTimeout(get(named(READ_TIMEOUT)), TimeUnit.MILLISECONDS)
             .writeTimeout(get(named(WRITE_TIMEOUT)), TimeUnit.MILLISECONDS)
             .connectTimeout(get(named(CONNECTION_TIMEOUT)), TimeUnit.MILLISECONDS)
-            .addInterceptor(get<Interceptor>())
+            .addInterceptor(get<Interceptor>(LOGGING_INTERCEPTOR))
             .build()
     }
 
