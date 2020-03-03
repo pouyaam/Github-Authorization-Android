@@ -1,6 +1,7 @@
 package com.mydigipay.challenge.app
 
 import android.app.Application
+import com.mydigipay.challenge.data.network.ConnectionLiveData
 import com.mydigipay.challenge.di.appModule
 import com.mydigipay.challenge.di.networkModule
 import com.mydigipay.challenge.di.repositoryModule
@@ -31,6 +32,9 @@ class App : Application() {
                 )
             )
         }
+
+        // Init Connection Detector
+        ConnectionLiveData.init(this)
     }
 
 }

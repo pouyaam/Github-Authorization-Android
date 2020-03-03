@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.observe
+import com.mydigipay.challenge.data.network.ConnectionLiveData
 
 abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompatActivity() {
 
@@ -22,7 +24,14 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompa
         super.onCreate(savedInstanceState)
         initBinding()
         bindObservables()
+        checkInternetConnection()
         oneTimeEvent()
+    }
+
+    private fun checkInternetConnection() {
+        ConnectionLiveData.observe(this) { isConnected ->
+            onNetworkStateChanged(isConnected)
+        }
     }
 
     override fun onStart() {
@@ -43,6 +52,8 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompa
     open fun oneTimeEvent() {}
 
     open fun everyTimeEvent() {}
+
+    open fun onNetworkStateChanged(isConnected: Boolean) {}
 
     fun getCurrentFragment(): Fragment? {
         return supportFragmentManager
