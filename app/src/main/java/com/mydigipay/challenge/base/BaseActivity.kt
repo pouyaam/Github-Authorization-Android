@@ -38,11 +38,11 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompa
      */
     abstract fun initBinding()
 
-    abstract fun bindObservables()
+    open fun bindObservables() {}
 
-    abstract fun oneTimeEvent()
+    open fun oneTimeEvent() {}
 
-    abstract fun everyTimeEvent()
+    open fun everyTimeEvent() {}
 
     fun getCurrentFragment(): Fragment? {
         return supportFragmentManager
