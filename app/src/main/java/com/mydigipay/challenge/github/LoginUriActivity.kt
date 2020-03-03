@@ -3,16 +3,14 @@ package com.mydigipay.challenge.github
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import com.mydigipay.challenge.network.oauth.RequestAccessToken
-import com.mydigipay.challenge.repository.oauth.AccessTokenDataSource
-import com.mydigipay.challenge.repository.token.TokenRepository
+import com.mydigipay.challenge.data.network.api.oauth.RequestAccessToken
+import com.mydigipay.challenge.data.repository.token.TokenRepository
 import kotlinx.android.synthetic.main.login_uri_activity.*
 import kotlinx.coroutines.*
 import org.koin.android.ext.android.inject
 
 class LoginUriActivity : Activity() {
     private val tokenRepository: TokenRepository by inject()
-    private val accessTokenDataSource: AccessTokenDataSource by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +26,7 @@ class LoginUriActivity : Activity() {
             val code = uri?.getQueryParameter("code") ?: ""
             code.takeIf { it.isNotEmpty() }?.let { code ->
                 val accessTokenJob = CoroutineScope(Dispatchers.IO).launch {
-                    val response = accessTokenDataSource.accessToken(
+                    tokenRepository.accessToken(
                         RequestAccessToken(
                             CLIENT_ID,
                             CLIENT_SECRET,
@@ -37,13 +35,11 @@ class LoginUriActivity : Activity() {
                             "0"
                         )
                     )
-
-                    tokenRepository.saveToken(response.accessToken).await()
                 }
 
                 accessTokenJob.invokeOnCompletion {
                     CoroutineScope(Dispatchers.Main).launch {
-                        token.text = tokenRepository.readToken().await()
+                        token.text = tokenRepository.readToken()
                         this.cancel()
                         accessTokenJob.cancelAndJoin()
                     }

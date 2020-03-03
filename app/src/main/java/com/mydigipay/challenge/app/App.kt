@@ -1,29 +1,27 @@
 package com.mydigipay.challenge.app
 
 import android.app.Application
-import androidx.preference.PreferenceManager
-import com.mydigipay.challenge.network.di.accessTokenModule
-import com.mydigipay.challenge.network.di.networkModule
-import com.mydigipay.challenge.repository.token.TokenRepositoryImpl
+import com.mydigipay.challenge.di.appModule
+import com.mydigipay.challenge.di.networkModule
+import com.mydigipay.challenge.di.repositoryModule
+import com.mydigipay.challenge.di.restModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import org.koin.core.qualifier.named
-import org.koin.dsl.module
-const val APPLICATION_CONTEXT = "APPLICATION_CONTEXT"
+
 class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
         startKoin {
             androidContext(this@App)
-            modules(listOf(appModule, networkModule, accessTokenModule))
+            modules(
+                listOf(
+                    appModule, networkModule,
+                    restModule, repositoryModule
+                )
+            )
         }
-    }
-
-    val appModule = module {
-        factory { TokenRepositoryImpl(get()) }
-        single(named(APPLICATION_CONTEXT)) { applicationContext }
-        single { PreferenceManager.getDefaultSharedPreferences(get()) }
     }
 
 }

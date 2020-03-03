@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.network.oauth
+package com.mydigipay.challenge.data.network.api.oauth
 
 import retrofit2.http.Body
 import retrofit2.http.Headers

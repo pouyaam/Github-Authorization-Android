@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.network.oauth
+package com.mydigipay.challenge.data.network.api.oauth
 
 import com.google.gson.annotations.SerializedName
 
