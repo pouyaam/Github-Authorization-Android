@@ -1,9 +1,11 @@
 package com.mydigipay.challenge.base
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
+import com.mydigipay.challenge.util.ActionCommand
 import com.mydigipay.challenge.util.NavigationCommand
 import com.mydigipay.challenge.util.livedata.Event
 
@@ -35,6 +37,14 @@ abstract class BaseViewModel() : ViewModel() {
      */
     fun navigateBackTo(destinationId: Int, inclusive: Boolean) {
         _navigationCommand.postValue(Event(NavigationCommand.BackTo(destinationId, inclusive)))
+    }
+
+    private val _actionCommand = MutableLiveData<Event<ActionCommand>>()
+    val actionCommand: LiveData<Event<ActionCommand>>
+        get() = _actionCommand
+
+    fun openIntent(action: String? = null, type: String? = null, uri: Uri? = null) {
+        _actionCommand.postValue(Event(ActionCommand.OpenUrl(action, type, uri)))
     }
 
 }
