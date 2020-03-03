@@ -1,3 +1,13 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+
+    <!-- Sp size for text -->
+    <dimen name="xxSmallTextSize">10sp</dimen>
+    <dimen name="xSmallTextSize">12sp</dimen>
+    <dimen name="smallTextSize">14sp</dimen>
+    <dimen name="mediumTextSize">16sp</dimen>
+    <dimen name="largeTextSize">18sp</dimen>
+    <dimen name="xLargeTextSize">20sp</dimen>
+    <dimen name="xxLargeTextSize">24sp</dimen>
+    <dimen name="xxxLargeTextSize">36sp</dimen>
+
 </resources>
