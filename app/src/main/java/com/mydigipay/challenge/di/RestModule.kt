@@ -7,6 +7,6 @@ import retrofit2.Retrofit
 
 val restModule = module {
 
-    factory { get<Retrofit>(named(RETROFIT)).create(AccessTokenService::class.java) }
+    factory { get<Retrofit>().create(AccessTokenService::class.java) }
 
 }

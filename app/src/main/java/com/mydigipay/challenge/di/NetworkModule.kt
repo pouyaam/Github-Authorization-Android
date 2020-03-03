@@ -9,8 +9,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-const val OK_HTTP = "OK_HTTP"
-const val RETROFIT = "RETROFIT"
 const val READ_TIMEOUT = "READ_TIMEOUT"
 const val WRITE_TIMEOUT = "WRITE_TIMEOUT"
 const val CONNECTION_TIMEOUT = "CONNECTION_TIMEOUT"
@@ -27,7 +25,7 @@ val networkModule = module {
             .setLevel(HttpLoggingInterceptor.Level.BODY)
     }
 
-    factory(named(OK_HTTP)) {
+    single {
         OkHttpClient.Builder()
             .readTimeout(get(named(READ_TIMEOUT)), TimeUnit.MILLISECONDS)
             .writeTimeout(get(named(WRITE_TIMEOUT)), TimeUnit.MILLISECONDS)
@@ -36,9 +34,9 @@ val networkModule = module {
             .build()
     }
 
-    single(named(RETROFIT)) {
+    single<Retrofit> {
         Retrofit.Builder()
-            .client(get(named(OK_HTTP)))
+            .client(get())
             .baseUrl("http://api.github.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
