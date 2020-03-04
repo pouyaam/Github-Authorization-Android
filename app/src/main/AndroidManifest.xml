@@ -24,6 +24,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <nav-graph android:value="@navigation/app_navigation" />
         </activity>
 
         <!--<activity android:name=".github.LoginUriActivity">

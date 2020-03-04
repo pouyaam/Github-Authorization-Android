@@ -9,5 +9,10 @@
         android:id="@+id/login"
         android:name="com.mydigipay.challenge.ui.login.LoginFragment"
         android:label="Login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+
+        <deepLink
+            app:uri="challenge://mydigipay.com/login/callback" />
+
+    </fragment>
 </navigation>
