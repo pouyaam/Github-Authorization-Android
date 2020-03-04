@@ -1,6 +1,8 @@
 package com.mydigipay.challenge.base
 
 import android.net.Uri
+import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -45,6 +47,14 @@ abstract class BaseViewModel() : ViewModel() {
 
     fun openIntent(action: String? = null, type: String? = null, uri: Uri? = null) {
         _actionCommand.postValue(Event(ActionCommand.OpenUrl(action, type, uri)))
+    }
+
+    fun showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
+        _actionCommand.postValue(Event(ActionCommand.ShowToast(message, duration)))
+    }
+
+    fun showToast(@StringRes message: Int, duration: Int = Toast.LENGTH_SHORT) {
+        _actionCommand.postValue(Event(ActionCommand.ShowToastRes(message, duration)))
     }
 
 }
