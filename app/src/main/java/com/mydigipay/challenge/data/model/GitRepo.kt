@@ -2,6 +2,9 @@ package com.mydigipay.challenge.data.model
 
 
 import com.google.gson.annotations.SerializedName
+import com.mydigipay.challenge.util.ktx.toEpochMillis
+import com.mydigipay.challenge.util.ktx.toHumanReadableFormat
+import com.mydigipay.challenge.util.ktx.toRelativeTimeFormat
 
 data class GitRepo(
     @SerializedName("id")
@@ -44,4 +47,27 @@ data class GitRepo(
     val openIssuesCount: Int,
     @SerializedName("score")
     val score: Double
-)
+) {
+    var stargazersCountFormatted: String? = null
+    var watchersCountFormatted: String? = null
+    var forksCountFormatted: String? = null
+    var openIssuesCountFormatted: String? = null
+
+    var createdAtFormatted: String? = null
+    var updatedAtFormatted: String? = null
+    var pushedAtFormatted: String? = null
+}
+
+fun GitRepo.fillRest(): GitRepo {
+
+    stargazersCountFormatted = stargazersCount.toHumanReadableFormat()
+    watchersCountFormatted = watchersCount.toHumanReadableFormat()
+    forksCountFormatted = forksCount.toHumanReadableFormat()
+    openIssuesCountFormatted = openIssuesCount.toHumanReadableFormat()
+
+    createdAtFormatted = createdAt.toEpochMillis()?.toRelativeTimeFormat()
+    updatedAtFormatted = updatedAt.toEpochMillis()?.toRelativeTimeFormat()
+    pushedAtFormatted = pushedAt.toEpochMillis()?.toRelativeTimeFormat()
+
+    return this
+}
