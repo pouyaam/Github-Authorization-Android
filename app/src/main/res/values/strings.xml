@@ -7,4 +7,6 @@
     <string name="avatar">Avatar</string>
     <string name="stars">Stars</string>
     <string name="pushed_on_placeholder">Pushed on %s</string>
+    <string name="search">Search</string>
+    <string name="search_github_repositories">Search Github Repositories</string>
 </resources>

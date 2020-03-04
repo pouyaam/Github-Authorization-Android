@@ -7,6 +7,7 @@ import com.mydigipay.challenge.data.model.GitRepo
 import com.mydigipay.challenge.data.network.ApiResult
 import com.mydigipay.challenge.data.repository.gitrepo.GitRepoRepository
 import com.mydigipay.challenge.util.ktx.launch
+import com.mydigipay.challenge.util.livedata.debounce
 
 class RepositoryListViewModel(
     private val gitRepoRepository: GitRepoRepository
@@ -17,27 +18,31 @@ class RepositoryListViewModel(
         get() = _repositories
 
 
-    val query = MutableLiveData<String>("toast")
+    val query = MutableLiveData<String>()
+
+    val onQueryChanged = query.debounce(500L)
 
     init {
         searchRepositories(1)
     }
 
     fun searchRepositories(page: Int) = launch {
-        val repos =
-            if (page == 1)
-                mutableListOf()
-            else
-                (_repositories.value ?: emptyList()).toMutableList()
-        val query = query.value ?: ""
-        when (val result = gitRepoRepository.searchRepositories(query, page)) {
-            is ApiResult.Success -> {
-                repos.addAll(result.data)
-                _repositories.postValue(repos)
+        query.value?.trim().takeIf { !it.isNullOrBlank() }?.let { query ->
+            val repos =
+                if (page == 1)
+                    mutableListOf()
+                else
+                    (_repositories.value ?: emptyList()).toMutableList()
+
+            when (val result = gitRepoRepository.searchRepositories(query, page)) {
+                is ApiResult.Success -> {
+                    repos.addAll(result.data)
+                    _repositories.postValue(repos)
+                }
+                is ApiResult.Error ->
+                    showSnackBar(result.message)
             }
-            is ApiResult.Error ->
-                showSnackBar(result.message)
-        }
+        } ?: _repositories.postValue(emptyList())
     }
 
 }
