@@ -28,17 +28,6 @@
             <nav-graph android:value="@navigation/app_navigation" />
         </activity>
 
-        <!--<activity android:name=".github.LoginUriActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="challenge" />
-            </intent-filter>
-        </activity>-->
-
     </application>
 
 </manifest>
