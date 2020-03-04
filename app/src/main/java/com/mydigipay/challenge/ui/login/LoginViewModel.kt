@@ -16,7 +16,7 @@ class LoginViewModel(
 
     private val code = MutableLiveData<String>()
 
-    private val _isLoading = MutableLiveData<Boolean>()
+    private val _isLoading = MutableLiveData<Boolean>(false)
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
@@ -31,15 +31,14 @@ class LoginViewModel(
     }
 
     private fun getToken(code: String?) = launch {
-        _isLoading.postValue(true)
         code.takeIf { !it.isNullOrBlank() }?.let { code ->
+            _isLoading.postValue(true)
             when (val result = tokenRepository.accessToken(code)) {
                 is ApiResult.Success -> showToast(R.string.login_successful)
                 is ApiResult.Error -> showToast(result.message)
             }
+            _isLoading.postValue(false)
         }
-        _isLoading.postValue(false)
-
     }
 
 }
