@@ -1,5 +1,6 @@
 package com.mydigipay.challenge.data.repository.gitrepo
 
+import com.mydigipay.challenge.data.model.fillRest
 import com.mydigipay.challenge.data.network.ApiResult
 import com.mydigipay.challenge.data.network.api.gitrepo.GitRepoService
 import com.mydigipay.challenge.data.network.api.gitrepo.Order
@@ -22,7 +23,7 @@ class GitRepoRepositoryImpl(
             sort.toString(),
             order.toString()
         )
-        return@safeApiCall ApiResult.Success(result.gitRepos)
+        return@safeApiCall ApiResult.Success(result.gitRepos.map { it.fillRest() })
     }
 
 }

@@ -5,4 +5,6 @@
     <string name="application_not_found">Application not found!</string>
     <string name="login_successful">Login was successful!</string>
     <string name="avatar">Avatar</string>
+    <string name="stars">Stars</string>
+    <string name="pushed_on_placeholder">Pushed on %s</string>
 </resources>
