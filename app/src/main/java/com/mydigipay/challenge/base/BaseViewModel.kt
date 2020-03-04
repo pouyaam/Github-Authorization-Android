@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
+import com.google.android.material.snackbar.Snackbar
 import com.mydigipay.challenge.util.ActionCommand
 import com.mydigipay.challenge.util.NavigationCommand
 import com.mydigipay.challenge.util.livedata.Event
@@ -55,6 +56,14 @@ abstract class BaseViewModel() : ViewModel() {
 
     fun showToast(@StringRes message: Int, duration: Int = Toast.LENGTH_SHORT) {
         _actionCommand.postValue(Event(ActionCommand.ShowToastRes(message, duration)))
+    }
+
+    fun showSnackBar(message: String, duration: Int = Snackbar.LENGTH_SHORT) {
+        _actionCommand.postValue(Event(ActionCommand.ShowSnackBar(message, duration)))
+    }
+
+    fun showSnackBar(@StringRes message: Int, duration: Int = Snackbar.LENGTH_SHORT) {
+        _actionCommand.postValue(Event(ActionCommand.ShowSnackBarRes(message, duration)))
     }
 
 }
