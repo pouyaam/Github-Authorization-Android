@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="com.mydigipay.challenge.R" />
+
         <variable
             name="vm"
             type="com.mydigipay.challenge.ui.login.LoginViewModel" />
@@ -14,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/imageView"
             android:layout_width="200dp"
             android:layout_height="0dp"
@@ -23,8 +27,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:visibility="@{!vm.isLoading}"
-            app:srcCompat="@drawable/ic_github"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@{vm.isLoading ? R.raw.loading : R.raw.github}"
+            tools:srcCompat="@drawable/ic_github"
             android:contentDescription="@string/login_to_github" />
 
         <com.google.android.material.button.MaterialButton
@@ -33,7 +39,6 @@
             android:layout_marginStart="72dp"
             android:layout_marginEnd="72dp"
             android:onClick="@{() -> vm.onLoginClicked()}"
-            app:visibility="@{!vm.isLoading}"
             android:text="@string/login_to_github"
             android:textSize="@dimen/largeTextSize"
             app:backgroundTint="@color/colorAccent"
@@ -42,7 +47,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
-            app:layout_constraintVertical_bias="0.75" />
+            app:layout_constraintVertical_bias="0.6"
+            app:visibility="@{!vm.isLoading}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
