@@ -1,13 +1,9 @@
 package com.mydigipay.challenge.github
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import com.mydigipay.challenge.R
-import com.mydigipay.challenge.data.network.api.oauth.RequestAccessToken
 import com.mydigipay.challenge.data.repository.token.TokenRepository
-import kotlinx.android.synthetic.main.login_uri_activity.*
-import kotlinx.coroutines.*
 import org.koin.android.ext.android.inject
 
 class LoginUriActivity : Activity() {
@@ -18,7 +14,7 @@ class LoginUriActivity : Activity() {
         setContentView(R.layout.login_uri_activity)
     }
 
-    override fun onResume() {
+    /*override fun onResume() {
         super.onResume()
 
         val intent = intent
@@ -49,5 +45,5 @@ class LoginUriActivity : Activity() {
         }
 
 
-    }
+    }*/
 }
