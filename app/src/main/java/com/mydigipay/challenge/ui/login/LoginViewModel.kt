@@ -9,6 +9,7 @@ import com.mydigipay.challenge.base.BaseViewModel
 import com.mydigipay.challenge.data.network.ApiResult
 import com.mydigipay.challenge.data.repository.token.TokenRepository
 import com.mydigipay.challenge.util.ktx.launch
+import kotlinx.coroutines.delay
 
 class LoginViewModel(
     private val tokenRepository: TokenRepository
@@ -34,9 +35,10 @@ class LoginViewModel(
         code.takeIf { !it.isNullOrBlank() }?.let { code ->
             _isLoading.postValue(true)
             when (val result = tokenRepository.accessToken(code)) {
-                is ApiResult.Success -> showToast(R.string.login_successful)
-                is ApiResult.Error -> showToast(result.message)
+                is ApiResult.Success -> showSnackBar(R.string.login_successful)
+                is ApiResult.Error -> showSnackBar(result.message)
             }
+            delay(500)
             _isLoading.postValue(false)
         }
     }
