@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#673ab7</color>
+    <color name="colorPrimaryDark">#512da8</color>
+    <color name="colorAccent">#4caf50</color>
+    <color name="colorAccentTransparent">#894caf50</color>
+
+    <!-- Dark text on light backgrounds -->
+    <color name="colorPrimaryTextLightTheme">#DE000000</color>      <!-- 87% -->
+    <color name="colorSecondaryTextLightTheme">#8A000000</color>    <!-- 54% -->
+    <color name="colorDisabledTextLightTheme">#61000000</color>     <!-- 38% -->
+    <color name="colorIconLightTheme">#61000000</color>             <!-- 38% -->
+    <color name="colorDividerLightTheme">#1F000000</color>          <!-- 12% -->
+
+    <!-- Light text on dark backgrounds -->
+    <color name="colorPrimaryTextDarkTheme">#FFFFFFFF</color>       <!-- 100% -->
+    <color name="colorSecondaryTextDarkTheme">#B3FFFFFF</color>     <!-- 70% -->
+    <color name="colorDisabledTextDarkTheme">#80FFFFFF</color>      <!-- 50% -->
+    <color name="colorIconDarkTheme">#80FFFFFF</color>              <!-- 50% -->
+    <color name="colorDividerDarkTheme">#1FFFFFFF</color>           <!-- 12% -->
+
 </resources>

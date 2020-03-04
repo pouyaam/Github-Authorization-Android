@@ -1,12 +1,9 @@
 package com.mydigipay.challenge.app
 
 import android.app.Application
+import com.mydigipay.challenge.BuildConfig
 import com.mydigipay.challenge.data.network.ConnectionLiveData
-import com.mydigipay.challenge.di.appModule
-import com.mydigipay.challenge.di.networkModule
-import com.mydigipay.challenge.di.repositoryModule
-import com.mydigipay.challenge.di.restModule
-import com.mydigipay.challenge.github.BuildConfig
+import com.mydigipay.challenge.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -27,8 +24,8 @@ class App : Application() {
             androidLogger(Level.DEBUG)
             modules(
                 listOf(
-                    appModule, networkModule,
-                    restModule, repositoryModule
+                    appModule, networkModule, restModule,
+                    viewModelModule, repositoryModule
                 )
             )
         }

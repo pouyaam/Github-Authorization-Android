@@ -6,6 +6,7 @@ buildscript {
         preferenceXVersion = '1.1.0'
         coreKtxVersion = '1.2.0'
         constraintLayoutVersion = '2.0.0-beta4'
+        googleMaterialVersion = '1.2.0-alpha05'
         jUnitVersion = '4.12'
         jUnitExtVersion = '1.1.1'
         espressoVersion = '3.2.0'
@@ -17,6 +18,7 @@ buildscript {
         coilVersion = '0.9.5'
         retrofitVersion = '2.7.1'
         okHttpVersion = '4.4.0'
+        lottieVersion = '3.4.0'
     }
     repositories {
         google()
