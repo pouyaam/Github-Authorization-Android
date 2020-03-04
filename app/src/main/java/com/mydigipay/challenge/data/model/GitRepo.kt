@@ -26,11 +26,11 @@ data class GitRepo(
     @SerializedName("fork")
     val isForked: Boolean,
     @SerializedName("created_at")
-    val createdAt: String,
+    val createdAt: String?,
     @SerializedName("updated_at")
-    val updatedAt: String,
+    val updatedAt: String?,
     @SerializedName("pushed_at")
-    val pushedAt: String,
+    val pushedAt: String?,
     @SerializedName("homepage")
     val homepage: String,
     @SerializedName("size")
@@ -65,9 +65,9 @@ fun GitRepo.fillRest(): GitRepo {
     forksCountFormatted = forksCount.toHumanReadableFormat()
     openIssuesCountFormatted = openIssuesCount.toHumanReadableFormat()
 
-    createdAtFormatted = createdAt.toEpochMillis()?.toRelativeTimeFormat()
-    updatedAtFormatted = updatedAt.toEpochMillis()?.toRelativeTimeFormat()
-    pushedAtFormatted = pushedAt.toEpochMillis()?.toRelativeTimeFormat()
+    createdAtFormatted = createdAt?.toEpochMillis()?.toRelativeTimeFormat()
+    updatedAtFormatted = updatedAt?.toEpochMillis()?.toRelativeTimeFormat()
+    pushedAtFormatted = pushedAt?.toEpochMillis()?.toRelativeTimeFormat()
 
     return this
 }
