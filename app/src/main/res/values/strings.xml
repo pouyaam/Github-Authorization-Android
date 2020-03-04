@@ -4,4 +4,5 @@
     <string name="login_to_github">Login to Github</string>
     <string name="application_not_found">Application not found!</string>
     <string name="login_successful">Login was successful!</string>
+    <string name="avatar">Avatar</string>
 </resources>

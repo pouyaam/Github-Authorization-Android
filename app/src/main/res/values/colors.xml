@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#512da8</color>
     <color name="colorAccent">#4caf50</color>
     <color name="colorAccentTransparent">#894caf50</color>
+    <color name="colorWhite">#FFF</color>
 
     <!-- Dark text on light backgrounds -->
     <color name="colorPrimaryTextLightTheme">#DE000000</color>      <!-- 87% -->
