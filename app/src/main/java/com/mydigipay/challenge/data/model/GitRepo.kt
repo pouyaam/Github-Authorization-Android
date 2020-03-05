@@ -1,11 +1,15 @@
 package com.mydigipay.challenge.data.model
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.mydigipay.challenge.util.ktx.toEpochMillis
 import com.mydigipay.challenge.util.ktx.toHumanReadableFormat
 import com.mydigipay.challenge.util.ktx.toRelativeTimeFormat
+import kotlinx.android.parcel.IgnoredOnParcel
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class GitRepo(
     @SerializedName("id")
     val id: Int,
@@ -47,14 +51,21 @@ data class GitRepo(
     val openIssuesCount: Int,
     @SerializedName("score")
     val score: Double
-) {
+): Parcelable {
+    @IgnoredOnParcel
     var stargazersCountFormatted: String? = null
+    @IgnoredOnParcel
     var watchersCountFormatted: String? = null
+    @IgnoredOnParcel
     var forksCountFormatted: String? = null
+    @IgnoredOnParcel
     var openIssuesCountFormatted: String? = null
 
+    @IgnoredOnParcel
     var createdAtFormatted: String? = null
+    @IgnoredOnParcel
     var updatedAtFormatted: String? = null
+    @IgnoredOnParcel
     var pushedAtFormatted: String? = null
 }
 
