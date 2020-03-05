@@ -2,6 +2,7 @@ package com.mydigipay.challenge.core
 
 import android.app.Application
 import com.mydigipay.challenge.di.appModule
+import com.mydigipay.challenge.ui.authorize.di.authorizeModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -15,7 +16,12 @@ class App : Application() {
     private fun startKoin() {
         startKoin {
             androidContext(this@App)
-            modules(listOf(appModule))
+            modules(
+                listOf(
+                    appModule,
+                    authorizeModule
+                )
+            )
         }
     }
 }
