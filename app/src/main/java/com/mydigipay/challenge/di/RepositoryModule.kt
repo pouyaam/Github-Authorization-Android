@@ -1,5 +1,7 @@
 package com.mydigipay.challenge.di
 
+import com.mydigipay.challenge.data.repository.commit.CommitRepository
+import com.mydigipay.challenge.data.repository.commit.CommitRepositoryImpl
 import com.mydigipay.challenge.data.repository.gitrepo.GitRepoRepository
 import com.mydigipay.challenge.data.repository.gitrepo.GitRepoRepositoryImpl
 import com.mydigipay.challenge.data.repository.token.TokenRepository
@@ -10,5 +12,6 @@ val repositoryModule = module {
 
     single<TokenRepository> { TokenRepositoryImpl(get(), get()) }
     single<GitRepoRepository> { GitRepoRepositoryImpl(get()) }
+    single<CommitRepository> { CommitRepositoryImpl(get()) }
 
 }
