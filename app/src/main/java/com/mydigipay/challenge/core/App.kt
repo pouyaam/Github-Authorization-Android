@@ -5,6 +5,7 @@ import com.mydigipay.challenge.di.appModule
 import com.mydigipay.challenge.ui.authorize.di.authorizeModule
 import com.mydigipay.challenge.ui.detail.di.detailModule
 import com.mydigipay.challenge.ui.profile.di.profileModule
+import com.mydigipay.challenge.ui.search.di.searchModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -23,7 +24,8 @@ class App : Application() {
                     appModule,
                     authorizeModule,
                     detailModule,
-                    profileModule
+                    profileModule,
+                    searchModule
                 )
             )
         }
