@@ -11,6 +11,7 @@ import androidx.lifecycle.LifecycleRegistry
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.mydigipay.challenge.BR
 
 abstract class BaseAdapter<T>(diffCallback: DiffUtil.ItemCallback<T>) :
     ListAdapter<T, BaseAdapter<T>.DataBindingViewHolder>(diffCallback) {
@@ -73,8 +74,7 @@ abstract class BaseAdapter<T>(diffCallback: DiffUtil.ItemCallback<T>) :
         fun bind(item: T) {
             binding.apply {
                 lifecycleOwner = this@DataBindingViewHolder
-                // TODO("3/3/2020 uncomment setVariable to bind items")
-                //setVariable(BR.item, item)
+                setVariable(BR.item, item)
                 executePendingBindings()
                 root.apply {
                     setOnClickListener {

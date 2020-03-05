@@ -23,12 +23,7 @@ val networkModule = module {
         HttpLoggingInterceptor(
             object : HttpLoggingInterceptor.Logger {
                 override fun log(message: String) {
-                    logD(
-                        """
-                            Network ->
-                            $message
-                        """.trimIndent()
-                    )
+                    logD(message)
                 }
             }
         ).apply {
@@ -48,7 +43,7 @@ val networkModule = module {
     single<Retrofit> {
         Retrofit.Builder()
             .client(get())
-            .baseUrl("http://api.github.com")
+            .baseUrl("https://api.github.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

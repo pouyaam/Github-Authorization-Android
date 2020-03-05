@@ -30,8 +30,12 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
         bindObservables()
         initActions()
         initNavigator()
-        oneTimeEvent()
         return binding?.root ?: View(context)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        oneTimeEvent()
     }
 
     private fun init(inflater: LayoutInflater, container: ViewGroup?) {

@@ -25,7 +25,7 @@ class App : Application() {
             modules(
                 listOf(
                     appModule, networkModule, restModule,
-                    viewModelModule, repositoryModule
+                    viewModelModule, repositoryModule, adapterModule
                 )
             )
         }
