@@ -8,6 +8,7 @@ import com.mydigipay.challenge.data.network.ApiResult
 import com.mydigipay.challenge.data.repository.gitrepo.GitRepoRepository
 import com.mydigipay.challenge.util.ktx.launch
 import com.mydigipay.challenge.util.livedata.StateLessEvent
+import com.mydigipay.challenge.util.livedata.combine
 import com.mydigipay.challenge.util.livedata.debounce
 
 class RepositoryListViewModel(
@@ -18,6 +19,15 @@ class RepositoryListViewModel(
     val repositories: LiveData<List<GitRepo>>
         get() = _repositories
 
+    private val isLoading = MutableLiveData<Boolean>(false)
+
+    val isFirstDataLoading = combine(_repositories, isLoading) { repositories, isLoading ->
+        repositories.isNullOrEmpty() && isLoading == true
+    }
+
+    val isDataEmpty = combine(_repositories, isLoading) { repositories, isLoading ->
+        repositories.isNullOrEmpty() && isLoading == false
+    }
 
     val query = MutableLiveData<String>()
 
@@ -37,6 +47,7 @@ class RepositoryListViewModel(
 
     fun searchRepositories(page: Int) = launch {
         query.value?.trim().takeIf { !it.isNullOrBlank() }?.let { query ->
+            isLoading.postValue(true)
             val repos =
                 if (page == 1)
                     mutableListOf()
@@ -54,6 +65,7 @@ class RepositoryListViewModel(
                     _onFetchDataFailed.postValue(StateLessEvent())
                 }
             }
+            isLoading.postValue(false)
         } ?: {
             _repositories.postValue(emptyList())
             _onResetList.postValue(StateLessEvent())
