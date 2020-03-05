@@ -60,4 +60,8 @@ class RepositoryListViewModel(
         }()
     }
 
+    fun openRepoDetail(gitRepo: GitRepo) {
+        navigateTo(RepositoryListFragmentDirections.actionRepositoriesToRepository(gitRepo))
+    }
+
 }

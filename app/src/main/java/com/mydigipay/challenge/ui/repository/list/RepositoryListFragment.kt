@@ -3,23 +3,27 @@ package com.mydigipay.challenge.ui.repository.list
 import androidx.lifecycle.observe
 import com.mydigipay.challenge.R
 import com.mydigipay.challenge.base.BaseFragment
-import com.mydigipay.challenge.databinding.FragmentRipositoryListBinding
+import com.mydigipay.challenge.databinding.FragmentRepositoryListBinding
 import com.mydigipay.challenge.util.EndlessRecyclerViewScrollListener
 import com.mydigipay.challenge.util.livedata.observeEvent
-import kotlinx.android.synthetic.main.fragment_ripository_list.*
+import kotlinx.android.synthetic.main.fragment_repository_list.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RepositoryListFragment :
-    BaseFragment<RepositoryListViewModel, FragmentRipositoryListBinding>() {
+    BaseFragment<RepositoryListViewModel, FragmentRepositoryListBinding>() {
 
     override val viewModel: RepositoryListViewModel by viewModel()
-    override val layoutRes: Int = R.layout.fragment_ripository_list
+    override val layoutRes: Int = R.layout.fragment_repository_list
     private val adapter: GitRepoAdapter by inject()
 
     private var endlessScroller: EndlessRecyclerViewScrollListener? = null
 
     override fun oneTimeEvent() {
+        configList()
+    }
+
+    private fun configList() {
         repo_list?.apply {
             adapter = this@RepositoryListFragment.adapter
             layoutManager?.let { layoutManager ->
@@ -32,6 +36,9 @@ class RepositoryListFragment :
                         addOnScrollListener(endlessScroller)
                     }
             }
+        }
+        adapter.onItemClicked = { gitRepo, _ ->
+            viewModel.openRepoDetail(gitRepo)
         }
     }
 

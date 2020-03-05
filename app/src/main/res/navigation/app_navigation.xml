@@ -41,7 +41,24 @@
     </fragment>
     <fragment
         android:id="@+id/repositories"
-        tools:layout="@layout/fragment_ripository_list"
+        tools:layout="@layout/fragment_repository_list"
         android:name="com.mydigipay.challenge.ui.repository.list.RepositoryListFragment"
-        android:label="Repositories" />
+        android:label="Repositories" >
+        <action
+            android:id="@+id/action_repositories_to_repository"
+            app:destination="@id/repository"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/repository"
+        tools:layout="@layout/fragment_repository_detail"
+        android:name="com.mydigipay.challenge.ui.repository.detail.RepositoryDetailFragment"
+        android:label="Repository Detail" >
+        <argument
+            android:name="gitRepo"
+            app:argType="com.mydigipay.challenge.data.model.GitRepo" />
+    </fragment>
 </navigation>

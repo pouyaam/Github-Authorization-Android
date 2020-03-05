@@ -9,4 +9,8 @@
     <string name="pushed_on_placeholder">Pushed on %s</string>
     <string name="search">Search</string>
     <string name="search_github_repositories">Search Github Repositories</string>
+    <string name="cover_photo">Cover photo</string>
+    <string name="watch_count">Watch count</string>
+    <string name="forks">Forks</string>
+    <string name="opened_issues">Opened Issues</string>
 </resources>
