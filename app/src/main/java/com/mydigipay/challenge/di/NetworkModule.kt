@@ -23,12 +23,7 @@ val networkModule = module {
         HttpLoggingInterceptor(
             object : HttpLoggingInterceptor.Logger {
                 override fun log(message: String) {
-                    logD(
-                        """
-                            Network ->
-                            $message
-                        """.trimIndent()
-                    )
+                    logD(message)
                 }
             }
         ).apply {
