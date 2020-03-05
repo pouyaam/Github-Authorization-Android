@@ -13,22 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/cover_photo"
-            android:scaleType="fitXY"
-            app:blurRadius="@{10f}"
-            app:hasBlur="@{true}"
-            app:image="@{@drawable/cover}"
-            app:layout_constraintDimensionRatio="w,3:4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/cover" />
+        android:background="@color/colorPrimary"
+        app:animateLayoutChanges="@{true}">
 
         <TextView
             android:id="@+id/textView6"
@@ -45,35 +31,38 @@
             tools:text="Github Login" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/txt_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:ellipsize="end"
-            android:lines="9"
+            android:maxLines="10"
             android:text="@{vm.gitRepo.description}"
             android:textColor="@color/colorSecondaryTextDarkTheme"
             android:textSize="@dimen/mediumTextSize"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView6"
             app:layout_constraintTop_toBottomOf="@+id/textView6"
             tools:text="@tools:sample/lorem/random" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/img_avatar"
             android:layout_width="48dp"
             android:layout_height="0dp"
             android:contentDescription="@string/avatar"
+            android:visibility="visible"
             app:image="@{vm.gitRepo.owner.avatarUrl}"
             app:isCircle="@{true}"
-            app:layout_constraintBottom_toBottomOf="@+id/chip4"
+            app:layout_constraintBottom_toBottomOf="@+id/chip_language"
             app:layout_constraintDimensionRatio="h,1:1"
             app:layout_constraintStart_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toTopOf="@+id/chip4"
+            app:layout_constraintTop_toTopOf="@+id/chip_language"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/txt_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -81,35 +70,49 @@
             android:textColor="@color/colorPrimaryTextDarkTheme"
             android:textSize="@dimen/mediumTextSize"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/chip4"
-            app:layout_constraintStart_toEndOf="@+id/imageView5"
-            app:layout_constraintTop_toTopOf="@+id/chip4"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/chip_language"
+            app:layout_constraintStart_toEndOf="@+id/img_avatar"
+            app:layout_constraintTop_toTopOf="@+id/chip_language"
             tools:text="TurKurT656" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip4"
+            android:id="@+id/chip_language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
             android:text="@{vm.gitRepo.language}"
             android:textColor="@color/colorPrimaryTextDarkTheme"
+            android:visibility="visible"
             app:chipBackgroundColor="@color/colorAccent"
             app:chipCornerRadius="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_description"
             tools:text="Kotlin" />
+
+        <View
+            android:id="@+id/counter_bg"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/rec_primary_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chip_language" />
 
         <ImageView
             android:id="@+id/imageView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:contentDescription="@string/watch_count"
+            app:layout_constraintBottom_toTopOf="@+id/textView9"
             app:layout_constraintEnd_toStartOf="@+id/imageView7"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4"
+            app:layout_constraintTop_toTopOf="@+id/counter_bg"
             app:srcCompat="@drawable/ic_eye" />
 
         <ImageView
@@ -154,11 +157,12 @@
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="@{vm.gitRepo.watchersCountFormatted}"
             android:textColor="@color/colorPrimaryTextDarkTheme"
             android:textSize="@dimen/smallTextSize"
+            app:layout_constraintBottom_toBottomOf="@+id/counter_bg"
             app:layout_constraintEnd_toEndOf="@+id/imageView6"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/imageView6"
             app:layout_constraintTop_toBottomOf="@+id/imageView6"
             tools:text="2.6k" />
@@ -167,42 +171,40 @@
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="@{vm.gitRepo.stargazersCountFormatted}"
             android:textColor="@color/colorPrimaryTextDarkTheme"
             android:textSize="@dimen/smallTextSize"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView9"
             app:layout_constraintEnd_toEndOf="@+id/imageView7"
             app:layout_constraintStart_toStartOf="@+id/imageView7"
-            app:layout_constraintTop_toBottomOf="@+id/imageView7"
             tools:text="10.2k" />
 
         <TextView
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="@{vm.gitRepo.forksCountFormatted}"
             android:textColor="@color/colorPrimaryTextDarkTheme"
             android:textSize="@dimen/smallTextSize"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView9"
             app:layout_constraintEnd_toEndOf="@+id/imageView8"
             app:layout_constraintStart_toStartOf="@+id/imageView8"
-            app:layout_constraintTop_toBottomOf="@+id/imageView8"
             tools:text="200" />
 
         <TextView
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="@{vm.gitRepo.openIssuesCountFormatted}"
             android:textColor="@color/colorPrimaryTextDarkTheme"
             android:textSize="@dimen/smallTextSize"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView9"
             app:layout_constraintEnd_toEndOf="@+id/imageView9"
             app:layout_constraintStart_toStartOf="@+id/imageView9"
-            app:layout_constraintTop_toBottomOf="@+id/imageView9"
             tools:text="1.2k" />
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/commit_card"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
@@ -215,14 +217,16 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView12">
+            app:layout_constraintTop_toBottomOf="@+id/counter_bg">
 
             <LinearLayout
+                android:id="@+id/linerLayout1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <View
+                    android:id="@+id/card_drawer"
                     android:layout_width="112dp"
                     android:layout_height="8dp"
                     android:layout_gravity="center"
@@ -242,6 +246,13 @@
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/grp_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="imageView8,textView9,textView12,textView11,imageView6,imageView9,textView10,counter_bg,imageView7"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
