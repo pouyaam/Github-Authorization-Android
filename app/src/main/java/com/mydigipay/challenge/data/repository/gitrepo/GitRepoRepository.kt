@@ -10,6 +10,7 @@ interface GitRepoRepository {
     suspend fun searchRepositories(
         query: String,
         page: Int,
+        perPage: Int = 10,
         sort: Sort = Sort.STARS,
         order: Order = Order.DESC
     ): ApiResult<List<GitRepo>>

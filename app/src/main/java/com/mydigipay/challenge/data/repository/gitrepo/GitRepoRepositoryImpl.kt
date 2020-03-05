@@ -14,12 +14,14 @@ class GitRepoRepositoryImpl(
     override suspend fun searchRepositories(
         query: String,
         page: Int,
+        perPage: Int,
         sort: Sort,
         order: Order
     ) = safeApiCall {
         val result = gitRepoService.searchRepositories(
             query,
             page,
+            perPage,
             sort.toString(),
             order.toString()
         )
