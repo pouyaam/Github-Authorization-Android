@@ -1,6 +1,7 @@
 package com.mydigipay.challenge.util
 
 import android.net.Uri
+import android.view.ViewGroup
 import androidx.activity.ComponentActivity
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
@@ -48,10 +49,20 @@ fun LifecycleOwner.observeActions(
                 }
 
             is ActionCommand.ShowSnackBar ->
-                if (this is Fragment) showSnackBar(command.message, command.duration)
+                when (this) {
+                    is Fragment ->
+                        showSnackBar(command.message, command.duration)
+                    is ComponentActivity ->
+                        findViewById<ViewGroup>(android.R.id.content).showSnackBar(command.message, command.duration)
+                }
 
             is ActionCommand.ShowSnackBarRes ->
-                if (this is Fragment) showSnackBar(command.message, command.duration)
+                when (this) {
+                    is Fragment ->
+                        showSnackBar(command.message, command.duration)
+                    is ComponentActivity ->
+                        findViewById<ViewGroup>(android.R.id.content).showSnackBar(command.message, command.duration)
+                }
 
         }
     }
