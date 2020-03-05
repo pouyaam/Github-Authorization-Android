@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/repositories"
-        tools:layout="@layout/fragment_ripository_list"
+        tools:layout="@layout/fragment_repository_list"
         android:name="com.mydigipay.challenge.ui.repository.list.RepositoryListFragment"
         android:label="Repositories" />
 </navigation>
