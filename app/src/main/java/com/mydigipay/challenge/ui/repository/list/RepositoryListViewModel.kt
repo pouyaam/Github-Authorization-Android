@@ -7,6 +7,7 @@ import com.mydigipay.challenge.data.model.GitRepo
 import com.mydigipay.challenge.data.network.ApiResult
 import com.mydigipay.challenge.data.repository.gitrepo.GitRepoRepository
 import com.mydigipay.challenge.util.ktx.launch
+import com.mydigipay.challenge.util.livedata.StateLessEvent
 import com.mydigipay.challenge.util.livedata.debounce
 
 class RepositoryListViewModel(
@@ -21,6 +22,14 @@ class RepositoryListViewModel(
     val query = MutableLiveData<String>()
 
     val onQueryChanged = query.debounce(500L)
+
+    private val _onResetList = MutableLiveData<StateLessEvent>()
+    val onResetList: LiveData<StateLessEvent>
+        get() = _onResetList
+
+    private val _onFetchDataFailed = MutableLiveData<StateLessEvent>()
+    val onFetchDataFailed: LiveData<StateLessEvent>
+        get() = _onFetchDataFailed
 
     init {
         searchRepositories(1)
@@ -38,11 +47,17 @@ class RepositoryListViewModel(
                 is ApiResult.Success -> {
                     repos.addAll(result.data)
                     _repositories.postValue(repos)
+                    if (page == 1) _onResetList.postValue(StateLessEvent())
                 }
-                is ApiResult.Error ->
+                is ApiResult.Error -> {
                     showSnackBar(result.message)
+                    _onFetchDataFailed.postValue(StateLessEvent())
+                }
             }
-        } ?: _repositories.postValue(emptyList())
+        } ?: {
+            _repositories.postValue(emptyList())
+            _onResetList.postValue(StateLessEvent())
+        }()
     }
 
 }
