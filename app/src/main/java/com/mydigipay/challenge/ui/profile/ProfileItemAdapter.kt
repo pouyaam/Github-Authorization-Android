@@ -26,7 +26,7 @@ class ProfileItemAdapter : BaseAdapter<ProfileItem>(DIFF_CALLBACK) {
     override fun getItemViewType(position: Int) =
         when (getItem(position)) {
             is StringItem -> R.layout.item_profile_string
-            else -> throw Exception("New ${ProfileItem::class} type not implemented")
+            else -> throw Exception("New ${ProfileItem::class.java.simpleName} type not implemented")
         }
 
 }
