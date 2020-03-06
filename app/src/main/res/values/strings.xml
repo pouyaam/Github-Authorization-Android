@@ -20,4 +20,8 @@
     <string name="company">Company\'</string>
     <string name="blog">Blog</string>
     <string name="soon">Soon …</string>
+    <string name="followings">Followings</string>
+    <string name="followers">Followers</string>
+    <string name="repositories">Repositories</string>
+    <string name="gists">Gists</string>
 </resources>

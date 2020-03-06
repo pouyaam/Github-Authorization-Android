@@ -13,3 +13,10 @@ data class StringItem(
     @StringRes val title: Int,
     val value: String
 ): ProfileItem
+
+data class BadgeItem(
+    override val id: Int,
+    @DrawableRes val icon : Int,
+    @StringRes val title: Int,
+    val badge: String
+): ProfileItem

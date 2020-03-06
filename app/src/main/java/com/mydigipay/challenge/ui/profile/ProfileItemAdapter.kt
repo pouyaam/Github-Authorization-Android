@@ -17,6 +17,8 @@ class ProfileItemAdapter : BaseAdapter<ProfileItem>(DIFF_CALLBACK) {
             override fun areContentsTheSame(oldItem: ProfileItem, newItem: ProfileItem): Boolean {
                 return if (oldItem is StringItem && newItem is StringItem)
                     (oldItem as StringItem) == (newItem as StringItem)
+                else if (oldItem is BadgeItem && newItem is BadgeItem)
+                    (oldItem as BadgeItem) == (newItem as BadgeItem)
                 else
                     false
             }
@@ -26,6 +28,7 @@ class ProfileItemAdapter : BaseAdapter<ProfileItem>(DIFF_CALLBACK) {
     override fun getItemViewType(position: Int) =
         when (getItem(position)) {
             is StringItem -> R.layout.item_profile_string
+            is BadgeItem -> R.layout.item_profile_badge
             else -> throw Exception("New ${ProfileItem::class.java.simpleName} type not implemented")
         }
 

@@ -9,6 +9,7 @@ import com.mydigipay.challenge.data.model.User
 import com.mydigipay.challenge.data.network.ApiResult
 import com.mydigipay.challenge.data.repository.user.UserRepository
 import com.mydigipay.challenge.util.ktx.launch
+import com.mydigipay.challenge.util.ktx.toHumanReadableFormat
 
 class ProfileViewModel(
     private val userRepository: UserRepository
@@ -32,17 +33,41 @@ class ProfileViewModel(
                 R.string.location,
                 it?.location ?: "Not filled"
             ),
-            StringItem(
+            BadgeItem(
                 3,
+                R.drawable.ic_following,
+                R.string.followings,
+                it?.following?.toHumanReadableFormat() ?: "Not filled"
+            ),
+            BadgeItem(
+                4,
+                R.drawable.ic_follower,
+                R.string.followers,
+                it?.followers?.toHumanReadableFormat() ?: "Not filled"
+            ),
+            StringItem(
+                5,
                 R.drawable.ic_work,
                 R.string.company,
                 it?.company ?: "Not filled"
             ),
             StringItem(
-                4,
+                6,
                 R.drawable.ic_web,
                 R.string.blog,
                 it?.blog ?: "Not filled"
+            ),
+            BadgeItem(
+                7,
+                R.drawable.ic_repo,
+                R.string.repositories,
+                it?.publicRepos?.toHumanReadableFormat() ?: "Not filled"
+            ),
+            BadgeItem(
+                8,
+                R.drawable.ic_gist,
+                R.string.gists,
+                it?.publicGists?.toHumanReadableFormat() ?: "Not filled"
             )
         )
     }
