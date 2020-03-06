@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="4dp"
+    android:orientation="vertical"
+    app:cardCornerRadius="@dimen/box_radius"
+    app:cardElevation="@dimen/card_elevation">
+
+    <RelativeLayout
+        android:id="@+id/commitItemLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingLeft="8dp"
+        android:paddingTop="12dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="12dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/commitItemAvatarIV"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentStart="true"
+            app:srcCompat="@drawable/ic_github_logo" />
+
+        <TextView
+            android:id="@+id/commitItemNameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_toLeftOf="@+id/commitItemDateTV"
+            android:layout_toRightOf="@id/commitItemAvatarIV"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/text_size_medium_large"
+            tools:text="Navigation" />
+
+        <TextView
+            android:id="@+id/commitItemDateTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/colorDarkTextSubtitle"
+            android:textSize="@dimen/text_size_medium_small"
+            tools:text="Java" />
+
+        <TextView
+            android:id="@+id/commitItemDescriptionTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/commitItemNameTV"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@id/commitItemAvatarIV"
+            android:textColor="@color/colorDarkTextPrimary"
+            android:textSize="@dimen/text_size_medium"
+            tools:text="Navigation" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/commitItemCommentIV"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_below="@+id/commitItemDescriptionTV"
+            android:layout_alignStart="@id/commitItemDescriptionTV"
+            android:layout_alignTop="@id/commitItemCommentTV"
+            android:layout_alignBottom="@id/commitItemCommentTV"
+            app:srcCompat="@drawable/ic_comment_black_24dp" />
+
+        <TextView
+            android:id="@+id/commitItemCommentTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/commitItemDescriptionTV"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@id/commitItemCommentIV"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorDarkTextSubtitle"
+            android:textSize="@dimen/text_size_medium_small"
+            tools:text="187" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

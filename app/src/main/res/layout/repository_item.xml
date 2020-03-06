@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="4dp"
+    android:orientation="vertical"
+    app:cardCornerRadius="@dimen/box_radius"
+    app:cardElevation="@dimen/card_elevation">
+
+    <RelativeLayout
+        android:id="@+id/repositoryItemLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingLeft="8dp"
+        android:paddingTop="12dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="12dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/repositoryItemAvatarIV"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentStart="true"
+            app:srcCompat="@drawable/ic_github_logo" />
+
+        <TextView
+            android:id="@+id/repositoryItemNameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_toLeftOf="@+id/repositoryItemLanguageTV"
+            android:layout_toRightOf="@id/repositoryItemAvatarIV"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/text_size_medium_large"
+            tools:text="Navigation" />
+
+        <TextView
+            android:id="@+id/repositoryItemLanguageTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/colorDarkTextSubtitle"
+            android:textSize="@dimen/text_size_medium_small"
+            tools:text="Java" />
+
+        <TextView
+            android:id="@+id/repositoryItemDescriptionTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/repositoryItemNameTV"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@id/repositoryItemAvatarIV"
+            android:textColor="@color/colorDarkTextPrimary"
+            android:textSize="@dimen/text_size_medium"
+            tools:text="Navigation" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/repositoryItemStarIV"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_below="@+id/repositoryItemDescriptionTV"
+            android:layout_alignStart="@id/repositoryItemDescriptionTV"
+            android:layout_alignTop="@id/repositoryItemStarTV"
+            android:layout_alignBottom="@id/repositoryItemStarTV"
+            app:srcCompat="@drawable/ic_star_black_24dp" />
+
+        <TextView
+            android:id="@+id/repositoryItemStarTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/repositoryItemDescriptionTV"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@id/repositoryItemStarIV"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorDarkTextSubtitle"
+            android:textSize="@dimen/text_size_medium_small"
+            tools:text="187" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/repositoryItemOwnerIV"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_below="@+id/repositoryItemDescriptionTV"
+            android:layout_alignTop="@id/repositoryItemOwnerTV"
+            android:layout_alignBottom="@id/repositoryItemOwnerTV"
+            android:layout_marginStart="32dp"
+            android:layout_toEndOf="@+id/repositoryItemStarTV"
+            app:srcCompat="@drawable/ic_person_black_24dp" />
+
+        <TextView
+            android:id="@+id/repositoryItemOwnerTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/repositoryItemDescriptionTV"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@id/repositoryItemOwnerIV"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorDarkTextSubtitle"
+            android:textSize="@dimen/text_size_medium_small"
+            tools:text="majid mohammadnejad" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
