@@ -40,4 +40,14 @@ class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>() {
             navigationView?.setupWithNavController(this)
         }
     }
+
+    fun toggleBottomSection(show: Boolean) {
+        if (show) {
+            bottom_bar.performShow()
+            fab.show()
+        } else {
+            bottom_bar.performHide()
+            fab.hide()
+        }
+    }
 }
