@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import androidx.navigation.Navigation
 import com.mydigipay.challenge.data.network.ConnectionLiveData
+import com.mydigipay.challenge.util.FragmentOnBackPressed
 import com.mydigipay.challenge.util.addNavigatorOn
 import com.mydigipay.challenge.util.observeActions
 
@@ -70,6 +71,14 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompa
             .findFragmentById(navigationId)
             ?.childFragmentManager
             ?.primaryNavigationFragment
+    }
+
+    override fun onBackPressed() {
+        val currentFragment = getCurrentFragment()
+        if (currentFragment !is FragmentOnBackPressed) super.onBackPressed()
+        (currentFragment as? FragmentOnBackPressed)?.onBackPressed()?.let {
+            if (it) super.onBackPressed()
+        }
     }
 
 }
