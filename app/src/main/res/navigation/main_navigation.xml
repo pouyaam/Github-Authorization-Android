@@ -9,5 +9,10 @@
         android:id="@+id/home"
         android:name="com.mydigipay.challenge.ui.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+
+        <deepLink
+            app:uri="challenge://mydigipay.com/login/callback" />
+
+    </fragment>
 </navigation>
