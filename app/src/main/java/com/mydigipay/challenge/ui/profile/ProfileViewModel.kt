@@ -24,25 +24,25 @@ class ProfileViewModel(
                 1,
                 R.drawable.ic_email,
                 R.string.email,
-                it?.email ?: ""
+                it?.email ?: "Not filled"
             ),
             StringItem(
                 2,
                 R.drawable.ic_location,
                 R.string.location,
-                it?.location ?: ""
+                it?.location ?: "Not filled"
             ),
             StringItem(
                 3,
                 R.drawable.ic_work,
                 R.string.company,
-                it?.company ?: ""
+                it?.company ?: "Not filled"
             ),
             StringItem(
                 4,
                 R.drawable.ic_web,
                 R.string.blog,
-                it?.blog ?: ""
+                it?.blog ?: "Not filled"
             )
         )
     }
