@@ -72,15 +72,29 @@ class ProfileViewModel(
         )
     }
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+
+    private val _requestFailed = MutableLiveData<Boolean>()
+    val requestFailed: LiveData<Boolean>
+        get() = _requestFailed
+
     init {
-        getUser()
+        getAuthenticatedUser()
     }
 
-    private fun getUser() = launch {
+    fun getAuthenticatedUser() = launch {
+        _isLoading.postValue(true)
+        _requestFailed.postValue(false)
         when (val result = userRepository.getAuthenticatedUser()) {
             is ApiResult.Success -> _user.postValue(result.data)
-            is ApiResult.Error -> showSnackBar(result.message)
+            is ApiResult.Error -> {
+                showSnackBar(result.message)
+                _requestFailed.postValue(true)
+            }
         }
+        _isLoading.postValue(false)
     }
 
     fun onEditProfileClicked() = showSnackBar(R.string.soon)

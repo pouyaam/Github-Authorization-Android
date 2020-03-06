@@ -49,6 +49,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+
+
                 <ImageView
                     android:id="@+id/img_avatar"
                     android:layout_width="72dp"
@@ -62,6 +64,17 @@
                     app:layout_constraintStart_toStartOf="@+id/avatar_bg"
                     app:layout_constraintTop_toTopOf="@+id/avatar_bg"
                     tools:srcCompat="@tools:sample/avatars" />
+
+                <ProgressBar
+                    android:theme="@style/PrimaryProgress"
+                    android:layout_width="wrap_content"
+                    app:visibility="@{vm.isLoading}"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@id/avatar_bg"
+                    app:layout_constraintStart_toStartOf="@id/avatar_bg"
+                    app:layout_constraintTop_toTopOf="@id/avatar_bg"
+                    app:layout_constraintBottom_toBottomOf="@id/avatar_bg"
+                    android:indeterminate="true" />
 
                 <TextView
                     android:id="@+id/txt_username"
@@ -98,12 +111,25 @@
                     android:overScrollMode="never"
                     app:data="@{vm.profileInfo}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/avatar_bg"
                     tools:itemCount="4"
                     tools:listitem="@layout/item_profile_string" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:id="@+id/try_again"
+                    android:onClick="@{() -> vm.getAuthenticatedUser()}"
+                    app:visibility="@{vm.requestFailed}"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:textColor="@color/colorPrimaryTextDarkTheme"
+                    android:text="@string/try_again"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/info_list"
+                    android:layout_height="wrap_content" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
@@ -113,6 +139,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            app:visibility="@{vm.user != null}"
             android:layout_marginBottom="16dp"
             android:onClick="@{() -> vm.onEditProfileClicked()}"
             app:backgroundTint="@color/colorWhite"
