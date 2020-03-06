@@ -6,6 +6,9 @@ import okhttp3.Interceptor
 import okhttp3.Response
 
 const val AUTH_STATE = "Auth-State"
+const val AUTH_STATE_OPTIONAL = "Optional"
+const val AUTH_STATE_FORCE = "Force"
+
 private const val AUTHORIZATION = "Authorization"
 
 class TokenInterceptor(
@@ -17,28 +20,19 @@ class TokenInterceptor(
         val authState = request.header(AUTH_STATE)
         authState?.let {state ->
             when (state) {
-                AuthState.OPTIONAL.toString() -> {
+                AUTH_STATE_OPTIONAL -> {
                     sharedPrefWrapper.readToken().takeIf { it.isNotEmpty() }?.let {
                         request = request.newBuilder().addHeader(AUTHORIZATION, it).build()
                     }
                 }
-                AuthState.FORCE.toString() -> {
+                AUTH_STATE_FORCE -> {
                     sharedPrefWrapper.readToken().takeIf { it.isNotEmpty() }?.let {
                         request = request.newBuilder().addHeader(AUTHORIZATION, it).build()
                     } ?: throw ApiException("Endpoint needs $AUTHORIZATION header but token is empty")
                 }
-                else -> throw ApiException("Not supported ${AuthState::class.java.simpleName} type")
+                else -> throw ApiException("Not supported $AUTH_STATE type")
             }
         }
         return chain.proceed(request)
-    }
-}
-
-enum class AuthState {
-    OPTIONAL {
-        override fun toString() = "Optional"
-    },
-    FORCE {
-        override fun toString() = "Force"
     }
 }
