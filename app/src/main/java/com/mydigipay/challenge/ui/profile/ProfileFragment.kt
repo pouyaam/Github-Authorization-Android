@@ -15,6 +15,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding>()
     private val adapter: ProfileItemAdapter by inject()
 
     override fun oneTimeEvent() {
+        getHome()?.toggleBottomSection(false)
         info_list.adapter = adapter
     }
 
@@ -26,5 +27,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding>()
         }
     }
 
-    override fun onBackPressed() = viewModel.onBackPressed()
+    override fun onBackPressed() = viewModel.onBackPressed().also {
+        getHome()?.toggleBottomSection(true)
+    }
 }
