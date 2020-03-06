@@ -12,10 +12,15 @@
         tools:layout="@layout/splash_fragment">
         <action
             android:id="@+id/action_splashFragment_to_authorizeFragment"
-            app:destination="@id/authorizeFragment" />
+            app:destination="@id/authorizeFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_splashFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/searchFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -25,7 +30,9 @@
         tools:layout="@layout/authorize_fragment">
         <action
             android:id="@+id/action_authorizeFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/searchFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
         <deepLink
             android:id="@+id/deepLink"
             app:uri="challenge://mydigipay.com/login/callback" />
