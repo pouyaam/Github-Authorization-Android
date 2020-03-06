@@ -12,6 +12,9 @@
         tools:layout="@layout/fragment_login">
 
         <deepLink app:uri="challenge://mydigipay.com/login/callback" />
+        <action
+            android:id="@+id/action_login_to_profile"
+            app:destination="@id/profile" />
 
     </fragment>
     <fragment
@@ -33,6 +36,13 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_repositories_to_profile"
+            app:destination="@id/profile"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/repository"
@@ -43,4 +53,9 @@
             android:name="gitRepo"
             app:argType="com.mydigipay.challenge.data.model.GitRepo" />
     </fragment>
+    <fragment
+        android:id="@+id/profile"
+        tools:layout="@layout/fragment_profile"
+        android:name="com.mydigipay.challenge.ui.profile.ProfileFragment"
+        android:label="Profile" />
 </navigation>

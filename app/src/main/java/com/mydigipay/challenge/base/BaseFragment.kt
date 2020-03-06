@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.mydigipay.challenge.ui.home.HomeActivity
 import com.mydigipay.challenge.util.addNavigatorOn
 import com.mydigipay.challenge.util.observeActions
 
@@ -72,5 +73,7 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
         super.onDestroyView()
         binding = null
     }
+
+    fun getHome(): HomeActivity? = activity as? HomeActivity
 }
 

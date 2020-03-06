@@ -2,6 +2,7 @@ package com.mydigipay.challenge.util.ba
 
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
 import coil.api.load
 import coil.transform.BlurTransformation
@@ -30,4 +31,9 @@ fun ImageView.loadImage(drawable: Drawable, placeholder: Drawable?, isCircle: Bo
         placeholder(placeholder)
         this.transformations(transformations)
     }
+}
+
+@BindingAdapter("srcCompatRes")
+fun ImageView.setSrcCompatRes(@DrawableRes drawable: Int) {
+    setImageResource(drawable)
 }

@@ -35,7 +35,10 @@ class LoginViewModel(
         code.takeIf { !it.isNullOrBlank() }?.let { code ->
             _isLoading.postValue(true)
             when (val result = tokenRepository.accessToken(code)) {
-                is ApiResult.Success -> showSnackBar(R.string.login_successful)
+                is ApiResult.Success -> {
+                    showToast(R.string.login_successful)
+                    navigateTo(LoginFragmentDirections.actionLoginToProfile())
+                }
                 is ApiResult.Error -> showSnackBar(result.message)
             }
             delay(500)
