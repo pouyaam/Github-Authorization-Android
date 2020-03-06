@@ -13,4 +13,6 @@
     <string name="watch_count">Watch count</string>
     <string name="forks">Forks</string>
     <string name="opened_issues">Opened Issues</string>
+    <string name="map_pixel">Map pixel</string>
+    <string name="icon">Icon</string>
 </resources>
