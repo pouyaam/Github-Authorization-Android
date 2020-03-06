@@ -59,4 +59,9 @@ class ProfileViewModel(
     }
 
     fun onEditProfileClicked() = showSnackBar(R.string.soon)
+
+    fun onBackPressed(): Boolean {
+        navigateBackTo(R.id.repositories, false)
+        return true
+    }
 }

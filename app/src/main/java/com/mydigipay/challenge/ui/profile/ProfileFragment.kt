@@ -5,7 +5,7 @@ import com.mydigipay.challenge.base.BaseFragment
 import com.mydigipay.challenge.databinding.FragmentProfileBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding>() {
+class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding>(), FragmentOnBackPressed {
 
     override val viewModel: ProfileViewModel by viewModel()
     override val layoutRes: Int = R.layout.fragment_profile
@@ -17,4 +17,6 @@ class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding>()
             executePendingBindings()
         }
     }
+
+    override fun onBackPressed() = viewModel.onBackPressed()
 }
