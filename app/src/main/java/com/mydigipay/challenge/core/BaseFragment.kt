@@ -15,35 +15,54 @@ abstract class BaseFragment : Fragment() {
 
     val sharedPref: SharedPreferences by inject()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return onBindView(inflater, container, savedInstanceState)
     }
 
+    abstract fun onBindView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onViewBound(view, savedInstanceState)
+        onViewBounded(view, savedInstanceState)
     }
 
-    abstract fun onBindView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View
+    abstract fun onViewBounded(view: View, savedInstanceState: Bundle?)
 
-    abstract fun onViewBound(view: View?, savedInstanceState: Bundle?)
-
-    protected fun bindView(inflater: LayoutInflater, layoutResId: Int, container: ViewGroup?, variableId: Int, viewModel: ViewModel): View {
+    protected fun bindView(
+        inflater: LayoutInflater,
+        layoutResId: Int,
+        container: ViewGroup?,
+        variableId: Int,
+        viewModel: ViewModel
+    ): View {
         return DataBindingUtil.inflate<ViewDataBinding>(inflater, layoutResId, container, false)
-                .apply {
+            .apply {
+                setVariable(variableId, viewModel)
+                executePendingBindings()
+            }.root
+    }
+
+    protected fun bindView(
+        inflater: LayoutInflater,
+        layoutResId: Int,
+        container: ViewGroup?,
+        variables: Map<Int, ViewModel>
+    ): View {
+        return DataBindingUtil.inflate<ViewDataBinding>(inflater, layoutResId, container, false)
+            .apply {
+                variables.forEach { (variableId, viewModel) ->
                     setVariable(variableId, viewModel)
-                    executePendingBindings()
-                }.root
-    }
-
-    protected fun bindView(inflater: LayoutInflater, layoutResId: Int, container: ViewGroup?, variables: Map<Int, ViewModel>): View {
-        return DataBindingUtil.inflate<ViewDataBinding>(inflater, layoutResId, container, false)
-                .apply {
-                    variables.forEach { (variableId, viewModel) ->
-                        setVariable(variableId, viewModel)
-                    }
-                    executePendingBindings()
-                }.root
+                }
+                executePendingBindings()
+            }.root
     }
 
     fun isValid(): Boolean {
