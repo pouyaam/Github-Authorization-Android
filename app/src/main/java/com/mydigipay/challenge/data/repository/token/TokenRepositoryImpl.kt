@@ -33,7 +33,7 @@ class TokenRepositoryImpl(
 
     private suspend fun saveToken(token: String) = sharedPrefWrapper.saveToken(token)
 
-    override suspend fun readToken() = sharedPrefWrapper.readToken()
+    override fun readToken() = sharedPrefWrapper.readToken()
 
     override suspend fun isUserLoggedIn() = sharedPrefWrapper.isUserLoggedIn()
 
