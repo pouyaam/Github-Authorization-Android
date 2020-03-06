@@ -16,7 +16,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/avatar_stroke"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="0.2"
@@ -30,7 +30,7 @@
             app:srcCompat="@drawable/map" />
 
         <View
-            android:id="@+id/view"
+            android:id="@+id/avatar_bg"
             android:layout_width="76dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
@@ -41,21 +41,21 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/img_avatar"
             android:layout_width="72dp"
             android:layout_height="0dp"
             app:image="@{vm.user.avatarUrl}"
             app:isCircle="@{true}"
-            app:layout_constraintBottom_toBottomOf="@+id/view"
+            app:layout_constraintBottom_toBottomOf="@+id/avatar_bg"
             app:layout_constraintDimensionRatio="h,1:1"
-            app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintStart_toStartOf="@+id/view"
-            app:layout_constraintTop_toTopOf="@+id/view"
+            app:layout_constraintEnd_toEndOf="@+id/avatar_bg"
+            app:layout_constraintStart_toStartOf="@+id/avatar_bg"
+            app:layout_constraintTop_toTopOf="@+id/avatar_bg"
             tools:srcCompat="@tools:sample/avatars"
             android:contentDescription="@string/avatar" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/txt_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -63,22 +63,22 @@
             tools:text="TurKurT656"
             android:textSize="@dimen/xxLargeTextSize"
             android:textColor="@color/colorPrimaryTextDarkTheme"
-            app:layout_constraintBottom_toTopOf="@+id/textView8"
-            app:layout_constraintStart_toEndOf="@+id/view"
-            app:layout_constraintTop_toTopOf="@+id/view"
+            app:layout_constraintBottom_toTopOf="@+id/txt_name"
+            app:layout_constraintStart_toEndOf="@+id/avatar_bg"
+            app:layout_constraintTop_toTopOf="@+id/avatar_bg"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/txt_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Saman Sattari"
             android:text="@{vm.user.name}"
             android:textSize="@dimen/largeTextSize"
             android:textColor="@color/colorSecondaryTextDarkTheme"
-            app:layout_constraintBottom_toBottomOf="@+id/view"
-            app:layout_constraintStart_toStartOf="@+id/textView7"
-            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+            app:layout_constraintBottom_toBottomOf="@+id/avatar_bg"
+            app:layout_constraintStart_toStartOf="@+id/txt_username"
+            app:layout_constraintTop_toBottomOf="@+id/txt_username" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -92,12 +92,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view"
+            app:layout_constraintTop_toBottomOf="@+id/avatar_bg"
             tools:itemCount="4"
             tools:listitem="@layout/item_profile_string" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
+            android:id="@+id/edit_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
