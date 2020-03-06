@@ -25,49 +25,49 @@ class ProfileViewModel(
                 1,
                 R.drawable.ic_email,
                 R.string.email,
-                it?.email ?: "Not filled"
+                if (!it?.email.isNullOrBlank()) it.email else "Not filled"
             ),
             StringItem(
                 2,
                 R.drawable.ic_location,
                 R.string.location,
-                it?.location ?: "Not filled"
+                if (!it?.location.isNullOrBlank()) it.location else "Not filled"
             ),
             BadgeItem(
                 3,
                 R.drawable.ic_following,
                 R.string.followings,
-                it?.following?.toHumanReadableFormat() ?: "Not filled"
+                it?.following?.toHumanReadableFormat() ?: "0"
             ),
             BadgeItem(
                 4,
                 R.drawable.ic_follower,
                 R.string.followers,
-                it?.followers?.toHumanReadableFormat() ?: "Not filled"
+                it?.followers?.toHumanReadableFormat() ?: "0"
             ),
             StringItem(
                 5,
                 R.drawable.ic_work,
                 R.string.company,
-                it?.company ?: "Not filled"
+                if (!it?.company.isNullOrBlank()) it.company else "Not filled"
             ),
             StringItem(
                 6,
                 R.drawable.ic_web,
                 R.string.blog,
-                it?.blog ?: "Not filled"
+                if (!it?.blog.isNullOrBlank()) it.blog else "Not filled"
             ),
             BadgeItem(
                 7,
                 R.drawable.ic_repo,
                 R.string.repositories,
-                it?.publicRepos?.toHumanReadableFormat() ?: "Not filled"
+                it?.publicRepos?.toHumanReadableFormat() ?: "0"
             ),
             BadgeItem(
                 8,
                 R.drawable.ic_gist,
                 R.string.gists,
-                it?.publicGists?.toHumanReadableFormat() ?: "Not filled"
+                it?.publicGists?.toHumanReadableFormat() ?: "0"
             )
         )
     }
