@@ -15,4 +15,9 @@
     <string name="opened_issues">Opened Issues</string>
     <string name="map_pixel">Map pixel</string>
     <string name="icon">Icon</string>
+    <string name="email">Email</string>
+    <string name="location">Location</string>
+    <string name="company">Company\'</string>
+    <string name="blog">Blog</string>
+    <string name="soon">Soon …</string>
 </resources>
