@@ -37,6 +37,7 @@ class HomeViewModel(private val model: HomeModel) : BaseViewModel(model) {
             when (val result = model.accessToken(code)) {
                 is ApiResult.Success -> {
                     logD("result Success = $result")
+                    navigateTo(HomeFragmentDirections.actionHomeToProfile())
                 }
                 is ApiResult.Error -> {
                     logD("result Error = $result")
