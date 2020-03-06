@@ -12,7 +12,7 @@ class TokenRemoteDataSource(
 
     override fun getToken() = throw IllegalStateException("bad request")
 
-    override fun getLoginURL() = throw IllegalStateException("bad request")
+    override fun getLoginUrl() = throw IllegalStateException("bad request")
 
     override fun generateToken(code: String) =
         api.getAccessToken(

@@ -16,12 +16,13 @@ class TokenCacheDataSource(
         sharePreferences
             .edit()
             .putString(userTokenKey, token)
+            .putBoolean(isUserLoginKey, true)
             .apply()
     }
 
     override fun getToken() = sharePreferences.getString(userTokenKey, "") ?: ""
 
-    override fun getLoginURL() = throw IllegalStateException("bad request")
+    override fun getLoginUrl() = throw IllegalStateException("bad request")
 
     override fun generateToken(code: String) = throw IllegalStateException("bad request")
 }

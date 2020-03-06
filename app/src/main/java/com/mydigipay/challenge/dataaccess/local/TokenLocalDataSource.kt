@@ -13,7 +13,7 @@ class TokenLocalDataSource : TokenDataSource {
 
     override fun getToken() = throw IllegalStateException("bad request")
 
-    override fun getLoginURL() =
+    override fun getLoginUrl() =
         "https://github.com/login/oauth/authorize?client_id=$clientId&redirect_uri=$redirectUrl&scope=repo user&state=$clientState"
 
     override fun generateToken(code: String) = throw IllegalStateException("bad request")

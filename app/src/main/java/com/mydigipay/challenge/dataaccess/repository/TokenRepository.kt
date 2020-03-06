@@ -13,7 +13,7 @@ class TokenRepository(
 
     override fun getToken() = cache.getToken()
 
-    override fun getLoginURL() = local.getLoginURL()
+    override fun getLoginUrl() = local.getLoginUrl()
 
     override fun generateToken(code: String) = remote.generateToken(code)
 }
