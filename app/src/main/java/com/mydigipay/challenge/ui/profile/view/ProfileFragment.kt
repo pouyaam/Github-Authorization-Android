@@ -22,6 +22,6 @@ class ProfileFragment : BaseFragment() {
         return bindView(inflater, R.layout.profile_fragment, container, BR.profile_vm, viewModel)
     }
 
-    override fun onViewBound(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewBounded(view: View, savedInstanceState: Bundle?) {
     }
 }

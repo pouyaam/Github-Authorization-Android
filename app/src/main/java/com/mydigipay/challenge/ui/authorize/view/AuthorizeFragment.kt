@@ -22,6 +22,6 @@ class AuthorizeFragment : BaseFragment() {
         return bindView(inflater, R.layout.authorize_fragment, container, BR.auth_vm, viewModel)
     }
 
-    override fun onViewBound(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewBounded(view: View, savedInstanceState: Bundle?) {
     }
 }
