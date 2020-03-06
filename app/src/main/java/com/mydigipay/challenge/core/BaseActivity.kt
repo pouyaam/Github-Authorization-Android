@@ -20,9 +20,16 @@ abstract class BaseActivity : AppCompatActivity() {
     abstract fun bindView()
 
     fun bindView(layoutId: Int, variableId: Int, viewModel: ViewModel) {
-        val binding: ViewDataBinding = DataBindingUtil.setContentView(this, layoutId)
-        binding.setVariable(variableId, viewModel)
-        binding.executePendingBindings()
+        (DataBindingUtil.setContentView(this, layoutId) as ViewDataBinding).apply {
+            setVariable(variableId, viewModel)
+            executePendingBindings()
+        }
+    }
+
+    fun bindView(layoutId: Int) {
+        (DataBindingUtil.setContentView(this, layoutId) as ViewDataBinding).apply {
+            executePendingBindings()
+        }
     }
 
 }
