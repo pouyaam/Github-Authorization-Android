@@ -84,11 +84,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/info_list"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="16dp"
+            android:overScrollMode="never"
             app:data="@{vm.profileInfo}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view"
@@ -108,14 +109,5 @@
             app:srcCompat="@drawable/ic_edit"
             app:tint="@color/colorPrimary" />
 
-        <View
-            android:id="@+id/view2"
-            android:layout_width="200dp"
-            android:layout_height="56dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/rec_primary_dark"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
