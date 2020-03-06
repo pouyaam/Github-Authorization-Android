@@ -21,7 +21,7 @@ var networkModule = module {
             .writeTimeout(10, TimeUnit.SECONDS)
             .connectTimeout(10, TimeUnit.SECONDS)
             .also {
-                if (BuildConfig.DEBUG) {
+                if (BuildConfig.DEBUG && false) {
                     it.addInterceptor(
                         HttpLoggingInterceptor().apply {
                             level = HttpLoggingInterceptor.Level.BODY
@@ -46,7 +46,7 @@ var networkModule = module {
 
     single<Retrofit> {
         Retrofit.Builder()
-            .baseUrl("https://api.github.com/")
+            .baseUrl("https://api.github.com")
             .client(get())
             .addConverterFactory(get())
             .addCallAdapterFactory(get())
