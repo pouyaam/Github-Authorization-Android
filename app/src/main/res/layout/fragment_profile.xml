@@ -10,104 +10,116 @@
             type="com.mydigipay.challenge.ui.profile.ProfileViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        app:animateLayoutChanges="@{true}"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/avatar_stroke"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroller_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alpha="0.2"
-            android:contentDescription="@string/map_pixel"
-            android:scaleType="fitXY"
-            android:scaleX="2"
-            android:scaleY="2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/map" />
+            android:layout_height="match_parent">
 
-        <View
-            android:id="@+id/avatar_bg"
-            android:layout_width="76dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="104dp"
-            android:background="@drawable/oval_white"
-            app:layout_constraintDimensionRatio="h,1:1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:animateLayoutChanges="@{true}">
 
-        <ImageView
-            android:id="@+id/img_avatar"
-            android:layout_width="72dp"
-            android:layout_height="0dp"
-            app:image="@{vm.user.avatarUrl}"
-            app:isCircle="@{true}"
-            app:layout_constraintBottom_toBottomOf="@+id/avatar_bg"
-            app:layout_constraintDimensionRatio="h,1:1"
-            app:layout_constraintEnd_toEndOf="@+id/avatar_bg"
-            app:layout_constraintStart_toStartOf="@+id/avatar_bg"
-            app:layout_constraintTop_toTopOf="@+id/avatar_bg"
-            tools:srcCompat="@tools:sample/avatars"
-            android:contentDescription="@string/avatar" />
+                <ImageView
+                    android:id="@+id/map_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.2"
+                    android:contentDescription="@string/map_pixel"
+                    android:scaleType="fitXY"
+                    android:scaleX="2"
+                    android:scaleY="2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/map" />
 
-        <TextView
-            android:id="@+id/txt_username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@{vm.user.login}"
-            tools:text="TurKurT656"
-            android:textSize="@dimen/xxLargeTextSize"
-            android:textColor="@color/colorPrimaryTextDarkTheme"
-            app:layout_constraintBottom_toTopOf="@+id/txt_name"
-            app:layout_constraintStart_toEndOf="@+id/avatar_bg"
-            app:layout_constraintTop_toTopOf="@+id/avatar_bg"
-            app:layout_constraintVertical_chainStyle="packed" />
+                <View
+                    android:id="@+id/avatar_bg"
+                    android:layout_width="76dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="104dp"
+                    android:background="@drawable/oval_white"
+                    app:layout_constraintDimensionRatio="h,1:1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txt_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Saman Sattari"
-            android:text="@{vm.user.name}"
-            android:textSize="@dimen/largeTextSize"
-            android:textColor="@color/colorSecondaryTextDarkTheme"
-            app:layout_constraintBottom_toBottomOf="@+id/avatar_bg"
-            app:layout_constraintStart_toStartOf="@+id/txt_username"
-            app:layout_constraintTop_toBottomOf="@+id/txt_username" />
+                <ImageView
+                    android:id="@+id/img_avatar"
+                    android:layout_width="72dp"
+                    android:layout_height="0dp"
+                    android:contentDescription="@string/avatar"
+                    app:image="@{vm.user.avatarUrl}"
+                    app:isCircle="@{true}"
+                    app:layout_constraintBottom_toBottomOf="@+id/avatar_bg"
+                    app:layout_constraintDimensionRatio="h,1:1"
+                    app:layout_constraintEnd_toEndOf="@+id/avatar_bg"
+                    app:layout_constraintStart_toStartOf="@+id/avatar_bg"
+                    app:layout_constraintTop_toTopOf="@+id/avatar_bg"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/txt_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@{vm.user.login}"
+                    android:textColor="@color/colorPrimaryTextDarkTheme"
+                    android:textSize="@dimen/xxLargeTextSize"
+                    app:layout_constraintBottom_toTopOf="@+id/txt_name"
+                    app:layout_constraintStart_toEndOf="@+id/avatar_bg"
+                    app:layout_constraintTop_toTopOf="@+id/avatar_bg"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:text="TurKurT656" />
+
+                <TextView
+                    android:id="@+id/txt_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{vm.user.name}"
+                    android:textColor="@color/colorSecondaryTextDarkTheme"
+                    android:textSize="@dimen/largeTextSize"
+                    app:layout_constraintBottom_toBottomOf="@+id/avatar_bg"
+                    app:layout_constraintStart_toStartOf="@+id/txt_username"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_username"
+                    tools:text="Saman Sattari" />
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/info_list"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:overScrollMode="never"
-            app:data="@{vm.profileInfo}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/avatar_bg"
-            tools:itemCount="4"
-            tools:listitem="@layout/item_profile_string" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/info_list"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:overScrollMode="never"
+                    app:data="@{vm.profileInfo}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/avatar_bg"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/item_profile_string" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/edit_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:onClick="@{() -> vm.onEditProfileClicked()}"
             android:layout_marginBottom="16dp"
+            android:onClick="@{() -> vm.onEditProfileClicked()}"
             app:backgroundTint="@color/colorWhite"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_anchor="@id/scroller_view"
+            app:layout_anchorGravity="bottom|right|end"
             app:srcCompat="@drawable/ic_edit"
             app:tint="@color/colorPrimary" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
