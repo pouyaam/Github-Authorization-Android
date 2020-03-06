@@ -1,5 +1,6 @@
 package com.mydigipay.challenge.core
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -68,4 +69,13 @@ abstract class BaseFragment : Fragment() {
     fun isValid(): Boolean {
         return activity != null && isAdded
     }
+
+    override fun onStart() {
+        super.onStart()
+        activity?.intent?.let {
+            intentHandle(it)
+        }
+    }
+
+    open fun intentHandle(intent: Intent) {}
 }
