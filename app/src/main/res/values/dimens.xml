@@ -1,3 +1,15 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+
+    <!-- Text Size -->
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_medium_large">16sp</dimen>
+    <dimen name="text_size_medium">14sp</dimen>
+    <dimen name="text_size_medium_small">12sp</dimen>
+    <dimen name="text_size_small">10sp</dimen>
+
+    <!-- Radius -->
+    <dimen name="box_radius">6dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+
 </resources>

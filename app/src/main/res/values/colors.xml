@@ -3,4 +3,13 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWindowsBackground">#F9F9Fb</color>
+    <color name="colorProfileBackground">#ED00574B</color>
+
+    <color name="colorLightTextPrimary">#E7E8E9</color>
+    <color name="colorDarkTextPrimary">#3A3A3A</color>
+    <color name="colorDarkTextHint">#CECFD1</color>
+    <color name="colorDarkTextSubtitle">#7C7C7C</color>
 </resources>

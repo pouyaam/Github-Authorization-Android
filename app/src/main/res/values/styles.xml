@@ -1,20 +1,63 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="BaseAppTheme" />
+
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/colorWindowsBackground</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/iran_sans_mobile</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <!-- Toolbar -->
+    <style name="MToolbar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="contentInsetStart">0dp</item>
+
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/text_size_medium_large</item>
+        <item name="android:textColor">@color/colorLightTextPrimary</item>
+    </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <!-- ActionButton in toolbar -->
+    <style name="MActionButton" parent="BaseMActionButton" />
 
+    <style name="BaseMActionButton" parent="Widget.AppCompat.ActionButton">
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <!-- Button Style -->
+    <style name="CommonButton" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:radius">@dimen/box_radius</item>
+        <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+    <style name="PrimaryButton" parent="CommonButton">
+        <item name="android:background">@drawable/background_button_primary</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <!-- Edit Text Style-->
+    <style name="CommonEditText" parent="@style/Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/background_edit_text</item>
+        <item name="android:textCursorDrawable">@color/colorDarkTextHint</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/text_size_medium_large</item>
+        <item name="android:textColor">@color/colorLightTextPrimary</item>
+        <item name="android:textColorHint">@color/colorDarkTextHint</item>
+    </style>
 </resources>
