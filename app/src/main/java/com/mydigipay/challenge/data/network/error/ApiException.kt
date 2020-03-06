@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.data.network
+package com.mydigipay.challenge.data.network.error
 
 import okio.IOException
 

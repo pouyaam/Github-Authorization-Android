@@ -1,6 +1,6 @@
 package com.mydigipay.challenge.data.network.interceptor
 
-import com.mydigipay.challenge.data.network.ApiException
+import com.mydigipay.challenge.data.network.error.ApiException
 import com.mydigipay.challenge.data.persist.SharedPrefWrapper
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -29,9 +29,13 @@ class TokenInterceptor(
                 AUTH_STATE_FORCE -> {
                     sharedPrefWrapper.readToken().takeIf { it.isNotEmpty() }?.let {
                         request = request.newBuilder().addHeader(AUTHORIZATION, "$BEARER $it").build()
-                    } ?: throw ApiException("Endpoint needs $AUTHORIZATION header but token is empty")
+                    } ?: throw ApiException(
+                        "Endpoint needs $AUTHORIZATION header but token is empty"
+                    )
                 }
-                else -> throw ApiException("Not supported $AUTH_STATE type")
+                else -> throw ApiException(
+                    "Not supported $AUTH_STATE type"
+                )
             }
         }
         return chain.proceed(request)
