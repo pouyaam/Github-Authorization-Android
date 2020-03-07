@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.mydigipay.challenge.ui.home.HomeViewModel" />
+            type="com.mydigipay.challenge.ui.login.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,20 +29,30 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/imageView"
-            android:layout_width="200dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="72dp"
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:contentDescription="@string/app_name"
-            app:layout_constraintDimensionRatio="h,1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/view_main"
+            app:layout_constraintEnd_toEndOf="@id/view_main"
+            app:layout_constraintStart_toStartOf="@id/view_main"
             app:layout_constraintTop_toTopOf="@id/view_main"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/github"
-            tools:srcCompat="@drawable/ic_github" />
+            app:srcCompat="@drawable/ic_github"
+            tools:ignore="VectorDrawableCompat" />
+
+
+        <TextView
+            android:id="@+id/txt_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_standard_x20"
+            android:gravity="center_horizontal"
+            android:text="@string/app_description"
+            android:textColor="@color/blue900"
+            android:textSize="@dimen/extraLargeTextSize"
+            app:layout_constraintEnd_toEndOf="@id/view_main"
+            app:layout_constraintStart_toStartOf="@id/view_main"
+            app:layout_constraintTop_toTopOf="@id/view_main" />
 
 
         <com.google.android.material.button.MaterialButton
@@ -51,9 +61,9 @@
             android:layout_marginStart="@dimen/margin_standard_x6"
             android:layout_marginEnd="@dimen/margin_standard_x6"
             android:layout_marginBottom="@dimen/margin_standard_x12"
-            app:backgroundTint="@color/blue500"
-            android:text="@string/login_to_github"
             android:onClick="@{()->vm.onLoginClicked()}"
+            android:text="@string/login_to_github"
+            app:backgroundTint="@color/blue500"
             app:cornerRadius="@dimen/margin_standard_x4"
             app:layout_constraintBottom_toBottomOf="@id/view_main"
             app:layout_constraintEnd_toEndOf="@id/view_main"
