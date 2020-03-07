@@ -22,9 +22,11 @@
             android:layout_marginStart="@dimen/margin_standard_x6"
             android:layout_marginTop="@dimen/margin_standard_x4"
             android:layout_marginEnd="@dimen/margin_standard_x6"
+            android:layout_marginBottom="@dimen/margin_standard_x2"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="@dimen/margin_standard_x3"
             app:cardElevation="@dimen/margin_standard"
+            app:layout_constraintBottom_toTopOf="@id/list_repository"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -52,6 +54,7 @@
                     android:hint="@string/search_or_jump_to"
                     android:maxLength="256"
                     android:maxLines="1"
+                    android:text="@={vm.query}"
                     android:textColor="@color/navy900"
                     android:textColorHint="@color/gray500"
                     android:textSize="@dimen/smallTextSize" />
@@ -59,20 +62,22 @@
             </LinearLayout>
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/repo_list"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:overScrollMode="never"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/search_card"
-                tools:itemCount="10"
-                tools:listitem="@layout/item_repository" />
-
         </com.google.android.material.card.MaterialCardView>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_repository"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            app:data="@{vm.repositories}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_card"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_repository" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
