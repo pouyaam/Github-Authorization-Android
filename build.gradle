@@ -21,6 +21,7 @@ buildscript {
         retrofitVersion = '2.7.1'
         okHttpVersion = '4.4.0'
         lottieVersion = '3.4.0'
+        glideVersion = '4.9.0'
     }
     repositories {
         google()
