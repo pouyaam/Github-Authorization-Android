@@ -9,7 +9,7 @@ import com.mydigipay.challenge.data.repository.gitrepo.GitRepoRepository
 import com.mydigipay.challenge.util.ktx.launch
 import com.mydigipay.challenge.util.livedata.StateLessEvent
 import com.mydigipay.challenge.util.livedata.combine
-import com.mydigipay.challenge.util.livedata.debounce
+import com.mydigipay.challenge.util.livedata.debounceEvent
 
 class RepositoryListViewModel(
     private val gitRepoRepository: GitRepoRepository
@@ -31,7 +31,7 @@ class RepositoryListViewModel(
 
     val query = MutableLiveData<String>()
 
-    val onQueryChanged = query.debounce(500L)
+    val onQueryChanged = query.debounceEvent(500L)
 
     private val _onResetList = MutableLiveData<StateLessEvent>()
     val onResetList: LiveData<StateLessEvent>

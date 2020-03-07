@@ -1,6 +1,5 @@
 package com.mydigipay.challenge.ui.repository.list
 
-import androidx.lifecycle.observe
 import com.mydigipay.challenge.R
 import com.mydigipay.challenge.base.BaseFragment
 import com.mydigipay.challenge.databinding.FragmentRepositoryListBinding
@@ -43,7 +42,7 @@ class RepositoryListFragment :
     }
 
     override fun bindObservables() {
-        viewModel.onQueryChanged.observe(this) {
+        viewModel.onQueryChanged.observeEvent(this) {
             viewModel.searchRepositories(1)
         }
         viewModel.onResetList.observeEvent(this) {
