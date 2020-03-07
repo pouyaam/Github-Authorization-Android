@@ -6,5 +6,13 @@
     <string name="pushed_on_placeholder">Pushed on %s</string>
     <string name="login_to_github">Login to github</string>
     <string name="github">GitHub</string>
-    <string name="app_description">This app for code challenge digikala company. you can login to GitHub account and watched any repository and profile</string>
+    <string name="app_description">This app is code challenge for digikala company. you can login to GitHub account and watched any repository and profile. I hope you enjoy it.</string>
+    <string name="followers">Followers : %s</string>
+    <string name="following">Following : %s</string>
+    <string name="repository">Repository : %s</string>
+    <string name="gist">Gist : %s</string>
+    <string name="bio">Bio : %s</string>
+    <string name="mail">Mail : %s</string>
+    <string name="company">Company : %s</string>
+    <string name="location">Location : %s</string>
 </resources>

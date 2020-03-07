@@ -11,6 +11,6 @@ val modelModule = module {
     factory { SplashModel(get()) }
     factory { MainModel() }
     factory { LoginModel(get()) }
-    factory { ProfileModel() }
+    factory { ProfileModel(get()) }
     factory { SearchModel(get()) }
 }
