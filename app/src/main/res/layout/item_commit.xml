@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.mydigipay.challenge.data.pojo.Commit" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_standard_x3"
+        android:layout_marginTop="@dimen/margin_standard_x2"
+        android:layout_marginEnd="@dimen/margin_standard_x3"
+        android:background="@drawable/shape_rec_white_color"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:id="@+id/img_user"
+            android:layout_width="32dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_standard_x2"
+            android:layout_marginTop="@dimen/margin_standard_x2"
+            android:layout_marginBottom="@dimen/margin_standard_x2"
+            android:layout_weight="1"
+            android:contentDescription="@string/app_name"
+            app:image="@{item.committer.avatarUrl}"
+            app:isCircle="@{true}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="w,1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/txt_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_standard_x2"
+            android:layout_marginEnd="@dimen/margin_standard_x4"
+            android:lines="1"
+            android:text="@{item.message.message}"
+            android:textColor="@color/blue900"
+            android:textSize="@dimen/smallTextSize"
+            app:layout_constraintBottom_toTopOf="@+id/txt_sha"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img_user"
+            app:layout_constraintTop_toTopOf="@+id/img_user"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="This is first commit" />
+
+        <TextView
+            android:id="@+id/txt_sha"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:text="@{item.sha}"
+            android:textColor="@color/gray500"
+            android:textSize="@dimen/extraSmallTextSize"
+            app:layout_constraintBottom_toBottomOf="@+id/img_user"
+            app:layout_constraintEnd_toEndOf="@+id/txt_message"
+            app:layout_constraintStart_toStartOf="@+id/txt_message"
+            app:layout_constraintTop_toBottomOf="@+id/txt_message"
+            tools:text="SHA1: 6dcb09b5b57875f334f61aebed695e2e4193db5e" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
