@@ -37,6 +37,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
 }
 dependencies {
     //base
@@ -54,6 +58,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:1.1.3")
     implementation("com.google.android.material:material:1.1.0")
     implementation("androidx.preference:preference-ktx:1.1.0")
+    implementation("androidx.cardview:cardview:1.0.0")
 
     //Lifecycle, ViewModel, LiveData
     val lifecycleVersion = "2.2.0"
