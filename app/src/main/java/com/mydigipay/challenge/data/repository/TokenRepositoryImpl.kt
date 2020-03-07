@@ -1,8 +1,8 @@
 package com.mydigipay.challenge.data.repository
 
 import com.mydigipay.challenge.data.network.ApiResult
-import com.mydigipay.challenge.data.network.oauth.AccessTokenService
-import com.mydigipay.challenge.data.network.oauth.RequestAccessToken
+import com.mydigipay.challenge.data.network.api.AccessTokenApi
+import com.mydigipay.challenge.data.network.req.AccessTokenReq
 import com.mydigipay.challenge.data.network.safeApiCall
 import com.mydigipay.challenge.data.persist.SharedPrefWrapper
 
@@ -13,13 +13,13 @@ private const val STATE = "0"
 
 class TokenRepositoryImpl(
     private val sharedPrefWrapper: SharedPrefWrapper,
-    private val accessTokenService: AccessTokenService
+    private val accessTokenService: AccessTokenApi
 ) : TokenRepository {
 
     override suspend fun accessToken(code: String) =
         safeApiCall {
             val result = accessTokenService.accessToken(
-                RequestAccessToken(
+                AccessTokenReq(
                     CLIENT_ID,
                     CLIENT_SECRET,
                     code,

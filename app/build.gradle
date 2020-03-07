@@ -33,6 +33,10 @@ android {
     }
 }
 
+androidExtensions {
+    experimental = true
+}
+
 dependencies {
     // Core
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -64,6 +68,8 @@ dependencies {
 
     // Image Processing
     implementation "io.coil-kt:coil:$coilVersion"
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
 
     // Network
     implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"

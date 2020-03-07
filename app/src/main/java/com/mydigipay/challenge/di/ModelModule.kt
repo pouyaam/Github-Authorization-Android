@@ -10,5 +10,5 @@ val modelModule = module {
     factory { MainModel() }
     factory { HomeModel(get()) }
     factory { ProfileModel() }
-    factory { SearchModel() }
+    factory { SearchModel(get()) }
 }
