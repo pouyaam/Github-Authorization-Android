@@ -8,4 +8,5 @@ val repositoryModule = module {
     single<TokenRepository> { TokenRepositoryImpl(get(), get()) }
     single<SearchRepository> { SearchRepositoryImpl(get()) }
     single<UserRepository> { UserRepositoryImpl(get()) }
+    single<CommitRepository> { CommitRepositoryImpl(get()) }
 }
