@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.ui.search
+package com.mydigipay.challenge.ui.search.list
 
 import androidx.recyclerview.widget.DiffUtil
 import com.mydigipay.challenge.base.BaseAdapter

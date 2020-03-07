@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.ui.search
+package com.mydigipay.challenge.ui.search.list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -50,6 +50,10 @@ class SearchViewModel(private val model: SearchModel) : BaseViewModel(model) {
         } ?: {
             _repositories.postValue(emptyList())
         }()
+    }
+
+    fun goToDetail(repository: Repository) {
+        navigateTo(SearchFragmentDirections.actionSearchToDetail(repository))
     }
 
 }

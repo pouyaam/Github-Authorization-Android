@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.ui.search
+package com.mydigipay.challenge.ui.search.list
 
 import com.mydigipay.challenge.base.BaseModel
 import com.mydigipay.challenge.data.repository.SearchRepository
