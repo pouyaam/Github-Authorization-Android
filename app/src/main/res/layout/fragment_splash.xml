@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.mydigipay.challenge.ui.splash.SplashViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/view_main"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_standard_x6"
+            android:layout_marginTop="@dimen/margin_standard_x16"
+            android:layout_marginEnd="@dimen/margin_standard_x6"
+            android:layout_marginBottom="@dimen/margin_standard_x16"
+            android:background="@drawable/shape_rec_white_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/imageView"
+            android:layout_width="200dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="72dp"
+            android:contentDescription="@string/app_name"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/view_main"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/github"
+            tools:srcCompat="@drawable/ic_github" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/github"
+            android:textColor="@color/blue900"
+            android:textSize="@dimen/extraLargeTextSize36sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/view_main"
+            app:layout_constraintEnd_toEndOf="@id/view_main"
+            app:layout_constraintStart_toStartOf="@id/view_main"
+            app:layout_constraintTop_toBottomOf="@id/imageView" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

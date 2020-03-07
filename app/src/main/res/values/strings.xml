@@ -5,4 +5,5 @@
     <string name="search_or_jump_to">search or jump to . . .</string>
     <string name="pushed_on_placeholder">Pushed on %s</string>
     <string name="login_to_github">Login to github</string>
+    <string name="github">GitHub</string>
 </resources>
