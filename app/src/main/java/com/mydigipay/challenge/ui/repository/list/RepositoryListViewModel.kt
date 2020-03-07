@@ -61,7 +61,7 @@ class RepositoryListViewModel(
                     if (page == 1) _onResetList.postValue(StateLessEvent())
                 }
                 is ApiResult.Error -> {
-                    showSnackBar(result.message)
+                    showSnackBar(result.error.message)
                     _onFetchDataFailed.postValue(StateLessEvent())
                 }
             }

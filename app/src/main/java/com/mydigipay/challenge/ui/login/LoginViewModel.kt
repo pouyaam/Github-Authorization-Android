@@ -39,7 +39,7 @@ class LoginViewModel(
                     showToast(R.string.login_successful)
                     navigateTo(LoginFragmentDirections.actionLoginToProfile())
                 }
-                is ApiResult.Error -> showSnackBar(result.message)
+                is ApiResult.Error -> showSnackBar(result.error.message)
             }
             delay(500)
             _isLoading.postValue(false)

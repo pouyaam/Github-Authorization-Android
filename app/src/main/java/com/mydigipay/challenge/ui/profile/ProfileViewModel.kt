@@ -90,7 +90,7 @@ class ProfileViewModel(
         when (val result = userRepository.getAuthenticatedUser()) {
             is ApiResult.Success -> _user.postValue(result.data)
             is ApiResult.Error -> {
-                showSnackBar(result.message)
+                showSnackBar(result.error.message)
                 _requestFailed.postValue(true)
             }
         }

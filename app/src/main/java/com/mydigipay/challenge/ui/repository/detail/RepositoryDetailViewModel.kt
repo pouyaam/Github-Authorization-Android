@@ -9,7 +9,6 @@ import com.mydigipay.challenge.data.model.fillRest
 import com.mydigipay.challenge.data.network.ApiResult
 import com.mydigipay.challenge.data.repository.commit.CommitRepository
 import com.mydigipay.challenge.util.ktx.launch
-import com.mydigipay.challenge.util.livedata.StateLessEvent
 
 class RepositoryDetailViewModel(
     private val commitRepository: CommitRepository
@@ -28,22 +27,16 @@ class RepositoryDetailViewModel(
         getCommits(1)
     }
 
-    private val _onFetchDataFailed = MutableLiveData<StateLessEvent>()
-    val onFetchDataFailed: LiveData<StateLessEvent>
-        get() = _onFetchDataFailed
-
     fun getCommits(page: Int) = launch {
         val gitRepo = _gitRepo.value ?: return@launch
-        val commits =  (_commits.value ?: emptyList()).toMutableList()
+        val commits = (_commits.value ?: emptyList()).toMutableList()
         when (val result = commitRepository.getCommits(gitRepo.owner.login, gitRepo.name, page)) {
             is ApiResult.Success -> {
                 commits.addAll(result.data)
                 _commits.postValue(commits)
             }
-            is ApiResult.Error -> {
-                showSnackBar(result.message)
-                _onFetchDataFailed.postValue(StateLessEvent())
-            }
+            is ApiResult.Error ->
+                showSnackBar(result.error.message)
         }
     }
 }
