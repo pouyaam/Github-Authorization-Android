@@ -14,5 +14,5 @@ val modelModule = module {
     factory { LoginModel(get()) }
     factory { ProfileModel(get()) }
     factory { SearchModel(get()) }
-    factory { DetailModel() }
+    factory { DetailModel(get()) }
 }
