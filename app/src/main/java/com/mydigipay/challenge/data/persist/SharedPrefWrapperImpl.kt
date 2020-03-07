@@ -21,8 +21,7 @@ class SharedPrefWrapperImpl(
             }
         }
 
-    override suspend fun readToken() =
-        withContext(Dispatchers.IO) { sharedPreferences.getString(TOKEN, "") ?: "" }
+    override fun readToken() = sharedPreferences.getString(TOKEN, "") ?: ""
 
     override suspend fun isUserLoggedIn() =
         withContext(Dispatchers.IO) { !sharedPreferences.getString(TOKEN, null).isNullOrBlank() }

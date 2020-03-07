@@ -1,8 +1,10 @@
 package com.mydigipay.challenge.di
 
+import com.mydigipay.challenge.data.network.interceptor.TokenInterceptor
 import com.mydigipay.challenge.di.Qualifiers.CONNECTION_TIMEOUT
 import com.mydigipay.challenge.di.Qualifiers.LOGGING_INTERCEPTOR
 import com.mydigipay.challenge.di.Qualifiers.READ_TIMEOUT
+import com.mydigipay.challenge.di.Qualifiers.TOKEN_INTERCEPTOR
 import com.mydigipay.challenge.di.Qualifiers.WRITE_TIMEOUT
 import com.mydigipay.challenge.utils.ktx.logD
 import okhttp3.Interceptor
@@ -31,12 +33,17 @@ val networkModule = module {
         }
     }
 
+    single<Interceptor>(TOKEN_INTERCEPTOR) {
+        TokenInterceptor(get())
+    }
+
     single {
         OkHttpClient.Builder()
             .readTimeout(get(READ_TIMEOUT), TimeUnit.MILLISECONDS)
             .writeTimeout(get(WRITE_TIMEOUT), TimeUnit.MILLISECONDS)
             .connectTimeout(get(CONNECTION_TIMEOUT), TimeUnit.MILLISECONDS)
             .addInterceptor(get<Interceptor>(LOGGING_INTERCEPTOR))
+            .addInterceptor(get<Interceptor>(TOKEN_INTERCEPTOR))
             .build()
     }
 
