@@ -1,6 +1,7 @@
 package com.mydigipay.challenge.data.network.interceptor
 
-import com.mydigipay.challenge.data.network.error.ApiException
+import com.mydigipay.challenge.data.network.error.CustomException
+import com.mydigipay.challenge.data.network.error.UnAuthorizedException
 import com.mydigipay.challenge.data.persist.SharedPrefWrapper
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -19,23 +20,21 @@ class TokenInterceptor(
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
         val authState = request.header(AUTH_STATE)
-        authState?.let {state ->
+        authState?.let { state ->
             when (state) {
                 AUTH_STATE_OPTIONAL -> {
                     sharedPrefWrapper.readToken().takeIf { it.isNotEmpty() }?.let {
-                        request = request.newBuilder().addHeader(AUTHORIZATION, "$BEARER $it").build()
+                        request =
+                            request.newBuilder().addHeader(AUTHORIZATION, "$BEARER $it").build()
                     }
                 }
                 AUTH_STATE_FORCE -> {
                     sharedPrefWrapper.readToken().takeIf { it.isNotEmpty() }?.let {
-                        request = request.newBuilder().addHeader(AUTHORIZATION, "$BEARER $it").build()
-                    } ?: throw ApiException(
-                        "Endpoint needs $AUTHORIZATION header but token is empty"
-                    )
+                        request =
+                            request.newBuilder().addHeader(AUTHORIZATION, "$BEARER $it").build()
+                    } ?: throw UnAuthorizedException()
                 }
-                else -> throw ApiException(
-                    "Not supported $AUTH_STATE type"
-                )
+                else -> throw CustomException("Not supported $AUTH_STATE type")
             }
         }
         return chain.proceed(request)
