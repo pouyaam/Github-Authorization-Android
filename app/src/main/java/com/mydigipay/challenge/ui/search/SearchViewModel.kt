@@ -7,6 +7,7 @@ import com.mydigipay.challenge.base.BaseViewModel
 import com.mydigipay.challenge.data.network.ApiResult
 import com.mydigipay.challenge.data.pojo.Repository
 import com.mydigipay.challenge.utils.ktx.debounce
+import com.mydigipay.challenge.utils.ktx.logD
 import kotlinx.coroutines.launch
 
 class SearchViewModel(private val model: SearchModel) : BaseViewModel(model) {
@@ -42,7 +43,7 @@ class SearchViewModel(private val model: SearchModel) : BaseViewModel(model) {
                     _repositories.postValue(repos)
                 }
                 is ApiResult.Error -> {
-
+                    logD("error = ${result.message}")
                 }
             }
             isLoading.postValue(false)
