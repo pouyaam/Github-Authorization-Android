@@ -22,7 +22,7 @@ class DetailFragment : BaseFragment() {
         return bindView(inflater, R.layout.detail_fragment, container, BR.detail_vm, viewModel)
     }
 
-    override fun onViewBound(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewBounded(view: View, savedInstanceState: Bundle?) {
 
     }
 }

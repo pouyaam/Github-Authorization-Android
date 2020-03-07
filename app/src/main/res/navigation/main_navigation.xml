@@ -1,21 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/authorizeFragment">
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.mydigipay.challenge.ui.splash.view.SplashFragment"
+        android:label="SplashFragment"
+        tools:layout="@layout/splash_fragment">
+        <action
+            android:id="@+id/action_splashFragment_to_authorizeFragment"
+            app:destination="@id/authorizeFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_searchFragment"
+            app:destination="@id/searchFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/authorizeFragment"
         android:name="com.mydigipay.challenge.ui.authorize.view.AuthorizeFragment"
-        android:label="AuthorizeFragment">
+        android:label="AuthorizeFragment"
+        tools:layout="@layout/authorize_fragment">
         <action
             android:id="@+id/action_authorizeFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/searchFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="challenge://mydigipay.com/login/callback" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.mydigipay.challenge.ui.search.view.SearchFragment"
-        android:label="SearchFragment">
+        android:label="SearchFragment"
+        tools:layout="@layout/search_fragment">
         <action
             android:id="@+id/action_searchFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
@@ -26,9 +52,11 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.mydigipay.challenge.ui.detail.view.DetailFragment"
-        android:label="DetailFragment" />
+        android:label="DetailFragment"
+        tools:layout="@layout/detail_fragment" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.mydigipay.challenge.ui.profile.view.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment"
+        tools:layout="@layout/profile_fragment" />
 </navigation>
