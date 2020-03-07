@@ -63,12 +63,11 @@
             android:id="@+id/img_avatar"
             android:layout_width="120dp"
             android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_standard_x4"
             android:layout_marginTop="@dimen/margin_standard_x4"
             android:contentDescription="@string/app_name"
             app:image="@{vm.user.avatarUrl}"
-            app:isCircle="@{true}"
             app:layout_constraintDimensionRatio="h,1:1"
-            app:layout_constraintEnd_toEndOf="@id/view_main"
             app:layout_constraintStart_toStartOf="@id/view_main"
             app:layout_constraintTop_toTopOf="@id/view_main"
             tools:srcCompat="@tools:sample/avatars" />
@@ -77,14 +76,13 @@
             android:id="@+id/txt_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_standard_x4"
+            android:layout_marginStart="@dimen/margin_standard_x6"
             android:text="@{vm.user.name}"
-            android:textColor="@color/navy900"
+            android:textColor="@color/blue900"
             android:textSize="@dimen/extraLargeTextSize"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/view_main"
-            app:layout_constraintStart_toStartOf="@id/view_main"
-            app:layout_constraintTop_toBottomOf="@id/img_avatar"
+            app:layout_constraintStart_toEndOf="@id/img_avatar"
+            app:layout_constraintTop_toTopOf="@id/img_avatar"
             tools:text="mo22sen" />
 
         <TextView
@@ -92,11 +90,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_standard_x6"
-            android:layout_marginTop="@dimen/margin_standard_x4"
+            android:drawableStart="@drawable/ic_following"
             android:text="@{@string/following(vm.user.following)}"
-            android:textColor="@color/gray900"
+            android:textColor="@color/blue900"
             android:textSize="@dimen/mediumTextSize"
-            app:layout_constraintStart_toStartOf="@id/view_main"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/txt_followers"
+            app:layout_constraintStart_toEndOf="@id/img_avatar"
             app:layout_constraintTop_toBottomOf="@id/txt_username"
             tools:text="following 1" />
 
@@ -105,88 +105,201 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_standard_x6"
+            android:drawableStart="@drawable/ic_follower"
             android:text="@{@string/followers(vm.user.followers)}"
             android:textColor="@color/gray900"
             android:textSize="@dimen/mediumTextSize"
-            app:layout_constraintBaseline_toBaselineOf="@id/txt_following"
-            app:layout_constraintEnd_toEndOf="@id/view_main"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/img_avatar"
+            app:layout_constraintStart_toStartOf="@id/txt_following"
+            app:layout_constraintTop_toBottomOf="@id/txt_following"
             tools:text="followers 7" />
+
+        <TextView
+            android:id="@+id/textView_mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_standard_x4"
+            android:layout_marginTop="@dimen/margin_standard_x4"
+            android:drawableStart="@drawable/ic_email"
+            android:drawablePadding="@dimen/margin_standard_x3"
+            android:text="@string/mail"
+            android:textColor="@color/blue900"
+            android:textSize="@dimen/mediumTextSize"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/view_main"
+            app:layout_constraintTop_toBottomOf="@id/img_avatar" />
+
 
         <TextView
             android:id="@+id/txt_mail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_standard_x2"
             android:layout_marginTop="@dimen/margin_standard_x4"
-            android:text="@{@string/mail(vm.user.email)}"
-            android:textColor="@color/gray900"
-            android:textSize="@dimen/mediumTextSize"
-            tools:text="mail : mohsenghafarpoor93@gmail.com"
-            app:layout_constraintStart_toStartOf="@id/txt_following"
-            app:layout_constraintTop_toBottomOf="@id/txt_following" />
+            android:text="@{vm.user.email}"
+            android:textColor="@color/gray600"
+            android:textSize="@dimen/smallTextSize"
+            app:layout_constraintBaseline_toBaselineOf="@id/textView_mail"
+            app:layout_constraintStart_toEndOf="@id/barrier"
+            tools:text=": mohsenghafarpoor93@gmail.com" />
 
+        <TextView
+            android:id="@+id/textView_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_standard_x4"
+            android:drawableStart="@drawable/ic_location"
+            android:drawablePadding="@dimen/margin_standard_x3"
+            android:text="@string/location"
+            android:textColor="@color/blue900"
+            android:textSize="@dimen/mediumTextSize"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/textView_mail"
+            app:layout_constraintTop_toBottomOf="@id/txt_mail" />
 
         <TextView
             android:id="@+id/txt_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_standard_x2"
             android:layout_marginTop="@dimen/margin_standard_x4"
-            tools:text="location : Tehran"
-            android:text="@{@string/location(vm.user.location)}"
-            android:textColor="@color/gray900"
-            android:textSize="@dimen/mediumTextSize"
-            app:layout_constraintStart_toStartOf="@id/txt_following"
-            app:layout_constraintTop_toBottomOf="@id/txt_mail" />
+            android:text="@{vm.user.location}"
+            android:textColor="@color/gray600"
+            android:textSize="@dimen/smallTextSize"
+            app:layout_constraintBaseline_toBaselineOf="@id/textView_location"
+            app:layout_constraintStart_toEndOf="@id/barrier"
+            tools:text=": Tehran" />
 
 
         <TextView
-            android:id="@+id/txt_company"
-            tools:text="company : digikala"
+            android:id="@+id/textView_company"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_standard_x4"
-            android:text="@{@string/company(vm.user.company)}"
-            android:textColor="@color/gray900"
+            android:drawableStart="@drawable/ic_company"
+            android:drawablePadding="@dimen/margin_standard_x3"
+            android:text="@string/company"
+            android:textColor="@color/blue900"
             android:textSize="@dimen/mediumTextSize"
-            app:layout_constraintStart_toStartOf="@id/txt_following"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/textView_mail"
             app:layout_constraintTop_toBottomOf="@id/txt_location" />
 
+        <TextView
+            android:id="@+id/txt_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_standard_x2"
+            android:layout_marginTop="@dimen/margin_standard_x4"
+            android:text="@{vm.user.company}"
+            android:textColor="@color/gray600"
+            android:textSize="@dimen/smallTextSize"
+            app:layout_constraintBaseline_toBaselineOf="@id/textView_company"
+            app:layout_constraintStart_toEndOf="@id/barrier"
+            tools:text=": digikala" />
+
+
+        <TextView
+            android:id="@+id/textView_repository"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_standard_x4"
+            android:drawableStart="@drawable/ic_repository"
+            android:drawablePadding="@dimen/margin_standard_x3"
+            android:text="@string/repository"
+            android:textColor="@color/blue900"
+            android:textSize="@dimen/mediumTextSize"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/textView_mail"
+            app:layout_constraintTop_toBottomOf="@id/txt_company" />
 
         <TextView
             android:id="@+id/txt_repository"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_standard_x2"
             android:layout_marginTop="@dimen/margin_standard_x4"
-            android:text="@{@string/repository(vm.user.publicRepos)}"
-            android:textColor="@color/gray900"
-            android:textSize="@dimen/mediumTextSize"
-            app:layout_constraintStart_toStartOf="@id/txt_following"
-            app:layout_constraintTop_toBottomOf="@id/txt_company"
-            tools:text="repository 3" />
+            android:text="@{``+vm.user.publicRepos}"
+            android:textColor="@color/gray600"
+            android:textSize="@dimen/smallTextSize"
+            app:layout_constraintBaseline_toBaselineOf="@id/textView_repository"
+            app:layout_constraintStart_toEndOf="@id/barrier"
+            tools:text=": 3" />
 
+
+        <TextView
+            android:id="@+id/textView_gist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_standard_x4"
+            android:drawableStart="@drawable/ic_gist"
+            android:drawablePadding="@dimen/margin_standard_x3"
+            android:text="@string/gist"
+            android:textColor="@color/blue900"
+            android:textSize="@dimen/mediumTextSize"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/textView_mail"
+            app:layout_constraintTop_toBottomOf="@id/txt_repository" />
 
         <TextView
             android:id="@+id/txt_gist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_standard_x2"
             android:layout_marginTop="@dimen/margin_standard_x4"
-            android:text="@{@string/gist(vm.user.publicGists)}"
-            android:textColor="@color/gray900"
+            android:text="@{``+vm.user.publicGists}"
+            android:textColor="@color/gray600"
+            android:textSize="@dimen/smallTextSize"
+            app:layout_constraintBaseline_toBaselineOf="@id/textView_gist"
+            app:layout_constraintStart_toEndOf="@id/barrier"
+            tools:text=": 0" />
+
+        <TextView
+            android:id="@+id/textView_bio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_standard_x4"
+            android:drawableStart="@drawable/ic_bio"
+            android:drawablePadding="@dimen/margin_standard_x3"
+            android:text="@string/bio"
+            android:textColor="@color/blue900"
             android:textSize="@dimen/mediumTextSize"
-            app:layout_constraintStart_toStartOf="@id/txt_following"
-            app:layout_constraintTop_toBottomOf="@id/txt_repository"
-            tools:text="gist 0" />
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/textView_mail"
+            app:layout_constraintTop_toBottomOf="@id/txt_gist" />
 
         <TextView
             android:id="@+id/txt_bio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_standard_x2"
             android:layout_marginTop="@dimen/margin_standard_x4"
-            android:text="@{@string/bio(vm.user.bio)}"
-            android:textColor="@color/gray900"
-            android:textSize="@dimen/mediumTextSize"
-            app:layout_constraintStart_toStartOf="@id/txt_following"
-            app:layout_constraintTop_toBottomOf="@id/txt_gist"
-            tools:text="bio" />
+            android:text="@{vm.user.bio}"
+            android:textColor="@color/gray600"
+            android:textSize="@dimen/smallTextSize"
+            app:layout_constraintBaseline_toBaselineOf="@id/textView_bio"
+            app:layout_constraintStart_toEndOf="@id/barrier"
+            tools:text=": android developer" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_standard_x4"
+            android:text="@string/edit_profile"
+            app:cornerRadius="@dimen/margin_standard_x2"
+            app:layout_constraintBottom_toBottomOf="@id/view_main"
+            app:layout_constraintEnd_toEndOf="@id/view_main"
+            app:layout_constraintStart_toStartOf="@id/view_main" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="end"
+            app:constraint_referenced_ids="textView_location,textView_gist,textView_mail,textView_company,textView_bio,textView_repository"
+            tools:layout_editor_absoluteY="731dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
