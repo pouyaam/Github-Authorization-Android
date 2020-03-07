@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.ui.search
+package com.mydigipay.challenge.ui.search.list
 
 import androidx.lifecycle.observe
 import com.mydigipay.challenge.base.BaseFragment
@@ -32,6 +32,9 @@ class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>() {
                         addOnScrollListener(endlessScroller)
                     }
             }
+        }
+        adapter.onItemClicked = { repository, _ ->
+            viewModel.goToDetail(repository)
         }
     }
 
