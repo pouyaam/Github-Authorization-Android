@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import com.mydigipay.challenge.data.network.ConnectionLiveData
 import com.mydigipay.challenge.ui.home.HomeActivity
 import com.mydigipay.challenge.util.addNavigatorOn
 import com.mydigipay.challenge.util.observeActions
@@ -31,6 +33,7 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
         bindObservables()
         initActions()
         initNavigator()
+        checkInternetConnection()
         return binding?.root ?: View(context)
     }
 
@@ -41,6 +44,12 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
 
     private fun init(inflater: LayoutInflater, container: ViewGroup?) {
         binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
+    }
+
+    private fun checkInternetConnection() {
+        ConnectionLiveData.observe(this) { isConnected ->
+            onNetworkStateChanged(isConnected)
+        }
     }
 
     private fun initActions() = observeActions(viewModel)
@@ -68,6 +77,8 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
     open fun oneTimeEvent() {}
 
     open fun everyTimeEvent() {}
+
+    open fun onNetworkStateChanged(isConnected: Boolean) {}
 
     override fun onDestroyView() {
         super.onDestroyView()

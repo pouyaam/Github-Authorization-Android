@@ -15,18 +15,34 @@ import androidx.lifecycle.MediatorLiveData
 /**
  * an ext func like rx debounce operator for live data
  */
-fun <T> LiveData<T>.debounce(duration: Long = 1000L) = MediatorLiveData<T>().let { mld ->
-    val source = this
+fun <T> LiveData<T>.debounce(duration: Long = 1000L) = MediatorLiveData<T>().apply {
+    val source = this@debounce
     val handler = Handler(Looper.getMainLooper())
 
     val runnable = Runnable {
-        if (mld.value != source.value) mld.value = source.value
+        if (value != source.value) value = source.value
     }
 
-    mld.addSource(source) {
+    addSource(source) {
         handler.removeCallbacks(runnable)
         handler.postDelayed(runnable, duration)
     }
+}
 
-    mld
+/**
+ * an ext func like rx debounce operator for live data
+ * this generates event wrapper to prevent from calling when onBackPressed
+ */
+fun <T> LiveData<T>.debounceEvent(duration: Long = 1000L) = MediatorLiveData<Event<T?>>().apply {
+    val source = this@debounceEvent
+    val handler = Handler(Looper.getMainLooper())
+
+    val runnable = Runnable {
+        if (value?.peek() != source.value) value = Event(source.value)
+    }
+
+    addSource(source) {
+        handler.removeCallbacks(runnable)
+        handler.postDelayed(runnable, duration)
+    }
 }

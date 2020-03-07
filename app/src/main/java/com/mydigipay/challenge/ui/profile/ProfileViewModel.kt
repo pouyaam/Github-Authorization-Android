@@ -7,6 +7,7 @@ import com.mydigipay.challenge.R
 import com.mydigipay.challenge.base.BaseViewModel
 import com.mydigipay.challenge.data.model.User
 import com.mydigipay.challenge.data.network.ApiResult
+import com.mydigipay.challenge.data.network.error.ErrorType
 import com.mydigipay.challenge.data.repository.user.UserRepository
 import com.mydigipay.challenge.util.ktx.launch
 import com.mydigipay.challenge.util.ktx.toHumanReadableFormat
@@ -84,14 +85,19 @@ class ProfileViewModel(
         getAuthenticatedUser()
     }
 
+    // A request failed due to "No Internet" and we need to request again
+    var networkPark = false
+
     fun getAuthenticatedUser() = launch {
         _isLoading.postValue(true)
+        networkPark = false
         _requestFailed.postValue(false)
         when (val result = userRepository.getAuthenticatedUser()) {
             is ApiResult.Success -> _user.postValue(result.data)
             is ApiResult.Error -> {
-                showSnackBar(result.message)
+                showSnackBar(result.error.message)
                 _requestFailed.postValue(true)
+                if (result.error.type == ErrorType.NETWORK) networkPark = true
             }
         }
         _isLoading.postValue(false)
