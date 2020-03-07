@@ -6,4 +6,5 @@
     <string name="pushed_on_placeholder">Pushed on %s</string>
     <string name="login_to_github">Login to github</string>
     <string name="github">GitHub</string>
+    <string name="app_description">This app for code challenge digikala company. you can login to GitHub account and watched any repository and profile</string>
 </resources>
