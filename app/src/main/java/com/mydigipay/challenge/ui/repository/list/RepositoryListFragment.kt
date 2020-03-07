@@ -22,6 +22,14 @@ class RepositoryListFragment :
         configList()
     }
 
+    override fun onNetworkStateChanged(isConnected: Boolean) {
+        if (isConnected && viewModel.networkPark.first) {
+            viewModel.networkPark.second?.let { page ->
+                viewModel.searchRepositories(page)
+            }
+        }
+    }
+
     private fun configList() {
         repo_list?.apply {
             adapter = this@RepositoryListFragment.adapter

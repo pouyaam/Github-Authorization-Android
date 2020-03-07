@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.mydigipay.challenge.base.BaseViewModel
 import com.mydigipay.challenge.data.model.GitRepo
 import com.mydigipay.challenge.data.network.ApiResult
+import com.mydigipay.challenge.data.network.error.ErrorType
 import com.mydigipay.challenge.data.repository.gitrepo.GitRepoRepository
 import com.mydigipay.challenge.util.ktx.launch
 import com.mydigipay.challenge.util.livedata.StateLessEvent
@@ -45,9 +46,14 @@ class RepositoryListViewModel(
         searchRepositories(1)
     }
 
+    // First parameter : a request failed due to "No Internet" and we need to request again
+    // Second parameter: page that failed if any
+    var networkPark: Pair<Boolean, Int?> = false to null
+
     fun searchRepositories(page: Int) = launch {
         query.value?.trim().takeIf { !it.isNullOrBlank() }?.let { query ->
             isLoading.postValue(true)
+            networkPark = false to null
             val repos =
                 if (page == 1)
                     mutableListOf()
@@ -63,6 +69,7 @@ class RepositoryListViewModel(
                 is ApiResult.Error -> {
                     showSnackBar(result.error.message)
                     _onFetchDataFailed.postValue(StateLessEvent())
+                    if (result.error.type == ErrorType.NETWORK) networkPark = true to page
                 }
             }
             isLoading.postValue(false)

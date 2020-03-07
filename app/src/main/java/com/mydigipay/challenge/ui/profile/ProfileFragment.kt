@@ -28,6 +28,11 @@ class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding>()
         }
     }
 
+    override fun onNetworkStateChanged(isConnected: Boolean) {
+        if (isConnected && viewModel.networkPark)
+            viewModel.getAuthenticatedUser()
+    }
+
     override fun initBinding() {
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
