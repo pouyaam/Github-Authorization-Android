@@ -11,20 +11,28 @@ import com.mydigipay.challenge.github.BR
 import com.mydigipay.challenge.github.R
 import com.mydigipay.challenge.ui.search.viewmodel.SearchItemViewModel
 
-class SearchItemAdapter(
-    private var navigator: NavController?
-) : RecyclerView.Adapter<SearchItemAdapter.ItemViewHolder>() {
+class SearchItemAdapter : RecyclerView.Adapter<SearchItemAdapter.ItemViewHolder>() {
 
-    var data = mutableListOf<ResponseProjectItem>()
+    lateinit var navigator: NavController
+
+    var items = mutableListOf<ResponseProjectItem>()
         set(value) {
-
+            field = value
             if (value.isEmpty())
-                field = value
+                items.clear()
             else
-                field.addAll(value)
-
+                items.addAll(value)
             notifyDataSetChanged()
         }
+
+    fun setData(data: MutableList<ResponseProjectItem>) {
+        if (data.isEmpty())
+            items = data
+        else
+            items.addAll(data)
+        notifyDataSetChanged()
+    }
+
 
     inner class ItemViewHolder(private val viewModel: ViewDataBinding) :
         RecyclerView.ViewHolder(viewModel.root) {
@@ -42,11 +50,11 @@ class SearchItemAdapter(
     }
 
     override fun getItemCount(): Int {
-        return data.size
+        return items.size
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.bind(data.get(position))
+        holder.bind(items[position])
     }
 
 }

@@ -53,7 +53,13 @@
         android:id="@+id/detailFragment"
         android:name="com.mydigipay.challenge.ui.detail.view.DetailFragment"
         android:label="DetailFragment"
-        tools:layout="@layout/detail_fragment" />
+        tools:layout="@layout/detail_fragment">
+
+        <argument
+            android:name="project"
+            app:argType="com.mydigipay.challenge.dataaccess.model.ResponseProjectItem" />
+
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.mydigipay.challenge.ui.profile.view.ProfileFragment"

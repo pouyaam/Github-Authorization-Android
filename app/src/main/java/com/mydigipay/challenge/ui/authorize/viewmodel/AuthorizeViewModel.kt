@@ -37,26 +37,24 @@ class AuthorizeViewModel(
 
     fun setCode(code: String) {
         showLoading = true
-        navigator?.let { navigator ->
-            compositeDisposable.add(
-                model.getToken(code)
-                    .doAfterSuccess {
-                        model.saveToken(it.accessToken)
+        compositeDisposable.add(
+            model.getToken(code)
+                .doAfterSuccess {
+                    model.saveToken(it.accessToken)
+                }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {
+                        showLoading = false
+                        navigator go AuthorizeFragmentDirections.actionAuthorizeFragmentToSearchFragment()
+                    },
+                    {
+                        it.printStackTrace()
+                        Toast.makeText(fragment.context, "error", Toast.LENGTH_SHORT).show()
                     }
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                        {
-                            showLoading = false
-                            navigator go AuthorizeFragmentDirections.actionAuthorizeFragmentToSearchFragment()
-                        },
-                        {
-                            it.printStackTrace()
-                            Toast.makeText(fragment.context, "error", Toast.LENGTH_SHORT).show()
-                        }
-                    )
-            )
-        }
+                )
+        )
     }
 
 }

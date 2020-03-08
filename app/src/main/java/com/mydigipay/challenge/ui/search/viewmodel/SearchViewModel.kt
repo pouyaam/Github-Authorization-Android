@@ -14,12 +14,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
-import io.reactivex.subjects.Subject
 import java.util.concurrent.TimeUnit
 
-
 class SearchViewModel(
-    private val fragment: BaseFragment,
+    fragment: BaseFragment,
     private val model: SearchModel,
     private val compositeDisposable: CompositeDisposable
 ) : RxNavBaseViewModel(compositeDisposable) {
@@ -37,18 +35,30 @@ class SearchViewModel(
             wordPublisher.onNext(value)
         }
 
-    var page = 1
+    private var wordPublisher = PublishSubject.create<String>()
+    private var projectItems = MutableLiveData<List<ResponseProjectItem>>()
 
-    private var wordPublisher: Subject<String> = PublishSubject.create()
-    private var projectItems: MutableLiveData<List<ResponseProjectItem>> = MutableLiveData()
+    val adapter = SearchItemAdapter()
 
-    val adapter: SearchItemAdapter = SearchItemAdapter(navigator)
+    val nextPageListener = fun(page: Int) {
+        compositeDisposable.add(
+            model.search(word, page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriberComplete(), subscriberError())
+        )
+    }
 
     init {
         subscribeWordPublisher()
         projectItems.observe(fragment) { items ->
-            adapter.data = items.toMutableList()
+            adapter.items = items.toMutableList()
         }
+    }
+
+    override fun bindNavigator() {
+        super.bindNavigator()
+        adapter.navigator = navigator
     }
 
     private fun subscribeWordPublisher() {
@@ -57,7 +67,7 @@ class SearchViewModel(
                 .doOnNext { beforeSendRequest() }
                 .filter { it.length > 2 }
                 .debounce(700, TimeUnit.MILLISECONDS)
-                .flatMap { model.search(it, page).toObservable() }
+                .flatMap { model.search(it, 1).toObservable() }
                 .doOnNext { afterSendRequest() }
                 .retry()
                 .subscribeOn(Schedulers.io())
@@ -67,7 +77,6 @@ class SearchViewModel(
     }
 
     private fun beforeSendRequest() {
-        page = 1
         showLoading = true
         projectItems.value = mutableListOf()
     }
@@ -80,14 +89,14 @@ class SearchViewModel(
         return {
             it.remoteSearchItemEntities?.let { list ->
                 projectItems.value = list
-                page++
             }
         }
     }
 
     private fun subscriberError(): (t: Throwable) -> Unit {
         return {
-//            it.printStackTrace()
+            afterSendRequest()
+            it.printStackTrace()
         }
     }
 
