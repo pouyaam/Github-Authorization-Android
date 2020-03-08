@@ -1,5 +1,7 @@
 package com.mydigipay.challenge.util
 
+import android.view.View
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 
@@ -20,5 +22,17 @@ fun RecyclerView.nextPageListener(nextPage: (page: Int, scrollListener: EndlessR
                 }
             }
         )
+    }
+}
+
+@BindingAdapter(value = ["loadUrl", "hideOnEmptyUrl"], requireAll = false)
+fun ImageView.loadUrl(
+    url: String?,
+    hideOnEmptyUrl: Boolean = false
+) {
+    if (url != null && url.isNotEmpty()) {
+        loadImage(url, this)
+    } else if (hideOnEmptyUrl) {
+        this.visibility = View.GONE
     }
 }
