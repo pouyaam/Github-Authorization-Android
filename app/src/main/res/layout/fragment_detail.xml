@@ -14,6 +14,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <View
+            android:id="@+id/view_top"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_standard_x3"
+            android:layout_marginTop="@dimen/margin_standard_x4"
+            android:layout_marginEnd="@dimen/margin_standard_x3"
+            android:background="@drawable/shape_rec_white_color"
+            app:layout_constraintBottom_toBottomOf="@id/txt_visit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/img_avatar"
             android:layout_width="48dp"
@@ -23,8 +36,8 @@
             android:contentDescription="@string/app_name"
             app:image="@{vm.repository.owner.avatarUrl}"
             app:layout_constraintDimensionRatio="h,1:1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@id/view_top"
+            app:layout_constraintTop_toTopOf="@id/view_top"
             tools:srcCompat="@tools:sample/avatars" />
 
 
@@ -34,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_standard_x4"
             android:text="@{vm.repository.name}"
-            android:textColor="@color/white"
+            android:textColor="@color/blue900"
             android:textSize="@dimen/mediumTextSize"
             app:layout_constraintBottom_toBottomOf="@id/img_avatar"
             app:layout_constraintStart_toEndOf="@id/img_avatar"
@@ -47,11 +60,11 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_standard_x3"
             android:text="@{vm.repository.language}"
-            android:textColor="@color/blue900"
-            app:chipBackgroundColor="@color/white"
+            android:textColor="@color/white"
+            app:chipBackgroundColor="@color/blue900"
             app:chipCornerRadius="@dimen/margin_standard_x2"
             app:layout_constraintBaseline_toBaselineOf="@id/txt_name"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/view_top"
             tools:text="Kotlin" />
 
 
@@ -63,127 +76,90 @@
             android:layout_marginTop="@dimen/margin_standard_x3"
             android:layout_marginEnd="@dimen/margin_standard_x3"
             android:maxLines="10"
+            android:paddingBottom="@dimen/margin_standard_x4"
             android:text="@{vm.repository.description}"
-            android:textColor="@color/gray150"
+            android:textColor="@color/blue900"
             android:textSize="@dimen/smallTextSize"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/view_top"
+            app:layout_constraintStart_toStartOf="@id/view_top"
             app:layout_constraintTop_toBottomOf="@id/img_avatar"
             tools:text="@tools:sample/lorem/random" />
 
-
-        <View
-            android:id="@+id/view_information"
-            android:layout_width="0dp"
-            android:layout_height="64dp"
-            android:layout_marginStart="@dimen/margin_standard_x3"
-            android:layout_marginTop="@dimen/margin_standard_x4"
-            android:layout_marginEnd="@dimen/margin_standard_x3"
-            android:background="@drawable/rec_primary_dark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_description" />
 
         <ImageView
             android:id="@+id/img_visit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/app_name"
-            app:layout_constraintBottom_toTopOf="@+id/txt_visit"
-            app:layout_constraintEnd_toStartOf="@+id/img_start"
+            app:layout_constraintEnd_toStartOf="@+id/img_star"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/view_information"
+            app:layout_constraintTop_toBottomOf="@id/txt_description"
             app:srcCompat="@drawable/ic_eye"
             tools:ignore="VectorDrawableCompat" />
-
-        <ImageView
-            android:id="@+id/img_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/app_name"
-            app:layout_constraintBottom_toBottomOf="@+id/img_visit"
-            app:layout_constraintEnd_toStartOf="@+id/img_fork"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/img_visit"
-            app:layout_constraintTop_toTopOf="@+id/img_visit"
-            app:srcCompat="@drawable/ic_star"
-            tools:ignore="VectorDrawableCompat" />
-
-        <ImageView
-            android:id="@+id/img_fork"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/app_name"
-            android:tint="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/img_visit"
-            app:layout_constraintEnd_toStartOf="@+id/img_issue"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/img_start"
-            app:layout_constraintTop_toTopOf="@+id/img_visit"
-            app:srcCompat="@drawable/ic_fork" />
-
-        <ImageView
-            android:id="@+id/img_issue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/app_name"
-            android:tint="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/img_visit"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/img_fork"
-            app:layout_constraintTop_toTopOf="@+id/img_visit"
-            app:srcCompat="@drawable/ic_issue_opened" />
 
         <TextView
             android:id="@+id/txt_visit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin_standard_x4"
             android:text="@{vm.repository.watchersCountFormatted}"
-            android:textColor="@color/white"
+            android:textColor="@color/blue900"
             android:textSize="@dimen/smallTextSize"
-            app:layout_constraintBottom_toBottomOf="@+id/view_information"
             app:layout_constraintEnd_toEndOf="@+id/img_visit"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/img_visit"
             app:layout_constraintTop_toBottomOf="@+id/img_visit"
             tools:text="2.6k" />
+
+
+        <ImageView
+            android:id="@+id/img_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            app:layout_constraintBottom_toBottomOf="@+id/img_visit"
+            app:layout_constraintEnd_toStartOf="@+id/img_fork"
+            app:layout_constraintStart_toEndOf="@+id/img_visit"
+            app:layout_constraintTop_toTopOf="@+id/img_visit"
+            app:srcCompat="@drawable/ic_star"
+            tools:ignore="VectorDrawableCompat" />
 
         <TextView
             android:id="@+id/txt_star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{vm.repository.stargazersCountFormatted}"
-            android:textColor="@color/white"
+            android:textColor="@color/blue900"
             android:textSize="@dimen/smallTextSize"
             app:layout_constraintBaseline_toBaselineOf="@+id/txt_visit"
-            app:layout_constraintEnd_toEndOf="@+id/img_start"
-            app:layout_constraintStart_toStartOf="@+id/img_start"
+            app:layout_constraintEnd_toEndOf="@+id/img_star"
+            app:layout_constraintStart_toStartOf="@+id/img_star"
             tools:text="10.2k" />
+
+
+        <ImageView
+            android:id="@+id/img_fork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            android:tint="@color/blue900"
+            app:layout_constraintBottom_toBottomOf="@+id/img_visit"
+            app:layout_constraintEnd_toEndOf="@id/view_top"
+            app:layout_constraintStart_toEndOf="@+id/img_star"
+            app:layout_constraintTop_toTopOf="@+id/img_visit"
+            app:srcCompat="@drawable/ic_fork" />
 
         <TextView
             android:id="@+id/txt_fork"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{vm.repository.forksCountFormatted}"
-            android:textColor="@color/white"
+            android:textColor="@color/blue900"
             android:textSize="@dimen/smallTextSize"
             app:layout_constraintBaseline_toBaselineOf="@+id/txt_visit"
             app:layout_constraintEnd_toEndOf="@+id/img_fork"
             app:layout_constraintStart_toStartOf="@+id/img_fork"
             tools:text="200" />
 
-        <TextView
-            android:id="@+id/txt_issue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{vm.repository.openIssuesCountFormatted}"
-            android:textColor="@color/white"
-            android:textSize="@dimen/smallTextSize"
-            app:layout_constraintBaseline_toBaselineOf="@+id/txt_visit"
-            app:layout_constraintEnd_toEndOf="@+id/img_issue"
-            app:layout_constraintStart_toStartOf="@+id/img_issue"
-            tools:text="1.2k" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_commit"
@@ -195,7 +171,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view_information"
+            app:layout_constraintTop_toBottomOf="@id/view_top"
             tools:itemCount="10"
             tools:listitem="@layout/item_commit" />
 
