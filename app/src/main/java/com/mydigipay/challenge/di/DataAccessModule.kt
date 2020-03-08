@@ -1,13 +1,17 @@
 package com.mydigipay.challenge.di
 
+import com.mydigipay.challenge.dataaccess.CommitDataSource
 import com.mydigipay.challenge.dataaccess.ProjectDataSource
 import com.mydigipay.challenge.dataaccess.TokenDataSource
 import com.mydigipay.challenge.dataaccess.cache.TokenCacheDataSource
 import com.mydigipay.challenge.dataaccess.local.TokenLocalDataSource
+import com.mydigipay.challenge.dataaccess.remote.CommitRemoteDataSource
 import com.mydigipay.challenge.dataaccess.remote.ProjectRemoteDataSource
 import com.mydigipay.challenge.dataaccess.remote.TokenRemoteDataSource
+import com.mydigipay.challenge.dataaccess.repository.CommitRepository
 import com.mydigipay.challenge.dataaccess.repository.ProjectRepository
 import com.mydigipay.challenge.dataaccess.repository.TokenRepository
+import com.mydigipay.challenge.di.Qualifiers.commitDataSource
 import com.mydigipay.challenge.di.Qualifiers.getNamedDependencyCache
 import com.mydigipay.challenge.di.Qualifiers.getNamedDependencyLocal
 import com.mydigipay.challenge.di.Qualifiers.getNamedDependencyRemote
@@ -44,5 +48,13 @@ val dataAccessModule = module {
 
     single<ProjectDataSource>(getNamedDependencyRepository(projectDataSource)) {
         ProjectRepository(get(getNamedDependencyRemote(projectDataSource)))
+    }
+
+    single<CommitDataSource>(getNamedDependencyRemote(commitDataSource)) {
+        CommitRemoteDataSource(get())
+    }
+
+    single<CommitDataSource>(getNamedDependencyRepository(commitDataSource)) {
+        CommitRepository(get(getNamedDependencyRemote(commitDataSource)))
     }
 }

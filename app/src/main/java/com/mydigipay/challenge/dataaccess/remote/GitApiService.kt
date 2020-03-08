@@ -2,6 +2,7 @@ package com.mydigipay.challenge.dataaccess.remote
 
 import com.mydigipay.challenge.dataaccess.model.RequestAccessToken
 import com.mydigipay.challenge.dataaccess.model.ResponseAccessToken
+import com.mydigipay.challenge.dataaccess.model.ResponseCommitItem
 import com.mydigipay.challenge.dataaccess.model.ResponseProject
 import io.reactivex.Single
 import retrofit2.http.*
@@ -16,4 +17,11 @@ interface GitApiService {
         @Query("q") query: String,
         @Query("page") page: Int
     ): Single<ResponseProject>
+
+    @GET("/repos/{owner}/{repo}/commits")
+    fun getCommits(
+        @Path("owner") owner: String,
+        @Path("repo") repo: String,
+        @Query("sha") branch: String = "master"
+    ): Single<List<ResponseCommitItem>>
 }
