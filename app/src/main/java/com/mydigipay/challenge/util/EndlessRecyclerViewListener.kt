@@ -65,6 +65,10 @@ abstract class EndlessRecyclerViewScrollListener(
             previousTotalItemCount = totalItemCount
         }
 
+        if (totalItemCount < previousTotalItemCount) {
+            resetState()
+        }
+
         if (!loading && lastVisibleItemPosition + visibleThreshold > totalItemCount) {
             onLoadMore(++currentPage)
             alreadyDecreasedPageForFailure = false
@@ -72,11 +76,10 @@ abstract class EndlessRecyclerViewScrollListener(
         }
     }
 
-    fun resetState() {
+    private fun resetState() {
         currentPage = initialPage
         previousTotalItemCount = 0
         loading = true
-        scrollToTop()
     }
 
     fun failed() {
@@ -88,16 +91,4 @@ abstract class EndlessRecyclerViewScrollListener(
             alreadyDecreasedPageForFailure = true
         }
     }
-
-    private fun scrollToTop() {
-        when (mLayoutManager) {
-            is LinearLayoutManager ->
-                (mLayoutManager as LinearLayoutManager).scrollToPositionWithOffset(0, 0)
-            is GridLayoutManager ->
-                (mLayoutManager as GridLayoutManager).scrollToPositionWithOffset(0, 0)
-            is StaggeredGridLayoutManager ->
-                (mLayoutManager as StaggeredGridLayoutManager).scrollToPositionWithOffset(0, 0)
-        }
-    }
-
 }

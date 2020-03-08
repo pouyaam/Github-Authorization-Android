@@ -4,40 +4,26 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.mydigipay.challenge.dataaccess.model.ResponseProjectItem
 import com.mydigipay.challenge.github.BR
 import com.mydigipay.challenge.github.R
 import com.mydigipay.challenge.ui.search.viewmodel.SearchItemViewModel
 
-class SearchItemAdapter : RecyclerView.Adapter<SearchItemAdapter.ItemViewHolder>() {
-
-    lateinit var navigator: NavController
+class SearchItemAdapter(
+    private val openDetail: (item: ResponseProjectItem) -> Unit
+) : RecyclerView.Adapter<SearchItemAdapter.ItemViewHolder>() {
 
     var items = mutableListOf<ResponseProjectItem>()
         set(value) {
             field = value
-            if (value.isEmpty())
-                items.clear()
-            else
-                items.addAll(value)
             notifyDataSetChanged()
         }
-
-    fun setData(data: MutableList<ResponseProjectItem>) {
-        if (data.isEmpty())
-            items = data
-        else
-            items.addAll(data)
-        notifyDataSetChanged()
-    }
-
 
     inner class ItemViewHolder(private val viewModel: ViewDataBinding) :
         RecyclerView.ViewHolder(viewModel.root) {
         fun bind(item: ResponseProjectItem) {
-            viewModel.setVariable(BR.vm, SearchItemViewModel(item, navigator))
+            viewModel.setVariable(BR.vm, SearchItemViewModel(item, openDetail))
             viewModel.executePendingBindings()
         }
     }

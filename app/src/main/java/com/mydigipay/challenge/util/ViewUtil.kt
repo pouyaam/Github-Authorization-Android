@@ -6,22 +6,17 @@ import androidx.recyclerview.widget.RecyclerView
 @BindingAdapter(value = ["loadAdapter"])
 fun RecyclerView.loadAdapter(itemAdapter: RecyclerView.Adapter<*>?) {
     itemAdapter?.let {
-        this.adapter = it
+        adapter = it
     }
 }
 
-@BindingAdapter(value = ["scrollListener"])
-fun RecyclerView.scrollListener(listener: RecyclerView.OnScrollListener) {
-    this.addOnScrollListener(listener)
-}
-
 @BindingAdapter(value = ["nextPageListener"])
-fun RecyclerView.nextPageListener(nextPage: (page: Int) -> Unit) {
+fun RecyclerView.nextPageListener(nextPage: (page: Int, scrollListener: EndlessRecyclerViewScrollListener) -> Unit) {
     layoutManager?.let { layoutManager ->
-        this.addOnScrollListener(
+        addOnScrollListener(
             object : EndlessRecyclerViewScrollListener(layoutManager) {
                 override fun onLoadMore(page: Int) {
-                    nextPage(page)
+                    nextPage(page, this)
                 }
             }
         )
