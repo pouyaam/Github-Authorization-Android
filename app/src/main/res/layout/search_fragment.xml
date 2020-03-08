@@ -31,19 +31,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="52dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/transparent"
                     android:gravity="start|center"
-                    android:hint="Search"
+                    android:hint="Write here for searching"
                     android:paddingStart="48dp"
                     android:paddingEnd="48dp"
                     android:singleLine="true"
-                    android:text="@={vm.word}">
+                    android:text="@={vm.word}"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textSize="16sp">
 
                     <requestFocus />
-                </com.google.android.material.textfield.TextInputEditText>
+                </EditText>
 
                 <ProgressBar
                     android:layout_width="16dp"

@@ -3,6 +3,7 @@ package com.mydigipay.challenge.ui.search.viewmodel
 import androidx.databinding.Bindable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.FragmentNavigator
 import com.mydigipay.challenge.core.BaseFragment
 import com.mydigipay.challenge.core.RxNavBaseViewModel
 import com.mydigipay.challenge.dataaccess.model.ResponseProjectItem
@@ -48,9 +49,11 @@ class SearchViewModel(
     private val wordPublisher = PublishSubject.create<String>()
     private var projectItems = MutableLiveData<ArrayList<ResponseProjectItem>>()
 
-    val adapter = SearchItemAdapter { item ->
-        navigator go SearchFragmentDirections.actionSearchFragmentToDetailFragment(item)
+
+    private val openDetail = fun(item: ResponseProjectItem, extras: FragmentNavigator.Extras) {
+        navigator.go(SearchFragmentDirections.actionSearchFragmentToDetailFragment(item), extras)
     }
+    val adapter = SearchItemAdapter(openDetail)
 
     val nextPageListener = fun(page: Int, scrollListener: EndlessRecyclerViewScrollListener) {
         showFetchLoading = true
