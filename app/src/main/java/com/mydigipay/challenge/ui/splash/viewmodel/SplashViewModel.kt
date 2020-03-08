@@ -16,20 +16,17 @@ class SplashViewModel(
 ) : RxNavBaseViewModel(compositeDisposable) {
 
     fun navigation() {
-        navigator?.let { navigator ->
-            compositeDisposable.add(
-                Observable.timer(2, TimeUnit.SECONDS)
-                    .map { model.isUserLogin() }
-                    .subscribeOn(Schedulers.computation())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe { isUserLogin ->
-                        if (isUserLogin)
-                            navigator go SplashFragmentDirections.actionSplashFragmentToSearchFragment()
-                        else
-                            navigator go SplashFragmentDirections.actionSplashFragmentToAuthorizeFragment()
-                    }
-            )
-        }
+        compositeDisposable.add(
+            Observable.timer(2, TimeUnit.SECONDS)
+                .map { model.isUserLogin() }
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { isUserLogin ->
+                    if (isUserLogin)
+                        navigator go SplashFragmentDirections.actionSplashFragmentToSearchFragment()
+                    else
+                        navigator go SplashFragmentDirections.actionSplashFragmentToAuthorizeFragment()
+                }
+        )
     }
-
 }

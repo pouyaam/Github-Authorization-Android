@@ -7,6 +7,7 @@ abstract class NavBaseFragment : BaseFragment() {
 
     fun bindNavigator(view: View, viewModel: RxNavBaseViewModel) {
         viewModel.navigator = Navigation.findNavController(view)
+        viewModel.bindNavigator()
     }
 
 }

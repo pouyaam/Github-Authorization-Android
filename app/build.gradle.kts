@@ -13,11 +13,12 @@ android {
     buildToolsVersion("29.0.2")
     defaultConfig {
         applicationId = "com.mydigipay.challenge.github"
-        minSdkVersion(17)
+        minSdkVersion(21)
         targetSdkVersion(29)
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = true
     }
 
     buildTypes {
@@ -52,6 +53,9 @@ dependencies {
     androidTestImplementation("androidx.test:runner:1.2.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
 
+    //multidex
+    implementation("com.android.support:multidex:1.0.3")
+
     //android
     implementation("androidx.appcompat:appcompat:1.2.0-alpha03")
     implementation("androidx.core:core-ktx:1.3.0-alpha02")
@@ -78,6 +82,7 @@ dependencies {
     implementation("com.squareup.retrofit2:adapter-rxjava2:2.3.0")
     implementation("com.squareup.okhttp3:okhttp:4.4.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.4.0")
+    implementation("com.squareup.picasso:picasso:2.71828")
 
     //navigation
     val navigationVersion = rootProject.extra.get("navigationVersion")

@@ -5,30 +5,38 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.observe
 import com.mydigipay.challenge.core.BaseFragment
 import com.mydigipay.challenge.core.RxNavBaseViewModel
-import com.mydigipay.challenge.dataaccess.model.ResponseProject
 import com.mydigipay.challenge.dataaccess.model.ResponseProjectItem
 import com.mydigipay.challenge.github.BR
 import com.mydigipay.challenge.ui.search.model.SearchModel
+import com.mydigipay.challenge.ui.search.view.SearchFragmentDirections
 import com.mydigipay.challenge.ui.search.view.SearchItemAdapter
+import com.mydigipay.challenge.util.EndlessRecyclerViewScrollListener
+import com.mydigipay.challenge.util.go
+import com.mydigipay.challenge.util.plusAssign
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
-import io.reactivex.subjects.Subject
 import java.util.concurrent.TimeUnit
 
-
 class SearchViewModel(
-    private val fragment: BaseFragment,
+    fragment: BaseFragment,
     private val model: SearchModel,
     private val compositeDisposable: CompositeDisposable
 ) : RxNavBaseViewModel(compositeDisposable) {
 
     @Bindable
-    var showLoading: Boolean = false
+    var showSearchLoading: Boolean = false
         set(value) {
             field = value
-            notifyPropertyChanged(BR.showLoading)
+            notifyPropertyChanged(BR.showSearchLoading)
+        }
+
+    @Bindable
+    var showFetchLoading: Boolean = false
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.showFetchLoading)
         }
 
     var word: String = ""
@@ -37,59 +45,70 @@ class SearchViewModel(
             wordPublisher.onNext(value)
         }
 
-    var page = 1
+    private val wordPublisher = PublishSubject.create<String>()
+    private var projectItems = MutableLiveData<ArrayList<ResponseProjectItem>>()
 
-    private var wordPublisher: Subject<String> = PublishSubject.create()
-    private var projectItems: MutableLiveData<List<ResponseProjectItem>> = MutableLiveData()
+    val adapter = SearchItemAdapter { item ->
+        navigator go SearchFragmentDirections.actionSearchFragmentToDetailFragment(item)
+    }
 
-    val adapter: SearchItemAdapter = SearchItemAdapter(navigator)
+    val nextPageListener = fun(page: Int, scrollListener: EndlessRecyclerViewScrollListener) {
+        showFetchLoading = true
+        compositeDisposable.add(
+            model.search(word, page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {
+                        showFetchLoading = false
+                        it.remoteSearchItemEntities?.let { items ->
+                            projectItems += items
+                        }
+                    }, {
+                        showFetchLoading = false
+                        scrollListener.failed()
+                        //todo
+                        it.printStackTrace()
+                    }
+                )
+        )
+    }
 
     init {
         subscribeWordPublisher()
         projectItems.observe(fragment) { items ->
-            adapter.data = items.toMutableList()
+            adapter.items = items.toMutableList()
         }
     }
 
     private fun subscribeWordPublisher() {
         compositeDisposable.add(
             wordPublisher
-                .doOnNext { beforeSendRequest() }
+                .doOnNext {
+                    showSearchLoading = true
+                    projectItems.value = arrayListOf()
+                }
                 .filter { it.length > 2 }
                 .debounce(700, TimeUnit.MILLISECONDS)
-                .flatMap { model.search(it, page).toObservable() }
-                .doOnNext { afterSendRequest() }
+                .flatMap { model.search(it, 1).toObservable() }
                 .retry()
+                .doOnNext {
+                    showSearchLoading = false
+                }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriberComplete(), subscriberError())
+                .subscribe(
+                    {
+                        it.remoteSearchItemEntities?.let { items ->
+                            projectItems.value = arrayListOf<ResponseProjectItem>().apply {
+                                addAll(items)
+                            }
+                        }
+                    }, {
+                        //todo
+                        it.printStackTrace()
+                    }
+                )
         )
     }
-
-    private fun beforeSendRequest() {
-        page = 1
-        showLoading = true
-        projectItems.value = mutableListOf()
-    }
-
-    private fun afterSendRequest() {
-        showLoading = false
-    }
-
-    private fun subscriberComplete(): (t: ResponseProject) -> Unit {
-        return {
-            it.remoteSearchItemEntities?.let { list ->
-                projectItems.value = list
-                page++
-            }
-        }
-    }
-
-    private fun subscriberError(): (t: Throwable) -> Unit {
-        return {
-//            it.printStackTrace()
-        }
-    }
-
-
 }

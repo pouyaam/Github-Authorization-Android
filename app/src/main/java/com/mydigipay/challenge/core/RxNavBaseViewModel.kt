@@ -9,10 +9,12 @@ open class RxNavBaseViewModel(
     private val compositeDisposable: CompositeDisposable
 ) : BaseViewModel() {
 
-    var navigator: NavController? = null
+    lateinit var navigator: NavController
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun dispose() {
         compositeDisposable.dispose()
     }
+
+    open fun bindNavigator() {}
 }

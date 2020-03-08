@@ -35,7 +35,7 @@ abstract class BaseFragment : Fragment() {
         onViewBounded(view, savedInstanceState)
     }
 
-    abstract fun onViewBounded(view: View, savedInstanceState: Bundle?)
+    open fun onViewBounded(view: View, savedInstanceState: Bundle?) {}
 
     protected fun bindView(
         inflater: LayoutInflater,
