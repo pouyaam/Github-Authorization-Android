@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
+import androidx.navigation.fragment.FragmentNavigator
 
 infix fun NavController.go(directions: NavDirections) {
     this.navigate(directions)
@@ -15,6 +16,10 @@ infix fun NavController.go(directions: NavDirections) {
 
 fun NavController.go(directions: NavDirections, navOptions: NavOptions) {
     this.navigate(directions, navOptions)
+}
+
+fun NavController.go(directions: NavDirections, extras: FragmentNavigator.Extras) {
+    this.navigate(directions, extras)
 }
 
 fun Fragment.openIntent(action: String? = null, type: String? = null, uri: Uri? = null) {

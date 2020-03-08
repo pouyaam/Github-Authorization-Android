@@ -14,7 +14,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{_ -> vm.showCommit()}"
+        android:onClick="@{_ -> vm.showCommit(name,`tr_obj_name`)}"
         app:cardCornerRadius="4dp"
         app:cardElevation="2dp"
         app:cardUseCompatPadding="true">
@@ -31,6 +31,7 @@
                 android:text="@{vm.item.name}"
                 android:textColor="@color/textDeep01"
                 android:textSize="16sp"
+                android:transitionName="tr_obj_name"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="fullName" />
@@ -41,7 +42,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@{vm.item.description}"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/textDeep02"
                 android:textSize="14sp"
                 app:layout_constraintLeft_toLeftOf="parent"

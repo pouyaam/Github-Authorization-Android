@@ -27,12 +27,14 @@ class DetailViewModel(
             notifyPropertyChanged(BR.showLoading)
         }
 
+    @Bindable
     var item: ResponseProjectItem? = null
         set(value) {
             field = value
             value?.let {
                 getCommit(it)
             }
+            notifyChange()
         }
 
     private var commitItems = MutableLiveData<List<ResponseCommitItem>>()
@@ -43,6 +45,8 @@ class DetailViewModel(
             adapter.data = items.toMutableList()
         }
     }
+
+    fun back() = navigator.popBackStack()
 
     private fun getCommit(item: ResponseProjectItem) {
         compositeDisposable.add(

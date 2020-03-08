@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.recyclerview.widget.RecyclerView
 import com.mydigipay.challenge.dataaccess.model.ResponseProjectItem
 import com.mydigipay.challenge.github.BR
@@ -11,7 +12,7 @@ import com.mydigipay.challenge.github.R
 import com.mydigipay.challenge.ui.search.viewmodel.SearchItemViewModel
 
 class SearchItemAdapter(
-    private val openDetail: (item: ResponseProjectItem) -> Unit
+    private val openDetail: (item: ResponseProjectItem, extras: FragmentNavigator.Extras) -> Unit
 ) : RecyclerView.Adapter<SearchItemAdapter.ItemViewHolder>() {
 
     var items = mutableListOf<ResponseProjectItem>()
