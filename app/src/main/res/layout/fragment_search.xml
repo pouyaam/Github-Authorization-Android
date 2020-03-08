@@ -65,16 +65,44 @@
         </com.google.android.material.card.MaterialCardView>
 
 
+        <View
+            android:id="@+id/view_main"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_standard_x6"
+            android:layout_marginTop="@dimen/margin_standard_x4"
+            android:layout_marginEnd="@dimen/margin_standard_x6"
+            android:layout_marginBottom="@dimen/margin_standard_x4"
+            android:background="@drawable/shape_rec_white_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_card" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            app:layout_constraintBottom_toBottomOf="@id/view_main"
+            app:layout_constraintEnd_toEndOf="@id/view_main"
+            app:layout_constraintStart_toStartOf="@id/view_main"
+            app:layout_constraintTop_toTopOf="@id/view_main"
+            app:srcCompat="@drawable/ic_github"
+            tools:ignore="VectorDrawableCompat" />
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_repository"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:overScrollMode="never"
             app:data="@{vm.repositories}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_card"
+            app:layout_constraintBottom_toBottomOf="@id/view_main"
+            app:layout_constraintEnd_toEndOf="@id/view_main"
+            app:layout_constraintStart_toStartOf="@id/view_main"
+            app:layout_constraintTop_toTopOf="@id/view_main"
             tools:itemCount="10"
             tools:listitem="@layout/item_repository" />
 

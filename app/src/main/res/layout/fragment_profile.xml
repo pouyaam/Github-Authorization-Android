@@ -24,7 +24,7 @@
             android:layout_marginEnd="@dimen/margin_standard_x6"
             android:background="@drawable/shape_rec_white_color"
             android:drawableStart="@drawable/ic_search"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:onClick="@{()->vm.goToSearchRepository()}"
             android:padding="@dimen/margin_standard_x2"
             android:text="@string/search_or_jump_to"
@@ -133,14 +133,15 @@
 
         <TextView
             android:id="@+id/txt_mail"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_standard_x2"
             android:layout_marginTop="@dimen/margin_standard_x4"
             android:text="@{vm.user.email}"
             android:textColor="@color/gray600"
-            android:textSize="@dimen/smallTextSize"
+            android:textSize="13sp"
             app:layout_constraintBaseline_toBaselineOf="@id/textView_mail"
+            app:layout_constraintEnd_toEndOf="@id/view_main"
             app:layout_constraintStart_toEndOf="@id/barrier"
             tools:text=": mohsenghafarpoor93@gmail.com" />
 

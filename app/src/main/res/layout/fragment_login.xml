@@ -50,6 +50,7 @@
             android:text="@string/app_description"
             android:textColor="@color/blue900"
             android:textSize="@dimen/extraLargeTextSize"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/view_main"
             app:layout_constraintStart_toStartOf="@id/view_main"
             app:layout_constraintTop_toTopOf="@id/view_main" />

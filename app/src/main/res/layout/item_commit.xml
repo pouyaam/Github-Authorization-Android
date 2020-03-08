@@ -17,7 +17,9 @@
         android:layout_marginTop="@dimen/margin_standard_x2"
         android:layout_marginEnd="@dimen/margin_standard_x3"
         android:background="@drawable/shape_rec_white_color"
-        android:orientation="horizontal">
+        android:backgroundTint="@color/blue900"
+        android:orientation="horizontal"
+        tools:ignore="UnusedAttribute">
 
 
         <ImageView
@@ -45,7 +47,7 @@
             android:layout_marginEnd="@dimen/margin_standard_x4"
             android:lines="1"
             android:text="@{item.message.message}"
-            android:textColor="@color/blue900"
+            android:textColor="@color/white"
             android:textSize="@dimen/smallTextSize"
             app:layout_constraintBottom_toTopOf="@+id/txt_sha"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +62,7 @@
             android:layout_height="wrap_content"
             android:lines="1"
             android:text="@{item.sha}"
-            android:textColor="@color/gray500"
+            android:textColor="@color/gray100"
             android:textSize="@dimen/extraSmallTextSize"
             app:layout_constraintBottom_toBottomOf="@+id/img_user"
             app:layout_constraintEnd_toEndOf="@+id/txt_message"
