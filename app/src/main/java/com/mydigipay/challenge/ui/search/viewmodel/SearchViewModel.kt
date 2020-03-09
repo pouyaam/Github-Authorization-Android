@@ -77,6 +77,10 @@ class SearchViewModel(
         )
     }
 
+    fun openProfile() {
+        navigator go SearchFragmentDirections.actionSearchFragmentToProfileFragment()
+    }
+
     init {
         subscribeWordPublisher()
         projectItems.observe(fragment) { items ->

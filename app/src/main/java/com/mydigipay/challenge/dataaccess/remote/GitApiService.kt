@@ -1,9 +1,6 @@
 package com.mydigipay.challenge.dataaccess.remote
 
-import com.mydigipay.challenge.dataaccess.model.RequestAccessToken
-import com.mydigipay.challenge.dataaccess.model.ResponseAccessToken
-import com.mydigipay.challenge.dataaccess.model.ResponseCommitItem
-import com.mydigipay.challenge.dataaccess.model.ResponseProject
+import com.mydigipay.challenge.dataaccess.model.*
 import io.reactivex.Single
 import retrofit2.http.*
 
@@ -24,4 +21,8 @@ interface GitApiService {
         @Path("repo") repo: String,
         @Query("sha") branch: String = "master"
     ): Single<List<ResponseCommitItem>>
+
+
+    @GET("user")
+    fun getAuthenticatedUser(@Header("Authorization") token: String): Single<UserResponse>
 }
