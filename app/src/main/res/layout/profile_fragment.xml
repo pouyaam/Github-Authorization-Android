@@ -1,16 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
-            name="profile_vm"
+            name="vm"
             type="com.mydigipay.challenge.ui.profile.viewmodel.ProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:scaleType="centerCrop"
+            android:visibility="@{vm.loading ? View.VISIBLE : View.GONE}" />
+
+        <ProgressBar
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:visibility="@{vm.loading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            circleTransform="@{false}"
+            grayscale="@{true}"
+            loadUrl="@{vm.user.avatarUrl}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:visibility="@{vm.loading ? View.GONE : View.VISIBLE}"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/box"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="40dp"
+            android:elevation="2dp"
+            android:visibility="@{vm.loading ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/avatar" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="32dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="32dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="48dp" />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            android:text="@{vm.user.getEmailAddress()}"
+            android:textColor="@color/textDeep03"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            android:visibility="@{vm.loading ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/bottom"
+            app:layout_constraintStart_toEndOf="@id/left"
+            tools:text="Email: Darvishiyan@gmail.com" />
+
+        <TextView
+            android:id="@+id/company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:elevation="2dp"
+            android:text="@{vm.user.getCompanyName()}"
+            android:textColor="@color/textDeep03"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            android:visibility="@{vm.loading ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@id/email"
+            app:layout_constraintStart_toEndOf="@id/left"
+            tools:text="Company: Github" />
+
+        <TextView
+            android:id="@+id/followers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:elevation="2dp"
+            android:text="@{vm.user.getFollowersCount()}"
+            android:textColor="@color/textDeep03"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="@{vm.loading ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@id/company"
+            app:layout_constraintEnd_toStartOf="@+id/following"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/left"
+            tools:text="829k followers" />
+
+        <TextView
+            android:id="@+id/following"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:elevation="2dp"
+            android:text="@{vm.user.getFollowingCount()}"
+            android:textColor="@color/textDeep03"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="@{vm.loading ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@id/company"
+            app:layout_constraintEnd_toStartOf="@+id/right"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/followers"
+            tools:text="835 following" />
+
+        <TextView
+            android:id="@+id/bio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:elevation="2dp"
+            android:maxLines="8"
+            android:text="@{vm.user.getUserBio()}"
+            android:textColor="@color/textDeep02"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            android:visibility="@{vm.loading ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@id/followers"
+            app:layout_constraintEnd_toStartOf="@id/right"
+            app:layout_constraintStart_toEndOf="@id/left"
+            tools:text="bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio bio " />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:elevation="2dp"
+            android:text="@{vm.user.name}"
+            android:textColor="@color/textDeep01"
+            android:textSize="22sp"
+            android:visibility="@{vm.loading ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@id/bio"
+            app:layout_constraintStart_toEndOf="@id/left"
+            tools:text="monalisa octocat" />
+
+        <ImageView
+            android:id="@+id/avatar"
+            circleTransform="@{true}"
+            loadUrl="@{vm.user.avatarUrl}"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:elevation="2dp"
+            android:scaleType="centerCrop"
+            android:visibility="@{vm.loading ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@id/name"
+            app:layout_constraintStart_toEndOf="@id/left"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="2dp"
+            android:onClick="@{_ -> vm.back()}"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_arrow_back_black_24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorPrimaryDark" />
+
+        <ImageView
+            android:id="@+id/edit"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="8dp"
+            android:elevation="2dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_edit_black_24dp"
+            android:visibility="@{vm.loading ? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="@id/box"
+            app:layout_constraintTop_toTopOf="@id/box"
+            app:tint="@color/textDeep03" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            android:text="edit"
+            android:textColor="@color/textDeep03"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            android:visibility="@{vm.loading ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/edit"
+            app:layout_constraintEnd_toStartOf="@id/edit"
+            app:layout_constraintTop_toTopOf="@id/edit" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
