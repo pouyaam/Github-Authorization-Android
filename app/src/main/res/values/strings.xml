@@ -2,4 +2,9 @@
     <string name="app_name">Github Login</string>
     <string name="action_settings">Settings</string>
     <string name="authorize">AUTHORIZE</string>
+    <string name="authorize_message">Please Login for showing profile page</string>
+    <string name="splash_message">This is Splash Screen</string>
+    <string name="search_message">Write here for searching</string>
+    <string name="verified">Verified</string>
+    <string name="edit">edit</string>
 </resources>

@@ -36,7 +36,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/transparent"
                     android:gravity="start|center"
-                    android:hint="Write here for searching"
+                    android:hint="@string/search_message"
                     android:layout_marginStart="48dp"
                     android:layout_marginEnd="48dp"
                     android:paddingEnd="48dp"

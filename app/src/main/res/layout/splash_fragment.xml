@@ -10,8 +10,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@color/colorPrimaryDark"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/splash_message"
+            android:textColor="@color/colorPrimary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
