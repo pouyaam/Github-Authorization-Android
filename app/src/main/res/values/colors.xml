@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#23292E</color>
+    <color name="colorPrimaryDark">#51575B</color>
+    <color name="activityBackground">#f7f7f7</color>
+    <color name="textColorPrimary">#373435</color>
+    <color name="greyTextColor">#FFA9B1BE</color>
+    <color name="colorAccent">#424242</color>
+    <color name="white">#FFFFFF</color>
+    <color name="textColorHint">#616161</color>
+    <color name="textColorHintLight">#9e9e9e</color>
+    <color name="green">#00CA52</color>
+    <color name="grey">#f7f7f7</color>
 </resources>
