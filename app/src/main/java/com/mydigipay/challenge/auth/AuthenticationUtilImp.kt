@@ -2,14 +2,14 @@ package com.mydigipay.challenge.auth
 
 import android.accounts.Account
 import android.accounts.AccountManager
-import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import com.mydigipay.challenge.data.models.User
+import com.mydigipay.challenge.util.CashSetting
 
 class AuthenticationUtilImp(
     private val accountManager: AccountManager,
-    private val sharedPreferences: SharedPreferences
+    private val cashSetting: CashSetting
 ) : AuthenticationUtil {
 
     override fun authenticationState(): AuthenticationState =
@@ -17,10 +17,10 @@ class AuthenticationUtilImp(
             0 -> AuthenticationState.UNAUTHENTICATED
             1 -> AuthenticationState.SINGLE_AUTHENTICATION
             else -> {
-                if (getCurrentUser() == null)
-                    AuthenticationState.MULTIPLE_AUTHENTICATION
-                else
+                if (cashSetting.isDefaultUserSelected())
                     AuthenticationState.SINGLE_AUTHENTICATION
+                else
+                    AuthenticationState.MULTIPLE_AUTHENTICATION
             }
 
         }
@@ -39,11 +39,7 @@ class AuthenticationUtilImp(
 
     override fun getCurrentUser(): User? = convertAccountToUser(getCurrentAccount())
 
-    override fun getCurrentUserLogin(): String? {
-        return sharedPreferences.getString(AccountGeneral.CURRENT_USER_NAME_KEY, null)
-    }
-
-    override fun getCurrentAccount(): Account? = getCurrentUserLogin()
+    override fun getCurrentAccount(): Account? = cashSetting.getSelectedUserLogin()
         .takeIf { it != null && it != "" }
         .run {
             getAllAccounts().firstOrNull() { it.name == this }

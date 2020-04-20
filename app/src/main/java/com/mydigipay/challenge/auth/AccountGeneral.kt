@@ -1,7 +1,8 @@
 package com.mydigipay.challenge.auth
 
 object AccountGeneral {
-    val CURRENT_USER_NAME_KEY = "CURRENT_USERNAME_KEY"
+    const val CURRENT_USER_LOGIN_KEY = "CURRENT_USERNAME_KEY"
+    const val IS_USER_SELECTED_KEY = "IS_USER_SELECTED_KEY"
 
     /**
      * Account type id

@@ -9,6 +9,7 @@ import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import com.google.common.truth.Truth.assertThat
 import com.mydigipay.challenge.data.models.User
+import com.mydigipay.challenge.util.CashSettingBySharedPref
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -67,7 +68,10 @@ class AuthenticationUtilImpTest {
             )
         }
 
-        authenticationUtil = AuthenticationUtilImp(am, sharedPreferences)
+        authenticationUtil = AuthenticationUtilImp(
+            am,
+            CashSettingBySharedPref(sharedPreferences)
+        )
     }
 
     @Test
@@ -88,7 +92,7 @@ class AuthenticationUtilImpTest {
     fun nullDefaultUser_THEN_getUserReturnNull() {
         addTestAccounts()
         val editor = sharedPreferences.edit()
-        editor.putString(AccountGeneral.CURRENT_USER_NAME_KEY, null)
+        editor.putString(AccountGeneral.CURRENT_USER_LOGIN_KEY, null)
         editor.commit()
 
         assertThat(authenticationUtil.getCurrentUser()).isNull()
@@ -98,7 +102,7 @@ class AuthenticationUtilImpTest {
     fun defaultUserIsSelected_THEN_ReturnUser() {
         addTestUser()
         val editor = sharedPreferences.edit()
-        editor.putString(AccountGeneral.CURRENT_USER_NAME_KEY, user3.login)
+        editor.putString(AccountGeneral.CURRENT_USER_LOGIN_KEY, user3.login)
         editor.commit()
 
         assertThat(authenticationUtil.getCurrentUser()).isNotNull()
@@ -109,7 +113,7 @@ class AuthenticationUtilImpTest {
     fun getAccessToken() {
         addTestUser()
         val editor = sharedPreferences.edit()
-        editor.putString(AccountGeneral.CURRENT_USER_NAME_KEY, user2.login)
+        editor.putString(AccountGeneral.CURRENT_USER_LOGIN_KEY, user2.login)
         editor.commit()
 
         assertThat(authenticationUtil.getAccessToken()).isNotNull()

@@ -56,13 +56,6 @@ interface AuthenticationUtil {
     fun getAllAccounts(): Array<Account>
 
     /**
-     * Create Current user login
-     *
-     * @return if user selected otherwise null
-     */
-    fun getCurrentUserLogin(): String?
-
-    /**
      * Get Current user access token from [AccountManager]
      *
      * @return if user selected otherwise null
