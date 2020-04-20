@@ -23,7 +23,7 @@ val networkModule = module {
     single(named(WRITE_TIMEOUT)) { 10 * 1000 }
     single(named(CONNECTION_TIMEOUT)) { 10 * 1000 }
 
-    factory<Interceptor> {
+    factory {
         HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.HEADERS)
             .setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -34,7 +34,7 @@ val networkModule = module {
             .readTimeout(get(named(READ_TIMEOUT)), TimeUnit.MILLISECONDS)
             .writeTimeout(get(named(WRITE_TIMEOUT)), TimeUnit.MILLISECONDS)
             .connectTimeout(get(named(CONNECTION_TIMEOUT)), TimeUnit.MILLISECONDS)
-            .addInterceptor(get())
+            .addInterceptor(get() as Interceptor)
             .build()
     }
 
