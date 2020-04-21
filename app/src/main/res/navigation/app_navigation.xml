@@ -10,4 +10,17 @@
         android:name="com.mydigipay.challenge.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/authorizeFragment"
+        android:name="com.mydigipay.challenge.ui.authorize.AuthorizeFragment"
+        android:label="authorize_fragment"
+        tools:layout="@layout/authorize_fragment">
+        <action
+            android:id="@+id/action_authorizeFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_authorizeFragment"
+        app:destination="@id/authorizeFragment" />
 </navigation>
