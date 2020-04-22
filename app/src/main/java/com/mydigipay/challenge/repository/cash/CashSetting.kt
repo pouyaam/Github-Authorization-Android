@@ -6,7 +6,7 @@ interface CashSetting {
 
     fun getSelectedUserLogin(): String?
 
-    fun setSelectedUserLogin(login: String)
+    fun setSelectedUserLogin(login: String?)
 
     fun clearSelectedUserLogin()
 }

@@ -9,7 +9,11 @@
         android:id="@+id/nav_home"
         android:name="com.mydigipay.challenge.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_nav_home_to_nav_repositories_list"
+            app:destination="@id/nav_repositories_list" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_authorize"
@@ -24,5 +28,10 @@
     <action
         android:id="@+id/action_global_nav_authorize"
         app:destination="@id/nav_authorize" />
+    <fragment
+        android:id="@+id/nav_repositories_list"
+        android:name="com.mydigipay.challenge.ui.repos.RepositoriesListFragment"
+        android:label="@string/searchRepo"
+        tools:layout="@layout/fragment_repositories_list" />
 
 </navigation>

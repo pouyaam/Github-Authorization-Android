@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.mydigipay.challenge.R
 import com.mydigipay.challenge.auth.AuthenticationState.SINGLE_AUTHENTICATION
 import com.mydigipay.challenge.auth.AuthenticationUtil
+import com.mydigipay.challenge.ui.HomeActivity
 import org.koin.android.ext.android.inject
 
 abstract class BaseFragment<V : BaseViewModel, B : ViewDataBinding> : Fragment(), Navigator {
@@ -56,11 +57,13 @@ abstract class BaseFragment<V : BaseViewModel, B : ViewDataBinding> : Fragment()
     }
 
     override fun popBackStack(@IdRes direction: Int) {
-            navController.popBackStack()
+        navController.popBackStack()
 
     }
 
     override fun popBackStackTo(destination: Int, inclusive: Boolean) {
         navController.popBackStack(destination, inclusive)
     }
+
+    fun getHomeActivity(): HomeActivity? = activity as? HomeActivity
 }

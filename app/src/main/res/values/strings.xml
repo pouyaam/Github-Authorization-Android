@@ -12,4 +12,5 @@
     <string name="home_second">Home Second</string>
     <string name="packageName">com.mydigipay.challenge</string>
     <string name="search">Search</string>
+    <string name="searchRepo">Search for  Repository</string>
 </resources>

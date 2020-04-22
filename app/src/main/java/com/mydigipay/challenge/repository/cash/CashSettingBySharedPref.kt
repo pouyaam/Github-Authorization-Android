@@ -1,9 +1,10 @@
-package com.mydigipay.challenge.util
+package com.mydigipay.challenge.repository.cash
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.mydigipay.challenge.auth.AccountGeneral.CURRENT_USER_LOGIN_KEY
 import com.mydigipay.challenge.auth.AccountGeneral.IS_USER_SELECTED_KEY
+import com.mydigipay.challenge.util.CashSetting
 
 class CashSettingBySharedPref(
     private val sharedPreferences: SharedPreferences
@@ -19,10 +20,10 @@ class CashSettingBySharedPref(
         null
     )
 
-    override fun setSelectedUserLogin(login: String) {
+    override fun setSelectedUserLogin(login: String?) {
         sharedPreferences.edit {
             putString(CURRENT_USER_LOGIN_KEY, login)
-            putBoolean(IS_USER_SELECTED_KEY, true)
+            putBoolean(IS_USER_SELECTED_KEY, login != null)
         }
     }
 

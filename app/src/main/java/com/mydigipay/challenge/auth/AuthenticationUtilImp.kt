@@ -68,6 +68,7 @@ class AuthenticationUtilImp(
         getAllAccounts().forEach {
             removeAccount(it)
         }
+        cashSetting.setSelectedUserLogin(null)
     }
 
     private fun removeAccount(account: Account) {
