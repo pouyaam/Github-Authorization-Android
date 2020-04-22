@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.mydigipay.challenge.R
-import com.mydigipay.challenge.auth.AuthenticationState.*
+import com.mydigipay.challenge.auth.AuthenticationState.SINGLE_AUTHENTICATION
 import com.mydigipay.challenge.auth.AuthenticationUtil
 import org.koin.android.ext.android.inject
 
@@ -42,15 +42,10 @@ abstract class BaseFragment<V : BaseViewModel, B : ViewDataBinding> : Fragment()
     }
 
     private fun checkAuth() {
-        if (needAuthentication) when (authUtil.authenticationState()) {
-            MULTIPLE_AUTHENTICATION,
-            UNAUTHENTICATED,
-            INVALID_AUTHENTICATION -> {
-                navigate(R.id.action_global_authorizeFragment)
-            }
-            else -> {
-                // do nothing
-            }
+        if (needAuthentication &&
+            authUtil.authenticationState() != SINGLE_AUTHENTICATION
+        ) {
+            navigate(R.id.action_global_nav_authorize)
         }
     }
 
@@ -60,10 +55,12 @@ abstract class BaseFragment<V : BaseViewModel, B : ViewDataBinding> : Fragment()
         navController.navigate(direction)
     }
 
-    override fun popBackStack(@IdRes direction: Int?, inclusive: Boolean) {
-        if (direction == null)
+    override fun popBackStack(@IdRes direction: Int) {
             navController.popBackStack()
-        else
-            navController.popBackStack(direction, inclusive)
+
+    }
+
+    override fun popBackStackTo(destination: Int, inclusive: Boolean) {
+        navController.popBackStack(destination, inclusive)
     }
 }

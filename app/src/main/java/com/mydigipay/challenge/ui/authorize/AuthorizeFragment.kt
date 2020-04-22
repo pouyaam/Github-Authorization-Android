@@ -20,7 +20,7 @@ class AuthorizeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.authorize_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_authorize, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

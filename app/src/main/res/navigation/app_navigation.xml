@@ -3,24 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@id/nav_home">
 
     <fragment
         android:id="@+id/nav_home"
         android:name="com.mydigipay.challenge.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
+
     <fragment
-        android:id="@+id/authorizeFragment"
+        android:id="@+id/nav_authorize"
         android:name="com.mydigipay.challenge.ui.authorize.AuthorizeFragment"
         android:label="authorize_fragment"
-        tools:layout="@layout/authorize_fragment">
+        tools:layout="@layout/fragment_authorize">
         <action
-            android:id="@+id/action_authorizeFragment_to_nav_home"
+            android:id="@+id/action_nav_authorize_to_nav_home"
             app:destination="@id/nav_home" />
     </fragment>
 
     <action
-        android:id="@+id/action_global_authorizeFragment"
-        app:destination="@id/authorizeFragment" />
+        android:id="@+id/action_global_nav_authorize"
+        app:destination="@id/nav_authorize" />
+
 </navigation>
