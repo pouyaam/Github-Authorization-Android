@@ -12,10 +12,14 @@ class AuthenticationUtilImp(
     private val cashSetting: CashSetting
 ) : AuthenticationUtil {
 
-    override fun authenticationState(): AuthenticationState =
-        when (getAllAccounts().size) {
-            0 -> AuthenticationState.UNAUTHENTICATED
-            1 -> AuthenticationState.SINGLE_AUTHENTICATION
+    override fun authenticationState(): AuthenticationState {
+        return when (getAllAccounts().size) {
+            0 -> {
+                AuthenticationState.UNAUTHENTICATED
+            }
+            1 -> {
+                AuthenticationState.SINGLE_AUTHENTICATION
+            }
             else -> {
                 if (cashSetting.isDefaultUserSelected())
                     AuthenticationState.SINGLE_AUTHENTICATION
@@ -24,6 +28,7 @@ class AuthenticationUtilImp(
             }
 
         }
+    }
 
     override fun addAccount(token: String, user: User) {
         val account = Account(user.login, AccountGeneral.ACCOUNT_TYPE)
@@ -68,7 +73,7 @@ class AuthenticationUtilImp(
         getAllAccounts().forEach {
             removeAccount(it)
         }
-        cashSetting.setSelectedUserLogin(null)
+        cashSetting.clearSelectedUserLogin()
     }
 
     private fun removeAccount(account: Account) {

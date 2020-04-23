@@ -10,7 +10,6 @@ import com.mydigipay.challenge.R
 import com.mydigipay.challenge.auth.AuthenticationUtil
 import com.mydigipay.challenge.auth.AuthenticationUtilImp
 import com.mydigipay.challenge.repository.cash.CashSettingBySharedPref
-import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -33,11 +32,13 @@ class HomeActivityTest {
     fun setUp() {
         rule.scenario.onActivity {
             val am = AccountManager.get(it)
-
             cashSetting = CashSettingBySharedPref(
                 PreferenceManager.getDefaultSharedPreferences(it)
             )
             authUtil = AuthenticationUtilImp(am, cashSetting)
+            authUtil.removeAllAccounts()
+            cashSetting.clearSelectedUserLogin()
+
         }
     }
 
@@ -62,9 +63,7 @@ class HomeActivityTest {
     @Test
     fun unauthenticated_THEN_navigateToHome() {
         Truth.assertThat(authUtil.getAllAccounts()).hasLength(0)
-
         rule.scenario.recreate()
-
         rule.scenario.onActivity {
 
             val navController = it.findNavController(R.id.nav_host_fragment)
@@ -78,10 +77,10 @@ class HomeActivityTest {
     }
 
     @Test
-    fun multipleAuthentication_THEN_navigateToHome() {
+    fun multipleAuthentication_THEN_navigateToRepoList() {
         authUtil.addAccount(testUser1Token, testUser1)
         authUtil.addAccount(testUser2Token, testUser2)
-
+        cashSetting.clearSelectedUserLogin()
         rule.scenario.recreate()
         rule.scenario.onActivity {
 
@@ -95,10 +94,21 @@ class HomeActivityTest {
         }
     }
 
-    @After
-    fun tearDown() {
+    @Test
+    fun multipleAuthenticationWithSelected_THEN_navigateToHome() {
+        authUtil.addAccount(testUser1Token, testUser1)
+        authUtil.addAccount(testUser2Token, testUser2)
+
+        rule.scenario.recreate()
         rule.scenario.onActivity {
-            authUtil.removeAllAccounts()
+
+            val navController = it.findNavController(R.id.nav_host_fragment)
+
+            Truth.assertThat(navController.currentDestination)
+                .isNotNull()
+
+            Truth.assertThat(navController.currentDestination!!.id)
+                .isEqualTo(R.id.nav_home)
         }
     }
 }

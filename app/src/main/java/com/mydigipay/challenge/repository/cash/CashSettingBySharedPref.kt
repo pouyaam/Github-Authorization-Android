@@ -20,10 +20,10 @@ class CashSettingBySharedPref(
         null
     )
 
-    override fun setSelectedUserLogin(login: String?) {
+    override fun setSelectedUserLogin(login: String) {
         sharedPreferences.edit {
             putString(CURRENT_USER_LOGIN_KEY, login)
-            putBoolean(IS_USER_SELECTED_KEY, login != null)
+            putBoolean(IS_USER_SELECTED_KEY, true)
         }
     }
 
