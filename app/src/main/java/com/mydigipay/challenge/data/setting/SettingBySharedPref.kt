@@ -1,14 +1,14 @@
-package com.mydigipay.challenge.repository.cash
+package com.mydigipay.challenge.data.setting
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.mydigipay.challenge.auth.AccountGeneral.CURRENT_USER_LOGIN_KEY
 import com.mydigipay.challenge.auth.AccountGeneral.IS_USER_SELECTED_KEY
-import com.mydigipay.challenge.util.CashSetting
+import com.mydigipay.challenge.util.Setting
 
-class CashSettingBySharedPref(
+class SettingBySharedPref(
     private val sharedPreferences: SharedPreferences
-) : CashSetting {
+) : Setting {
 
     override fun isDefaultUserSelected() = sharedPreferences.getBoolean(
         IS_USER_SELECTED_KEY,

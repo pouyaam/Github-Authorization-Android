@@ -5,11 +5,11 @@ import android.accounts.AccountManager
 import android.os.Build
 import android.os.Bundle
 import com.mydigipay.challenge.data.models.User
-import com.mydigipay.challenge.util.CashSetting
+import com.mydigipay.challenge.util.Setting
 
 class AuthenticationUtilImp(
     private val accountManager: AccountManager,
-    private val cashSetting: CashSetting
+    private val cashSetting: Setting
 ) : AuthenticationUtil {
 
     override fun authenticationState(): AuthenticationState {

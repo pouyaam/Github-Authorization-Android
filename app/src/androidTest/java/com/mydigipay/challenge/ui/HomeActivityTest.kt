@@ -9,7 +9,7 @@ import com.google.common.truth.Truth
 import com.mydigipay.challenge.R
 import com.mydigipay.challenge.auth.AuthenticationUtil
 import com.mydigipay.challenge.auth.AuthenticationUtilImp
-import com.mydigipay.challenge.repository.cash.CashSettingBySharedPref
+import com.mydigipay.challenge.data.setting.SettingBySharedPref
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -23,7 +23,7 @@ import testUser2Token
 class HomeActivityTest {
 
     lateinit var authUtil: AuthenticationUtil
-    lateinit var cashSetting: CashSettingBySharedPref
+    lateinit var cashSetting: SettingBySharedPref
 
     @get:Rule
     val rule = ActivityScenarioRule(HomeActivity::class.java)
@@ -32,7 +32,7 @@ class HomeActivityTest {
     fun setUp() {
         rule.scenario.onActivity {
             val am = AccountManager.get(it)
-            cashSetting = CashSettingBySharedPref(
+            cashSetting = SettingBySharedPref(
                 PreferenceManager.getDefaultSharedPreferences(it)
             )
             authUtil = AuthenticationUtilImp(am, cashSetting)

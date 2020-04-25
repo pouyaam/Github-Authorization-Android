@@ -8,7 +8,7 @@ import android.os.Build
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import com.google.common.truth.Truth.assertThat
-import com.mydigipay.challenge.repository.cash.CashSettingBySharedPref
+import com.mydigipay.challenge.data.setting.SettingBySharedPref
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -52,7 +52,7 @@ class AuthenticationUtilImpTest {
 
         authenticationUtil = AuthenticationUtilImp(
             am,
-            CashSettingBySharedPref(sharedPreferences)
+            SettingBySharedPref(sharedPreferences)
         )
     }
 

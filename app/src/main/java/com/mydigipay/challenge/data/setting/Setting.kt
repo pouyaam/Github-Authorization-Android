@@ -1,6 +1,6 @@
 package com.mydigipay.challenge.util
 
-interface CashSetting {
+interface Setting {
 
     fun isDefaultUserSelected(): Boolean
 
