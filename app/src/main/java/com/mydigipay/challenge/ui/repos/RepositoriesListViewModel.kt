@@ -1,7 +1,7 @@
 package com.mydigipay.challenge.ui.repos
 
-import androidx.lifecycle.ViewModel
+import com.mydigipay.challenge.base.BaseViewModel
 
-class RepositoriesListViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class RepositoriesListViewModel : BaseViewModel() {
+
 }
