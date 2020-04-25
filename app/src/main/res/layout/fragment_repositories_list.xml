@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.mydigipay.challenge.ui.repos.RepositoriesListViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -43,12 +50,13 @@
                 android:id="@+id/home_searchRepo_et"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="@null"
                 android:hint="@string/search"
                 android:imeOptions="actionSearch"
                 android:padding="10dp"
                 android:singleLine="true"
+                android:text="@{`Size is :`+ viewModel.list.size() +`   Error :`+viewModel.message}"
                 android:textColor="@color/textColorHint"
-                android:background="@null"
                 android:textColorHint="@color/textColorHintLight"
                 app:layout_constraintEnd_toStartOf="@id/repoList_doSearch_iv"
                 app:layout_constraintStart_toStartOf="parent"
