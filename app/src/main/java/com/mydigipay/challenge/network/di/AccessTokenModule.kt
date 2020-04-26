@@ -1,5 +1,6 @@
 package com.mydigipay.challenge.network.di
 
+import com.mydigipay.challenge.di.RETROFIT
 import com.mydigipay.challenge.network.oauth.AccessTokenService
 import com.mydigipay.challenge.repository.oauth.AccessTokenDataSource
 import com.mydigipay.challenge.repository.oauth.AccessTokenDataSourceImpl

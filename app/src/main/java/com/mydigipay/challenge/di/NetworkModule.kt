@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.network.di
+package com.mydigipay.challenge.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.mydigipay.challenge.repository.token.TokenRepository
@@ -19,11 +19,11 @@ const val WRITE_TIMEOUT = "WRITE_TIMEOUT"
 const val CONNECTION_TIMEOUT = "CONNECTION_TIMEOUT"
 val networkModule = module {
 
-    single(named(READ_TIMEOUT)) { 30 * 1000 }
-    single(named(WRITE_TIMEOUT)) { 10 * 1000 }
-    single(named(CONNECTION_TIMEOUT)) { 10 * 1000 }
+    single<Long>(named(READ_TIMEOUT)) { 30 * 1000 }
+    single<Long>(named(WRITE_TIMEOUT)) { 10 * 1000 }
+    single<Long>(named(CONNECTION_TIMEOUT)) { 10 * 1000 }
 
-    factory {
+    factory<Interceptor> {
         HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.HEADERS)
             .setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -38,10 +38,10 @@ val networkModule = module {
             .build()
     }
 
-    single(named(RETROFIT)) {
+    factory<Retrofit>(named(RETROFIT)) {
         Retrofit.Builder()
             .client(get(named(OK_HTTP)))
-            .baseUrl("http://api.github.com")
+            .baseUrl("https://api.github.com")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()

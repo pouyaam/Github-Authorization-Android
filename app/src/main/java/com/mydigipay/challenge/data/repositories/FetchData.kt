@@ -2,6 +2,7 @@ package com.mydigipay.challenge.data.repositories
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 suspend fun <T> fetchFromNetwork(
     apiFun: suspend () -> T,
@@ -11,12 +12,14 @@ suspend fun <T> fetchFromNetwork(
         try {
             ApiResult.Success(apiFun())
         } catch (e: Exception) {
+
+            Timber.e(e)
+
             val error = ApiResult.Error<T>(e)
             dbFun?.let {
                 error.data = try {
                     error.data
                 } finally {
-                    // TODO: 4/25/20 handleDbError
                 }
             }
             error
@@ -30,7 +33,7 @@ suspend fun <T> fetchFromDB(
         try {
             ApiResult.Success(dbFun())
         } catch (e: Exception) {
-            ApiResult.Error(e)
-
+            Timber.e(e)
+            ApiResult.Error<T>(e)
         }
     }
