@@ -1,5 +1,6 @@
 package com.mydigipay.challenge.di
 
+import com.mydigipay.challenge.network.di.RETROFIT
 import com.mydigipay.challenge.network.services.SearchService
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
