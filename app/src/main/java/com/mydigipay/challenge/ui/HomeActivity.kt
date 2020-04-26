@@ -52,7 +52,7 @@ class HomeActivity : AppCompatActivity() {
 
             try {
                 navController.navigate(
-                    R.id.action_nav_home_to_nav_repositories_list,
+                    R.id.action_nav_home_to_nav_search_repositories,
                     null,
                     navOptions
                 )
@@ -60,7 +60,7 @@ class HomeActivity : AppCompatActivity() {
                 Timber.e(e)
             }
 
-            appbarConfRoot = R.id.nav_repositories_list
+            appbarConfRoot = R.id.nav_search_repositories
 
         }
         appBarConfiguration = AppBarConfiguration(

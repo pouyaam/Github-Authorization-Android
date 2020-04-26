@@ -72,7 +72,7 @@ class HomeActivityTest {
                 .isNotNull()
 
             Truth.assertThat(navController.currentDestination!!.id)
-                .isEqualTo(R.id.nav_repositories_list)
+                .isEqualTo(R.id.nav_search_repositories)
         }
     }
 
@@ -90,7 +90,7 @@ class HomeActivityTest {
                 .isNotNull()
 
             Truth.assertThat(navController.currentDestination!!.id)
-                .isEqualTo(R.id.nav_repositories_list)
+                .isEqualTo(R.id.nav_search_repositories)
         }
     }
 

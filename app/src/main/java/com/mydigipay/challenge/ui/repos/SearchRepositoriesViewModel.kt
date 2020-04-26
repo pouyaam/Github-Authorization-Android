@@ -10,7 +10,7 @@ import com.mydigipay.challenge.network.Order
 import com.mydigipay.challenge.network.Sort
 import kotlinx.coroutines.launch
 
-class RepositoriesListViewModel(val repoRepository: RepoRepository) : BaseViewModel() {
+class SearchRepositoriesViewModel(val repoRepository: RepoRepository) : BaseViewModel() {
 
     val list = MutableLiveData<List<Repo>>(mutableListOf())
     val message = MutableLiveData<String>()
