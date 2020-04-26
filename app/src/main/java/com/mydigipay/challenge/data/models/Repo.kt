@@ -1,6 +1,7 @@
 package com.mydigipay.challenge.data.models
 
 
+import androidx.recyclerview.widget.DiffUtil
 import com.google.gson.annotations.SerializedName
 
 data class Repo(
@@ -52,4 +53,16 @@ data class Repo(
     var watchers: Int,
     @SerializedName("watchers_count")
     var watchersCount: Int
-)
+) {
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Repo>() {
+            override fun areItemsTheSame(oldItem: Repo, newItem: Repo): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Repo, newItem: Repo): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
+}

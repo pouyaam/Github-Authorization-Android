@@ -2,6 +2,7 @@ package com.mydigipay.challenge.binding
 
 import android.view.View
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -25,6 +26,11 @@ fun bindImage(imageView: ImageView, url: String) {
     } catch (e: Exception) {
         e.printStackTrace()
     }
+}
+
+@BindingAdapter("imageVector")
+fun bindImage(view: View, resId: Int) {
+    (view as AppCompatImageView).setImageResource(resId)
 }
 
 @Suppress("UNCHECKED_CAST")

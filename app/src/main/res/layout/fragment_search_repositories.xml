@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <import type="com.mydigipay.challenge.network.Order" />
+
+        <variable
+            name="vm"
+            type="com.mydigipay.challenge.ui.repos.SearchRepositoriesViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -27,7 +36,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_filter_list_black_24dp" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/repoList_doSearch_iv"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
@@ -43,12 +52,12 @@
                 android:id="@+id/home_searchRepo_et"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="@null"
                 android:hint="@string/search"
                 android:imeOptions="actionSearch"
                 android:padding="10dp"
                 android:singleLine="true"
                 android:textColor="@color/textColorHint"
-                android:background="@null"
                 android:textColorHint="@color/textColorHintLight"
                 app:layout_constraintEnd_toStartOf="@id/repoList_doSearch_iv"
                 app:layout_constraintStart_toStartOf="parent"
@@ -63,5 +72,16 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/repoList_searchBar_cl" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:onClick="@{v -> vm.changeOrder()}"
+            android:src="@{vm.order==Order.ASC ? @drawable/ic_arrow_down : @drawable/ic_arrow_up}"
+            android:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
