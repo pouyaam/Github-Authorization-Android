@@ -13,7 +13,6 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         android:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +33,7 @@
                 android:id="@+id/itemRepo_name_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="10dp"
                 android:text="@{repo.name}"
                 android:textColor="@color/textColorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
