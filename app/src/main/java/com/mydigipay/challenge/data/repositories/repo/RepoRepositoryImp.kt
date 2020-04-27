@@ -6,7 +6,7 @@ import com.mydigipay.challenge.data.repositories.ApiResult
 import com.mydigipay.challenge.data.repositories.fetchFromNetwork
 import com.mydigipay.challenge.network.services.SearchService
 
-class RepoRepositoryImp(val searchService: SearchService) : RepoRepository {
+class RepoRepositoryImp(private val searchService: SearchService) : RepoRepository {
     override suspend fun search(
         query: String,
         sort: String,

@@ -29,7 +29,7 @@ val networkModule = module {
             .setLevel(HttpLoggingInterceptor.Level.BODY)
     }
 
-    factory(named(OK_HTTP)) {
+    single(named(OK_HTTP)) {
         OkHttpClient.Builder()
             .readTimeout(get(named(READ_TIMEOUT)), TimeUnit.MILLISECONDS)
             .writeTimeout(get(named(WRITE_TIMEOUT)), TimeUnit.MILLISECONDS)
@@ -38,7 +38,7 @@ val networkModule = module {
             .build()
     }
 
-    factory<Retrofit>(named(RETROFIT)) {
+    single<Retrofit>(named(RETROFIT)) {
         Retrofit.Builder()
             .client(get(named(OK_HTTP)))
             .baseUrl("https://api.github.com")

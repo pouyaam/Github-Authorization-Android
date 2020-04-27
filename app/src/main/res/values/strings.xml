@@ -13,4 +13,5 @@
     <string name="packageName">com.mydigipay.challenge</string>
     <string name="search">Search</string>
     <string name="searchRepo">Search for  Repository</string>
+    <string name="searchRepoHint">"Search repositories to jump"</string>
 </resources>

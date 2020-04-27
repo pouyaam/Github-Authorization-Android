@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -10,9 +12,7 @@
             type="com.mydigipay.challenge.ui.repos.SearchRepositoriesViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.home.HomeFragment">
@@ -57,6 +57,7 @@
                 android:imeOptions="actionSearch"
                 android:padding="10dp"
                 android:singleLine="true"
+                android:text="@={vm.query}"
                 android:textColor="@color/textColorHint"
                 android:textColorHint="@color/textColorHintLight"
                 app:layout_constraintEnd_toStartOf="@id/repoList_doSearch_iv"
@@ -70,6 +71,16 @@
             android:id="@+id/repoList_rv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:data="@{vm.list}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progressBar" />
+
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/searchRepoHint"
+            app:goneUnless="@{vm.list==null||vm.list.size()==0}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/repoList_searchBar_cl" />
 
@@ -83,5 +94,16 @@
             android:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:goneUnless="@{vm.loading}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/repoList_searchBar_cl" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

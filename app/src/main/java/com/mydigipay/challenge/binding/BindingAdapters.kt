@@ -10,7 +10,7 @@ import com.mydigipay.challenge.R
 import com.mydigipay.challenge.base.BaseAdapter
 
 
-@BindingAdapter("visibleGone")
+@BindingAdapter("goneUnless")
 fun goneUnless(view: View, show: Boolean) {
     view.visibility = if (show) View.VISIBLE else View.GONE
 }
@@ -34,7 +34,7 @@ fun bindImage(view: View, resId: Int) {
 }
 
 @Suppress("UNCHECKED_CAST")
-@BindingAdapter("listItem")
+@BindingAdapter("data")
 fun <T> setListItem(recyclerView: RecyclerView, data: MutableList<T>?) {
     (recyclerView.adapter as BaseAdapter<T, *>).submitList(data)
 }
