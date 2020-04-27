@@ -92,6 +92,7 @@
             android:onClick="@{v -> vm.changeOrder()}"
             android:src="@{vm.order==Order.ASC ? @drawable/ic_arrow_down : @drawable/ic_arrow_up}"
             android:tint="@color/white"
+            android:background="@color/secondaryColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
