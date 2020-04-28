@@ -33,14 +33,17 @@
         android:name="com.mydigipay.challenge.ui.search.SearchRepositoryFragment"
         android:label="@string/searchRepo"
         tools:layout="@layout/fragment_search_repositories">
-
         <action
-            android:id="@+id/action_nav_search_repositories_to_nav_repo2"
+            android:id="@+id/action_nav_search_repositories_to_nav_repo"
             app:destination="@id/nav_repo" />
     </fragment>
     <fragment
         android:id="@+id/nav_repo"
         android:name="com.mydigipay.challenge.ui.repo.RepoFragment"
-        android:label="RepoFragment" />
+        android:label="RepoFragment">
+        <argument
+            android:name="argumentRepo"
+            app:argType="com.mydigipay.challenge.data.models.Repo" />
+    </fragment>
 
 </navigation>

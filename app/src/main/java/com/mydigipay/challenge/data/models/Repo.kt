@@ -1,9 +1,12 @@
 package com.mydigipay.challenge.data.models
 
 
+import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Repo(
     @SerializedName("clone_url")
     var cloneUrl: String,
@@ -53,7 +56,7 @@ data class Repo(
     var watchers: Int,
     @SerializedName("watchers_count")
     var watchersCount: Int
-) {
+) : Parcelable {
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Repo>() {
             override fun areItemsTheSame(oldItem: Repo, newItem: Repo): Boolean {

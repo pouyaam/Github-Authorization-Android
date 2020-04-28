@@ -15,7 +15,12 @@ class SearchRepositoryFragment :
     override val layoutId: Int = R.layout.fragment_search_repositories
 
     private val repoAdapter = RepoAdapter {
-        // TODO: 4/27/20 Navigate To Repo Detail
+
+        navController.navigate(
+            SearchRepositoryFragmentDirections.actionNavSearchRepositoriesToNavRepo(
+                it
+            )
+        )
     }
 
     override fun setBindingVar() {

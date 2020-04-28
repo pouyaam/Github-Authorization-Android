@@ -1,7 +1,10 @@
 package com.mydigipay.challenge.data.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class User(
     val login: String,
     var id: Int? = null,
@@ -60,4 +63,4 @@ data class User(
     @SerializedName("two_factor_authentication")
     var twoFactorAuthentication: Boolean? = null,
     var url: String? = null
-)
+) : Parcelable

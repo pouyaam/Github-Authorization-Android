@@ -2,6 +2,7 @@ package com.mydigipay.challenge.binding
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +32,12 @@ fun bindImage(imageView: ImageView, url: String) {
 @BindingAdapter("imageVector")
 fun bindImage(view: View, resId: Int) {
     (view as AppCompatImageView).setImageResource(resId)
+}
+
+@BindingAdapter("number")
+fun <T : Number> bindText(textView: TextView, number: T) {
+    // TODO: 4/28/20 make it readable
+    textView.text = "$number"
 }
 
 @Suppress("UNCHECKED_CAST")
