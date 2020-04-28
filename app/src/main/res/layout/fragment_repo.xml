@@ -106,11 +106,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    app:number="@{vm.repo.stargazersCount}"
                     android:textColor="@color/textColorPrimary"
                     app:layout_constraintEnd_toEndOf="@id/fragmentRepo_starsLabel_tv"
                     app:layout_constraintStart_toStartOf="@id/fragmentRepo_starsLabel_tv"
                     app:layout_constraintTop_toBottomOf="@id/fragmentRepo_ownerName_tv"
+                    app:number="@{vm.repo.stargazersCount}"
                     tools:text="100k" />
 
                 <TextView
@@ -118,11 +118,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    app:number="@{vm.repo.forksCount}"
                     android:textColor="@color/textColorPrimary"
                     app:layout_constraintEnd_toEndOf="@id/fragmentRepo_forkLabel_tv"
                     app:layout_constraintStart_toStartOf="@id/fragmentRepo_forkLabel_tv"
                     app:layout_constraintTop_toBottomOf="@id/fragmentRepo_ownerName_tv"
+                    app:number="@{vm.repo.forksCount}"
                     tools:text="3" />
 
                 <TextView
@@ -130,11 +130,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    app:number="@{0}"
                     android:textColor="@color/textColorPrimary"
                     app:layout_constraintEnd_toEndOf="@id/fragmentRepo_branchLabel_tv"
                     app:layout_constraintStart_toStartOf="@id/fragmentRepo_branchLabel_tv"
                     app:layout_constraintTop_toBottomOf="@id/fragmentRepo_ownerName_tv"
+                    app:number="@{0}"
                     tools:text="4" />
 
                 <androidx.appcompat.widget.AppCompatImageView
