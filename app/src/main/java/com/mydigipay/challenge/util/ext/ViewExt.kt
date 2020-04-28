@@ -4,6 +4,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -19,4 +20,8 @@ fun LiveData<String>.autoComplete(
             callback(it)
         }
     })
+}
+
+fun TabLayout.addNewTab(text: String) {
+    addTab(newTab().setText(text))
 }

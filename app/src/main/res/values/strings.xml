@@ -17,4 +17,5 @@
     <string name="stargazers">Stargazers</string>
     <string name="forks">Forks</string>
     <string name="branches">branches</string>
+    <string name="commitedBy">Committed by %s</string>
 </resources>

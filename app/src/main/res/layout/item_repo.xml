@@ -109,7 +109,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:constraint_referenced_ids="itemRepo_languageLogo_iv,itemRepo_language_tv"
-            app:goneUnless="@{repo.language!=null || repo.language.length()>0}" />
+            app:goneUnless="@{repo.language!=null &amp;&amp; repo.language.length()>0}" />
 
         <TextView
             android:id="@+id/itemRepo_updatedAt_tv"
