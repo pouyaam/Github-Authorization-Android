@@ -1,7 +1,7 @@
 package com.mydigipay.challenge.repository.oauth
 
-import com.mydigipay.challenge.network.oauth.RequestAccessToken
-import com.mydigipay.challenge.network.oauth.ResponseAccessToken
+import com.mydigipay.challenge.data.network.oauth.RequestAccessToken
+import com.mydigipay.challenge.data.network.oauth.ResponseAccessToken
 import kotlinx.coroutines.Deferred
 
 interface AccessTokenDataSource {

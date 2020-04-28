@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mydigipay.challenge.base.BaseViewModel
 import com.mydigipay.challenge.data.models.Repo
+import com.mydigipay.challenge.data.network.Order.ASC
+import com.mydigipay.challenge.data.network.Order.DESC
+import com.mydigipay.challenge.data.network.Sort
 import com.mydigipay.challenge.data.repositories.ApiResult
 import com.mydigipay.challenge.data.repositories.repo.RepoRepository
-import com.mydigipay.challenge.network.Order.ASC
-import com.mydigipay.challenge.network.Order.DESC
-import com.mydigipay.challenge.network.Sort
 import kotlinx.coroutines.launch
 
 class SearchRepositoriesViewModel(private val repoRepository: RepoRepository) : BaseViewModel() {

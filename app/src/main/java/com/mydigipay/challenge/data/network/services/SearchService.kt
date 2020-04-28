@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.network.services
+package com.mydigipay.challenge.data.network.services
 
 import com.mydigipay.challenge.data.models.Repo
 import com.mydigipay.challenge.data.models.Search

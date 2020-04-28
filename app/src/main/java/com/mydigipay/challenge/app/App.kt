@@ -2,8 +2,8 @@ package com.mydigipay.challenge.app
 
 import android.app.Application
 import com.mydigipay.challenge.BuildConfig
+import com.mydigipay.challenge.data.network.di.accessTokenModule
 import com.mydigipay.challenge.di.*
-import com.mydigipay.challenge.network.di.accessTokenModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber

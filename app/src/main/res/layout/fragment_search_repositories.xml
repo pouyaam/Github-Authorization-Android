@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.mydigipay.challenge.network.Order" />
+        <import type="com.mydigipay.challenge.data.network.Order" />
 
         <variable
             name="vm"

@@ -1,7 +1,7 @@
-package com.mydigipay.challenge.network.di
+package com.mydigipay.challenge.data.network.di
 
+import com.mydigipay.challenge.data.network.oauth.AccessTokenService
 import com.mydigipay.challenge.di.RETROFIT
-import com.mydigipay.challenge.network.oauth.AccessTokenService
 import com.mydigipay.challenge.repository.oauth.AccessTokenDataSource
 import com.mydigipay.challenge.repository.oauth.AccessTokenDataSourceImpl
 import org.koin.core.qualifier.named

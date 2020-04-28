@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.network
+package com.mydigipay.challenge.data.network
 
 object Order {
     const val ASC = "asc"

@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.network.oauth
+package com.mydigipay.challenge.data.network.oauth
 
 import kotlinx.coroutines.Deferred
 import retrofit2.http.Body
