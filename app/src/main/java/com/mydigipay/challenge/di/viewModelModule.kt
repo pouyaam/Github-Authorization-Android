@@ -1,7 +1,7 @@
 package com.mydigipay.challenge.di
 
 import com.mydigipay.challenge.ui.home.HomeViewModel
-import com.mydigipay.challenge.ui.repos.SearchRepositoriesViewModel
+import com.mydigipay.challenge.ui.search.SearchRepositoriesViewModel
 
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module

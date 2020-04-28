@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.ui.repos
+package com.mydigipay.challenge.ui.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -9,7 +9,7 @@
 
         <variable
             name="vm"
-            type="com.mydigipay.challenge.ui.repos.SearchRepositoriesViewModel" />
+            type="com.mydigipay.challenge.ui.search.SearchRepositoriesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

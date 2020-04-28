@@ -10,37 +10,129 @@
             type="com.mydigipay.challenge.data.models.Repo" />
     </data>
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:paddingTop="8dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <ImageView
+            android:id="@+id/itemRepo_avatar"
+            imageUrl="@{repo.owner.avatarUrl}"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/github_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/itemRepo_name_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{repo.name}"
+            android:textColor="@color/repoTitleColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/itemRepo_avatar"
+            app:layout_constraintTop_toTopOf="@id/itemRepo_avatar"
+            tools:text="Repo title" />
+
+        <TextView
+            android:id="@+id/itemRepo_desc_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{repo.description}"
+            android:textColor="@color/greyTextColor"
+            app:layout_constraintStart_toEndOf="@id/itemRepo_avatar"
+            app:layout_constraintTop_toBottomOf="@id/itemRepo_name_tv"
+            tools:text="Repo Desc" />
+
+        <ImageView
+            android:id="@+id/itemRepo_starLogo_iv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:tint="@color/greyTextColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemRepo_avatar"
+            app:srcCompat="@drawable/ic_star" />
+
+        <TextView
+            android:id="@+id/itemRepo_StarCount_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="@{String.valueOf(repo.stargazersCount)}"
+            android:textColor="@color/greyTextColor"
+            app:layout_constraintBottom_toBottomOf="@id/itemRepo_starLogo_iv"
+            app:layout_constraintStart_toEndOf="@id/itemRepo_starLogo_iv"
+            app:layout_constraintTop_toTopOf="@id/itemRepo_starLogo_iv"
+            tools:text="12k" />
+
+        <ImageView
+            android:id="@+id/itemRepo_languageLogo_iv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:padding="5dp"
+            android:tint="@color/languageIconTint"
+            app:layout_constraintStart_toEndOf="@id/itemRepo_StarCount_tv"
+            app:layout_constraintTop_toBottomOf="@id/itemRepo_avatar"
+            app:srcCompat="@drawable/ic_brightness" />
+
+        <TextView
+            android:id="@+id/itemRepo_language_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{repo.language}"
+            android:textColor="@color/greyTextColor"
+            app:layout_constraintBottom_toBottomOf="@id/itemRepo_languageLogo_iv"
+            app:layout_constraintStart_toEndOf="@id/itemRepo_languageLogo_iv"
+            app:layout_constraintTop_toTopOf="@id/itemRepo_languageLogo_iv"
+            tools:text="Kotlin" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/itemRepo_languageGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="itemRepo_languageLogo_iv,itemRepo_language_tv"
+            app:goneUnless="@{repo.language!=null || repo.language.length()>0}" />
+
+        <TextView
+            android:id="@+id/itemRepo_updatedAt_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@{repo.updatedAt}"
+            android:textColor="@color/greyTextColor"
+            app:layout_constraintBottom_toBottomOf="@id/itemRepo_starLogo_iv"
+            app:layout_constraintStart_toEndOf="@id/itemRepo_language_tv"
+            app:layout_constraintTop_toTopOf="@id/itemRepo_starLogo_iv"
+            tools:text="Kotlin" />
+
+        <View
+            android:id="@+id/itemRepoUnderLine"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/itemRepo_avatar"
-                imageUrl="@{repo.owner.avatarUrl}"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/itemRepo_name_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="@{repo.name}"
-                android:textColor="@color/textColorPrimary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/itemRepo_avatar"
-                app:layout_constraintTop_toTopOf="@id/itemRepo_avatar"
-                tools:text="Repo title" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/separatorLine"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemRepo_starLogo_iv" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

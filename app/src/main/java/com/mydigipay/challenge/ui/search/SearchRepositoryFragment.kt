@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.ui.repos
+package com.mydigipay.challenge.ui.search
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mydigipay.challenge.R
@@ -6,7 +6,6 @@ import com.mydigipay.challenge.base.BaseFragment
 import com.mydigipay.challenge.databinding.FragmentSearchRepositoriesBinding
 import com.mydigipay.challenge.ui.adapters.RepoAdapter
 import com.mydigipay.challenge.util.EndlessRecyclerViewScrollListener
-import com.mydigipay.challenge.util.EqualSpacingItemDecoration
 import com.mydigipay.challenge.util.ext.autoComplete
 import org.koin.android.ext.android.inject
 
@@ -39,13 +38,6 @@ class SearchRepositoryFragment :
                     viewModel.search(page)
                 }
             })
-
-            addItemDecoration(
-                EqualSpacingItemDecoration(
-                    resources.getDimensionPixelSize(R.dimen.viewHolderHalfMargin),
-                    EqualSpacingItemDecoration.VERTICAL
-                )
-            )
         }
     }
 }
