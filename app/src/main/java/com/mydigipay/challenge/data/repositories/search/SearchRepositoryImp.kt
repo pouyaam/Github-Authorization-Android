@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.data.repositories.repo
+package com.mydigipay.challenge.data.repositories.search
 
 import com.mydigipay.challenge.data.models.Repo
 import com.mydigipay.challenge.data.models.Search
@@ -6,8 +6,8 @@ import com.mydigipay.challenge.data.network.services.SearchService
 import com.mydigipay.challenge.data.repositories.ApiResult
 import com.mydigipay.challenge.data.repositories.fetchFromNetwork
 
-class RepoRepositoryImp(private val searchService: SearchService) : RepoRepository {
-    override suspend fun search(
+class SearchRepositoryImp(private val searchService: SearchService) : SearchRepository {
+    override suspend fun searchRepo(
         query: String,
         sort: String,
         order: String,

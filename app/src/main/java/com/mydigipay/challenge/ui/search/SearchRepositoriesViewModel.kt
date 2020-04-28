@@ -9,10 +9,10 @@ import com.mydigipay.challenge.data.network.Order.ASC
 import com.mydigipay.challenge.data.network.Order.DESC
 import com.mydigipay.challenge.data.network.Sort
 import com.mydigipay.challenge.data.repositories.ApiResult
-import com.mydigipay.challenge.data.repositories.repo.RepoRepository
+import com.mydigipay.challenge.data.repositories.search.SearchRepository
 import kotlinx.coroutines.launch
 
-class SearchRepositoriesViewModel(private val repoRepository: RepoRepository) : BaseViewModel() {
+class SearchRepositoriesViewModel(private val repoRepository: SearchRepository) : BaseViewModel() {
 
     private val _loading = MutableLiveData(false)
     val loading: LiveData<Boolean>
@@ -49,7 +49,7 @@ class SearchRepositoriesViewModel(private val repoRepository: RepoRepository) : 
             .takeIf { !it.isNullOrEmpty() }?.let { keyword ->
 
                 _loading.postValue(true)
-                val result = repoRepository.search(
+                val result = repoRepository.searchRepo(
                     keyword,
                     _sort.value!!,
                     _order.value!!,
