@@ -14,4 +14,6 @@
     <string name="search">Search</string>
     <string name="searchRepo">Search for  Repository</string>
     <string name="searchRepoHint">"Search repositories to jump"</string>
+    <string name="stargazers">Stargazers</string>
+    <string name="forks">Forks</string>
 </resources>

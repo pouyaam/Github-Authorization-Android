@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="repo"
+            type="com.mydigipay.challenge.data.models.Repo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.repo.RepoFragment">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/repoDetailHeader_cv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingTop="16dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/fragmentRepo_avatar_iv"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="18dp"
+                    app:imageUrl="@{repo.owner.avatarUrl}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/github_logo" />
+
+                <TextView
+                    android:id="@+id/fragmentRepo_repoName_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@{repo.name}"
+                    android:textColor="@color/textColorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragmentRepo_avatar_iv"
+                    tools:text="Repo Name Title" />
+
+                <TextView
+                    android:id="@+id/fragmentRepo_ownerName_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{`@` + repo.owner.login}"
+                    android:textColor="@color/greyTextColor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragmentRepo_repoName_tv"
+                    tools:text="sdarvish" />
+
+                <TextView
+                    android:id="@+id/fragmentRepo_starsLabel_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stargazers"
+                    android:textColor="@color/greyTextColor"
+                    app:layout_constraintEnd_toStartOf="@id/fragmentRepo_forkLabel_tv"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragmentRepo_starsCount_tv" />
+
+                <TextView
+                    android:id="@+id/fragmentRepo_forkLabel_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/forks"
+                    android:textColor="@color/greyTextColor"
+                    app:layout_constraintEnd_toStartOf="@id/fragmentRepo_branchLabel_tv"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toEndOf="@id/fragmentRepo_starsLabel_tv"
+                    app:layout_constraintTop_toBottomOf="@id/fragmentRepo_forkCount_tv" />
+
+
+                <TextView
+                    android:id="@+id/fragmentRepo_branchLabel_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{`@` + repo.owner.login}"
+                    android:textColor="@color/greyTextColor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toEndOf="@id/fragmentRepo_forkLabel_tv"
+                    app:layout_constraintTop_toBottomOf="@id/fragmentRepo_branchCount_tv"
+                    tools:text="branches" />
+
+                <TextView
+                    android:id="@+id/fragmentRepo_starsCount_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@{repo.stargazersCount}"
+                    android:textColor="@color/textColorPrimary"
+                    app:layout_constraintEnd_toEndOf="@id/fragmentRepo_starsLabel_tv"
+                    app:layout_constraintStart_toStartOf="@id/fragmentRepo_starsLabel_tv"
+                    app:layout_constraintTop_toBottomOf="@id/fragmentRepo_ownerName_tv"
+                    tools:text="100k" />
+
+                <TextView
+                    android:id="@+id/fragmentRepo_forkCount_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@{repo.name}"
+                    android:textColor="@color/textColorPrimary"
+                    app:layout_constraintEnd_toEndOf="@id/fragmentRepo_forkLabel_tv"
+                    app:layout_constraintStart_toStartOf="@id/fragmentRepo_forkLabel_tv"
+                    app:layout_constraintTop_toBottomOf="@id/fragmentRepo_ownerName_tv"
+                    tools:text="3" />
+
+                <TextView
+                    android:id="@+id/fragmentRepo_branchCount_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@{repo.name}"
+                    android:textColor="@color/textColorPrimary"
+                    app:layout_constraintEnd_toEndOf="@id/fragmentRepo_branchLabel_tv"
+                    app:layout_constraintStart_toStartOf="@id/fragmentRepo_branchLabel_tv"
+                    app:layout_constraintTop_toBottomOf="@id/fragmentRepo_ownerName_tv"
+                    tools:text="4" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/fragmentRepo_quote_aiv"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragmentRepo_starsLabel_tv"
+                    app:srcCompat="@drawable/ic_double_quote" />
+
+                <TextView
+                    android:id="@+id/fragmentRepo_desc_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@{repo.description}"
+                    android:textColor="@color/textColorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/fragmentRepo_quote_aiv"
+                    app:layout_constraintTop_toTopOf="@id/fragmentRepo_quote_aiv"
+                    tools:text="Repo Description text title" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/separatorLine"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragmentRepo_desc_tv" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/fragmentRepo_branches_tl"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toBottomOf="@id/repoDetailHeader_cv" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragmentRepo_commitList_rv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragmentRepo_branches_tl" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+
