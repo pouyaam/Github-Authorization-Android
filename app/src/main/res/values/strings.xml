@@ -18,4 +18,6 @@
     <string name="forks">Forks</string>
     <string name="branches">branches</string>
     <string name="commitedBy">Committed by %s</string>
+    <string name="noBranchSelected">Non of branch selecetd</string>
+    <string name="noCommit">No commit pushed yet</string>
 </resources>

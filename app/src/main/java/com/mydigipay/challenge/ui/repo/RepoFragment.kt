@@ -1,15 +1,15 @@
 package com.mydigipay.challenge.ui.repo
 
-import android.os.Bundle
-import android.view.View
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
-import com.google.android.material.tabs.TabLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mydigipay.challenge.R
 import com.mydigipay.challenge.base.BaseFragment
 import com.mydigipay.challenge.databinding.FragmentRepoBinding
-import com.mydigipay.challenge.util.ext.addNewTab
+import com.mydigipay.challenge.ui.adapters.CommitAdapter
+import com.mydigipay.challenge.util.EndlessRecyclerViewScrollListener
+import com.mydigipay.challenge.util.ext.onTabSelected
 import org.koin.android.ext.android.inject
+import java.util.*
 
 class RepoFragment : BaseFragment<RepoViewModel, FragmentRepoBinding>() {
 
@@ -17,7 +17,11 @@ class RepoFragment : BaseFragment<RepoViewModel, FragmentRepoBinding>() {
     override val layoutId: Int = R.layout.fragment_repo
     private val args: RepoFragmentArgs by navArgs()
 
+    private val commitAdapter = CommitAdapter {}
+
     override fun setBindingVar() {
+        configTabLayout()
+        configList()
         args.argumentRepo.let {
             viewModel.repo.value = it
             viewModel.loadBranches(it)
@@ -25,37 +29,30 @@ class RepoFragment : BaseFragment<RepoViewModel, FragmentRepoBinding>() {
         binding.vm = viewModel
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun configList() {
+        binding.fragmentRepoCommitListRv.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = commitAdapter
 
-        configTabLayout()
-    }
-
-    private fun configTabLayout() {
-        binding.fragmentRepoBranchesTl.apply {
-
-            viewModel.branch.observe(viewLifecycleOwner, Observer { branches ->
-                branches.takeIf {
-                    !it.isNullOrEmpty()
-                }?.sortedBy {
-                    it.name == viewModel.repo.value?.defaultBranch
-                }?.forEach {
-                    addNewTab(it.name)
-                }
-            })
-
-            addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-                override fun onTabReselected(tab: TabLayout.Tab?) {
-                }
-
-                override fun onTabUnselected(tab: TabLayout.Tab?) {
-                }
-
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    viewModel.changeBranch(tab?.text.toString())
+            addOnScrollListener(object :
+                EndlessRecyclerViewScrollListener(layoutManager as LinearLayoutManager) {
+                override fun onLoadMore(page: Int, totalItemsCount: Int) {
+                    viewModel.getCommits(page)
                 }
             })
         }
+    }
 
+
+    private fun configTabLayout() {
+        binding.fragmentRepoBranchesTl.onTabSelected {
+            it?.run {
+                viewModel.changeBranch(
+                    text
+                        .toString()
+                        .toLowerCase(Locale.ROOT)
+                )
+            }
+        }
     }
 }

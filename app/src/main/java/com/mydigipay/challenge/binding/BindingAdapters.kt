@@ -7,8 +7,10 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.tabs.TabLayout
 import com.mydigipay.challenge.R
 import com.mydigipay.challenge.base.BaseAdapter
+import com.mydigipay.challenge.data.models.TextTab
 
 
 @BindingAdapter("goneUnless")
@@ -17,7 +19,7 @@ fun goneUnless(view: View, show: Boolean) {
 }
 
 @BindingAdapter("imageUrl")
-fun bindImage(imageView: ImageView, url: String) {
+fun bindImage(imageView: ImageView, url: String?) {
     try {
         Glide.with(imageView)
             .load(url)
@@ -44,4 +46,15 @@ fun <T : Number> bindText(textView: TextView, number: T) {
 @BindingAdapter("data")
 fun <T> setListItem(recyclerView: RecyclerView, data: MutableList<T>?) {
     (recyclerView.adapter as BaseAdapter<T, *>).submitList(data)
+}
+
+@BindingAdapter("tabs")
+fun <T : TextTab> tabs(tabLayout: TabLayout, tabs: List<T>) {
+    tabLayout.apply {
+        tabs.takeIf {
+            !it.isNullOrEmpty()
+        }?.forEach {
+            addTab(newTab().setText(it.text))
+        }
+    }
 }

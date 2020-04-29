@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mydigipay.challenge.base.BaseViewModel
 import com.mydigipay.challenge.data.models.Branch
-import com.mydigipay.challenge.data.models.Commit
+import com.mydigipay.challenge.data.models.CommitDetail
 import com.mydigipay.challenge.data.models.Repo
 import com.mydigipay.challenge.data.repositories.ApiResult
 import com.mydigipay.challenge.data.repositories.repo.RepoRepository
@@ -19,8 +19,8 @@ class RepoViewModel(val repoRepository: RepoRepository) : BaseViewModel() {
     val branch: MutableLiveData<List<Branch>>
         get() = _branches
 
-    private val _commits = MutableLiveData(listOf<Commit>())
-    val commits: MutableLiveData<List<Commit>>
+    private val _commits = MutableLiveData(listOf<CommitDetail>())
+    val commits: MutableLiveData<List<CommitDetail>>
         get() = _commits
 
 
@@ -31,8 +31,9 @@ class RepoViewModel(val repoRepository: RepoRepository) : BaseViewModel() {
     var selectedBranch: String? = null
 
     fun changeBranch(branch: String) {
-        _commits.value = listOf()
+        _commits.postValue(listOf())
         selectedBranch = branch
+        getCommits(1)
     }
 
     fun getCommits(page: Int = 1) {
@@ -40,9 +41,12 @@ class RepoViewModel(val repoRepository: RepoRepository) : BaseViewModel() {
             _inProgress.postValue(true)
 
             if (repo.value != null && selectedBranch != null) {
-                val result = repoRepository.getCommits(repo.value!!, selectedBranch!!, page)
 
-                when (result) {
+                when (val result = repoRepository.getCommits(
+                    repo.value!!,
+                    selectedBranch!!,
+                    page
+                )) {
                     is ApiResult.Success -> _commits.postValue(result.data)
                     is ApiResult.Error -> {
                         // TODO: 4/28/20 Display error

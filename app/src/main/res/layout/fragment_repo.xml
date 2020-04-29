@@ -21,7 +21,6 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:paddingTop="16dp"
-            app:cardElevation="3dp"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -162,7 +161,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0.75dp"
                     android:layout_marginTop="8dp"
                     android:background="@color/separatorLine"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -171,20 +170,48 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
+        <ProgressBar
+            android:id="@+id/fragmentRepo_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:goneUnless="@{vm.inProgress}"
+            app:layout_constraintTop_toBottomOf="@id/repoDetailHeader_cv" />
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/fragmentRepo_branches_tl"
-            app:goneUnless="@{vm.branch!=null &amp;&amp; vm.branch.size()>0}"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_constraintTop_toBottomOf="@id/repoDetailHeader_cv" />
+            android:layout_height="56dp"
+            app:layout_constraintTop_toBottomOf="@id/fragmentRepo_progress"
+            app:tabMode="scrollable"
+            app:tabs="@{vm.branch}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragmentRepo_commitList_rv"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:data="@{vm.commits}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragmentRepo_branches_tl" />
+            app:layout_constraintTop_toBottomOf="@id/fragmentRepo_branches_tl"
+            tools:listitem="@layout/item_commit" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/itemRepo_commitAndBranchGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="fragmentRepo_branches_tl,fragmentRepo_commitList_rv"
+            app:goneUnless="@{vm.branch!=null &amp;&amp; vm.branch.size()>0}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/noCommit"
+            app:goneUnless="@{vm.commits==null || vm.commits.size()>0}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/repoDetailHeader_cv" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 

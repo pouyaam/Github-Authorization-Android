@@ -15,7 +15,7 @@ class CommitAdapter(private val itemClickCallback: ((CommitDetail) -> Unit)? = n
     override fun createBinding(parent: ViewGroup): ItemCommitBinding {
         val binding = DataBindingUtil.inflate<ItemCommitBinding>(
             LayoutInflater.from(parent.context),
-            R.layout.item_repo,
+            R.layout.item_commit,
             parent,
             false
         )
@@ -27,7 +27,7 @@ class CommitAdapter(private val itemClickCallback: ((CommitDetail) -> Unit)? = n
         return binding
     }
 
-    override fun bind(binding: ItemCommitBinding, item: CommitDetail) {
+    override fun bind(binding: ItemCommitBinding, item: CommitDetail?) {
         binding.commitDetail = item
     }
 }

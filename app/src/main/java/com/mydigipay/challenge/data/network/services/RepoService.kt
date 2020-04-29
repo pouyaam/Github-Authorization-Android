@@ -1,9 +1,10 @@
 package com.mydigipay.challenge.data.network.services
 
 import com.mydigipay.challenge.data.models.Branch
-import com.mydigipay.challenge.data.models.Commit
+import com.mydigipay.challenge.data.models.CommitDetail
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface RepoService {
 
@@ -13,10 +14,11 @@ interface RepoService {
         @Path("REPO") repo: String
     ): List<Branch>
 
-    @GET("repos/{OWNER}/{REPO}/commits/{BRANCH}")
+    @GET("repos/{OWNER}/{REPO}/commits")
     suspend fun getCommits(
         @Path("OWNER") owner: String,
         @Path("REPO") repo: String,
-        @Path("BRANCH") branch: String?
-    ): List<Commit>
+        @Query("sha") branch: String,
+        @Query("per_page") perPage: Int = 10
+    ): List<CommitDetail>
 }

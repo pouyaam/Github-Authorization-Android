@@ -27,7 +27,7 @@ class RepoAdapter(private val itemClickCallback: ((Repo) -> Unit)? = null) :
         return binding
     }
 
-    override fun bind(binding: ItemRepoBinding, item: Repo) {
+    override fun bind(binding: ItemRepoBinding, item: Repo?) {
         binding.repo = item
     }
 }

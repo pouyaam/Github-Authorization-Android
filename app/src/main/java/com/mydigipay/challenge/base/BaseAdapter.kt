@@ -22,5 +22,5 @@ abstract class BaseAdapter<T, V : ViewDataBinding>(
         holder.binding.executePendingBindings()
     }
 
-    protected abstract fun bind(binding: V, item: T)
+    protected abstract fun bind(binding: V, item: T?)
 }

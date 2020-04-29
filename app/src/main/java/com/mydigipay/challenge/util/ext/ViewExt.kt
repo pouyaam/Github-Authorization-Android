@@ -22,6 +22,16 @@ fun LiveData<String>.autoComplete(
     })
 }
 
-fun TabLayout.addNewTab(text: String) {
-    addTab(newTab().setText(text))
+fun TabLayout.onTabSelected(callback: (tab: TabLayout.Tab?) -> Unit) {
+    addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        override fun onTabReselected(tab: TabLayout.Tab?) {
+        }
+
+        override fun onTabUnselected(tab: TabLayout.Tab?) {
+        }
+
+        override fun onTabSelected(tab: TabLayout.Tab?) {
+            callback(tab)
+        }
+    })
 }

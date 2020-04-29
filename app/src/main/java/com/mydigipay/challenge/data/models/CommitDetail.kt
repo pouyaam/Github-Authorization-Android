@@ -6,17 +6,17 @@ import com.google.gson.annotations.SerializedName
 
 data class CommitDetail(
     @SerializedName("commit")
-    var commit: Commit,
+    var commit: Commit? = null,
     @SerializedName("committer")
-    var committer: User,
+    var committer: User? = null,
     @SerializedName("html_url")
-    var htmlUrl: String,
+    var htmlUrl: String? = null,
     @SerializedName("node_id")
-    var nodeId: String,
+    var nodeId: String? = null,
     @SerializedName("sha")
-    var sha: String,
+    var sha: String? = null,
     @SerializedName("url")
-    var url: String
+    var url: String? = null
 ) {
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CommitDetail>() {

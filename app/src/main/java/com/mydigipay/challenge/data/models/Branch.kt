@@ -3,9 +3,13 @@ package com.mydigipay.challenge.data.models
 
 import com.google.gson.annotations.SerializedName
 
+sealed class TextTab {
+    abstract var text: String
+}
+
 data class Branch(
     @SerializedName("name")
-    var name: String,
+    override var text: String,
     @SerializedName("protected")
-    var `protected`: Boolean
-)
+    var isProtected: Boolean
+) : TextTab()

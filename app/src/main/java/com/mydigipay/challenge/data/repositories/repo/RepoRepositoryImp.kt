@@ -1,7 +1,7 @@
 package com.mydigipay.challenge.data.repositories.repo
 
 import com.mydigipay.challenge.data.models.Branch
-import com.mydigipay.challenge.data.models.Commit
+import com.mydigipay.challenge.data.models.CommitDetail
 import com.mydigipay.challenge.data.models.Repo
 import com.mydigipay.challenge.data.network.services.RepoService
 import com.mydigipay.challenge.data.repositories.ApiResult
@@ -17,6 +17,7 @@ class RepoRepositoryImp(
         repo: Repo,
         branch: String,
         page: Int
-    ): ApiResult<List<Commit>> =
+    ): ApiResult<List<CommitDetail>> =
         fetchFromNetwork({ repoService.getCommits(repo.owner.login, repo.name, branch) })
+
 }

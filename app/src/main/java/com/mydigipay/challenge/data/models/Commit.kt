@@ -6,17 +6,17 @@ import com.google.gson.annotations.SerializedName
 data class Commit(
 
     @SerializedName("author")
-    var author: Author,
+    var author: Author? = null,
 
     @SerializedName("comment_count")
-    var commentCount: Int,
+    var commentCount: Int? = null,
 
     @SerializedName("message")
-    var message: String,
+    var message: String? = null,
 
     @SerializedName("url")
-    var url: String,
+    var url: String? = null,
 
     @SerializedName("verification")
-    var verification: Verification
+    var verification: Verification? = null
 )
