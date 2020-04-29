@@ -1,32 +1,36 @@
 package com.mydigipay.challenge.ui.authorize
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mydigipay.challenge.R
+import com.mydigipay.challenge.auth.AuthenticationUtil
+import com.mydigipay.challenge.base.BaseFragment
+import com.mydigipay.challenge.databinding.FragmentAuthorizeBinding
+import com.mydigipay.challenge.ui.adapters.UserAdapter
+import org.koin.android.ext.android.inject
 
-class AuthorizeFragment : Fragment() {
+class AuthorizeFragment : BaseFragment<AuthorizeViewModel, FragmentAuthorizeBinding>() {
 
-    companion object {
-        fun newInstance() = AuthorizeFragment()
+    override val viewModel: AuthorizeViewModel by inject()
+    override val layoutId = R.layout.fragment_authorize
+
+    private val authUtils: AuthenticationUtil by inject()
+    private val userAdapter = UserAdapter {
+
     }
 
-    private lateinit var viewModel: AuthorizeViewModel
+    override fun setBindingVar() {
+        configList()
+        binding.vm = viewModel
+        viewModel.loadUsers(authUtils)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_authorize, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(AuthorizeViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun configList() {
+        binding.accountsListRV.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = userAdapter
+        }
     }
+
 
 }

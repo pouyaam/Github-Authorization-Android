@@ -1,6 +1,7 @@
 package com.mydigipay.challenge.data.models
 
 import android.os.Parcelable
+import androidx.recyclerview.widget.DiffUtil
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
@@ -63,4 +64,19 @@ data class User(
     @SerializedName("two_factor_authentication")
     var twoFactorAuthentication: Boolean? = null,
     var url: String? = null
-) : Parcelable
+) : Parcelable {
+
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<User>() {
+            override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
+                return oldItem == newItem
+            }
+        }
+
+
+    }
+}
