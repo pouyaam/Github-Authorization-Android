@@ -21,4 +21,6 @@
     <string name="noBranchSelected">Non of branch selecetd</string>
     <string name="noCommit">No commit pushed yet</string>
     <string name="addAccount">Add Account</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_search">Search</string>
 </resources>

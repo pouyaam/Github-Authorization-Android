@@ -7,7 +7,7 @@ import com.mydigipay.challenge.base.BaseViewModel
 class HomeViewModel : BaseViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+        value = "This is bottom_nav_menu Fragment"
     }
     val text: LiveData<String> = _text
 }

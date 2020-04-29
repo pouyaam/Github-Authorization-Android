@@ -1,16 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-
-    </style>
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.Bridge">
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorSecondaryVariant">@color/primaryDarkColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">@color/primaryDarkColor</item>
+        <item name="android:windowLightStatusBar">false</item>
+
     </style>
 </resources>

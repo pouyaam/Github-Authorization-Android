@@ -75,7 +75,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/progressBar" />
 
-        <AutoCompleteTextView
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:gravity="center"
@@ -89,10 +89,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
+            android:background="@color/secondaryColor"
             android:onClick="@{v -> vm.changeOrder()}"
             android:src="@{vm.order==Order.ASC ? @drawable/ic_arrow_down : @drawable/ic_arrow_up}"
             android:tint="@color/white"
-            android:background="@color/secondaryColor"
+            app:goneUnless="@{vm.list==null||vm.list.size()==0}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
