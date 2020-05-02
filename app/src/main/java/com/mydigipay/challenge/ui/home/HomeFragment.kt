@@ -10,6 +10,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     override val viewModel: HomeViewModel by inject()
     override val layoutId: Int = R.layout.fragment_home
+
+    override val needAuthentication = true
+
     override fun setBindingVar() {
+
     }
 }

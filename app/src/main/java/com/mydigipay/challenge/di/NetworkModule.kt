@@ -1,9 +1,7 @@
 package com.mydigipay.challenge.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.mydigipay.challenge.repository.token.TokenRepository
-import com.mydigipay.challenge.repository.token.TokenRepositoryImpl
-import okhttp3.Interceptor
+import com.mydigipay.challenge.data.network.AuthInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.qualifier.named
@@ -23,10 +21,14 @@ val networkModule = module {
     single<Long>(named(WRITE_TIMEOUT)) { 10 * 1000 }
     single<Long>(named(CONNECTION_TIMEOUT)) { 10 * 1000 }
 
-    factory<Interceptor> {
+    factory {
         HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.HEADERS)
             .setLevel(HttpLoggingInterceptor.Level.BODY)
+    }
+
+    factory {
+        AuthInterceptor(get(named(ACCESS_TOKEN)))
     }
 
     single(named(OK_HTTP)) {
@@ -34,20 +36,17 @@ val networkModule = module {
             .readTimeout(get(named(READ_TIMEOUT)), TimeUnit.MILLISECONDS)
             .writeTimeout(get(named(WRITE_TIMEOUT)), TimeUnit.MILLISECONDS)
             .connectTimeout(get(named(CONNECTION_TIMEOUT)), TimeUnit.MILLISECONDS)
-            .addInterceptor(get() as Interceptor)
+            .addInterceptor(get<HttpLoggingInterceptor>())
+            .addInterceptor(get<AuthInterceptor>())
             .build()
     }
 
     single<Retrofit>(named(RETROFIT)) {
         Retrofit.Builder()
             .client(get(named(OK_HTTP)))
-            .baseUrl("https://api.github.com")
+            .baseUrl("https://api.github.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
-    }
-
-    single {
-        TokenRepositoryImpl(get()) as TokenRepository
     }
 }

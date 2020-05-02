@@ -12,5 +12,5 @@ val viewModelModule = module {
     viewModel { HomeViewModel() }
     viewModel { SearchRepositoriesViewModel(get()) }
     viewModel { RepoViewModel(get()) }
-    viewModel { AuthorizeViewModel() }
+    viewModel { AuthorizeViewModel(get(), get()) }
 }

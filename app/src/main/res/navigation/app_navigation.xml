@@ -23,6 +23,7 @@
         <action
             android:id="@+id/action_nav_authorize_to_nav_home"
             app:destination="@id/nav_home" />
+        <deepLink app:uri="challenge://account/authorize" />
     </fragment>
 
     <action

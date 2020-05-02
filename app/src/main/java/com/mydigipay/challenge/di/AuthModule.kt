@@ -6,7 +6,7 @@ import com.mydigipay.challenge.auth.AuthenticationUtilImp
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-const val TOKEN = "ACCESS_TOKEN"
+const val ACCESS_TOKEN = "ACCESS_TOKEN"
 const val CURRENT_USER = "CURRENT_USER"
 
 val authModule = module {
@@ -22,9 +22,10 @@ val authModule = module {
         authUtil.authenticationState()
     }
 
-    factory(named(TOKEN)) {
+    single(named(ACCESS_TOKEN)) {
         val authUtil: AuthenticationUtil = get()
-        authUtil.getAccessToken()
+        val token = authUtil.getAccessToken()
+        token ?: ""
     }
 
     factory(named(CURRENT_USER)) {

@@ -2,7 +2,6 @@ package com.mydigipay.challenge.app
 
 import android.app.Application
 import com.mydigipay.challenge.BuildConfig
-import com.mydigipay.challenge.data.network.di.accessTokenModule
 import com.mydigipay.challenge.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -19,9 +18,8 @@ class App : Application() {
             modules(
                 listOf(
                     appModule,
-                    networkModule,
-                    accessTokenModule,
                     authModule,
+                    networkModule,
                     viewModelModule,
                     serviceModule,
                     repositoryModule

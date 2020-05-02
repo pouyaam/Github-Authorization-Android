@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.mydigipay.challenge.R
 import com.mydigipay.challenge.auth.AuthenticationState.SINGLE_AUTHENTICATION
@@ -52,8 +53,8 @@ abstract class BaseFragment<V : BaseViewModel, B : ViewDataBinding> : Fragment()
 
     abstract fun setBindingVar()
 
-    override fun navigate(@IdRes direction: Int, args: Bundle?) {
-        navController.navigate(direction)
+    override fun navigate(@IdRes direction: Int, args: Bundle?, navOptions: NavOptions?) {
+        navController.navigate(direction, args, navOptions)
     }
 
     override fun popBackStack(@IdRes direction: Int) {
