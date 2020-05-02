@@ -6,23 +6,23 @@
     app:startDestination="@id/nav_search_repositories">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.mydigipay.challenge.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home">
+        android:id="@+id/nav_profile"
+        android:name="com.mydigipay.challenge.ui.profile.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile">
         <action
-            android:id="@+id/action_nav_home_to_nav_search_repositories"
+            android:id="@+id/action_nav_profile_to_nav_search_repositories"
             app:destination="@id/nav_search_repositories" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_authorize"
         android:name="com.mydigipay.challenge.ui.authorize.AuthorizeFragment"
-        android:label="authorize_fragment"
+        android:label="Add Account"
         tools:layout="@layout/fragment_authorize">
         <action
-            android:id="@+id/action_nav_authorize_to_nav_home"
-            app:destination="@id/nav_home" />
+            android:id="@+id/action_nav_authorize_to_nav_profile"
+            app:destination="@id/nav_profile" />
         <deepLink app:uri="challenge://account/authorize" />
     </fragment>
 
@@ -41,7 +41,7 @@
     <fragment
         android:id="@+id/nav_repo"
         android:name="com.mydigipay.challenge.ui.repo.RepoFragment"
-        android:label="RepoFragment">
+        android:label="Repository Detail">
         <argument
             android:name="argumentRepo"
             app:argType="com.mydigipay.challenge.data.models.Repo" />

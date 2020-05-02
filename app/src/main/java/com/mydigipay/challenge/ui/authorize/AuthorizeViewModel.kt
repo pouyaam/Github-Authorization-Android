@@ -61,10 +61,10 @@ class AuthorizeViewModel(
                                 authUtils.addAccount(accessToken, userApiResult.data)
 
                                 val navOptions = NavOptions.Builder()
-                                    .setPopUpTo(R.id.nav_home, true)
+                                    .setPopUpTo(R.id.nav_profile, true)
                                     .build()
                                 navigator?.navigate(
-                                    R.id.action_nav_authorize_to_nav_home,
+                                    R.id.action_nav_authorize_to_nav_profile,
                                     null,
                                     navOptions
                                 )
