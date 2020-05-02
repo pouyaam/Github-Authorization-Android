@@ -13,7 +13,8 @@ class AuthenticationUtilImp(
 ) : AuthenticationUtil {
 
     override fun authenticationState(): AuthenticationState {
-        return when (getAllAccounts().size) {
+        val accounts = getAllAccounts();
+        return when (accounts.size) {
             0 -> {
                 AuthenticationState.UNAUTHENTICATED
             }
@@ -37,18 +38,32 @@ class AuthenticationUtilImp(
         userData.putString("AVATAR_URL", user.avatarUrl)
         userData.putString("BIO", user.bio)
         userData.putString("EMAIL", user.email)
+        user.following?.let { userData.putInt("FOLLOWING", it) }
+        user.followers?.let { userData.putInt("FOLLOWERS", it) }
+        user.publicRepos?.let { userData.putInt("PUBLIC_REPOS", it) }
 
         accountManager.addAccountExplicitly(account, null, userData)
         accountManager.setAuthToken(account, AccountGeneral.AUTH_TOKEN_TYPE_FULL_ACCESS, token)
+
+        if (getAllAccounts().size == 1)
+            cashSetting.setSelectedUserLogin(user.login)
+
     }
 
     override fun getCurrentUser(): User? = convertAccountToUser(getCurrentAccount())
 
-    override fun getCurrentAccount(): Account? = cashSetting.getSelectedUserLogin()
-        .takeIf { it != null && it != "" }
-        .run {
-            getAllAccounts().firstOrNull() { it.name == this }
-        }
+    override fun getCurrentAccount(): Account? {
+        val accounts = getAllAccounts()
+
+        if (accounts.size == 1)
+            return accounts[0]
+
+        return cashSetting.getSelectedUserLogin()
+            .takeIf { (it != null && it != "") }
+            .run {
+                getAllAccounts().firstOrNull() { it.name == this }
+            }
+    }
 
     override fun getAllUsers(): List<User> = getAllAccounts().map { convertAccountToUser(it)!! }
 
@@ -58,7 +73,10 @@ class AuthenticationUtilImp(
                 login = account.name,
                 avatarUrl = accountManager.getUserData(account, "AVATAR_URL"),
                 bio = accountManager.getUserData(account, "BIO"),
-                email = accountManager.getUserData(account, "EMAIL")
+                email = accountManager.getUserData(account, "EMAIL"),
+                followers = (accountManager.getUserData(account, "FOLLOWING") ?: "0").toInt(),
+                following = (accountManager.getUserData(account, "FOLLOWERS") ?: "0").toInt(),
+                publicRepos = (accountManager.getUserData(account, "PUBLIC_REPOS") ?: "0").toInt()
             )
         else
             null

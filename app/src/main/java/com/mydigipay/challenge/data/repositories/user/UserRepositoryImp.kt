@@ -26,4 +26,5 @@ class UserRepositoryImp(private val userService: UserService) : UserRepository {
     override suspend fun profile(token: String?) =
         fetchFromNetwork({ userService.profile(token) })
 
+    override suspend fun repos(page: Int) = fetchFromNetwork({ userService.repos(page) })
 }

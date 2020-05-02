@@ -24,4 +24,8 @@
     <string name="title_profile">Profile</string>
     <string name="title_search">Search</string>
     <string name="profile">Profile</string>
+    <string name="following">Following</string>
+    <string name="publicRepos">Public Repos</string>
+    <string name="followers">Followers</string>
+    <string name="dontHaveAnyRepos">You don\'t have any repos</string>
 </resources>

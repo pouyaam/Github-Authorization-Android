@@ -5,13 +5,21 @@ import okhttp3.Request
 import okhttp3.Response
 import java.io.IOException
 
-class AuthInterceptor(private val token: String) : Interceptor {
+const val AUTHENTICATE_TOKEN = "AUTHENTICATE_TOKEN"
+
+class AuthInterceptor(private var token: String) : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
-        val builder: Request.Builder = chain.request().newBuilder()
+        val request = chain.request()
 
-        token.takeIf { !it.isBlank() }?.let {
-            builder.addHeader("Authorization", it)
+        request.header(AUTHENTICATE_TOKEN)?.let {
+            token = it
+        }
+
+        val builder: Request.Builder = request.newBuilder()
+
+        token.takeIf { it != "" }?.let {
+            builder.addHeader("Authorization", "bearer $it")
         }
         builder.addHeader("Accept", "application/json")
         builder.addHeader("Content-Type", "application/json")

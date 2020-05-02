@@ -55,7 +55,7 @@ class AuthorizeViewModel(
                 is ApiResult.Success -> {
                     result.data.run {
                         val userApiResult =
-                            userRepository.profile("$tokenType $accessToken")
+                            userRepository.profile(accessToken)
                         when (userApiResult) {
                             is ApiResult.Success -> {
                                 authUtils.addAccount(accessToken, userApiResult.data)

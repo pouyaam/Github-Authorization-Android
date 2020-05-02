@@ -37,15 +37,17 @@ fun bindImage(view: View, resId: Int) {
 }
 
 @BindingAdapter("number")
-fun <T : Number> bindText(textView: TextView, number: T) {
+fun <T : Number> bindText(textView: TextView, number: T?) {
     // TODO: 4/28/20 make it readable
-    textView.text = "$number"
+    textView.text = "${number ?: 0}"
 }
 
 @Suppress("UNCHECKED_CAST")
 @BindingAdapter("data")
 fun <T> setListItem(recyclerView: RecyclerView, data: MutableList<T>?) {
-    (recyclerView.adapter as BaseAdapter<T, *>).submitList(data)
+    data?.let {
+        (recyclerView.adapter as BaseAdapter<T, *>).submitList(data)
+    }
 }
 
 @BindingAdapter("tabs")
