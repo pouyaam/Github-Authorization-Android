@@ -19,6 +19,6 @@ class RepositoryItemViewModel(
     val publishedAt = ObservableField<String>(itemRepository.createdAt)
 
     fun onClick() {
-        clickListener?.onItemClicked("")
+        clickListener?.onItemClicked(itemRepository.owner?.login,itemRepository.name)
     }
 }

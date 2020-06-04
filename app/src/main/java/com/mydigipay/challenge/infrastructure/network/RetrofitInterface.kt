@@ -2,6 +2,7 @@ package com.mydigipay.challenge.infrastructure.network
 
 import com.mydigipay.challenge.infrastructure.data.model.api.RequestAccessToken
 import com.mydigipay.challenge.infrastructure.data.model.api.ResponseAccessToken
+import com.mydigipay.challenge.infrastructure.data.model.api.repositorycommit.ResponseRepositoryCommits
 import com.mydigipay.challenge.infrastructure.data.model.api.repositorysearch.ResponseRepositorySearch
 import io.reactivex.Single
 import retrofit2.http.*
@@ -15,5 +16,8 @@ interface RetrofitInterface {
 
     @GET("/search/repositories?order=desc")
     fun searchRepositories(@Query("q") repoSearch: String): Single<ResponseRepositorySearch>
+
+    @GET("/repos/{login}/{name}/commits")
+    fun repositoryCommits(@Path("login") login: String, @Path("name") name: String): Single<MutableList<ResponseRepositoryCommits>>
 
 }

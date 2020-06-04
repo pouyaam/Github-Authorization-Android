@@ -3,6 +3,7 @@ package com.mydigipay.challenge.infrastructure.data
 import com.mydigipay.challenge.infrastructure.data.local.preference.PreferenceHelper
 import com.mydigipay.challenge.infrastructure.data.model.api.RequestAccessToken
 import com.mydigipay.challenge.infrastructure.data.model.api.ResponseAccessToken
+import com.mydigipay.challenge.infrastructure.data.model.api.repositorycommit.ResponseRepositoryCommits
 import com.mydigipay.challenge.infrastructure.data.model.api.repositorysearch.ResponseRepositorySearch
 import com.mydigipay.challenge.infrastructure.data.remote.ApiHelper
 import io.reactivex.Single
@@ -33,5 +34,8 @@ class DataManagerImp @Inject constructor(
 
     override fun searchRepositories(repoSearch: String): Single<ResponseRepositorySearch> =
         apiHelper.searchRepositories(repoSearch)
+
+    override fun getRepositoryCommits(login:String,name:String): Single<MutableList<ResponseRepositoryCommits>> =
+        apiHelper.getRepositoryCommits(login,name)
 
 }

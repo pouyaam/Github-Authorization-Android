@@ -1,13 +1,14 @@
 package com.mydigipay.challenge.mvvm.repositorysearchfragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.mydigipay.challenge.R
 import com.mydigipay.challenge.databinding.FragmentRepositorySearchBinding
+import com.mydigipay.challenge.mvvm.base.BaseActivity
 import com.mydigipay.challenge.mvvm.base.BaseFragment
 import com.mydigipay.challenge.mvvm.repositorysearchfragment.adapter.RepositoryAdapter
 import javax.inject.Inject
@@ -57,8 +58,10 @@ class RepositorySearchFragment :
         viewDataBinding.searchViewQuery.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null)
+                if (query != null) {
+                    (requireActivity() as BaseActivity<*, *>).hideKeyboard()
                     mViewModel.searchInRepositories(query)
+                }
                 return true
             }
 
@@ -78,7 +81,12 @@ class RepositorySearchFragment :
         })
     }
 
-    override fun onItemClicked(articleUrl: String?) {
-
+    override fun onItemClicked(login: String?, name: String?) {
+        findNavController().navigate(
+            RepositorySearchFragmentDirections.actionRepositorySearchFragmentToRepositoryCommitFragment(
+                login ?: "",
+                name ?: ""
+            )
+        )
     }
 }

@@ -2,6 +2,7 @@ package com.mydigipay.challenge.infrastructure.data.remote
 
 import com.mydigipay.challenge.infrastructure.data.model.api.RequestAccessToken
 import com.mydigipay.challenge.infrastructure.data.model.api.ResponseAccessToken
+import com.mydigipay.challenge.infrastructure.data.model.api.repositorycommit.ResponseRepositoryCommits
 import com.mydigipay.challenge.infrastructure.data.model.api.repositorysearch.ResponseRepositorySearch
 import com.mydigipay.challenge.infrastructure.network.RetrofitInterface
 import com.mydigipay.challenge.infrastructure.network.RetrofitUtils
@@ -12,6 +13,8 @@ interface ApiHelper {
     fun accessToken(requestAccessToken: RequestAccessToken): Single<ResponseAccessToken>
 
     fun searchRepositories(repoSearch: String): Single<ResponseRepositorySearch>
+
+    fun getRepositoryCommits(login: String,name:String): Single<MutableList<ResponseRepositoryCommits>>
 }
 
 @Singleton
@@ -28,5 +31,11 @@ class ApiHelperImp : ApiHelper {
             .getRetrofit()
             .create(RetrofitInterface::class.java)
             .searchRepositories(repoSearch)
+
+    override fun getRepositoryCommits(login: String,name: String): Single<MutableList<ResponseRepositoryCommits>> =
+        RetrofitUtils()
+            .getRetrofit()
+            .create(RetrofitInterface::class.java)
+            .repositoryCommits(login, name)
 
 }

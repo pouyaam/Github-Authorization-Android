@@ -9,5 +9,21 @@
         android:id="@+id/repositorySearchFragment"
         android:name="com.mydigipay.challenge.mvvm.repositorysearchfragment.RepositorySearchFragment"
         android:label="RepositorySearchFragment"
-        tools:layout="@layout/fragment_repository_search"/>
+        tools:layout="@layout/fragment_repository_search">
+        <action
+            android:id="@+id/action_repositorySearchFragment_to_repositoryCommitFragment"
+            app:destination="@id/repositoryCommitFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/repositoryCommitFragment"
+        android:name="com.mydigipay.challenge.mvvm.repocommitsfragment.RepositoryCommitsFragment"
+        android:label="{login}/{name}"
+        tools:layout="@layout/fragment_repository_commits">
+        <argument
+            android:name="login"
+            app:argType="string" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+    </fragment>
 </navigation>
