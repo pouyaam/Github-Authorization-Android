@@ -81,11 +81,19 @@ class RepositorySearchFragment :
         })
     }
 
-    override fun onItemClicked(login: String?, name: String?) {
+    override fun onRepoCommitsClicked(login: String?, name: String?) {
         findNavController().navigate(
             RepositorySearchFragmentDirections.actionRepositorySearchFragmentToRepositoryCommitFragment(
                 login ?: "",
                 name ?: ""
+            )
+        )
+    }
+
+    override fun onRepoUserProfileClicked(username: String?) {
+        findNavController().navigate(
+            RepositorySearchFragmentDirections.actionRepositorySearchFragmentToProfileFragment(
+                username ?: ""
             )
         )
     }

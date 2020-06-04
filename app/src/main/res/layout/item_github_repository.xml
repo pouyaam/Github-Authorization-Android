@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/small_padding"
-        android:onClick="@{() -> vm.onClick()}"
+        android:onClick="@{() -> vm.onProfileClicked()}"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/item_corner_radios">
 
@@ -35,6 +35,29 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="@dimen/side_padding" />
 
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_avatar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/small_padding"
+                app:cardCornerRadius="@dimen/item_corner_radios"
+                app:layout_constraintBottom_toTopOf="@id/text_title"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="@id/v_guide_end"
+                app:layout_constraintStart_toStartOf="@id/v_guide_start"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.3">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_avatar"
+                    avatar="@{vm.authorAvatar}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY" />
+
+            </androidx.cardview.widget.CardView>
+
             <TextView
                 android:id="@+id/text_title"
                 style="@style/ItemTitle"
@@ -45,7 +68,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/text_author"
                 app:layout_constraintEnd_toEndOf="@id/v_guide_end"
                 app:layout_constraintStart_toStartOf="@id/v_guide_start"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/card_avatar"
+                app:layout_goneMarginTop="@dimen/small_padding" />
 
             <TextView
                 android:id="@+id/text_author"
@@ -79,10 +103,24 @@
                 android:layout_marginTop="@dimen/small_padding"
                 android:layout_marginBottom="@dimen/small_padding"
                 android:text="@{vm.description}"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/btn_commits"
                 app:layout_constraintEnd_toEndOf="@id/v_guide_end"
                 app:layout_constraintStart_toStartOf="@id/v_guide_start"
                 app:layout_constraintTop_toBottomOf="@id/text_published" />
+
+            <Button
+                android:id="@+id/btn_commits"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/small_padding"
+                android:background="@color/teal_400"
+                android:onClick="@{() -> vm.onCommitClick()}"
+                android:text="@string/commits"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/v_guide_end"
+                app:layout_constraintStart_toStartOf="@id/v_guide_start"
+                app:layout_constraintTop_toBottomOf="@id/text_description" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

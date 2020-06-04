@@ -50,7 +50,8 @@ class RepositoryAdapter(private val repositories: MutableList<ItemRepository>) :
     }
 
     interface OnItemClickListener {
-        fun onItemClicked(login: String?,name:String?)
+        fun onRepoCommitsClicked(login: String?, name:String?)
+        fun onRepoUserProfileClicked(username:String?)
     }
 
 

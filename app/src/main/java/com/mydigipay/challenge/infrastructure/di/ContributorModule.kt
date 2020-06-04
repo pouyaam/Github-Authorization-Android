@@ -2,6 +2,8 @@ package com.mydigipay.challenge.infrastructure.di
 
 import com.mydigipay.challenge.mvvm.mainactivity.MainActivity
 import com.mydigipay.challenge.mvvm.mainactivity.MainModule
+import com.mydigipay.challenge.mvvm.profilefragment.ProfileFragment
+import com.mydigipay.challenge.mvvm.profilefragment.ProfileModule
 import com.mydigipay.challenge.mvvm.repocommitsfragment.RepositoryCommitsFragment
 import com.mydigipay.challenge.mvvm.repocommitsfragment.RepositoryCommitsModule
 import com.mydigipay.challenge.mvvm.repositorysearchfragment.RepositorySearchFragment
@@ -21,8 +23,8 @@ abstract class ContributorModule {
 
     @ContributesAndroidInjector(modules = [RepositoryCommitsModule::class])
     abstract fun bindRepositoryCommitsFragment(): RepositoryCommitsFragment
-//
-//    @ContributesAndroidInjector(modules = [ArticleModule::class])
-//    abstract fun bindArticleFragment(): ArticleFragment
+
+    @ContributesAndroidInjector(modules = [ProfileModule::class])
+    abstract fun bindProfileFragment(): ProfileFragment
 
 }

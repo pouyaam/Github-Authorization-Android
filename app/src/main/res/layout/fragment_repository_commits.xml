@@ -41,7 +41,7 @@
             app:layout_constraintEnd_toEndOf="@id/v_guide_end"
             app:layout_constraintStart_toStartOf="@id/v_guide_start"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/item_github_repository" />
+            tools:listitem="@layout/item_repository_commits" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

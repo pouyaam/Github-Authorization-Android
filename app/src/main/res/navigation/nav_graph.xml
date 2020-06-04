@@ -8,11 +8,14 @@
     <fragment
         android:id="@+id/repositorySearchFragment"
         android:name="com.mydigipay.challenge.mvvm.repositorysearchfragment.RepositorySearchFragment"
-        android:label="RepositorySearchFragment"
+        android:label="Github Search"
         tools:layout="@layout/fragment_repository_search">
         <action
             android:id="@+id/action_repositorySearchFragment_to_repositoryCommitFragment"
             app:destination="@id/repositoryCommitFragment" />
+        <action
+            android:id="@+id/action_repositorySearchFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/repositoryCommitFragment"
@@ -24,6 +27,15 @@
             app:argType="string" />
         <argument
             android:name="name"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.mydigipay.challenge.mvvm.profilefragment.ProfileFragment"
+        android:label="{username}"
+        tools:layout="@layout/fragment_profile">
+        <argument
+            android:name="username"
             app:argType="string" />
     </fragment>
 </navigation>

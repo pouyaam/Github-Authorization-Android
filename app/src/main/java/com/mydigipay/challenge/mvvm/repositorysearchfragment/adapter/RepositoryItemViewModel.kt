@@ -14,11 +14,16 @@ class RepositoryItemViewModel(
 ) {
 
     val author = ObservableField<String>(itemRepository.owner?.login)
+    val authorAvatar = ObservableField<String>(itemRepository.owner?.avatarUrl)
     val title = ObservableField<String>(itemRepository.fullName)
     val description = ObservableField<String>(itemRepository.description)
     val publishedAt = ObservableField<String>(itemRepository.createdAt)
 
-    fun onClick() {
-        clickListener?.onItemClicked(itemRepository.owner?.login,itemRepository.name)
+    fun onCommitClick() {
+        clickListener?.onRepoCommitsClicked(itemRepository.owner?.login,itemRepository.name)
+    }
+
+    fun onProfileClicked(){
+        clickListener?.onRepoUserProfileClicked(itemRepository.owner?.login)
     }
 }

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.mydigipay.challenge.mvvm.profilefragment.ProfileViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/v_guide_start"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/side_padding" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/v_guide_end"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/side_padding" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_avatar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/medium_padding"
+            app:cardCornerRadius="@dimen/item_corner_radios"
+            app:layout_constraintBottom_toTopOf="@id/text_name"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/v_guide_end"
+            app:layout_constraintStart_toStartOf="@id/v_guide_start"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+
+            app:layout_constraintWidth_percent="0.3">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                avatar="@{vm.avatar}"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/text_name"
+            style="@style/ItemTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_padding"
+            android:gravity="center"
+            android:text="@{vm.name}"
+            app:layout_constraintBottom_toTopOf="@+id/text_company"
+            app:layout_constraintEnd_toEndOf="@id/v_guide_end"
+            app:layout_constraintStart_toStartOf="@id/v_guide_start"
+            app:layout_constraintTop_toBottomOf="@id/card_avatar" />
+
+        <TextView
+            android:id="@+id/text_company"
+            style="@style/ItemDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_padding"
+            android:gravity="center"
+            android:text="@{vm.company}"
+            app:layout_constraintBottom_toTopOf="@+id/text_bio"
+            app:layout_constraintEnd_toEndOf="@id/v_guide_end"
+            app:layout_constraintStart_toStartOf="@id/v_guide_start"
+            app:layout_constraintTop_toBottomOf="@id/text_name" />
+
+        <TextView
+            android:id="@+id/text_bio"
+            style="@style/ItemDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_padding"
+            android:gravity="center"
+            android:text="@{vm.bio}"
+            app:layout_constraintBottom_toTopOf="@+id/text_url"
+            app:layout_constraintEnd_toEndOf="@id/v_guide_end"
+            app:layout_constraintStart_toStartOf="@id/v_guide_start"
+            app:layout_constraintTop_toBottomOf="@id/text_company" />
+
+        <TextView
+            android:id="@+id/text_url"
+            style="@style/ItemDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_padding"
+            android:gravity="center"
+            android:text="@{vm.url}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/v_guide_end"
+            app:layout_constraintStart_toStartOf="@id/v_guide_start"
+            app:layout_constraintTop_toBottomOf="@id/text_bio" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
