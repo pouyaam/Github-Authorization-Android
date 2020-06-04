@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -11,6 +13,45 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/v_guide_start"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/side_padding" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/v_guide_end"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/side_padding" />
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view_query"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/side_padding"
+            app:iconifiedByDefault="false"
+            app:layout_constraintEnd_toEndOf="@id/v_guide_end"
+            app:layout_constraintStart_toStartOf="@id/v_guide_start"
+            app:layout_constraintTop_toTopOf="parent"
+            app:queryHint="@string/search_repo_hint" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_repository"
+            repositoryAdapter="@{vm.repositories}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/small_padding"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/v_guide_end"
+            app:layout_constraintStart_toStartOf="@id/v_guide_start"
+            app:layout_constraintTop_toBottomOf="@id/search_view_query"
+            tools:listitem="@layout/item_github_repository" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

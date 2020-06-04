@@ -1,10 +1,15 @@
 package com.mydigipay.challenge.mvvm.repositorysearchfragment
 
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.library.baseAdapters.BR
+import androidx.lifecycle.Observer
 import com.mydigipay.challenge.R
 import com.mydigipay.challenge.databinding.FragmentRepositorySearchBinding
 import com.mydigipay.challenge.mvvm.base.BaseFragment
+import com.mydigipay.challenge.mvvm.repositorysearchfragment.adapter.RepositoryAdapter
 import javax.inject.Inject
 
 /**
@@ -14,10 +19,13 @@ import javax.inject.Inject
  */
 class RepositorySearchFragment :
     BaseFragment<FragmentRepositorySearchBinding, RepositorySearchViewModel>(),
-    RepositorySearchNavigator {
+    RepositorySearchNavigator, RepositoryAdapter.OnItemClickListener {
 
     @Inject
     lateinit var repositorySearchViewModel: RepositorySearchViewModel
+
+    @Inject
+    lateinit var adapter: RepositoryAdapter
 
     override val bindingVariable: Int
         get() = BR.vm
@@ -29,5 +37,48 @@ class RepositorySearchFragment :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel.setNavigator(this)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initialRecyclerView()
+        initialSearchView()
+        subscribeToLiveData()
+
+    }
+
+    private fun initialRecyclerView() {
+        adapter.clickListener = this
+        viewDataBinding.rvRepository.adapter = adapter
+    }
+
+    private fun initialSearchView() {
+        viewDataBinding.searchViewQuery.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null)
+                    mViewModel.searchInRepositories(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+
+        })
+    }
+
+    private fun subscribeToLiveData() {
+        mViewModel.repoLiveData.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                mViewModel.repositories.clear()
+                mViewModel.repositories.addAll(it)
+            }
+        })
+    }
+
+    override fun onItemClicked(articleUrl: String?) {
+
     }
 }
