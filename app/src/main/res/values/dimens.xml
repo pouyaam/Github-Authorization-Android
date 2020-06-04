@@ -1,3 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="side_padding">16dp</dimen>
+    <dimen name="medium_padding">8dp</dimen>
+    <dimen name="small_padding">4dp</dimen>
+
+    <dimen name="item_corner_radios">12dp</dimen>
+
+    <dimen name="tab_height">45dp</dimen>
+
+
+    <dimen name="font_size_small">12sp</dimen>
+    <dimen name="font_size_medium">16sp</dimen>
+    <dimen name="font_size_large">22sp</dimen>
+    <dimen name="font_size_huge">24sp</dimen>
+
 </resources>

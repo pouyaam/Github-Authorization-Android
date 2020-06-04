@@ -1,7 +1,10 @@
 package com.mydigipay.challenge.infrastructure.data
 
 import com.mydigipay.challenge.infrastructure.data.local.preference.PreferenceHelper
+import com.mydigipay.challenge.infrastructure.data.model.api.RequestAccessToken
+import com.mydigipay.challenge.infrastructure.data.model.api.ResponseAccessToken
 import com.mydigipay.challenge.infrastructure.data.remote.ApiHelper
+import io.reactivex.Single
 import javax.inject.Inject
 
 /**
@@ -17,7 +20,14 @@ class DataManagerImp @Inject constructor(
     private val apiHelper: ApiHelper,
     private val preferenceHelper: PreferenceHelper
 ) : DataManager {
+    override fun getToken(): String? =
+        preferenceHelper.getToken()
+
+    override fun setToken(accessToken: String?) =
+        preferenceHelper.setToken(accessToken)
 
 
+    override fun accessToken(requestAccessToken: RequestAccessToken): Single<ResponseAccessToken> =
+        apiHelper.accessToken(requestAccessToken)
 
 }

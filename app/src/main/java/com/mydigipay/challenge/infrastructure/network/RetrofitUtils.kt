@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 class RetrofitUtils {
 
     companion object {
-        const val END_POINT = "https://newsapi.org/"
+        const val END_POINT = "https://github.com/"
     }
 
     private val defaultOkHttpRequestTimeoutSeconds = 50L

@@ -7,5 +7,8 @@ package com.mydigipay.challenge.infrastructure.utils
  */
 object Constants {
 
-    const val API_KEY = "ab296b4892f54f4b9009de5ef1ef6644"
+    const val CLIENT_ID = "217d789ecfac3dbabb72"
+    const val CLIENT_SECRET = "a157233b28332d8ede545ff96ac88079a9325289"
+    const val CLIENT_REDIRECT_URI = "challenge://"
+
 }

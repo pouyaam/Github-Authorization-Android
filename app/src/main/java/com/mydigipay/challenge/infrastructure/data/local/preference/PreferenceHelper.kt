@@ -13,9 +13,9 @@ import javax.inject.Singleton
 
 interface PreferenceHelper {
 
-//    fun getToken(): String?
-//
-//    fun setToken(accessToken: String?)
+    fun getToken(): String?
+
+    fun setToken(accessToken: String?)
 
 }
 
@@ -30,13 +30,13 @@ class PreferenceHelperImp @Inject constructor(context: Context) : PreferenceHelp
         context.getSharedPreferences("GUNG_HO_PREF", Context.MODE_PRIVATE)
 
 
-//    override fun getToken(): String? = mPrefs.getString(
-//        PREF_KEY_ACCESS_TOKEN,
-//        null
-//    )
-//
-//    override fun setToken(accessToken: String?) {
-//        mPrefs.edit().putString(PREF_KEY_ACCESS_TOKEN, accessToken).apply()
-//    }
+    override fun getToken(): String? = mPrefs.getString(
+        PREF_KEY_ACCESS_TOKEN,
+        null
+    )
+
+    override fun setToken(accessToken: String?) {
+        mPrefs.edit().putString(PREF_KEY_ACCESS_TOKEN, accessToken).apply()
+    }
 
 }

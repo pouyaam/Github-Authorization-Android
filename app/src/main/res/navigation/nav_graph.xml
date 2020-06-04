@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/repositorySearchFragment">
 
+    <fragment
+        android:id="@+id/repositorySearchFragment"
+        android:name="com.mydigipay.challenge.mvvm.repositorysearchfragment.RepositorySearchFragment"
+        android:label="RepositorySearchFragment"
+        tools:layout="@layout/fragment_repository_search"/>
 </navigation>
