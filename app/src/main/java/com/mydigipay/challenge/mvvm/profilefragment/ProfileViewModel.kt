@@ -36,7 +36,7 @@ class ProfileViewModel(
                         url.set(it.url)
                     },
                     {
-                        it.printStackTrace()
+                        mNavigator.get()?.showError(it.message)
                     }
                 )
         )

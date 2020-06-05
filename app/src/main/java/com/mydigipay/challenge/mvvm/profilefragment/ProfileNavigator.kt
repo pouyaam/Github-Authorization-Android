@@ -6,4 +6,5 @@ package com.mydigipay.challenge.mvvm.profilefragment
  * mahdiZTD@gmail.com
  */
 interface ProfileNavigator {
+    fun showError(message: String?)
 }

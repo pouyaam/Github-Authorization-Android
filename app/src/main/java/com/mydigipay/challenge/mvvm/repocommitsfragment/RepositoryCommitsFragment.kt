@@ -64,4 +64,10 @@ class RepositoryCommitsFragment :
         })
     }
 
+    override fun showError(message: String?) {
+        showSnackMessageError(
+            message ?: requireActivity().resources.getString(R.string.general_error_message)
+        )
+    }
+
 }

@@ -34,4 +34,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
         super.onViewCreated(view, savedInstanceState)
         mViewModel.getProfile(ProfileFragmentArgs.fromBundle(requireArguments()).username)
     }
+
+    override fun showError(message: String?) {
+        showSnackMessageError(
+            message ?: requireActivity().resources.getString(R.string.general_error_message)
+        )
+    }
 }

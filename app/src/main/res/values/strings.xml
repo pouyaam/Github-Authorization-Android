@@ -4,4 +4,6 @@
     <string name="authorize">AUTHORIZE</string>
     <string name="search_repo_hint">Search in Repositories</string>
     <string name="commits">Commits</string>
+
+    <string name="general_error_message">Oops an Error</string>
 </resources>

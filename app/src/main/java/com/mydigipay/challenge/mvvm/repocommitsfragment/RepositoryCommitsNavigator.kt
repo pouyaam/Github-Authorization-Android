@@ -6,4 +6,5 @@ package com.mydigipay.challenge.mvvm.repocommitsfragment
  * mahdiZTD@gmail.com
  */
 interface RepositoryCommitsNavigator {
+    fun showError(message: String?)
 }

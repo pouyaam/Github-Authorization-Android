@@ -23,9 +23,9 @@ class RepositoryCommitsViewModel(
     val repositoryCommits = ObservableArrayList<ResponseRepositoryCommits>()
 
 
-    fun getRepoCommits(login: String,name:String) {
+    fun getRepoCommits(login: String, name: String) {
         compositeDisposable.add(
-            dataManager.getRepositoryCommits(login,name)
+            dataManager.getRepositoryCommits(login, name)
                 .subscribeOn(schedulersProvider.io())
                 .observeOn(schedulersProvider.ui())
                 .subscribe(
@@ -33,7 +33,7 @@ class RepositoryCommitsViewModel(
                         repoCommitsLiveData.value = it
                     },
                     {
-                        it.printStackTrace()
+                        mNavigator.get()?.showError(it.message)
                     }
                 )
         )

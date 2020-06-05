@@ -49,7 +49,7 @@ class RepositorySearchViewModel(
                         repoLiveData.value = it.items
                     },
                     {
-                        it.printStackTrace()
+                        mNavigator.get()?.showError(it.message)
                     }
                 )
         )

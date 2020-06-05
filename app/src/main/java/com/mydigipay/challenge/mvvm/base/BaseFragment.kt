@@ -8,6 +8,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
 
 /**
@@ -81,4 +82,12 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>> : Fragmen
         AndroidSupportInjection.inject(this)
     }
 
+    fun showSnackMessageError(message: String) {
+        val snack = Snackbar.make(
+            viewDataBinding.root,
+            message,
+            Snackbar.LENGTH_LONG
+        )
+        snack.show()
+    }
 }

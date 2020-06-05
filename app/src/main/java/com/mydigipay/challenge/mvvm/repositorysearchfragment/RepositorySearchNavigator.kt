@@ -6,4 +6,5 @@ package com.mydigipay.challenge.mvvm.repositorysearchfragment
  * mahdiZTD@gmail.com
  */
 interface RepositorySearchNavigator {
+    fun showError(message: String?)
 }
