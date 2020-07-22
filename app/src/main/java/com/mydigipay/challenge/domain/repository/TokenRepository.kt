@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.data.datasource.auth
+package com.mydigipay.challenge.domain.repository
 
 import kotlinx.coroutines.Deferred
 

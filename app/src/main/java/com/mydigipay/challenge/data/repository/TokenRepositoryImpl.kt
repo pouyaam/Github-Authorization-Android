@@ -1,7 +1,7 @@
-package com.mydigipay.challenge.datasource.auth
+package com.mydigipay.challenge.data.repository
 
 import android.content.SharedPreferences
-import com.mydigipay.challenge.data.datasource.auth.TokenRepository
+import com.mydigipay.challenge.domain.repository.TokenRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
