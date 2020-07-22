@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.domain.repository.oauth
+package com.mydigipay.challenge.data.datasource.auth
 
 import com.mydigipay.challenge.network.oauth.RequestAccessToken
 import com.mydigipay.challenge.network.oauth.ResponseAccessToken
