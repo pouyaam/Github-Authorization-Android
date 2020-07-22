@@ -2,12 +2,13 @@ package com.mydigipay.challenge.di.component
 
 import android.content.Context
 import com.einhesari.batmanmovies.di.module.ViewModelModule
+import com.mydigipay.challenge.di.module.SharedPrefsModule
 import com.mydigipay.challenge.presentation.MainActivity
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Subcomponent
 
-@Component
+@Component(modules = [SharedPrefsModule::class])
 interface AppComponent {
 
     @Component.Factory
