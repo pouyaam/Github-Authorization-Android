@@ -6,8 +6,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-const val CLIENT_ID = "CLIENT_ID"
-const val CLIENT_SECRET = "CLIENT_SECRET"
+const val CLIENT_ID = "Iv1.791f3bf9dee10749"
+const val CLIENT_SECRET = "b252036c3238ec98a4a1dbd2ad6683c5664295a7"
 const val REDIRECT_URI = "REDIRECT_URI"
 
 class MainActivity : AppCompatActivity() {
