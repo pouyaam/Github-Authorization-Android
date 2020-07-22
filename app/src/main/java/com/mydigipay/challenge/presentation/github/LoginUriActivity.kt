@@ -1,13 +1,7 @@
 package com.mydigipay.challenge.presentation.github
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
-import com.mydigipay.challenge.network.oauth.RequestAccessToken
-import com.mydigipay.challenge.repository.oauth.AccessTokenDataSource
-import com.mydigipay.challenge.repository.token.TokenRepository
-import kotlinx.android.synthetic.main.login_uri_activity.*
-import kotlinx.coroutines.*
 
 class LoginUriActivity : Activity() {
 //    private val tokenRepository: TokenRepository by inject()

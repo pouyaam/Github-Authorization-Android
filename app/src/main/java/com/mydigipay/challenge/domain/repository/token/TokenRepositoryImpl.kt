@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.repository.token
+package com.mydigipay.challenge.domain.repository.token
 
 import android.content.SharedPreferences
 import kotlinx.coroutines.CoroutineScope
