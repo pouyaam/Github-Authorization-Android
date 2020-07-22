@@ -9,13 +9,8 @@ import dagger.Provides
 class SharedPrefsModule {
 
     @Provides
-    fun provideSharedPrefs(context: Context): SharedPreferences? {
+    fun provideSharedPrefs(context: Context): SharedPreferences {
         return context.getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE)
-    }
-
-    @Provides
-    fun provideEditor(sharedPreferences: SharedPreferences): SharedPreferences.Editor? {
-        return sharedPreferences.edit()
     }
 
 }

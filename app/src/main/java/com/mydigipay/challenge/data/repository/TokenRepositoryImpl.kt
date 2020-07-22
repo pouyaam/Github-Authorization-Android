@@ -1,21 +1,23 @@
 package com.mydigipay.challenge.data.repository
 
-import android.content.SharedPreferences
+import com.mydigipay.challenge.data.datasource.auth.LocalAccessTokenDataSource
+import com.mydigipay.challenge.data.datasource.auth.RemoteAccessTokenDataSource
 import com.mydigipay.challenge.domain.repository.TokenRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
+import io.reactivex.Completable
+import javax.inject.Inject
 
-private const val TOKEN = "TOKEN"
 
-class TokenRepositoryImpl(private val sharedPreferences: SharedPreferences) :
+class TokenRepositoryImpl @Inject constructor(
+    private val localAccessTokenDataSource: LocalAccessTokenDataSource
+) :
     TokenRepository {
-    override fun saveToken(token: String): Deferred<Unit> =
-        CoroutineScope(Dispatchers.IO).async { sharedPreferences.edit().apply { putString(
-            TOKEN, token) }.apply() }
 
+    override fun saveToken(token: String): Completable {
+        TODO("Not yet implemented")
+    }
 
-    override fun readToken(): Deferred<String> =
-        CoroutineScope(Dispatchers.IO).async { sharedPreferences.getString(TOKEN, "") ?: "" }
+    override fun readToken(): String {
+        return localAccessTokenDataSource.readToken()
+    }
+
 }

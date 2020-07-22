@@ -4,6 +4,6 @@ import com.mydigipay.challenge.network.oauth.RequestAccessToken
 import com.mydigipay.challenge.network.oauth.ResponseAccessToken
 import kotlinx.coroutines.Deferred
 
-interface AccessTokenDataSource {
+interface RemoteAccessTokenDataSource {
     fun accessToken(requestAccessToken: RequestAccessToken): Deferred<ResponseAccessToken>
 }
