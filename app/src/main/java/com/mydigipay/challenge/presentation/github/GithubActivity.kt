@@ -2,18 +2,16 @@ package com.mydigipay.challenge.presentation.github
 
 import android.app.Activity
 import android.os.Bundle
+import kotlinx.coroutines.handleCoroutineException
 
-class LoginUriActivity : Activity() {
-//    private val tokenRepository: TokenRepository by inject()
-//    private val accessTokenDataSource: AccessTokenDataSource by inject()
+class GithubActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_uri_activity)
+
     }
 
-    override fun onResume() {
-        super.onResume()
 
 //        val intent = intent
 //        if (Intent.ACTION_VIEW == intent.action) {
@@ -44,6 +42,4 @@ class LoginUriActivity : Activity() {
 //            } ?: run { finish() }
 //        }
 
-
-    }
 }

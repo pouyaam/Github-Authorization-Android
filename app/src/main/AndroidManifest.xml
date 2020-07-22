@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.mydigipay.challenge.presentation.github.LoginUriActivity">
+        <activity android:name="com.mydigipay.challenge.presentation.github.GithubActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
