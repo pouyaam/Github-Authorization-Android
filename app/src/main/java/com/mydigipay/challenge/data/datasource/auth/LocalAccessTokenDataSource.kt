@@ -5,4 +5,5 @@ import io.reactivex.Single
 
 interface LocalAccessTokenDataSource {
     fun readToken(): String
+    fun saveToken(token: String): Completable
 }

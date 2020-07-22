@@ -1,9 +1,14 @@
 package com.mydigipay.challenge.data.datasource.auth
 
-import com.mydigipay.challenge.network.oauth.RequestAccessToken
-import com.mydigipay.challenge.network.oauth.ResponseAccessToken
-import kotlinx.coroutines.Deferred
+import com.mydigipay.challenge.data.model.ResponseAccessToken
+import io.reactivex.Single
 
 interface RemoteAccessTokenDataSource {
-    fun accessToken(requestAccessToken: RequestAccessToken): Deferred<ResponseAccessToken>
+    fun getAccessToken(
+        clientId: String,
+        clientSecret: String,
+        code: String,
+        redirectUrl: String,
+        state: String
+    ): Single<ResponseAccessToken>
 }

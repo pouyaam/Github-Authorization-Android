@@ -11,7 +11,8 @@ import javax.inject.Inject
 
 const val CLIENT_ID = "Iv1.791f3bf9dee10749"
 const val CLIENT_SECRET = "b252036c3238ec98a4a1dbd2ad6683c5664295a7"
-const val REDIRECT_URI = "REDIRECT_URI"
+const val REDIRECT_URI = ""
+const val STATE = "0"
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,13 +23,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         component.viewModelProviderFactory.create().inject(this)
-        if(viewModel.isUserAuthorized()){
+        if (viewModel.isUserAuthorized()) {
             TODO("Not Implemented")
-        }else{
+        } else {
             setContentView(R.layout.activity_main)
             authorize.setOnClickListener { view ->
                 val url =
-                    "https://github.com/login/oauth/authorize?client_id=$CLIENT_ID&redirect_uri=$REDIRECT_URI&scope=repo user&state=0"
+                    "https://github.com/login/oauth/authorize?client_id=$CLIENT_ID&redirect_uri=$REDIRECT_URI&scope=repo user&state=$STATE"
                 val i = Intent(Intent.ACTION_VIEW)
                 i.data = Uri.parse(url)
                 startActivity(i)

@@ -7,4 +7,5 @@ import kotlinx.coroutines.Deferred
 interface TokenRepository {
     fun saveToken(token: String): Completable
     fun readToken(): String
+    fun fetchAccessToken(code: String): Completable
 }
