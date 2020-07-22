@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.github
+package com.mydigipay.challenge.presentation.github
 
 import org.junit.Test
 

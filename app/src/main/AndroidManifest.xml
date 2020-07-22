@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mydigipay.challenge.github">
+    package="com.mydigipay.challenge.presentation.github">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme"
         android:name="com.mydigipay.challenge.app.App">
         <activity
-            android:name="com.mydigipay.challenge.github.MainActivity"
+            android:name="com.mydigipay.challenge.presentation.github.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.mydigipay.challenge.github.LoginUriActivity">
+        <activity android:name="com.mydigipay.challenge.presentation.github.LoginUriActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
