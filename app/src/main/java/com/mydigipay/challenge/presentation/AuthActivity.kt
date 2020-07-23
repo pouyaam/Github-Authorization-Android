@@ -11,7 +11,7 @@ import com.mydigipay.challenge.presentation.github.MainActivity
 import com.mydigipay.challenge.presentation.github.R
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_auth.*
 import javax.inject.Inject
 
 const val CLIENT_ID = "Iv1.791f3bf9dee10749"
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         } else {
-            setContentView(R.layout.activity_main)
+            setContentView(R.layout.activity_auth)
             authorize_btn.setOnClickListener {
                 val url =
                     "https://github.com/login/oauth/authorize?client_id=$CLIENT_ID&redirect_uri=$REDIRECT_URI&scope=repo user&state=$STATE"
