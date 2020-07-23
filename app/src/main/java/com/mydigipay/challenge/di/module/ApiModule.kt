@@ -2,8 +2,8 @@ package com.mydigipay.challenge.di.module
 
 import android.content.SharedPreferences
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import com.mydigipay.challenge.data.datasource.remote.ApiService
-import com.mydigipay.challenge.datasource.auth.TOKEN
+import com.mydigipay.challenge.data.datasource.api.ApiService
+import com.mydigipay.challenge.datasource.local.TOKEN
 import dagger.Lazy
 import dagger.Module
 import dagger.Provides

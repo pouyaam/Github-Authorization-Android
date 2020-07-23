@@ -1,14 +1,13 @@
 package com.mydigipay.challenge.data.repository
 
-import com.mydigipay.challenge.data.datasource.auth.LocalAccessTokenDataSource
-import com.mydigipay.challenge.data.datasource.auth.RemoteAccessTokenDataSource
+import com.mydigipay.challenge.data.datasource.local.LocalAccessTokenDataSource
+import com.mydigipay.challenge.data.datasource.remote.RemoteAccessTokenDataSource
 import com.mydigipay.challenge.domain.repository.TokenRepository
 import com.mydigipay.challenge.presentation.CLIENT_ID
 import com.mydigipay.challenge.presentation.CLIENT_SECRET
 import com.mydigipay.challenge.presentation.REDIRECT_URI
 import com.mydigipay.challenge.presentation.STATE
 import io.reactivex.Completable
-import io.reactivex.CompletableSource
 import javax.inject.Inject
 
 

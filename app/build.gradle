@@ -5,7 +5,6 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.1"
     defaultConfig {
         applicationId "com.mydigipay.challenge.presentation.github"
         minSdkVersion 17
@@ -30,7 +29,9 @@ android {
             jvmTarget = "1.8"
         }
     }
-
+    buildFeatures{
+        dataBinding = true
+    }
 }
 
 def appcompat_version = '1.1.0'
