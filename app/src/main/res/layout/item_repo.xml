@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="repo"
+            type="com.mydigipay.challenge.presentation.model.RepositoryItem" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_small"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="3dp">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fullname_tv"
+                style="@style/HeaderStyle"
+                android:ellipsize="marquee"
+                android:layout_margin="@dimen/margin_small"
+                android:text="@{repo.fullName}"
+                tools:text="Full Name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/createdAt_tv"
+                style="@style/InfoStyle"
+                tools:text="Created at"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small"
+                android:text="@{repo.createdAt}"
+                android:textAlignment="viewStart"
+                app:layout_constraintStart_toStartOf="@+id/fullname_tv"
+                app:layout_constraintTop_toBottomOf="@+id/fullname_tv" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/createdAt_tv"
+                app:layout_constraintStart_toStartOf="@+id/createdAt_tv"
+                app:layout_constraintTop_toBottomOf="@+id/createdAt_tv">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/InfoStyle"
+                        android:text="@string/issues" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/issues_tv"
+                        style="@style/InfoStyle"
+                        android:text="@{String.valueOf(repo.openIssuesCount)}" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/InfoStyle"
+                        android:text="@string/stragazers" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/stars_tv"
+                        style="@style/InfoStyle"
+                        android:layout_width="match_parent"
+                        android:text="@{String.valueOf(repo.stargazersCount)}" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/InfoStyle"
+                        android:text="@string/forks" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/forks_tv"
+                        style="@style/InfoStyle"
+                        android:text="@{String.valueOf(repo.forksCount)}" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/InfoStyle"
+                        android:text="@string/watchers" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/watchers_tv"
+                        style="@style/InfoStyle"
+                        android:text="@{String.valueOf(repo.watchersCount)}" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

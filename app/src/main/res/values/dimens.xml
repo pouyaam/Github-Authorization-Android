@@ -16,4 +16,11 @@
     <dimen name="padding_large">24dp</dimen>
     <dimen name="padding_xlarge">32dp</dimen>
 
+    <!-- Custom CardView -->
+    <dimen name="custom_card_view_outer_4th_layer_radius">16dp</dimen>
+    <dimen name="custom_card_view_outer_3th_layer_radius">15dp</dimen>
+    <dimen name="custom_card_view_outer_2nd_layer_radius">14dp</dimen>
+    <dimen name="custom_card_view_outer_1st_layer_radius">13dp</dimen>
+    <dimen name="custom_card_view_inner_layer_radius">12dp</dimen>
+
 </resources>

@@ -3,4 +3,14 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="blank_background_color">#eeeeee</color>
+
+    <!-- Custom CardView -->
+    <color name="shadow1">#01000000</color>
+    <color name="shadow2">#02000000</color>
+    <color name="shadow3">#03000000</color>
+    <color name="shadow4">#04000000</color>
+    <color name="shadow5">#0D000000</color>
+
 </resources>

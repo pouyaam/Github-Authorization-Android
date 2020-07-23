@@ -6,7 +6,7 @@ import com.mydigipay.challenge.di.module.ApiModule
 import com.mydigipay.challenge.di.module.DataSourceModule
 import com.mydigipay.challenge.di.module.RepositoryModule
 import com.mydigipay.challenge.di.module.SharedPrefsModule
-import com.mydigipay.challenge.presentation.AuthActivity
+import com.mydigipay.challenge.presentation.auth.AuthActivity
 import com.mydigipay.challenge.presentation.github.SearchFragment
 import dagger.BindsInstance
 import dagger.Component

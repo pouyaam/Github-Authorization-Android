@@ -1,5 +1,7 @@
 package com.mydigipay.challenge.domain.model
 
+import com.mydigipay.challenge.presentation.model.RepositoryItem
+
 data class RemoteRepository(
     var id: Int? = 0,
     var nodeId: String? = null,
@@ -25,3 +27,31 @@ data class RemoteRepository(
     var defaultBranch: String? = null,
     var score: Double? = 0.0
 )
+
+fun RemoteRepository.mapToPresentationModel(): RepositoryItem {
+    return RepositoryItem(
+        id = id,
+        nodeId = nodeId,
+        name = name,
+        fullName = fullName,
+        repoOwnerItem = remoteRepositoryOwner?.mapToPresentationModel(),
+        isPrivate = isPrivate,
+        htmlUrl = htmlUrl,
+        description = description,
+        isFork = isFork,
+        url = url,
+        createdAt = createdAt,
+        updatedAt = updatedAt,
+        pushedAt = pushedAt,
+        homepage = homepage,
+        size = size,
+        stargazersCount = stargazersCount,
+        watchersCount = watchersCount,
+        language = language,
+        forksCount = forksCount,
+        openIssuesCount = openIssuesCount,
+        masterBranch = masterBranch,
+        defaultBranch = defaultBranch,
+        score = score
+    )
+}
