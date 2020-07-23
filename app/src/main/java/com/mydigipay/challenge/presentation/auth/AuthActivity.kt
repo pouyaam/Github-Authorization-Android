@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.presentation
+package com.mydigipay.challenge.presentation.auth
 
 import android.content.Intent
 import android.net.Uri

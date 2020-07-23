@@ -1,6 +1,5 @@
-package com.mydigipay.challenge.presentation
+package com.mydigipay.challenge.presentation.auth
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.mydigipay.challenge.domain.usecase.AuthUseCase
