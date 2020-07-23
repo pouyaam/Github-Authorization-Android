@@ -1,7 +1,7 @@
-package com.mydigipay.challenge.datasource.auth
+package com.mydigipay.challenge.datasource.local
 
 import android.content.SharedPreferences
-import com.mydigipay.challenge.data.datasource.auth.LocalAccessTokenDataSource
+import com.mydigipay.challenge.data.datasource.local.LocalAccessTokenDataSource
 import io.reactivex.Completable
 import javax.inject.Inject
 

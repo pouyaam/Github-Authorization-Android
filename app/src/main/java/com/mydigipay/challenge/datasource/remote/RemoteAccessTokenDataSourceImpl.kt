@@ -1,7 +1,7 @@
-package com.mydigipay.challenge.datasource.auth
+package com.mydigipay.challenge.datasource.remote
 
-import com.mydigipay.challenge.data.datasource.auth.RemoteAccessTokenDataSource
-import com.mydigipay.challenge.data.datasource.remote.ApiService
+import com.mydigipay.challenge.data.datasource.remote.RemoteAccessTokenDataSource
+import com.mydigipay.challenge.data.datasource.api.ApiService
 import com.mydigipay.challenge.data.model.RequestAccessToken
 import com.mydigipay.challenge.data.model.ResponseAccessToken
 import io.reactivex.Single
