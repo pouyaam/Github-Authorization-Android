@@ -2,4 +2,6 @@
     <string name="app_name">Github Login</string>
     <string name="action_settings">Settings</string>
     <string name="authorize">AUTHORIZE</string>
+    <string name="netwrok_error">Unable To Contact To Github</string>
+    <string name="try_again">Try again</string>
 </resources>
