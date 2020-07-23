@@ -18,7 +18,7 @@ const val STATE = "0"
 class MainActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var viewModel: MainActivityViewModel
+    lateinit var viewModel: AuthActivityViewModel
     private val KEY_CODE = "code"
 
     override fun onCreate(savedInstanceState: Bundle?) {

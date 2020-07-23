@@ -2,12 +2,12 @@ package com.mydigipay.challenge.presentation
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.mydigipay.challenge.domain.usecase.AuthCheckingUseCase
+import com.mydigipay.challenge.domain.usecase.AuthUseCase
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class MainActivityViewModel @Inject constructor(private val useCase: AuthCheckingUseCase) :
+class AuthActivityViewModel @Inject constructor(private val useCase: AuthUseCase) :
     ViewModel() {
     private val compositeDisposable = CompositeDisposable()
 
