@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.mydigipay.challenge.app.component
+import com.mydigipay.challenge.presentation.github.GithubActivity
 import com.mydigipay.challenge.presentation.github.R
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -18,16 +19,19 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModel: MainActivityViewModel
+    private val KEY_CODE = "code"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         component.viewModelProviderFactory.create().inject(this)
         if (viewModel.isUserAuthorized()) {
-            TODO("Not Implemented")
+            startActivity(Intent(this, GithubActivity::class.java))
+            finish()
         } else {
             setContentView(R.layout.activity_main)
-            authorize.setOnClickListener { view ->
+            handleIncomingIntent()
+            authorize.setOnClickListener {
                 val url =
                     "https://github.com/login/oauth/authorize?client_id=$CLIENT_ID&redirect_uri=$REDIRECT_URI&scope=repo user&state=$STATE"
                 val i = Intent(Intent.ACTION_VIEW)
@@ -37,5 +41,14 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun handleIncomingIntent() {
+        if (Intent.ACTION_VIEW == intent.action) {
+            val code = intent.data?.getQueryParameter(KEY_CODE)
+            code?.let {
+                viewModel.fetchAccessToken(code)
+            }
+        }
     }
 }
