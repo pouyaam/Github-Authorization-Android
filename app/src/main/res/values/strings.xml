@@ -4,4 +4,5 @@
     <string name="authorize">AUTHORIZE</string>
     <string name="netwrok_error">Unable To Contact To Github</string>
     <string name="try_again">Try again</string>
+    <string name="search_hint">search repositories</string>
 </resources>

@@ -19,7 +19,7 @@ const val CLIENT_SECRET = "b252036c3238ec98a4a1dbd2ad6683c5664295a7"
 const val REDIRECT_URI = ""
 const val STATE = "0"
 
-class MainActivity : AppCompatActivity() {
+class AuthActivity : AppCompatActivity() {
 
     private lateinit var compositeDisposable: CompositeDisposable
 

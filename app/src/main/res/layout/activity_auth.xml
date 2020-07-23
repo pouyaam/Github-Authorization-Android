@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mydigipay.challenge.presentation.MainActivity">
+    tools:context="com.mydigipay.challenge.presentation.AuthActivity">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/authorize_btn"
@@ -21,21 +21,21 @@
 
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/loading"
-        android:visibility="gone"
         style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminate="true"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Group
-        android:visibility="gone"
         android:id="@+id/network_error_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:constraint_referenced_ids="btn_tryagain,auth_error_tv" />
 
     <com.google.android.material.textview.MaterialTextView
