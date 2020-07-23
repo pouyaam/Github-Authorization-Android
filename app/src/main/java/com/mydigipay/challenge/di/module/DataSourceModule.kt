@@ -4,10 +4,10 @@ import android.content.SharedPreferences
 import com.mydigipay.challenge.data.datasource.local.LocalAccessTokenDataSource
 import com.mydigipay.challenge.data.datasource.remote.RemoteAccessTokenDataSource
 import com.mydigipay.challenge.data.datasource.api.ApiService
-import com.mydigipay.challenge.data.datasource.remote.SearchDataSource
+import com.mydigipay.challenge.data.datasource.remote.GithubDataSource
 import com.mydigipay.challenge.datasource.local.LocalAccessTokenDataSourceImpl
 import com.mydigipay.challenge.datasource.remote.RemoteAccessTokenDataSourceImpl
-import com.mydigipay.challenge.datasource.remote.SearchDataSourceImpl
+import com.mydigipay.challenge.datasource.remote.GithubDataSourceImpl
 import dagger.Module
 import dagger.Provides
 
@@ -29,7 +29,7 @@ class DataSourceModule {
     }
 
     @Provides
-    fun provideSearchDataSource(apiService: ApiService): SearchDataSource {
-        return SearchDataSourceImpl(apiService)
+    fun provideGithubDataSource(apiService: ApiService): GithubDataSource {
+        return GithubDataSourceImpl(apiService)
     }
 }

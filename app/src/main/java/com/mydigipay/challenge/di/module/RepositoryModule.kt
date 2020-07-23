@@ -2,7 +2,7 @@ package com.mydigipay.challenge.di.module
 
 import com.mydigipay.challenge.data.datasource.local.LocalAccessTokenDataSource
 import com.mydigipay.challenge.data.datasource.remote.RemoteAccessTokenDataSource
-import com.mydigipay.challenge.data.datasource.remote.SearchDataSource
+import com.mydigipay.challenge.data.datasource.remote.GithubDataSource
 import com.mydigipay.challenge.data.repository.SearchRepositoryImpl
 import com.mydigipay.challenge.data.repository.TokenRepositoryImpl
 import com.mydigipay.challenge.domain.repository.SearchRepository
@@ -22,7 +22,7 @@ class RepositoryModule {
     }
 
     @Provides
-    fun ProvideSearchRepository(searchDataSource: SearchDataSource): SearchRepository {
+    fun ProvideSearchRepository(searchDataSource: GithubDataSource): SearchRepository {
         return SearchRepositoryImpl(searchDataSource)
     }
 }

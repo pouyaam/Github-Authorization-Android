@@ -1,6 +1,5 @@
 package com.mydigipay.challenge.presentation.github
 
-import androidx.core.util.rangeTo
 import androidx.lifecycle.ViewModel
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.mydigipay.challenge.domain.model.mapToPresentationModel
@@ -18,22 +17,18 @@ class SearchFragmentViewModel @Inject constructor(private val useCase: SearchUse
     fun getState() = state.hide()
 
     fun searchRepository(query: String) {
-        if (query.isNotBlank()) {
-            state.accept(SearchFragmentState.Loading)
-            useCase.saerchRepository(query).subscribeOn(Schedulers.io())
-                .subscribe({
-                    state.accept(SearchFragmentState.SearchedRepository(it.map {
-                        it.mapToPresentationModel()
-                    }))
-                }, {
-                    state.accept(SearchFragmentState.Error(it.message))
-                }).let {
-                    compositeDisposable.add(it)
-                }
-        } else {
-            state.accept(SearchFragmentState.SearchedRepository(listOf()))
-        }
-
+        state.accept(SearchFragmentState.Loading)
+        useCase.searchRepository(query)
+            .subscribeOn(Schedulers.io())
+            .subscribe({
+                state.accept(SearchFragmentState.SearchedRepository(it.map {
+                    it.mapToPresentationModel()
+                }))
+            }, {
+                state.accept(SearchFragmentState.Error(it.message))
+            }).let {
+                compositeDisposable.add(it)
+            }
 
     }
 

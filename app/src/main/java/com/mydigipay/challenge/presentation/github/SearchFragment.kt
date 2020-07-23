@@ -66,7 +66,6 @@ class SearchFragment : Fragment() {
         when (state) {
             is SearchFragmentState.Error -> {
                 loading.hide()
-
             }
             is SearchFragmentState.SearchedRepository -> {
                 loading.hide()

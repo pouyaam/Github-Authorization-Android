@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class SearchUseCase @Inject constructor(private val searchRepository: SearchRepository) {
 
-    fun saerchRepository(query: String): Single<List<RemoteRepository>> {
+    fun searchRepository(query: String): Single<List<RemoteRepository>> {
         return searchRepository.search(query)
     }
 }
