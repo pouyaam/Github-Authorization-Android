@@ -1,9 +1,8 @@
-package com.mydigipay.challenge.data.datasource.remote
+package com.mydigipay.challenge.data.datasource.api
 
 import com.mydigipay.challenge.data.model.RequestAccessToken
 import com.mydigipay.challenge.data.model.ResponseAccessToken
 import io.reactivex.Single
-import kotlinx.coroutines.Deferred
 import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
