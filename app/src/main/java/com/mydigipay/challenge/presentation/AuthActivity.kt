@@ -7,7 +7,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import com.mydigipay.challenge.app.component
-import com.mydigipay.challenge.presentation.github.GithubActivity
+import com.mydigipay.challenge.presentation.github.MainActivity
 import com.mydigipay.challenge.presentation.github.R
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         compositeDisposable = CompositeDisposable()
 
         if (viewModel.isUserAuthorized()) {
-            startActivity(Intent(this, GithubActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         } else {
             setContentView(R.layout.activity_main)
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
 
             }
             is AuthActivityState.SuccessfullyGotToken -> {
-                startActivity(Intent(this, GithubActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
             is AuthActivityState.Error -> {

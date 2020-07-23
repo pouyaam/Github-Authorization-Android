@@ -6,8 +6,6 @@ import com.mydigipay.challenge.di.module.ApiModule
 import com.mydigipay.challenge.di.module.DataSourceModule
 import com.mydigipay.challenge.di.module.RepositoryModule
 import com.mydigipay.challenge.di.module.SharedPrefsModule
-import com.mydigipay.challenge.presentation.MainActivity
-import com.mydigipay.challenge.presentation.github.GithubActivity
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Subcomponent
@@ -36,7 +34,7 @@ interface AppComponent {
 interface ViewModelComponent {
 
     fun inject(mainActivity: MainActivity)
-    fun inject(githubActivity: GithubActivity)
+    fun inject(githubActivity: com.mydigipay.challenge.presentation.github.MainActivity)
 
     @Subcomponent.Factory
     interface Factory {
