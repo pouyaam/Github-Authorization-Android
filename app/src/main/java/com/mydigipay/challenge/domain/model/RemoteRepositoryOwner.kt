@@ -1,12 +1,12 @@
 package com.mydigipay.challenge.domain.model
 
 data class RemoteRepositoryOwner(
-    val login: String,
-    val id: Int,
-    val nodeId: String,
-    val avatarUrl: String,
-    val gravatarId: String,
-    val url: String,
-    val receivedEventsUrl: String,
-    val type: String
+    var login: String? = null,
+    var id: Int? = 0,
+    var nodeId: String? = null,
+    var avatarUrl: String? = null,
+    var gravatarId: String? = null,
+    var url: String? = null,
+    var receivedEventsUrl: String? = null,
+    var type: String? = null
 )

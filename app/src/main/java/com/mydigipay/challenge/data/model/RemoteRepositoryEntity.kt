@@ -5,73 +5,73 @@ import com.mydigipay.challenge.domain.model.RemoteRepository
 
 data class RemoteRepositorySearchResponse(
     @SerializedName("id")
-    val id: Int,
+    var id: Int? = 0,
 
     @SerializedName("node_id")
-    val nodeId: String,
+    var nodeId: String? = null,
 
     @SerializedName("name")
-    val name: String,
+    var name: String? = null,
 
     @SerializedName("full_name")
-    val fullName: String,
+    var fullName: String? = null,
 
     @SerializedName("owner")
-    val remoteOwnerEntity: RemoteOwnerEntity,
+    var remoteOwnerEntity: RemoteOwnerEntity? = null,
 
     @SerializedName("private")
-    val isPrivate: Boolean,
+    var isPrivate: Boolean? = false,
 
     @SerializedName("html_url")
-    val htmlUrl: String,
+    var htmlUrl: String? = null,
 
     @SerializedName("description")
-    val description: String,
+    var description: String? = null,
 
     @SerializedName("fork")
-    val isFork: Boolean,
+    var isFork: Boolean? = false,
 
     @SerializedName("url")
-    val url: String,
+    var url: String? = null,
 
     @SerializedName("created_at")
-    val createdAt: String,
+    var createdAt: String? = null,
 
     @SerializedName("updated_at")
-    val updatedAt: String,
+    var updatedAt: String? = null,
 
     @SerializedName("pushed_at")
-    val pushedAt: String,
+    var pushedAt: String? = null,
 
     @SerializedName("homepage")
-    val homepage: String,
+    var homepage: String? = null,
 
     @SerializedName("size")
-    val size: Int,
+    var size: Int? = null,
 
     @SerializedName("stargazers_count")
-    val stargazersCount: Int,
+    var stargazersCount: Int? = 0,
 
     @SerializedName("watchers_count")
-    val watchersCount: Int,
+    var watchersCount: Int? = 0,
 
     @SerializedName("language")
-    val language: String,
+    var language: String? = null,
 
     @SerializedName("forks_count")
-    val forksCount: Int,
+    var forksCount: Int? = 0,
 
     @SerializedName("open_issues_count")
-    val openIssuesCount: Int,
+    var openIssuesCount: Int? = 0,
 
     @SerializedName("master_branch")
-    val masterBranch: String,
+    var masterBranch: String? = null,
 
     @SerializedName("default_branch")
-    val defaultBranch: String,
+    var defaultBranch: String? = null,
 
     @SerializedName("score")
-    val score: Double
+    var score: Double? = 0.0
 )
 
 fun RemoteRepositorySearchResponse.mapToDomainModel(): RemoteRepository {
@@ -80,7 +80,7 @@ fun RemoteRepositorySearchResponse.mapToDomainModel(): RemoteRepository {
         nodeId = nodeId,
         name = name,
         fullName = fullName,
-        remoteRepositoryOwner = remoteOwnerEntity.mapToDomainModel(),
+        remoteRepositoryOwner = remoteOwnerEntity?.mapToDomainModel(),
         isPrivate = isPrivate,
         htmlUrl = htmlUrl,
         description = description,

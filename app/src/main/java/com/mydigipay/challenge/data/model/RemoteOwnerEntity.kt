@@ -6,28 +6,28 @@ import com.mydigipay.challenge.domain.model.RemoteRepositoryOwner
 
 data class RemoteOwnerEntity(
     @SerializedName("login")
-    val login: String,
+    val login: String? = null,
 
     @SerializedName("id")
-    val id: Int,
+    val id: Int? = 0,
 
     @SerializedName("node_id")
-    val nodeId: String,
+    val nodeId: String? = "",
 
     @SerializedName("avatar_url")
-    val avatarUrl: String,
+    val avatarUrl: String? = "",
 
     @SerializedName("gravatar_id")
-    val gravatarId: String,
+    val gravatarId: String? = "",
 
     @SerializedName("url")
-    val url: String,
+    val url: String? = null,
 
     @SerializedName("received_events_url")
-    val receivedEventsUrl: String,
+    val receivedEventsUrl: String? = null,
 
     @SerializedName("type")
-    val type: String
+    val type: String? = null
 )
 
 fun RemoteOwnerEntity.mapToDomainModel(): RemoteRepositoryOwner {
