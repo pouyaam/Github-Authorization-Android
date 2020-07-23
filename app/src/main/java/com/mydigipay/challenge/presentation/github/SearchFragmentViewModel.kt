@@ -12,12 +12,11 @@ class SearchFragmentViewModel @Inject constructor(private val useCase: SearchUse
     private val compositeDisposable = CompositeDisposable()
 
     fun searchRepository(query: String) {
-        useCase.saerchRepository(query).observeOn(Schedulers.io())
+        useCase.saerchRepository(query).subscribeOn(Schedulers.io())
             .subscribe({
                 Log.i("", "")
             }, {
                 Log.i("", "")
-
             }).let {
                 compositeDisposable.add(it)
             }

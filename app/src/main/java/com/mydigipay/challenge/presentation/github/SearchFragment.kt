@@ -23,7 +23,7 @@ class SearchFragment : Fragment() {
     private lateinit var compositeDisposable: CompositeDisposable
 
     @Inject
-    private lateinit var viewModel: SearchFragmentViewModel
+    lateinit var viewModel: SearchFragmentViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
