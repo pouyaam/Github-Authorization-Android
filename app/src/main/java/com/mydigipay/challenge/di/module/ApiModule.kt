@@ -3,13 +3,12 @@ package com.mydigipay.challenge.di.module
 import android.content.SharedPreferences
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.mydigipay.challenge.data.datasource.api.ApiService
-import com.mydigipay.challenge.datasource.local.TOKEN
+import com.mydigipay.challenge.datasource.local.TOKEN_PREF_KEY
 import dagger.Lazy
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -20,7 +19,7 @@ import javax.inject.Singleton
 class ApiModule {
 
     private val requestTimeout = 60L
-    private val baseUrl = "http://api.github.com/"
+    private val baseUrl = "https://api.github.com/"
     private val authTokenKey = "Authorization"
 
     @Provides
@@ -68,21 +67,11 @@ class ApiModule {
     fun provideInterceptor(sharedPreferences: Lazy<SharedPreferences>): Interceptor {
         return Interceptor { chain: Interceptor.Chain ->
             val originalRequest = chain.request()
-            val accessToken = sharedPreferences.get().getString(TOKEN, "") ?: ""
-
-            if (alreadyHasAuthorizationHeader(originalRequest)) {
-                chain.proceed(originalRequest)
-            }
-
+            val accessToken = sharedPreferences.get().getString(TOKEN_PREF_KEY, "")
             val requestBuilder = originalRequest.newBuilder()
                 .header(authTokenKey, "Bearer $accessToken")
-
             chain.proceed(requestBuilder.build())
         }
 
-    }
-
-    private fun alreadyHasAuthorizationHeader(request: Request): Boolean {
-        return !request.header(authTokenKey).isNullOrEmpty()
     }
 }
