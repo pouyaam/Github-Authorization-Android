@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.presentation.github
+package com.mydigipay.challenge.presentation.github.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,12 +7,16 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.mydigipay.challenge.app.ViewModelProviderFactory
 import com.mydigipay.challenge.app.component
+import com.mydigipay.challenge.presentation.github.R
+import com.mydigipay.challenge.presentation.github.SearchToCommitViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -23,7 +27,7 @@ import javax.inject.Inject
 
 class SearchFragment : Fragment() {
 
-    private val searchInputDelay = 300L
+    private val searchInputDelay = 1000L
     private val searchInputDelayTimeUnit = TimeUnit.MILLISECONDS
     private lateinit var compositeDisposable: CompositeDisposable
     private var lastVisibleRepo = 0
@@ -31,6 +35,8 @@ class SearchFragment : Fragment() {
     private val stateBundleSearchQueryKey = "QUERY_KEY"
     private lateinit var adapter: RepoAdapter
     private var searchQuery = ""
+
+    private val repoSelectionViewModel: SearchToCommitViewModel by activityViewModels()
 
     @Inject
     lateinit var factory: ViewModelProviderFactory
@@ -119,12 +125,15 @@ class SearchFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = RepoAdapter()
+        adapter =
+            RepoAdapter()
         adapter.selectedRepo()
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-
-            }).let {
+            .subscribe {
+                repoSelectionViewModel.owner = it.repoOwnerItem?.login ?: ""
+                repoSelectionViewModel.repo = it.name ?: ""
+                findNavController().navigate(R.id.action_searchFragment_to_commitFragment)
+            }.let {
                 compositeDisposable.add(it)
             }
         repoRv.layoutManager = LinearLayoutManager(requireContext())

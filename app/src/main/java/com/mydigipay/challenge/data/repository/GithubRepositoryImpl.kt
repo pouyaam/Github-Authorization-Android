@@ -1,6 +1,7 @@
 package com.mydigipay.challenge.data.repository
 
 import com.mydigipay.challenge.data.datasource.remote.GithubDataSource
+import com.mydigipay.challenge.domain.model.Commit
 import com.mydigipay.challenge.domain.model.RemoteRepository
 import com.mydigipay.challenge.domain.model.User
 import com.mydigipay.challenge.domain.repository.GithubRepository
@@ -15,5 +16,9 @@ class GithubRepositoryImpl @Inject constructor(private val githubDataSource: Git
 
     override fun getUser(): Single<User> {
         return githubDataSource.getUser()
+    }
+
+    override fun getCommits(owner: String, repo: String): Single<List<Commit>> {
+        return githubDataSource.getCommits(owner, repo)
     }
 }

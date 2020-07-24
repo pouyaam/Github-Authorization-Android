@@ -7,7 +7,8 @@ import com.mydigipay.challenge.di.module.DataSourceModule
 import com.mydigipay.challenge.di.module.RepositoryModule
 import com.mydigipay.challenge.di.module.SharedPrefsModule
 import com.mydigipay.challenge.presentation.auth.AuthActivity
-import com.mydigipay.challenge.presentation.github.SearchFragment
+import com.mydigipay.challenge.presentation.github.commit.CommitFragment
+import com.mydigipay.challenge.presentation.github.search.SearchFragment
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Subcomponent
@@ -37,6 +38,7 @@ interface ViewModelComponent {
 
     fun inject(authActivity: AuthActivity)
     fun inject(searchFragment: SearchFragment)
+    fun inject(commitFragment: CommitFragment)
 
     @Subcomponent.Factory
     interface Factory {

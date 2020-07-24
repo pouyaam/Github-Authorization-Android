@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.presentation.github
+package com.mydigipay.challenge.presentation.github.search
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -10,9 +10,7 @@ import com.mydigipay.challenge.presentation.model.RepositoryItem
 import com.mydigipay.challenge.presentation.model.UserItem
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import retrofit2.HttpException
 import javax.inject.Inject
-import javax.net.ssl.HttpsURLConnection
 
 class SearchFragmentViewModel @Inject constructor(
     private val searchUseCase: SearchUseCase,
@@ -47,9 +45,12 @@ class SearchFragmentViewModel @Inject constructor(
                 if (it.isEmpty()) {
                     state.accept(SearchFragmentState.NoRepoFound)
                 } else {
-                    state.accept(SearchFragmentState.SearchedRepository(it.map {
-                        it.mapToPresentationModel()
-                    }))
+                    state.accept(
+                        SearchFragmentState.SearchedRepository(
+                            it.map {
+                                it.mapToPresentationModel()
+                            })
+                    )
                 }
             }, {
                 if (it.message != null && it.message.toString().contains(unprocessableEntity)) {

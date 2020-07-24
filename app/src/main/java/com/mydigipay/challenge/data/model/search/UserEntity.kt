@@ -1,8 +1,7 @@
-package com.mydigipay.challenge.data.model
+package com.mydigipay.challenge.data.model.search
 
 import com.google.gson.annotations.SerializedName
 import com.mydigipay.challenge.domain.model.User
-import com.mydigipay.challenge.presentation.model.UserItem
 
 data class UserEntity(
     @SerializedName("login") var login: String? = null,

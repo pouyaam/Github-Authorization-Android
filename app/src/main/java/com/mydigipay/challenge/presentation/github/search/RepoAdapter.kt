@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.presentation.github
+package com.mydigipay.challenge.presentation.github.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxrelay2.PublishRelay
+import com.mydigipay.challenge.presentation.github.R
 import com.mydigipay.challenge.presentation.github.databinding.ItemRepoBinding
 import com.mydigipay.challenge.presentation.model.RepositoryItem
 import kotlinx.android.synthetic.main.item_repo.view.*

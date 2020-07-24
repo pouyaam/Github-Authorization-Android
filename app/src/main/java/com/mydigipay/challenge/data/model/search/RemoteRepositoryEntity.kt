@@ -1,4 +1,4 @@
-package com.mydigipay.challenge.data.model
+package com.mydigipay.challenge.data.model.search
 
 import com.google.gson.annotations.SerializedName
 import com.mydigipay.challenge.domain.model.RemoteRepository

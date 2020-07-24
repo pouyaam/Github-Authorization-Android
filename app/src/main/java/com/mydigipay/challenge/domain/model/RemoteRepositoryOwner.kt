@@ -15,13 +15,13 @@ data class RemoteRepositoryOwner(
 
 fun RemoteRepositoryOwner.mapToPresentationModel(): RepositoryOwnerItem {
     return RepositoryOwnerItem(
-        login = login,
-        id = id,
-        nodeId = nodeId,
-        avatarUrl = avatarUrl,
-        gravatarId = gravatarId,
-        url = url,
-        receivedEventsUrl = receivedEventsUrl,
-        type = type
+        login = login ?: "",
+        id = id ?: 0,
+        nodeId = nodeId ?: "",
+        avatarUrl = avatarUrl?: "",
+        gravatarId = gravatarId?: "",
+        url = url?: "",
+        receivedEventsUrl = receivedEventsUrl?: "",
+        type = type?: ""
     )
 }

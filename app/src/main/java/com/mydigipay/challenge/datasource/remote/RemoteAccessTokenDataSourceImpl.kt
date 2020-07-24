@@ -2,8 +2,8 @@ package com.mydigipay.challenge.datasource.remote
 
 import com.mydigipay.challenge.data.datasource.remote.RemoteAccessTokenDataSource
 import com.mydigipay.challenge.data.datasource.api.ApiService
-import com.mydigipay.challenge.data.model.RequestAccessToken
-import com.mydigipay.challenge.data.model.ResponseAccessToken
+import com.mydigipay.challenge.data.model.token.RequestAccessToken
+import com.mydigipay.challenge.data.model.token.ResponseAccessToken
 import io.reactivex.Single
 
 class RemoteAccessTokenDataSourceImpl(private val apiService: ApiService) :

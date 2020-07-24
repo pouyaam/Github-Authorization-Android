@@ -1,6 +1,7 @@
-package com.mydigipay.challenge.data.model
+package com.mydigipay.challenge.data.model.search
 
 import com.google.gson.annotations.SerializedName
+import com.mydigipay.challenge.data.model.search.RemoteRepositorySearchResponse
 
 data class SearchResponse(
     @SerializedName("total_count")

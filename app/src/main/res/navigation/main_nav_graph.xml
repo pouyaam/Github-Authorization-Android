@@ -5,6 +5,16 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.mydigipay.challenge.presentation.github.SearchFragment"
-        android:label="SearchFragment" />
+        android:name="com.mydigipay.challenge.presentation.github.search.SearchFragment"
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_commitFragment"
+            app:destination="@id/commitFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/commitFragment"
+        android:name="com.mydigipay.challenge.presentation.github.commit.CommitFragment"
+        android:label="CommitFragment" />
 </navigation>
