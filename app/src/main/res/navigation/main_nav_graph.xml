@@ -12,9 +12,18 @@
             app:destination="@id/commitFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_searchFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/commitFragment"
         android:name="com.mydigipay.challenge.presentation.github.commit.CommitFragment"
         android:label="CommitFragment" />
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.mydigipay.challenge.presentation.github.user.UserProfileFragment"
+        android:label="UserProfileFragment" />
 </navigation>

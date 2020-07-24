@@ -40,8 +40,8 @@ data class User(
 
 fun User.mapToPresentationModel(): UserItem {
     return UserItem(
-        login = login ?: "",
-        id = id ?: "",
+        login = login ?: "N/A",
+        id = id ?: "N/A",
         nodeId = nodeId ?: "",
         avatarUrl = avatarUrl ?: "",
         gravatarId = gravatarId ?: "",
@@ -58,19 +58,19 @@ fun User.mapToPresentationModel(): UserItem {
         receivedEventsUrl = receivedEventsUrl ?: "",
         type = type ?: "",
         site_admin = site_admin ?: false,
-        name = name ?: "",
-        company = company ?: "",
-        blog = blog ?: "",
-        location = location ?: "",
-        email = email ?: "",
+        name = name ?: "N/A",
+        company = company ?: "N/A",
+        blog = blog ?: "N/A",
+        location = location ?: "N/A",
+        email = email ?: "N/A",
         hireable = hireable ?: false,
-        bio = bio ?: "",
-        twitterUsername = twitterUsername ?: "",
+        bio = bio ?: "N/A",
+        twitterUsername = twitterUsername ?: "N/A",
         publicRepos = publicRepos ?: "",
         publicGists = publicGists ?: "",
         followers = followers ?: "",
         following = following ?: "",
-        createdAt = createdAt ?: "",
-        updatedAt = updatedAt ?: ""
+        createdAt = createdAt ?: "N/A",
+        updatedAt = updatedAt ?: "N/A"
     )
 }

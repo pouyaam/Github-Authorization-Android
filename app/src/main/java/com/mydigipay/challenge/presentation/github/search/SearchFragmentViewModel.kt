@@ -20,22 +20,10 @@ class SearchFragmentViewModel @Inject constructor(
 
     private val compositeDisposable = CompositeDisposable()
     private val state: BehaviorRelay<SearchFragmentState> = BehaviorRelay.create()
-    private val user: BehaviorRelay<UserItem> = BehaviorRelay.create()
     private val unprocessableEntity = "422"
 
     fun getState() = state.hide()
-    fun getUser() = user.hide()
 
-    fun fetchUserInfo() {
-        userUseCase.getUser().subscribeOn(Schedulers.io())
-            .subscribe({
-                Log.i("", "")
-            }, {
-                Log.i("", "")
-            }).let {
-                compositeDisposable.add(it)
-            }
-    }
 
     fun searchRepository(query: String) {
         state.accept(SearchFragmentState.Loading)

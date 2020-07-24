@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.mydigipay.challenge.presentation.model.UserItem" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blank_background_color">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/movie_detail_poster_center_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_small"
+                app:layout_constraintBottom_toBottomOf="@id/movie_poster_img"
+                app:layout_constraintEnd_toEndOf="@id/movie_poster_img"
+                app:layout_constraintStart_toStartOf="@id/movie_poster_img"
+                app:layout_constraintTop_toTopOf="@id/movie_poster_img" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:background="@drawable/custom_card"
+                app:layout_constraintBottom_toBottomOf="@id/created_at_tv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/movie_detail_poster_center_indicator" />
+
+            <View
+                android:layout_width="@dimen/user_avatar_ring"
+                android:layout_height="@dimen/user_avatar_ring"
+                android:background="@drawable/user_avatar_ring"
+                app:layout_constraintBottom_toBottomOf="@id/movie_poster_img"
+                app:layout_constraintEnd_toEndOf="@id/movie_poster_img"
+                app:layout_constraintStart_toStartOf="@id/movie_poster_img"
+                app:layout_constraintTop_toTopOf="@id/movie_poster_img" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/movie_poster_img"
+                android:layout_width="@dimen/user_avatar"
+                android:layout_height="@dimen/user_avatar"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginBottom="@dimen/margin_large"
+                android:imageUrl="@{user.avatarUrl}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/user_name_tv"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:ellipsize="marquee"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="@{user.name}"
+                app:layout_constraintTop_toBottomOf="@id/movie_poster_img"
+                tools:text="Name" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/user_bio_tv"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:ellipsize="marquee"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="@{user.bio}"
+                app:layout_constraintTop_toBottomOf="@id/user_name_tv"
+                tools:text="bio" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/padding_xlarge"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_xlarge"
+                android:background="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/user_bio_tv" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/email_tv"
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_standard"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:drawablePadding="@dimen/padding_small"
+                android:ellipsize="marquee"
+                android:padding="@dimen/padding_standard"
+                android:singleLine="true"
+                android:text="@{user.email}"
+                app:drawableStartCompat="@drawable/ic_email"
+                app:layout_constraintTop_toBottomOf="@id/user_bio_tv"
+                tools:text="email" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/company_tv"
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/email_tv"
+                android:layout_marginStart="@dimen/margin_standard"
+                android:drawablePadding="@dimen/padding_small"
+                android:ellipsize="marquee"
+                android:padding="@dimen/padding_standard"
+                android:singleLine="true"
+                android:text="@{user.company}"
+                app:drawableStartCompat="@drawable/ic_company"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/email_tv"
+                tools:text="company" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/location_tv"
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/email_tv"
+                android:layout_marginStart="@dimen/margin_standard"
+                android:drawablePadding="@dimen/padding_small"
+                android:ellipsize="marquee"
+                android:padding="@dimen/padding_standard"
+                android:singleLine="true"
+                android:text="@{user.location}"
+                app:drawableStartCompat="@drawable/ic_location"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/company_tv"
+                tools:text="location" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/created_at_tv"
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_standard"
+                android:drawablePadding="@dimen/padding_small"
+                android:ellipsize="marquee"
+                android:padding="@dimen/padding_standard"
+                android:singleLine="true"
+                android:text="@{user.createdAt}"
+                app:drawableStartCompat="@drawable/ic_created_at"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/location_tv"
+                tools:text="created at" />
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/loading"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</layout>

@@ -58,10 +58,10 @@ class SearchFragment : Fragment() {
         viewModel = ViewModelProvider(this, factory)[SearchFragmentViewModel::class.java]
 
         initViewInteraction(savedInstanceState)
-        initDataInteraction(savedInstanceState)
+        initDataInteraction()
     }
 
-    private fun initDataInteraction(savedInstanceState: Bundle?) {
+    private fun initDataInteraction() {
 
         viewModel.getState()
             .observeOn(AndroidSchedulers.mainThread())
@@ -123,6 +123,9 @@ class SearchFragment : Fragment() {
         tryAgainBtn.setOnClickListener {
             if (searchQuery.isNotEmpty() && searchQuery.isNotBlank())
                 viewModel.searchRepository(searchQuery)
+        }
+        userAvatarImg.setOnClickListener {
+            findNavController().navigate(R.id.action_searchFragment_to_userProfileFragment)
         }
     }
 

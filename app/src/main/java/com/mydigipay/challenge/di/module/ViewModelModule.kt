@@ -5,6 +5,7 @@ import com.mydigipay.challenge.di.scope.ViewModelKey
 import com.mydigipay.challenge.presentation.auth.AuthActivityViewModel
 import com.mydigipay.challenge.presentation.github.commit.CommitFragmentViewModel
 import com.mydigipay.challenge.presentation.github.search.SearchFragmentViewModel
+import com.mydigipay.challenge.presentation.github.user.UserProfileViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -24,6 +25,11 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(CommitFragmentViewModel::class)
-    abstract fun bindCommitFragmentViewModel(commitFragmentViewMode : CommitFragmentViewModel): ViewModel
+    abstract fun bindCommitFragmentViewModel(commitFragmentViewMode: CommitFragmentViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UserProfileViewModel::class)
+    abstract fun bindUserProfileViewModel(userProfileViewModel: UserProfileViewModel): ViewModel
 
 }
