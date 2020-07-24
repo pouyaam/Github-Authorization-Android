@@ -10,7 +10,9 @@ import com.mydigipay.challenge.presentation.model.RepositoryItem
 import com.mydigipay.challenge.presentation.model.UserItem
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import retrofit2.HttpException
 import javax.inject.Inject
+import javax.net.ssl.HttpsURLConnection
 
 class SearchFragmentViewModel @Inject constructor(
     private val searchUseCase: SearchUseCase,
@@ -21,6 +23,7 @@ class SearchFragmentViewModel @Inject constructor(
     private val compositeDisposable = CompositeDisposable()
     private val state: BehaviorRelay<SearchFragmentState> = BehaviorRelay.create()
     private val user: BehaviorRelay<UserItem> = BehaviorRelay.create()
+    private val unprocessableEntity = "422"
 
     fun getState() = state.hide()
     fun getUser() = user.hide()
@@ -41,11 +44,19 @@ class SearchFragmentViewModel @Inject constructor(
         searchUseCase.searchRepository(query)
             .subscribeOn(Schedulers.io())
             .subscribe({
-                state.accept(SearchFragmentState.SearchedRepository(it.map {
-                    it.mapToPresentationModel()
-                }))
+                if (it.isEmpty()) {
+                    state.accept(SearchFragmentState.NoRepoFound)
+                } else {
+                    state.accept(SearchFragmentState.SearchedRepository(it.map {
+                        it.mapToPresentationModel()
+                    }))
+                }
             }, {
-                state.accept(SearchFragmentState.Error(it.message))
+                if (it.message != null && it.message.toString().contains(unprocessableEntity)) {
+                    state.accept(SearchFragmentState.EmptyQuery)
+                } else {
+                    state.accept(SearchFragmentState.Error)
+                }
             }).let {
                 compositeDisposable.add(it)
             }
@@ -61,5 +72,7 @@ class SearchFragmentViewModel @Inject constructor(
 sealed class SearchFragmentState() {
     data class SearchedRepository(val repositories: List<RepositoryItem>) : SearchFragmentState()
     object Loading : SearchFragmentState()
-    data class Error(val message: String?) : SearchFragmentState()
+    object Error : SearchFragmentState()
+    object NoRepoFound : SearchFragmentState()
+    object EmptyQuery : SearchFragmentState()
 }

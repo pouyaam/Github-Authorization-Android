@@ -32,14 +32,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/network_error_group"
+        android:id="@+id/networkErrorGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="btn_tryagain,auth_error_tv" />
+        app:constraint_referenced_ids="tryAgainBtn,authErrorTv" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/auth_error_tv"
+        android:id="@+id/authErrorTv"
         style="@style/TextAppearance.MaterialComponents.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,23 +47,24 @@
         android:gravity="center"
         android:text="@string/netwrok_error"
         app:drawableTopCompat="@drawable/ic_github"
-        app:layout_constraintBottom_toTopOf="@id/btn_tryagain"
+        app:layout_constraintBottom_toTopOf="@id/tryAgainBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_tryagain"
+        android:id="@+id/tryAgainBtn"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_standard"
+        android:onClick="tryAgain"
         android:text="@string/try_again"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/auth_error_tv" />
+        app:layout_constraintTop_toBottomOf="@id/authErrorTv" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

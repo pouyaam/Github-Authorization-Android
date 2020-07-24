@@ -3,9 +3,12 @@ package com.mydigipay.challenge.presentation.auth
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import com.mydigipay.challenge.app.ViewModelProviderFactory
 import com.mydigipay.challenge.app.component
 import com.mydigipay.challenge.presentation.github.MainActivity
 import com.mydigipay.challenge.presentation.github.R
@@ -24,13 +27,16 @@ class AuthActivity : AppCompatActivity() {
     private lateinit var compositeDisposable: CompositeDisposable
 
     @Inject
+    lateinit var factory: ViewModelProviderFactory
     lateinit var viewModel: AuthActivityViewModel
     private val keyCode = "code"
+    private var code: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         component.viewModelProviderFactory.create().inject(this)
+        viewModel = ViewModelProvider(this, factory)[AuthActivityViewModel::class.java]
 
         compositeDisposable = CompositeDisposable()
 
@@ -55,10 +61,8 @@ class AuthActivity : AppCompatActivity() {
         super.onNewIntent(intent)
         intent?.let {
             if (Intent.ACTION_VIEW == it.action) {
-                val code = it.data?.getQueryParameter(keyCode)
-                code?.let {
-                    viewModel.fetchAccessToken(code)
-                }
+                code = it.data?.getQueryParameter(keyCode) ?: ""
+                viewModel.fetchAccessToken(code)
                 viewModel.getState().observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
                         handleViewState(it)
@@ -72,7 +76,7 @@ class AuthActivity : AppCompatActivity() {
     private fun handleViewState(state: AuthActivityState) {
         when (state) {
             is AuthActivityState.Loading -> {
-                network_error_group.visibility = GONE
+                networkErrorGroup.visibility = GONE
                 authorize_btn.visibility = GONE
                 loading.show()
 
@@ -82,11 +86,15 @@ class AuthActivity : AppCompatActivity() {
                 finish()
             }
             is AuthActivityState.Error -> {
-                network_error_group.visibility = VISIBLE
+                networkErrorGroup.visibility = VISIBLE
                 authorize_btn.visibility = GONE
                 loading.hide()
             }
         }
+    }
+
+    fun tryAgain(view: View) {
+        viewModel.fetchAccessToken(code)
     }
 
     override fun onDestroy() {

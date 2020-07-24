@@ -3,15 +3,16 @@ package com.mydigipay.challenge.presentation.github
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxbinding3.widget.textChanges
+import com.mydigipay.challenge.app.ViewModelProviderFactory
 import com.mydigipay.challenge.app.component
-import com.mydigipay.challenge.presentation.github.databinding.FragmentSearchBinding
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -19,18 +20,20 @@ import kotlinx.android.synthetic.main.fragment_search.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+
 class SearchFragment : Fragment() {
 
-    private lateinit var binding: FragmentSearchBinding
     private val searchInputDelay = 300L
     private val searchInputDelayTimeUnit = TimeUnit.MILLISECONDS
     private lateinit var compositeDisposable: CompositeDisposable
-    private var firstVisibleRepo = 0
+    private var lastVisibleRepo = 0
     private val stateBundlePositionKey = "POSITION_KEY"
+    private val stateBundleSearchQueryKey = "QUERY_KEY"
     private lateinit var adapter: RepoAdapter
-    private lateinit var repoRv: RecyclerView
+    private var searchQuery = ""
 
     @Inject
+    lateinit var factory: ViewModelProviderFactory
     lateinit var viewModel: SearchFragmentViewModel
 
     override fun onCreateView(
@@ -38,8 +41,7 @@ class SearchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
-        return binding.root
+        return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -47,11 +49,13 @@ class SearchFragment : Fragment() {
 
         compositeDisposable = CompositeDisposable()
         component.viewModelProviderFactory.create().inject(this)
-        initViewIntraction(savedInstanceState)
-        initDataIntraction(savedInstanceState)
+        viewModel = ViewModelProvider(this, factory)[SearchFragmentViewModel::class.java]
+
+        initViewInteraction(savedInstanceState)
+        initDataInteraction(savedInstanceState)
     }
 
-    private fun initDataIntraction(savedInstanceState: Bundle?) {
+    private fun initDataInteraction(savedInstanceState: Bundle?) {
 
         viewModel.getState()
             .observeOn(AndroidSchedulers.mainThread())
@@ -60,30 +64,58 @@ class SearchFragment : Fragment() {
             }.let {
                 compositeDisposable.add(it)
             }
-        viewModel.fetchUserInfo()
     }
 
     private fun handleState(state: SearchFragmentState) {
         when (state) {
             is SearchFragmentState.Error -> {
                 loading.hide()
+                repoRv.visibility = GONE
+                errorTv.visibility = VISIBLE
+                tryAgainBtn.visibility = VISIBLE
+                errorTv.text = getString(R.string.netwrok_error)
             }
             is SearchFragmentState.SearchedRepository -> {
                 loading.hide()
                 adapter.submitList(state.repositories)
+                errorTv.visibility = GONE
+                tryAgainBtn.visibility = GONE
+                repoRv.visibility = VISIBLE
+                repoRv.scrollToPosition(lastVisibleRepo)
             }
             is SearchFragmentState.Loading -> {
                 loading.show()
+                repoRv.visibility = GONE
+                errorTv.visibility = GONE
+                tryAgainBtn.visibility = GONE
+            }
+            is SearchFragmentState.NoRepoFound -> {
+                loading.hide()
+                repoRv.visibility = GONE
+                errorTv.visibility = VISIBLE
+                tryAgainBtn.visibility = GONE
+                errorTv.text = getString(R.string.no_repo_found)
+            }
+            is SearchFragmentState.EmptyQuery -> {
+                loading.hide()
+                repoRv.visibility = GONE
+                errorTv.visibility = GONE
+                tryAgainBtn.visibility = GONE
             }
         }
     }
 
-    private fun initViewIntraction(savedInstanceState: Bundle?) {
+    private fun initViewInteraction(savedInstanceState: Bundle?) {
         savedInstanceState?.let {
-            firstVisibleRepo = it.getInt(stateBundlePositionKey)
+            lastVisibleRepo = it.getInt(stateBundlePositionKey)
+            searchQuery = it.getString(stateBundleSearchQueryKey) ?: ""
         }
-        initSearchBar()
         initRecyclerView()
+        initSearchBar()
+        tryAgainBtn.setOnClickListener {
+            if (searchQuery.isNotEmpty() && searchQuery.isNotBlank())
+                viewModel.searchRepository(searchQuery)
+        }
     }
 
     private fun initRecyclerView() {
@@ -95,33 +127,38 @@ class SearchFragment : Fragment() {
             }).let {
                 compositeDisposable.add(it)
             }
-        repoRv = binding.repoRv
         repoRv.layoutManager = LinearLayoutManager(requireContext())
         repoRv.adapter = adapter
+        repoRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                when (newState) {
+                    RecyclerView.SCROLL_STATE_IDLE -> {
+                        lastVisibleRepo =
+                            (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+                    }
+                }
+            }
+        })
     }
 
-    private fun getFirstVisibleItemPosition(): Int {
-        (repoRv.layoutManager as? GridLayoutManager)
-            ?.let {
-                return it.findFirstCompletelyVisibleItemPosition()
-            }
-        return 0
-    }
 
     private fun initSearchBar() {
-        binding.searchEdt
+        searchEdt
             .textChanges()
             .skipInitialValue()
             .debounce(searchInputDelay, searchInputDelayTimeUnit)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe({
-                viewModel.searchRepository(it.toString())
+                if (!it.toString().equals(searchQuery)) {
+                    searchQuery = it.toString()
+                    viewModel.searchRepository(searchQuery)
+                }
             }, {
             }).let {
                 compositeDisposable.add(it)
             }
-
     }
 
     override fun onDestroyView() {
@@ -130,8 +167,8 @@ class SearchFragment : Fragment() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt(stateBundlePositionKey, firstVisibleRepo)
+        outState.putInt(stateBundlePositionKey, lastVisibleRepo)
+        outState.putString(stateBundleSearchQueryKey, searchQuery)
         super.onSaveInstanceState(outState)
-
     }
 }
