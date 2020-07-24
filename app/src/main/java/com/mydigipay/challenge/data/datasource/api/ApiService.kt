@@ -1,9 +1,6 @@
 package com.mydigipay.challenge.data.datasource.api
 
-import com.mydigipay.challenge.data.model.RemoteRepositorySearchResponse
-import com.mydigipay.challenge.data.model.RequestAccessToken
-import com.mydigipay.challenge.data.model.ResponseAccessToken
-import com.mydigipay.challenge.data.model.SearchResponse
+import com.mydigipay.challenge.data.model.*
 import io.reactivex.Single
 import retrofit2.http.*
 
@@ -15,4 +12,7 @@ interface ApiService {
 
     @GET("/search/repositories")
     fun performSearch(@Query("q") query: String): Single<SearchResponse>
+
+    @GET("/user")
+    fun getUser(): Single<UserEntity>
 }

@@ -3,9 +3,9 @@ package com.mydigipay.challenge.di.module
 import com.mydigipay.challenge.data.datasource.local.LocalAccessTokenDataSource
 import com.mydigipay.challenge.data.datasource.remote.RemoteAccessTokenDataSource
 import com.mydigipay.challenge.data.datasource.remote.GithubDataSource
-import com.mydigipay.challenge.data.repository.SearchRepositoryImpl
+import com.mydigipay.challenge.data.repository.GithubRepositoryImpl
 import com.mydigipay.challenge.data.repository.TokenRepositoryImpl
-import com.mydigipay.challenge.domain.repository.SearchRepository
+import com.mydigipay.challenge.domain.repository.GithubRepository
 import com.mydigipay.challenge.domain.repository.TokenRepository
 import dagger.Module
 import dagger.Provides
@@ -14,7 +14,7 @@ import dagger.Provides
 class RepositoryModule {
 
     @Provides
-    fun ProvideTokenRepository(
+    fun provideTokenRepository(
         localAccessTokenDataSource: LocalAccessTokenDataSource,
         remoteAccessTokenDataSource: RemoteAccessTokenDataSource
     ): TokenRepository {
@@ -22,7 +22,7 @@ class RepositoryModule {
     }
 
     @Provides
-    fun ProvideSearchRepository(searchDataSource: GithubDataSource): SearchRepository {
-        return SearchRepositoryImpl(searchDataSource)
+    fun provideGithubRepository(githubDataSource: GithubDataSource): GithubRepository {
+        return GithubRepositoryImpl(githubDataSource)
     }
 }

@@ -60,6 +60,7 @@ class SearchFragment : Fragment() {
             }.let {
                 compositeDisposable.add(it)
             }
+        viewModel.fetchUserInfo()
     }
 
     private fun handleState(state: SearchFragmentState) {

@@ -76,7 +76,6 @@ class ApiModule {
 
             val requestBuilder = originalRequest.newBuilder()
                 .header(authTokenKey, "Bearer $accessToken")
-                .method(originalRequest.method, originalRequest.body)
 
             chain.proceed(requestBuilder.build())
         }

@@ -1,24 +1,44 @@
 package com.mydigipay.challenge.presentation.github
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.mydigipay.challenge.domain.model.mapToPresentationModel
 import com.mydigipay.challenge.domain.usecase.SearchUseCase
+import com.mydigipay.challenge.domain.usecase.UserUseCase
 import com.mydigipay.challenge.presentation.model.RepositoryItem
+import com.mydigipay.challenge.presentation.model.UserItem
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class SearchFragmentViewModel @Inject constructor(private val useCase: SearchUseCase) :
+class SearchFragmentViewModel @Inject constructor(
+    private val searchUseCase: SearchUseCase,
+    private val userUseCase: UserUseCase
+) :
     ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
     private val state: BehaviorRelay<SearchFragmentState> = BehaviorRelay.create()
+    private val user: BehaviorRelay<UserItem> = BehaviorRelay.create()
+
     fun getState() = state.hide()
+    fun getUser() = user.hide()
+
+    fun fetchUserInfo() {
+        userUseCase.getUser().subscribeOn(Schedulers.io())
+            .subscribe({
+                Log.i("", "")
+            }, {
+                Log.i("", "")
+            }).let {
+                compositeDisposable.add(it)
+            }
+    }
 
     fun searchRepository(query: String) {
         state.accept(SearchFragmentState.Loading)
-        useCase.searchRepository(query)
+        searchUseCase.searchRepository(query)
             .subscribeOn(Schedulers.io())
             .subscribe({
                 state.accept(SearchFragmentState.SearchedRepository(it.map {

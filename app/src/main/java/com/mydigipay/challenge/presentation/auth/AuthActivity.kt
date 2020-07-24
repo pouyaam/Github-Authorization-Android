@@ -14,10 +14,10 @@ import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_auth.*
 import javax.inject.Inject
 
-const val CLIENT_ID = "Iv1.791f3bf9dee10749"
-const val CLIENT_SECRET = "b252036c3238ec98a4a1dbd2ad6683c5664295a7"
-const val REDIRECT_URI = ""
-const val STATE = "0"
+const val CLIENT_ID = "685e6244dd56a72db4c6"
+const val CLIENT_SECRET = "50c7fa47bd384aaf6487c4ae2a375a8f6891cda0"
+const val REDIRECT_URI = "challenge://mydigipay.com/mohsen/callback"
+const val STATE = "0123456"
 
 class AuthActivity : AppCompatActivity() {
 
