@@ -1,4 +1,4 @@
-package com.einhesari.batmanmovies.di.module
+package com.mydigipay.challenge.di.module
 
 import androidx.lifecycle.ViewModel
 import com.mydigipay.challenge.di.scope.ViewModelKey

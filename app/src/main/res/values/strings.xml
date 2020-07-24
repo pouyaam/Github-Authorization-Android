@@ -3,6 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="authorize">AUTHORIZE</string>
     <string name="netwrok_error">Unable To Contact To Github</string>
+    <string name="empty_search">Search In Github Repos</string>
     <string name="no_repo_found">Sorry, Nothing Found</string>
     <string name="no_commit">There is no commit</string>
     <string name="try_again">Try again</string>

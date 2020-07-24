@@ -1,11 +1,7 @@
 package com.mydigipay.challenge.di.component
 
 import android.content.Context
-import com.einhesari.batmanmovies.di.module.ViewModelModule
-import com.mydigipay.challenge.di.module.ApiModule
-import com.mydigipay.challenge.di.module.DataSourceModule
-import com.mydigipay.challenge.di.module.RepositoryModule
-import com.mydigipay.challenge.di.module.SharedPrefsModule
+import com.mydigipay.challenge.di.module.*
 import com.mydigipay.challenge.presentation.auth.AuthActivity
 import com.mydigipay.challenge.presentation.github.commit.CommitFragment
 import com.mydigipay.challenge.presentation.github.search.SearchFragment

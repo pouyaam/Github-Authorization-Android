@@ -17,6 +17,7 @@ import com.mydigipay.challenge.app.ViewModelProviderFactory
 import com.mydigipay.challenge.app.component
 import com.mydigipay.challenge.presentation.github.R
 import com.mydigipay.challenge.presentation.github.SearchToCommitViewModel
+import com.mydigipay.challenge.presentation.model.UserItem
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -35,7 +36,6 @@ class SearchFragment : Fragment() {
     private val stateBundleSearchQueryKey = "QUERY_KEY"
     private lateinit var adapter: RepoAdapter
     private var searchQuery = ""
-
     private val repoSelectionViewModel: SearchToCommitViewModel by activityViewModels()
 
     @Inject
@@ -70,6 +70,7 @@ class SearchFragment : Fragment() {
             }.let {
                 compositeDisposable.add(it)
             }
+
     }
 
     private fun handleState(state: SearchFragmentState) {
@@ -105,8 +106,9 @@ class SearchFragment : Fragment() {
             is SearchFragmentState.EmptyQuery -> {
                 loading.hide()
                 repoRv.visibility = GONE
-                errorTv.visibility = GONE
+                errorTv.visibility = VISIBLE
                 tryAgainBtn.visibility = GONE
+                errorTv.text = getString(R.string.empty_search)
             }
         }
     }
@@ -131,7 +133,7 @@ class SearchFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 repoSelectionViewModel.owner = it.repoOwnerItem?.login ?: ""
-                repoSelectionViewModel.repo = it.name ?: ""
+                repoSelectionViewModel.repo = it.name
                 findNavController().navigate(R.id.action_searchFragment_to_commitFragment)
             }.let {
                 compositeDisposable.add(it)
