@@ -27,7 +27,7 @@ class AuthActivity : AppCompatActivity() {
 
     @Inject
     lateinit var factory: ViewModelProviderFactory
-    lateinit var viewModel: AuthActivityViewModel
+    lateinit var viewModel: AuthViewModel
     private val keyCode = "code"
     private var code: String = ""
 
@@ -35,7 +35,7 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         component.viewModelProviderFactory.create().inject(this)
-        viewModel = ViewModelProvider(this, factory)[AuthActivityViewModel::class.java]
+        viewModel = ViewModelProvider(this, factory)[AuthViewModel::class.java]
 
         compositeDisposable = CompositeDisposable()
 

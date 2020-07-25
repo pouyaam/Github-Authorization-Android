@@ -16,6 +16,7 @@ class UserProfileViewModel @Inject constructor(private val userUseCase: UserUseC
     fun getState() = state.hide()
 
     fun fetchUserInfo() {
+        state.accept(UserProfileFragmentState.Loading)
         userUseCase.getUser().subscribeOn(Schedulers.io())
             .subscribe({
                 state.accept(UserProfileFragmentState.GotUser(it.mapToPresentationModel()))

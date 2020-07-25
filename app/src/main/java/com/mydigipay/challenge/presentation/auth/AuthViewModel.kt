@@ -7,7 +7,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class AuthActivityViewModel @Inject constructor(private val useCase: AuthUseCase) :
+class AuthViewModel @Inject constructor(private val useCase: AuthUseCase) :
     ViewModel() {
     private val compositeDisposable = CompositeDisposable()
     private val state: BehaviorRelay<AuthActivityState> = BehaviorRelay.create()

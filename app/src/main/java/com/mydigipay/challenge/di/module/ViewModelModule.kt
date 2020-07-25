@@ -2,9 +2,9 @@ package com.mydigipay.challenge.di.module
 
 import androidx.lifecycle.ViewModel
 import com.mydigipay.challenge.di.scope.ViewModelKey
-import com.mydigipay.challenge.presentation.auth.AuthActivityViewModel
-import com.mydigipay.challenge.presentation.github.commit.CommitFragmentViewModel
-import com.mydigipay.challenge.presentation.github.search.SearchFragmentViewModel
+import com.mydigipay.challenge.presentation.auth.AuthViewModel
+import com.mydigipay.challenge.presentation.github.commit.CommitViewModel
+import com.mydigipay.challenge.presentation.github.search.SearchViewModel
 import com.mydigipay.challenge.presentation.github.user.UserProfileViewModel
 import dagger.Binds
 import dagger.Module
@@ -14,18 +14,18 @@ import dagger.multibindings.IntoMap
 abstract class ViewModelModule {
     @Binds
     @IntoMap
-    @ViewModelKey(AuthActivityViewModel::class)
-    abstract fun bindAuthActivityViewModel(authActivityViewModel: AuthActivityViewModel): ViewModel
+    @ViewModelKey(AuthViewModel::class)
+    abstract fun bindAuthViewModel(authViewModel: AuthViewModel): ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(SearchFragmentViewModel::class)
-    abstract fun bindSearchFragmentViewModel(searchFragmentViewModel: SearchFragmentViewModel): ViewModel
+    @ViewModelKey(SearchViewModel::class)
+    abstract fun bindSearchViewModel(searchViewModel: SearchViewModel): ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(CommitFragmentViewModel::class)
-    abstract fun bindCommitFragmentViewModel(commitFragmentViewMode: CommitFragmentViewModel): ViewModel
+    @ViewModelKey(CommitViewModel::class)
+    abstract fun bindCommitViewModel(commitViewMode: CommitViewModel): ViewModel
 
     @Binds
     @IntoMap

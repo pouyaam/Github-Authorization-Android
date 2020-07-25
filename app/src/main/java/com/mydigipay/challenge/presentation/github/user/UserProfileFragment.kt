@@ -70,6 +70,7 @@ class UserProfileFragment : Fragment() {
                 binding.user = state.user
             }
             is UserProfileFragmentState.Error -> {
+                loading.hide()
                 Toast.makeText(context, getString(R.string.user_profile_error), Toast.LENGTH_LONG)
                     .show()
                 findNavController().navigateUp()

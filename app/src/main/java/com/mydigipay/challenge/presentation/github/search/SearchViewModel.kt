@@ -12,7 +12,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class SearchFragmentViewModel @Inject constructor(
+class SearchViewModel @Inject constructor(
     private val searchUseCase: SearchUseCase
 ) :
     ViewModel() {

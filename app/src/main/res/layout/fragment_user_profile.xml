@@ -20,14 +20,14 @@
             android:layout_height="match_parent">
 
             <View
-                android:id="@+id/movie_detail_poster_center_indicator"
+                android:id="@+id/user_avatar_center_indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_small"
-                app:layout_constraintBottom_toBottomOf="@id/movie_poster_img"
-                app:layout_constraintEnd_toEndOf="@id/movie_poster_img"
-                app:layout_constraintStart_toStartOf="@id/movie_poster_img"
-                app:layout_constraintTop_toTopOf="@id/movie_poster_img" />
+                app:layout_constraintBottom_toBottomOf="@id/user_avatar_img"
+                app:layout_constraintEnd_toEndOf="@id/user_avatar_img"
+                app:layout_constraintStart_toStartOf="@id/user_avatar_img"
+                app:layout_constraintTop_toTopOf="@id/user_avatar_img" />
 
             <View
                 android:layout_width="match_parent"
@@ -38,19 +38,19 @@
                 app:layout_constraintBottom_toBottomOf="@id/created_at_tv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/movie_detail_poster_center_indicator" />
+                app:layout_constraintTop_toTopOf="@id/user_avatar_center_indicator" />
 
             <View
                 android:layout_width="@dimen/user_avatar_ring"
                 android:layout_height="@dimen/user_avatar_ring"
                 android:background="@drawable/user_avatar_ring"
-                app:layout_constraintBottom_toBottomOf="@id/movie_poster_img"
-                app:layout_constraintEnd_toEndOf="@id/movie_poster_img"
-                app:layout_constraintStart_toStartOf="@id/movie_poster_img"
-                app:layout_constraintTop_toTopOf="@id/movie_poster_img" />
+                app:layout_constraintBottom_toBottomOf="@id/user_avatar_img"
+                app:layout_constraintEnd_toEndOf="@id/user_avatar_img"
+                app:layout_constraintStart_toStartOf="@id/user_avatar_img"
+                app:layout_constraintTop_toTopOf="@id/user_avatar_img" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/movie_poster_img"
+                android:id="@+id/user_avatar_img"
                 android:layout_width="@dimen/user_avatar"
                 android:layout_height="@dimen/user_avatar"
                 android:layout_marginTop="@dimen/margin_large"
@@ -73,7 +73,7 @@
                 android:gravity="center"
                 android:singleLine="true"
                 android:text="@{user.name}"
-                app:layout_constraintTop_toBottomOf="@id/movie_poster_img"
+                app:layout_constraintTop_toBottomOf="@id/user_avatar_img"
                 tools:text="Name" />
 
             <com.google.android.material.textview.MaterialTextView

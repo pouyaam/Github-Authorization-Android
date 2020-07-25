@@ -17,7 +17,6 @@ import com.mydigipay.challenge.app.ViewModelProviderFactory
 import com.mydigipay.challenge.app.component
 import com.mydigipay.challenge.presentation.github.R
 import com.mydigipay.challenge.presentation.github.SearchToCommitViewModel
-import com.mydigipay.challenge.presentation.model.UserItem
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -40,7 +39,7 @@ class SearchFragment : Fragment() {
 
     @Inject
     lateinit var factory: ViewModelProviderFactory
-    lateinit var viewModel: SearchFragmentViewModel
+    lateinit var viewModel: SearchViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,7 +54,7 @@ class SearchFragment : Fragment() {
 
         compositeDisposable = CompositeDisposable()
         component.viewModelProviderFactory.create().inject(this)
-        viewModel = ViewModelProvider(this, factory)[SearchFragmentViewModel::class.java]
+        viewModel = ViewModelProvider(this, factory)[SearchViewModel::class.java]
 
         initViewInteraction(savedInstanceState)
         initDataInteraction()

@@ -9,7 +9,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class CommitFragmentViewModel @Inject constructor(private val commitUseCase: CommitUseCase) : ViewModel() {
+class CommitViewModel @Inject constructor(private val commitUseCase: CommitUseCase) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
     private val state: BehaviorRelay<CommitFragmentState> = BehaviorRelay.create()
