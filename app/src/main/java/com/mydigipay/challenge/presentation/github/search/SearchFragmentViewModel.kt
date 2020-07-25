@@ -13,8 +13,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class SearchFragmentViewModel @Inject constructor(
-    private val searchUseCase: SearchUseCase,
-    private val userUseCase: UserUseCase
+    private val searchUseCase: SearchUseCase
 ) :
     ViewModel() {
 
