@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mydigipay.challenge.app.ViewModelProviderFactory
 import com.mydigipay.challenge.app.component
 import com.mydigipay.challenge.presentation.github.R
@@ -27,8 +28,9 @@ class CommitFragment : Fragment() {
 
     @Inject
     lateinit var factory: ViewModelProviderFactory
-    lateinit var viewModel: CommitFragmentViewModel
-
+    lateinit var viewModel: CommitViewModel
+    private var lastVisibleCommit = 0
+    private val stateBundlePositionKey = "POSITION_KEY"
     private lateinit var adapter: CommitAdapter
 
     override fun onCreateView(
@@ -44,27 +46,41 @@ class CommitFragment : Fragment() {
 
         compositeDisposable = CompositeDisposable()
         component.viewModelProviderFactory.create().inject(this)
-        viewModel = ViewModelProvider(this, factory)[CommitFragmentViewModel::class.java]
+        viewModel = ViewModelProvider(this, factory)[CommitViewModel::class.java]
 
-        initViewIntraction()
-        initDataInteraction()
+        initViewInteraction(savedInstanceState)
+        initDataInteraction(savedInstanceState)
 
     }
 
-    private fun initViewIntraction() {
+    private fun initViewInteraction(savedInstanceState: Bundle?) {
+        savedInstanceState?.let {
+            lastVisibleCommit = it.getInt(stateBundlePositionKey)
+        }
         adapter =
             CommitAdapter()
 
         commitRv.layoutManager = LinearLayoutManager(requireContext())
         commitRv.adapter = adapter
-
+        commitRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                when (newState) {
+                    RecyclerView.SCROLL_STATE_IDLE -> {
+                        lastVisibleCommit =
+                            (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+                    }
+                }
+            }
+        })
         tryAgainBtn.setOnClickListener {
             viewModel.getCommits(repoSelectionViewModel.owner, repoSelectionViewModel.repo)
         }
     }
 
-    private fun initDataInteraction() {
-        viewModel.getCommits(repoSelectionViewModel.owner, repoSelectionViewModel.repo)
+    private fun initDataInteraction(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null)
+            viewModel.getCommits(repoSelectionViewModel.owner, repoSelectionViewModel.repo)
         viewModel.getState()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
@@ -89,6 +105,7 @@ class CommitFragment : Fragment() {
                 errorTv.visibility = View.GONE
                 tryAgainBtn.visibility = View.GONE
                 commitRv.visibility = View.VISIBLE
+                commitRv.scrollToPosition(lastVisibleCommit)
             }
             is CommitFragmentState.Loading -> {
                 loading.show()
@@ -109,5 +126,11 @@ class CommitFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         compositeDisposable.dispose()
+
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(stateBundlePositionKey, lastVisibleCommit)
+        super.onSaveInstanceState(outState)
     }
 }
