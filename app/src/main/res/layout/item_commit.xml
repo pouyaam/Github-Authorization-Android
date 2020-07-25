@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="commit"
+            type="com.mydigipay.challenge.presentation.model.CommitItem" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_small"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="3dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/commit_message_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small"
+                android:maxLines="3"
+                android:text="@{commit.message}"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/email_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                app:layout_constraintStart_toStartOf="@+id/commit_message_tv"
+                app:layout_constraintTop_toBottomOf="@+id/commit_message_tv"
+                app:srcCompat="@drawable/ic_email" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/owner_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                app:layout_constraintStart_toStartOf="@+id/email_img"
+                app:layout_constraintTop_toBottomOf="@+id/email_img"
+                app:srcCompat="@drawable/ic_account" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/update_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/owner_img"
+                app:layout_constraintTop_toBottomOf="@+id/owner_img"
+                app:srcCompat="@drawable/ic_update" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/email_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small"
+                android:text="@{commit.email}"
+                android:textColor="@android:color/black"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@+id/email_img"
+                app:layout_constraintEnd_toEndOf="@+id/commit_message_tv"
+                app:layout_constraintStart_toEndOf="@+id/email_img"
+                app:layout_constraintTop_toTopOf="@+id/email_img" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/owner_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small"
+                android:text="@{commit.name}"
+                android:textColor="@android:color/black"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@+id/owner_img"
+                app:layout_constraintEnd_toEndOf="@+id/commit_message_tv"
+                app:layout_constraintStart_toEndOf="@+id/email_img"
+                app:layout_constraintTop_toTopOf="@+id/owner_img" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/date_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small"
+                android:text="@{commit.date}"
+                android:textColor="@android:color/black"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@+id/update_img"
+                app:layout_constraintEnd_toEndOf="@+id/commit_message_tv"
+                app:layout_constraintStart_toEndOf="@+id/update_img"
+                app:layout_constraintTop_toTopOf="@+id/update_img" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
