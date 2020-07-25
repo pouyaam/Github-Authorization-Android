@@ -43,7 +43,16 @@ class UserProfileFragment : Fragment() {
         compositeDisposable = CompositeDisposable()
         component.viewModelProviderFactory.create().inject(this)
         viewModel = ViewModelProvider(this, factory)[UserProfileViewModel::class.java]
-        viewModel.fetchUserInfo()
+
+        initDataInteraction(savedInstanceState)
+
+
+    }
+
+    private fun initDataInteraction(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null){
+            viewModel.fetchUserInfo()
+        }
         viewModel.getState()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
