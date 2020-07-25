@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blank_background_color">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/margin_small"
+        android:layout_toStartOf="@id/userAvatarImg"
+        android:background="@drawable/custom_card"
+        android:paddingStart="@dimen/padding_large"
+        android:paddingEnd="@dimen/margin_large" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/searchEdt"
+        style="@style/TextAppearance.MaterialComponents.Body1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/search_edt_height"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/margin_small"
+        android:layout_toStartOf="@id/userAvatarImg"
+        android:autofillHints="hello"
+        android:background="@android:color/transparent"
+        android:hint="@string/search_hint"
+        android:paddingStart="@dimen/padding_large"
+        android:paddingEnd="@dimen/padding_large"
+        android:singleLine="true" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/userAvatarImg"
+        android:layout_width="@dimen/search_fragment_user_avatar_height"
+        android:layout_height="@dimen/search_fragment_user_avatar_height"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/margin_small"
+        app:srcCompat="@drawable/ic_account" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/repoRv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchEdt" />
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/loading"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"
+        android:visibility="invisible" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/errorTv"
+        style="@style/TextAppearance.MaterialComponents.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:drawablePadding="@dimen/padding_standard"
+        android:gravity="center"
+        android:text="@string/empty_search"
+        app:drawableTopCompat="@drawable/ic_github" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tryAgainBtn"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/errorTv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_standard"
+        android:text="@string/try_again"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/errorTv" />
+</RelativeLayout>

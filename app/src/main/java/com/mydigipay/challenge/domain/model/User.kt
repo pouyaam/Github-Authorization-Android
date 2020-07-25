@@ -1,0 +1,76 @@
+package com.mydigipay.challenge.domain.model
+
+import com.google.gson.annotations.SerializedName
+import com.mydigipay.challenge.presentation.model.UserItem
+
+data class User(
+    var login: String? ,
+    var id: Int? ,
+    var nodeId: String? ,
+    var avatarUrl: String? ,
+    var gravatarId: String? ,
+    var url: String? ,
+    var htmlUrl: String? ,
+    var followersUrl: String? ,
+    var followingUrl: String? ,
+    var gistsUrl: String? ,
+    var starredUrl: String? ,
+    var subscriptionsUrl: String? ,
+    var organizationsUrl: String? ,
+    var reposUrl: String? ,
+    var eventsUrl: String? ,
+    var receivedEventsUrl: String? ,
+    var type: String? ,
+    var site_admin: Boolean?,
+    var name: String? ,
+    var company: String? ,
+    var blog: String? ,
+    var location: String? ,
+    var email: String? ,
+    var hireable: Boolean?,
+    var bio: String? ,
+    var twitterUsername: String? ,
+    var publicRepos: Int? ,
+    var publicGists: Int? ,
+    var followers: Int? ,
+    var following: Int? ,
+    var createdAt: String? ,
+    var updatedAt: String? 
+)
+
+fun User.mapToPresentationModel(): UserItem {
+    return UserItem(
+        login = login ?: "N/A",
+        id = id ?: 0,
+        nodeId = nodeId ?: "",
+        avatarUrl = avatarUrl ?: "",
+        gravatarId = gravatarId ?: "",
+        url = url ?: "",
+        htmlUrl = htmlUrl ?: "",
+        followersUrl = followersUrl ?: "",
+        followingUrl = followingUrl ?: "",
+        gistsUrl = gistsUrl ?: "",
+        starredUrl = starredUrl ?: "",
+        subscriptionsUrl = subscriptionsUrl ?: "",
+        organizationsUrl = organizationsUrl ?: "",
+        reposUrl = reposUrl ?: "",
+        eventsUrl = eventsUrl ?: "",
+        receivedEventsUrl = receivedEventsUrl ?: "",
+        type = type ?: "",
+        site_admin = site_admin ?: false,
+        name = name ?: "N/A",
+        company = company ?: "N/A",
+        blog = blog ?: "N/A",
+        location = location ?: "N/A",
+        email = email ?: "N/A",
+        hireable = hireable ?: false,
+        bio = bio ?: "N/A",
+        twitterUsername = twitterUsername ?: "N/A",
+        publicRepos = publicRepos ?: 0,
+        publicGists = publicGists ?: 0,
+        followers = followers ?: 0,
+        following = following ?: 0,
+        createdAt = createdAt ?: "N/A",
+        updatedAt = updatedAt ?: "N/A"
+    )
+}
