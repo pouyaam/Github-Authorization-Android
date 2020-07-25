@@ -2,7 +2,7 @@ package com.mydigipay.challenge.presentation.model
 
 data class UserItem(
     var login: String,
-    var id: String,
+    var id: Int,
     var nodeId: String,
     var avatarUrl: String,
     var gravatarId: String,
@@ -27,10 +27,10 @@ data class UserItem(
     var hireable: Boolean = false,
     var bio: String,
     var twitterUsername: String,
-    var publicRepos: String,
-    var publicGists: String,
-    var followers: String,
-    var following: String,
+    var publicRepos: Int,
+    var publicGists: Int,
+    var followers: Int,
+    var following: Int,
     var createdAt: String,
     var updatedAt: String
 )

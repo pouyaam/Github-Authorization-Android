@@ -1,11 +1,11 @@
-package com.mydigipay.challenge.data.model.search
+package com.mydigipay.challenge.data.model.user
 
 import com.google.gson.annotations.SerializedName
 import com.mydigipay.challenge.domain.model.User
 
 data class UserEntity(
     @SerializedName("login") var login: String? = null,
-    @SerializedName("id") var id: String? = null,
+    @SerializedName("id") var id: Int? = null,
     @SerializedName("node_id") var nodeId: String? = null,
     @SerializedName("avatar_url") var avatarUrl: String? = null,
     @SerializedName("gravatar_id") var gravatarId: String? = null,
@@ -30,10 +30,10 @@ data class UserEntity(
     @SerializedName("hireable") var hireable: Boolean? = false,
     @SerializedName("bio") var bio: String? = null,
     @SerializedName("twitter_username") var twitterUsername: String? = null,
-    @SerializedName("public_repos") var publicRepos: String? = null,
-    @SerializedName("public_gists") var publicGists: String? = null,
-    @SerializedName("followers") var followers: String? = null,
-    @SerializedName("following") var following: String? = null,
+    @SerializedName("public_repos") var publicRepos: Int? = null,
+    @SerializedName("public_gists") var publicGists: Int? = null,
+    @SerializedName("followers") var followers: Int? = null,
+    @SerializedName("following") var following: Int? = null,
     @SerializedName("created_at") var createdAt: String? = null,
     @SerializedName("updated_at") var updatedAt: String? = null
 )

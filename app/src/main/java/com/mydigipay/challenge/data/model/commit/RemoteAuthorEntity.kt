@@ -5,17 +5,17 @@ import com.mydigipay.challenge.domain.model.CommitAuthor
 
 data class RemoteAuthorEntity(
     @SerializedName("date")
-    val date: String?,
+    val date: String? = null,
     @SerializedName("email")
-    val email: String?,
+    val email: String? = null,
     @SerializedName("name")
-    val name: String?
+    val name: String? = null
 )
 
 fun RemoteAuthorEntity.mapToDomainModel(): CommitAuthor {
     return CommitAuthor(
-        name = name ?: "",
-        email = email ?: "",
-        date = date ?: ""
+        name = name,
+        email = email,
+        date = date
     )
 }

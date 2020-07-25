@@ -3,7 +3,7 @@ package com.mydigipay.challenge.data.model.search
 import com.google.gson.annotations.SerializedName
 import com.mydigipay.challenge.domain.model.RemoteRepository
 
-data class RemoteRepositorySearchResponse(
+data class RemoteRepositoryEntity(
     @SerializedName("id")
     var id: Int? = 0,
 
@@ -74,7 +74,7 @@ data class RemoteRepositorySearchResponse(
     var score: Double? = 0.0
 )
 
-fun RemoteRepositorySearchResponse.mapToDomainModel(): RemoteRepository {
+fun RemoteRepositoryEntity.mapToDomainModel(): RemoteRepository {
     return RemoteRepository(
         id = id,
         nodeId = nodeId,

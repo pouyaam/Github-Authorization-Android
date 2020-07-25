@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class RemoteCommiterEntity(
     @SerializedName("date")
-    val date: String,
+    val date: String?= null,
     @SerializedName("email")
-    val email: String,
+    val email: String?= null,
     @SerializedName("name")
-    val name: String
+    val name: String?= null
 )

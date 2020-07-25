@@ -1,15 +1,14 @@
 package com.mydigipay.challenge.data.model.search
 
 import com.google.gson.annotations.SerializedName
-import com.mydigipay.challenge.data.model.search.RemoteRepositorySearchResponse
 
 data class SearchResponse(
     @SerializedName("total_count")
-    val totalCount: Int,
+    val totalCount: Int? = 0,
 
     @SerializedName("incomplete_results")
-    val isIncompleteResults: Boolean,
+    val isIncompleteResults: Boolean? = false,
 
     @SerializedName("items")
-    val remoteSearchItemEntities: List<RemoteRepositorySearchResponse>
+    val remoteSearchItemEntities: List<RemoteRepositoryEntity>? = null
 )

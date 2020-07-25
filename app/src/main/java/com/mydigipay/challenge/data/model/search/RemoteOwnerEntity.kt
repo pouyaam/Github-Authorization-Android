@@ -11,13 +11,13 @@ data class RemoteOwnerEntity(
     val id: Int? = 0,
 
     @SerializedName("node_id")
-    val nodeId: String? = "",
+    val nodeId: String? = null,
 
     @SerializedName("avatar_url")
-    val avatarUrl: String? = "",
+    val avatarUrl: String? = null,
 
     @SerializedName("gravatar_id")
-    val gravatarId: String? = "",
+    val gravatarId: String? = null,
 
     @SerializedName("url")
     val url: String? = null,

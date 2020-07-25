@@ -4,17 +4,17 @@ import com.google.gson.annotations.SerializedName
 
 data class RemoteCommitEntity(
     @SerializedName("author")
-    val author: RemoteAuthorEntity?,
+    val author: RemoteAuthorEntity?= null,
     @SerializedName("comment_count")
-    val commentCount: Int?,
+    val commentCount: Int?= null,
     @SerializedName("committer")
-    val committer: RemoteCommiterEntity?,
+    val committer: RemoteCommiterEntity?= null,
     @SerializedName("message")
-    val message: String?,
+    val message: String?= null,
     @SerializedName("tree")
-    val tree: Tree?,
+    val tree: Tree?= null,
     @SerializedName("url")
-    val url: String?,
+    val url: String?= null,
     @SerializedName("verification")
-    val verification: Verification?
+    val verification: Verification?= null
 )

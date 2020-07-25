@@ -5,29 +5,29 @@ import com.mydigipay.challenge.domain.model.Commit
 
 data class CommitResponseEntity(
     @SerializedName("author")
-    val author: RemoteAuthorEntity?,
+    val author: RemoteAuthorEntity? = null,
     @SerializedName("comments_url")
-    val commentsUrl: String?,
+    val commentsUrl: String? = null,
     @SerializedName("commit")
-    val commit: RemoteCommitEntity?,
+    val commit: RemoteCommitEntity? = null,
     @SerializedName("committer")
-    val committer: RemoteCommiterEntity?,
+    val committer: RemoteCommiterEntity? = null,
     @SerializedName("html_url")
-    val htmlUrl: String?,
+    val htmlUrl: String? = null,
     @SerializedName("node_id")
-    val nodeId: String?,
+    val nodeId: String? = null,
     @SerializedName("parents")
-    val parents: List<RemoteParentEntity>?,
+    val parents: List<RemoteParentEntity>? = null,
     @SerializedName("sha")
-    val sha: String?,
+    val sha: String? = null,
     @SerializedName("url")
-    val url: String?
+    val url: String? = null
 )
 
 fun CommitResponseEntity.mapToDomainModel(): Commit {
     return Commit(
-        message = commit?.message ?: "",
+        message = commit?.message,
         author = commit?.author?.mapToDomainModel(),
-        commentsCount = commit?.commentCount ?: 0
+        commentsCount = commit?.commentCount
     )
 }

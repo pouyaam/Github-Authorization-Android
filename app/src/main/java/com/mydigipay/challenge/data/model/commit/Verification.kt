@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class Verification(
     @SerializedName("payload")
-    val payload: Any?,
+    val payload: Any? = null,
     @SerializedName("reason")
-    val reason: String?,
+    val reason: String? = null,
     @SerializedName("signature")
-    val signature: Any?,
+    val signature: Any? = null,
     @SerializedName("verified")
-    val verified: Boolean?
+    val verified: Boolean? = null
 )
