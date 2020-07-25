@@ -8,6 +8,9 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.mydigipay.challenge.app.Const.CLIENT_ID
+import com.mydigipay.challenge.app.Const.REDIRECT_URI
+import com.mydigipay.challenge.app.Const.STATE
 import com.mydigipay.challenge.app.ViewModelProviderFactory
 import com.mydigipay.challenge.app.component
 import com.mydigipay.challenge.presentation.github.MainActivity
@@ -17,10 +20,6 @@ import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_auth.*
 import javax.inject.Inject
 
-const val CLIENT_ID = "685e6244dd56a72db4c6"
-const val CLIENT_SECRET = "50c7fa47bd384aaf6487c4ae2a375a8f6891cda0"
-const val REDIRECT_URI = "challenge://mydigipay.com/mohsen/callback"
-const val STATE = "0123456"
 
 class AuthActivity : AppCompatActivity() {
 
