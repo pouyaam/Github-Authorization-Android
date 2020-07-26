@@ -10,7 +10,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.mydigipay.challenge.github.R
+import com.mydigipay.challenge.R
 import com.mydigipay.challenge.presentation.design.TAG
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
