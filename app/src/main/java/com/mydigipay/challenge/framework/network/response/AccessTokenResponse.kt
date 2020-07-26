@@ -1,8 +1,8 @@
-package com.mydigipay.challenge.network.oauth
+package com.mydigipay.challenge.framework.network.response
 
 import com.google.gson.annotations.SerializedName
 
-data class ResponseAccessToken(
+data class AccessTokenResponse(
     @SerializedName("access_token")
     var accessToken: String,
 

@@ -9,6 +9,6 @@ interface AccessTokenDataSource {
         clientSecret: String,
         code: String,
         redirectUri: String,
-        state: String = "0"
+        state: String
     ): Resource<AccessToken>
 }
