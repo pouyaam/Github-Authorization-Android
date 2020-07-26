@@ -14,4 +14,9 @@ class PreferenceModule {
     @Singleton
     fun provideSharedPreferences(context: Context): SharedPreferences =
         PreferenceManager.getDefaultSharedPreferences(context)
+
+    @Provides
+    @Singleton
+    fun provideTokenDao(sharedPreferences: SharedPreferences): TokenDao =
+        TokenDaoImpl(sharedPreferences)
 }
