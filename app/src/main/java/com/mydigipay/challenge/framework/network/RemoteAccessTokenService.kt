@@ -10,6 +10,6 @@ import retrofit2.http.POST
 interface RemoteAccessTokenService {
 
     @Headers("Accept:application/json")
-    @POST
+    @POST(".")
     suspend fun fetchAccessToken(@Body accessTokenRequest: AccessTokenRequest): Response<AccessTokenResponse>
 }

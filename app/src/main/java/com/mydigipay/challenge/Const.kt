@@ -4,10 +4,10 @@ package com.mydigipay.challenge
 const val AUTHORIZE_URL: String = "https://github.com/login/oauth/authorize"
 
 // The base URL used for request AccessToken from GitHub.
-const val ACCESS_TOKEN_URL: String = "https://github.com/login/oauth/access_token"
+const val ACCESS_TOKEN_URL: String = "https://github.com/login/oauth/access_token/"
 
 // The base URL used for request AccessToken from GitHub.
-const val REST_API_URL: String = "https://api.github.com"
+const val REST_API_URL: String = "https://api.github.com/"
 
 // The URL in your application where users are sent after authorization.
 const val REDIRECT_URI: String = "com.mydigipay.challenge://oauth2redirect"
