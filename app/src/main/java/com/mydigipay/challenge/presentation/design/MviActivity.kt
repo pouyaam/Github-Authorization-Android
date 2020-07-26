@@ -13,16 +13,16 @@ import com.mydigipay.challenge.common.BaseActivity
 abstract class MviActivity<STATE, EFFECT, EVENT, ViewModel : MviViewModel<STATE, EFFECT, EVENT>> :
     BaseActivity() {
 
-    abstract val viewModel: ViewModel
+    lateinit var viewModel: ViewModel
 
-    private val viewStateObserver = Observer<STATE> {
+    protected val viewStateObserver = Observer<STATE> {
         // DEBUG
         Log.d(TAG, "observed viewState : $it")
 
         renderViewState(it)
     }
 
-    private val viewEffectObserver = Observer<EFFECT> {
+    protected val viewEffectObserver = Observer<EFFECT> {
         // DEBUG
         Log.d(TAG, "observed viewEffect : $it")
 
@@ -32,8 +32,10 @@ abstract class MviActivity<STATE, EFFECT, EVENT, ViewModel : MviViewModel<STATE,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel.viewStates().observe(this, viewStateObserver)
-        viewModel.viewEffects().observe(this, viewEffectObserver)
+        /**
+         * Consider to start observing viewStates and viewEffects here,
+         * using viewStateObserver and viewEffectObserver.
+         */
     }
 
     abstract fun renderViewState(viewState: STATE)

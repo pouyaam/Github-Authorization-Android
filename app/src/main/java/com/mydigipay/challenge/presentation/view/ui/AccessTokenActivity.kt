@@ -4,20 +4,22 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
-import androidx.activity.viewModels
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.mydigipay.challenge.AUTHORIZE_URL
 import com.mydigipay.challenge.CLIENT_ID
-import com.mydigipay.challenge.REDIRECT_URI
 import com.mydigipay.challenge.R
+import com.mydigipay.challenge.REDIRECT_URI
 import com.mydigipay.challenge.databinding.ActivityAccessTokenBinding
 import com.mydigipay.challenge.presentation.design.MviActivity
 import com.mydigipay.challenge.presentation.viewmodel.AccessTokenViewModel
 import com.mydigipay.challenge.presentation.viewstate.AccessTokenViewEffect
 import com.mydigipay.challenge.presentation.viewstate.AccessTokenViewEvent
 import com.mydigipay.challenge.presentation.viewstate.AccessTokenViewState
-import java.lang.IllegalArgumentException
+import javax.inject.Inject
+
 
 class AccessTokenActivity :
     MviActivity<AccessTokenViewState, AccessTokenViewEffect, AccessTokenViewEvent, AccessTokenViewModel>() {
@@ -26,7 +28,8 @@ class AccessTokenActivity :
      * Values
      */
 
-    override val viewModel: AccessTokenViewModel by viewModels()
+    @Inject
+    internal lateinit var viewModelProviderFactory: ViewModelProvider.Factory
 
     private lateinit var dataBinding: ActivityAccessTokenBinding
 
@@ -82,13 +85,24 @@ class AccessTokenActivity :
         /* Nothing */
     }
 
+    override fun setupObservers() {
+        super.setupObservers()
+
+        viewModel =
+            ViewModelProvider(this, viewModelProviderFactory).get(AccessTokenViewModel::class.java)
+
+        viewModel.viewStates().observe(this, viewStateObserver)
+        viewModel.viewEffects().observe(this, viewEffectObserver)
+    }
+
     override fun renderViewState(viewState: AccessTokenViewState) {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun renderViewEffect(viewEffect: AccessTokenViewEffect) {
         when (viewEffect) {
             AccessTokenViewEffect.StartAuthorizationAction -> startAuthorizationAction()
+            is AccessTokenViewEffect.ShowToast -> showToast(viewEffect.message)
             else -> throw IllegalArgumentException("Un-known view effect")
         }
     }
@@ -107,5 +121,13 @@ class AccessTokenActivity :
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(url)
         startActivity(intent)
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(
+            this,
+            message,
+            Toast.LENGTH_LONG
+        ).show()
     }
 }
