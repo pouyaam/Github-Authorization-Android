@@ -1,11 +1,15 @@
 package com.mydigipay.challenge.presentation.view.ui
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
+import com.mydigipay.challenge.AUTHORIZE_URL
+import com.mydigipay.challenge.CLIENT_ID
+import com.mydigipay.challenge.REDIRECT_URI
 import com.mydigipay.challenge.R
 import com.mydigipay.challenge.databinding.ActivityAccessTokenBinding
 import com.mydigipay.challenge.presentation.design.MviActivity
@@ -13,6 +17,7 @@ import com.mydigipay.challenge.presentation.viewmodel.AccessTokenViewModel
 import com.mydigipay.challenge.presentation.viewstate.AccessTokenViewEffect
 import com.mydigipay.challenge.presentation.viewstate.AccessTokenViewEvent
 import com.mydigipay.challenge.presentation.viewstate.AccessTokenViewState
+import java.lang.IllegalArgumentException
 
 class AccessTokenActivity :
     MviActivity<AccessTokenViewState, AccessTokenViewEffect, AccessTokenViewEvent, AccessTokenViewModel>() {
@@ -24,6 +29,10 @@ class AccessTokenActivity :
     override val viewModel: AccessTokenViewModel by viewModels()
 
     private lateinit var dataBinding: ActivityAccessTokenBinding
+
+    /**
+     * Workflow
+     */
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
@@ -47,12 +56,18 @@ class AccessTokenActivity :
     }
 
     override fun extractIntentParams(data: Intent?) {
-        // Nothing
+        data?.let {
+            viewModel.process(AccessTokenViewEvent.NewIntentReceived(it))
+        }
     }
 
     override fun setupViews() {
         // Set Content View
         dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_access_token)
+
+        dataBinding.content.authorizeButton.setOnClickListener {
+            viewModel.process(AccessTokenViewEvent.AuthorizationButtonClicked)
+        }
     }
 
     override fun setupActionBar() {
@@ -72,6 +87,25 @@ class AccessTokenActivity :
     }
 
     override fun renderViewEffect(viewEffect: AccessTokenViewEffect) {
-        TODO("Not yet implemented")
+        when (viewEffect) {
+            AccessTokenViewEffect.StartAuthorizationAction -> startAuthorizationAction()
+            else -> throw IllegalArgumentException("Un-known view effect")
+        }
+    }
+
+    /**
+     * Functionality
+     */
+
+    private fun startAuthorizationAction() {
+        val url = "$AUTHORIZE_URL" +
+                "?client_id=$CLIENT_ID" +
+                "&redirect_uri=$REDIRECT_URI" +
+                "&scope=repo,user" +
+                "&state=0"
+
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
     }
 }
