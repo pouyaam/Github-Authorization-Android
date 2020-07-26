@@ -2,8 +2,12 @@ package com.mydigipay.challenge.authorization
 
 import com.mydigipay.challenge.model.Resource
 import javax.inject.Inject
+import javax.inject.Named
 
-class AccessTokenRepository @Inject constructor(private val dataSource: AccessTokenDataSource) {
+class AccessTokenRepository @Inject constructor(
+    @Named("local") private val localDataSource: AccessTokenDataSource,
+    @Named("remote") private val remoteDataSource: AccessTokenDataSource
+) {
 
     suspend fun getAccessToken(
         clientId: String,
@@ -12,5 +16,11 @@ class AccessTokenRepository @Inject constructor(private val dataSource: AccessTo
         redirectUri: String,
         state: String = "0"
     ): Resource<AccessToken> =
-        dataSource.getAccessToken(clientId, clientSecret, code, redirectUri, state)
+        remoteDataSource.getAccessToken(clientId, clientSecret, code, redirectUri, state)
+
+     suspend fun saveAccessToken(token: String): Resource<Unit> =
+         localDataSource.saveAccessToken(token)
+
+     suspend fun readAccessToken(): Resource<String> =
+         localDataSource.readAccessToken()
 }

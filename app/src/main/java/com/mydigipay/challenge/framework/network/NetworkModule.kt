@@ -31,12 +31,10 @@ class NetworkModule {
     @Singleton
     @Named("access_token")
     fun provideOkHttpClientForAccessToken(
-        loggingInterceptor: HttpLoggingInterceptor,
-        requestInterceptor: RequestInterceptor
+        loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
-            .addInterceptor(requestInterceptor)
             .build()
     }
 
@@ -65,10 +63,12 @@ class NetworkModule {
     @Singleton
     @Named("rest_api")
     fun provideOkHttpClientForRestApi(
-        loggingInterceptor: HttpLoggingInterceptor
+        loggingInterceptor: HttpLoggingInterceptor,
+        requestInterceptor: RequestInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(requestInterceptor)
             .build()
     }
 

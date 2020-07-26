@@ -10,5 +10,9 @@ interface AccessTokenDataSource {
         code: String,
         redirectUri: String,
         state: String
-    ): Resource<AccessToken>
+    ): Resource<AccessToken> = Resource.error(IllegalAccessException())
+
+    suspend fun saveAccessToken(token: String): Resource<Unit> = Resource.error(IllegalAccessException())
+
+    suspend fun readAccessToken(): Resource<String> = Resource.error(IllegalAccessException())
 }
