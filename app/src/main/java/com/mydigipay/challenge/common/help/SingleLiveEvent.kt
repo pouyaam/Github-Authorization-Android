@@ -1,5 +1,6 @@
 package com.mydigipay.challenge.common.help
 
+import android.util.Log
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
@@ -14,12 +15,13 @@ import java.util.concurrent.atomic.AtomicBoolean
  * can be emitted if the observer is active. This LiveData only calls the observable if there's an
  * explicit call to setValue() or call().
  *
- * Note: ONLY ONE OBSERVER IS GOING TO BE NOTIFIED OF CHANGES AND THERE IS NO GUARANTEE WHICH ONE.
- * IF THIS CAUSES ANY ISSUES THEN USE 'EVENT WRAPPER'.
- * Event Wrapper:
+ * Note that only one observer is going to be notified of changes and there is no guarantee which one.
+ * If this causes any issues then use 'EVENT WRAPPER'.
+ *
+ * Event Wrapper Reference:
  * [https://medium.com/androiddevelopers/livedata-with-snackbar-navigation-and-other-events-the-singleliveevent-case-ac2622673150]
  *
- * Reference:
+ * Source Reference:
  * [https://github.com/android/architecture-samples]
  */
 class SingleLiveEvent<T> : MutableLiveData<T>() {
@@ -27,7 +29,12 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
 
     @MainThread
     override fun observe(owner: LifecycleOwner, observer: Observer<in T>) {
-        super.observe(owner, Observer<T> { t ->
+        if (hasActiveObservers()) {
+            Log.w(TAG, "Multiple observers registered but only one will be notified of changes.")
+        }
+
+        // Observe the internal MutableLiveData
+        super.observe(owner, Observer { t: T ->
             if (pending.compareAndSet(true, false)) {
                 observer.onChanged(t)
             }
@@ -38,5 +45,25 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
     override fun setValue(t: T?) {
         pending.set(true)
         super.setValue(t)
+    }
+
+    /**
+     * Used for cases where T is Void, to make calls cleaner.
+     */
+    @MainThread
+    fun call() {
+        value = null
+    }
+
+    /**
+     * Added by @Yusmle for cases where T is not Void, to make calls cleaner.
+     */
+    @MainThread
+    fun call(t: T) {
+        value = t
+    }
+
+    companion object {
+        private const val TAG = "SingleLiveEvent"
     }
 }
