@@ -6,7 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.mydigipay.challenge.CLIENT_ID
 import com.mydigipay.challenge.CLIENT_SECRET
 import com.mydigipay.challenge.REDIRECT_URI
-import com.mydigipay.challenge.authorization.AccessTokenRepository
+import com.mydigipay.challenge.authorization.GetAccessTokenUseCase
+import com.mydigipay.challenge.authorization.SaveAccessTokenUseCase
 import com.mydigipay.challenge.model.Status
 import com.mydigipay.challenge.presentation.design.MviViewModel
 import com.mydigipay.challenge.presentation.viewstate.AccessTokenViewEffect
@@ -18,7 +19,8 @@ import javax.inject.Inject
 
 class AccessTokenViewModel @Inject constructor(
     application: Application,
-    private val accessTokenRepository: AccessTokenRepository
+    private val getAccessTokenUseCase: GetAccessTokenUseCase,
+    private val saveAccessTokenUseCase: SaveAccessTokenUseCase
 ) : MviViewModel<AccessTokenViewState, AccessTokenViewEffect, AccessTokenViewEvent>(application) {
 
     init {
@@ -56,7 +58,7 @@ class AccessTokenViewModel @Inject constructor(
         viewState = viewState.copy(fetchStatus = FetchStatus.Fetching)
 
         viewModelScope.launch {
-            val result = accessTokenRepository.getAccessToken(
+            val result = getAccessTokenUseCase(
                 CLIENT_ID,
                 CLIENT_SECRET,
                 authorizationCode,
@@ -71,11 +73,19 @@ class AccessTokenViewModel @Inject constructor(
                     )
                 }
                 Status.SUCCESS -> {
+                    saveAccessToken(result.data!!.accessToken)
+
                     viewState =
                         viewState.copy(fetchStatus = FetchStatus.Fetched, accessToken = result.data)
                 }
                 else -> throw IllegalArgumentException("Un-expected API call status")
             }
+        }
+    }
+
+    private fun saveAccessToken(token: String) {
+        viewModelScope.launch {
+            saveAccessTokenUseCase(token)
         }
     }
 }

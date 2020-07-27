@@ -3,7 +3,7 @@ package com.mydigipay.challenge.authorization
 import com.mydigipay.challenge.model.Resource
 import javax.inject.Inject
 
-class AccessTokenUseCase @Inject constructor(private val repository: AccessTokenRepository) {
+class GetAccessTokenUseCase @Inject constructor(private val repository: AccessTokenRepository) {
 
     suspend operator fun invoke(
         clientId: String,
