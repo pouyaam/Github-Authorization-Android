@@ -1,0 +1,21 @@
+apply plugin: Plugins.javaLibrary
+apply plugin: Plugins.kotlin
+apply plugin: Plugins.kotlinKapt
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation Dependencies.kotlin
+
+    /* RxJava */
+    implementation Dependencies.rxJva
+    implementation Dependencies.rxAndroid
+
+    /* Dependency Injection using Dagger2 */
+    implementation Dependencies.dagger
+    implementation Dependencies.daggerAndroidSupport
+    kapt Dependencies.daggerCompiler
+    kapt Dependencies.daggerAndroidProcessor
+}
+
+sourceCompatibility = "8"
+targetCompatibility = "8"
