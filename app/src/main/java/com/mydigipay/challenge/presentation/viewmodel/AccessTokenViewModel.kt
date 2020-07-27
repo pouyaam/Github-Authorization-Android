@@ -67,7 +67,8 @@ class AccessTokenViewModel @Inject constructor(
 
             when (result.status) {
                 Status.ERROR -> {
-                    viewState = viewState.copy(fetchStatus = FetchStatus.Fetched)
+                    viewState = viewState.copy(fetchStatus = FetchStatus.NotFetched)
+
                     viewEffect = AccessTokenViewEffect.ShowToast(
                         message = result.error?.message ?: "Un-known API call error"
                     )

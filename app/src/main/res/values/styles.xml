@@ -15,12 +15,37 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
     <style name="AppTheme.ToolbarOverlay" parent="ThemeOverlay.AppCompat.Light">
         <!-- Change Overflow Icon Color in ActionMode this way -->
         <item name="android:textColorSecondary">@color/colorTextTitle</item>
         <item name="android:contentInsetStart">@dimen/toolbar_margin_left</item>
         <item name="android:contentInsetEnd">@dimen/toolbar_margin_right</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- TextView Styles -->
+    <style name="styleTextTitle" parent="android:TextAppearance.Large">
+        <item name="android:textColor">@color/colorTextTitle</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="styleTextDescription" parent="android:TextAppearance.Medium">
+        <item name="android:textColor">@color/colorTextDescription</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="styleTextComment" parent="android:TextAppearance.Medium">
+        <item name="android:textColor">@color/colorTextComment</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <!-- ProgressBar Styles -->
+    <style name="styleLinearProgress" parent="Theme.MaterialComponents.Light">
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="styleCircleProgress" parent="Theme.MaterialComponents.Light">
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 </resources>

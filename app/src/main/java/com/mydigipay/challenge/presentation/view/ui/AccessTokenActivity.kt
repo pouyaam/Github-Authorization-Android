@@ -18,6 +18,7 @@ import com.mydigipay.challenge.presentation.viewmodel.AccessTokenViewModel
 import com.mydigipay.challenge.presentation.viewstate.AccessTokenViewEffect
 import com.mydigipay.challenge.presentation.viewstate.AccessTokenViewEvent
 import com.mydigipay.challenge.presentation.viewstate.AccessTokenViewState
+import com.mydigipay.challenge.presentation.viewstate.FetchStatus
 import javax.inject.Inject
 
 
@@ -96,7 +97,20 @@ class AccessTokenActivity :
     }
 
     override fun renderViewState(viewState: AccessTokenViewState) {
-        //TODO("Not yet implemented")
+        when (viewState.fetchStatus) {
+            is FetchStatus.Fetching -> with(dataBinding.content) {
+                isLoading = true
+                executePendingBindings()
+            }
+            is FetchStatus.Fetched -> with(dataBinding.content) {
+                isLoading = false
+                executePendingBindings()
+            }
+            is FetchStatus.NotFetched -> with(dataBinding.content) {
+                isLoading = false
+                executePendingBindings()
+            }
+        }
     }
 
     override fun renderViewEffect(viewEffect: AccessTokenViewEffect) {

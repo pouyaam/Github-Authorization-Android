@@ -2,7 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data />
+    <data>
+
+        <variable
+            name="isLoading"
+            type="Boolean" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -26,7 +31,18 @@
                 android:text="@string/authorize"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
                 app:strokeColor="@color/colorPrimary"
-                app:strokeWidth="1dp" />
+                app:strokeWidth="1dp"
+                app:visibleGone="@{!isLoading}" />
+
+            <ProgressBar
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="64dp"
+                android:layout_height="6dp"
+                android:layout_centerInParent="true"
+                android:indeterminate="true"
+                android:padding="@dimen/padding_16"
+                android:theme="@style/styleCircleProgress"
+                app:visibleGone="@{isLoading}" />
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
