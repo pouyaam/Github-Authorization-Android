@@ -1,3 +1,8 @@
 <resources>
+    <dimen name="toolbar_margin_left">32dp</dimen>
+    <dimen name="toolbar_margin_right">32dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
+    <dimen name="padding_24">24dp</dimen>
 </resources>

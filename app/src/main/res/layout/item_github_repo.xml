@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.graphics.Color"/>
+
+        <variable
+            name="item"
+            type="com.mydigipay.challenge.presentation.model.ListItem.GithubRepoListItem" />
+
+        <variable
+            name="callback"
+            type="com.mydigipay.challenge.presentation.view.callback.ListItemCallback" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:onClick="@{() -> callback.onClick(item)}"
+        android:onLongClick="@{(view) -> callback.onLongClick(view, item)}"
+        android:padding="8dp"
+        android:translationZ="4dp"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:padding="@dimen/padding_8"
+                android:text="@{item.githubRepo.name}"
+                android:textColor="@color/colorTextTitle"
+                android:textStyle="bold"
+                tools:text="@string/app_name" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

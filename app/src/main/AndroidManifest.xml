@@ -1,35 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mydigipay.challenge.github">
-    <uses-permission android:name="android.permission.INTERNET"/>
+    package="com.mydigipay.challenge">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name="com.mydigipay.challenge.app.App">
+        android:theme="@style/AppTheme">
+
         <activity
-            android:name="com.mydigipay.challenge.github.MainActivity"
-            android:label="@string/app_name"
+            android:name=".presentation.view.ui.AccessTokenActivity"
+            android:label="@string/title_activity_access_token"
             android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
 
-        <activity android:name="com.mydigipay.challenge.github.LoginUriActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="challenge" />
+                <!-- My custom URI scheme -->
+                <data
+                    android:scheme="com.mydigipay.challenge"
+                    android:host="oauth2redirect" />
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".presentation.view.ui.GithubReposActivity"
+            android:label="@string/title_activity_github_repos"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
-
 </manifest>

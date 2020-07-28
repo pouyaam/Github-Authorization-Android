@@ -1,5 +1,19 @@
 <resources>
-    <string name="app_name">Github Login</string>
+    <string name="app_name">GitHub Challenge</string>
     <string name="action_settings">Settings</string>
-    <string name="authorize">AUTHORIZE</string>
+
+    <!-- Strings used for activities -->
+    <string name="title_activity_access_token">GitHub Login</string>
+    <string name="title_activity_github_repos">GitHub Repos</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="github_repos_fragment_label">GitHub Repos</string>
+    <string name="repo_commits_fragment_label">Repo Commits</string>
+
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="authorize">Authorize</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

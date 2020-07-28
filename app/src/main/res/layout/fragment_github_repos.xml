@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="initialLoading"
+            type="Boolean" />
+
+        <variable
+            name="initialError"
+            type="Boolean" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:refreshing="@{initialLoading}">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/githubRepos"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="GithubRepos"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <TextSwitcher
+            android:id="@+id/errorAnnounce"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/padding_24"
+            android:layout_marginEnd="@dimen/padding_24"
+            android:background="@drawable/_border_custom"
+            android:minHeight="128dp"
+            android:padding="@dimen/padding_24"
+            app:visibleGone="@{initialError}" />
+    </RelativeLayout>
+</layout>
