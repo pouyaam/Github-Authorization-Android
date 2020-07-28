@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/GithubReposFragment">
+
+    <fragment
+        android:id="@+id/GithubReposFragment"
+        android:name="com.mydigipay.challenge.presentation.view.ui.GithubReposFragment"
+        android:label="@string/github_repos_fragment_label"
+        tools:layout="@layout/fragment_github_repos">
+
+        <action
+            android:id="@+id/action_GithubReposFragment_to_RepoCommitsFragment"
+            app:destination="@id/RepoCommitsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/RepoCommitsFragment"
+        android:name="com.mydigipay.challenge.presentation.view.ui.RepoCommitsFragment"
+        android:label="@string/repo_commits_fragment_label"
+        tools:layout="@layout/fragment_repo_commits">
+
+        <action
+            android:id="@+id/action_RepoCommitsFragment_to_GithubReposFragment"
+            app:destination="@id/GithubReposFragment" />
+    </fragment>
+</navigation>

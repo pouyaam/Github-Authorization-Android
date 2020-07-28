@@ -1,13 +1,13 @@
 package  com.mydigipay.challenge.framework.di.modules
 
 import com.mydigipay.challenge.authorization.AccessTokenDataSource
-import com.mydigipay.challenge.framework.network.NetworkModule
-import com.mydigipay.challenge.framework.network.RemoteAccessTokenDataSource
-import com.mydigipay.challenge.framework.network.RemoteAccessTokenService
+import com.mydigipay.challenge.framework.network.*
 import com.mydigipay.challenge.framework.network.mapper.AccessTokenMapper
+import com.mydigipay.challenge.framework.network.mapper.GithubRepoMapper
 import com.mydigipay.challenge.framework.preference.LocalAccessTokenDataSource
 import com.mydigipay.challenge.framework.preference.PreferenceModule
 import com.mydigipay.challenge.framework.preference.TokenDao
+import com.mydigipay.challenge.repositories.GithubRepoDataSource
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -33,5 +33,14 @@ class DataSourceModule {
         service: TokenDao
     ): AccessTokenDataSource {
         return LocalAccessTokenDataSource(service)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRemoteGithubRepoDataSource(
+        service: RemoteGithubRepoService,
+        mapper: GithubRepoMapper
+    ): GithubRepoDataSource {
+        return RemoteGithubRepoDataSource(service, mapper)
     }
 }

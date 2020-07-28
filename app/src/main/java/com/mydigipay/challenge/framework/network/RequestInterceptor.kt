@@ -14,8 +14,8 @@ class RequestInterceptor @Inject constructor() : Interceptor {
         var request = chain.request()
 
         val httpUrl = request.url.newBuilder()
-            .addQueryParameter(CLIENT_ID_QUERY, CLIENT_ID_VALUE)
-            .addQueryParameter(CLIENT_SECRET_QUERY, CLIENT_SECRET_VALUE)
+            //.addQueryParameter(CLIENT_ID_QUERY, CLIENT_ID_VALUE)
+            //.addQueryParameter(CLIENT_SECRET_QUERY, CLIENT_SECRET_VALUE)
             .build()
 
         request = request.newBuilder().url(httpUrl).build()

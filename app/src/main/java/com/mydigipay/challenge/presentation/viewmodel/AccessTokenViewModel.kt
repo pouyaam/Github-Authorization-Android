@@ -6,14 +6,12 @@ import androidx.lifecycle.viewModelScope
 import com.mydigipay.challenge.CLIENT_ID
 import com.mydigipay.challenge.CLIENT_SECRET
 import com.mydigipay.challenge.REDIRECT_URI
+import com.mydigipay.challenge.authorization.AccessToken
 import com.mydigipay.challenge.authorization.GetAccessTokenUseCase
 import com.mydigipay.challenge.authorization.SaveAccessTokenUseCase
 import com.mydigipay.challenge.model.Status
 import com.mydigipay.challenge.presentation.design.MviViewModel
-import com.mydigipay.challenge.presentation.viewstate.AccessTokenViewEffect
-import com.mydigipay.challenge.presentation.viewstate.AccessTokenViewEvent
-import com.mydigipay.challenge.presentation.viewstate.AccessTokenViewState
-import com.mydigipay.challenge.presentation.viewstate.FetchStatus
+import com.mydigipay.challenge.presentation.viewstate.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,15 +22,15 @@ class AccessTokenViewModel @Inject constructor(
 ) : MviViewModel<AccessTokenViewState, AccessTokenViewEffect, AccessTokenViewEvent>(application) {
 
     init {
-        viewState = AccessTokenViewState(fetchStatus = FetchStatus.NotFetched)
+        viewState = AccessTokenViewState(fetchStatus = AccessTokenFetchStatus.NotFetched)
     }
 
     override fun process(viewEvent: AccessTokenViewEvent) {
         super.process(viewEvent)
 
         when (viewEvent) {
-            AccessTokenViewEvent.AuthorizationButtonClicked -> authorizationButtonClicked()
             is AccessTokenViewEvent.NewIntentReceived -> processNewIntent(viewEvent.intent)
+            AccessTokenViewEvent.AuthorizationButtonClicked -> authorizationButtonClicked()
         }
     }
 
@@ -55,7 +53,7 @@ class AccessTokenViewModel @Inject constructor(
     }
 
     private fun retrieveAccessToken(authorizationCode: String) {
-        viewState = viewState.copy(fetchStatus = FetchStatus.Fetching)
+        viewState = viewState.copy(fetchStatus = AccessTokenFetchStatus.Fetching)
 
         viewModelScope.launch {
             val result = getAccessTokenUseCase(
@@ -67,26 +65,28 @@ class AccessTokenViewModel @Inject constructor(
 
             when (result.status) {
                 Status.ERROR -> {
-                    viewState = viewState.copy(fetchStatus = FetchStatus.NotFetched)
+                    viewState = viewState.copy(fetchStatus = AccessTokenFetchStatus.NotFetched)
 
                     viewEffect = AccessTokenViewEffect.ShowToast(
                         message = result.error?.message ?: "Un-known API call error"
                     )
                 }
                 Status.SUCCESS -> {
-                    saveAccessToken(result.data!!.accessToken)
+                    saveAccessToken(result.data!!)
 
                     viewState =
-                        viewState.copy(fetchStatus = FetchStatus.Fetched, accessToken = result.data)
+                        viewState.copy(fetchStatus = AccessTokenFetchStatus.Fetched)
+
+                    viewEffect = AccessTokenViewEffect.NavigateToGithubRepos
                 }
                 else -> throw IllegalArgumentException("Un-expected API call status")
             }
         }
     }
 
-    private fun saveAccessToken(token: String) {
+    private fun saveAccessToken(accessToken: AccessToken) {
         viewModelScope.launch {
-            saveAccessTokenUseCase(token)
+            saveAccessTokenUseCase("${accessToken.tokenType} ${accessToken.accessToken}")
         }
     }
 }

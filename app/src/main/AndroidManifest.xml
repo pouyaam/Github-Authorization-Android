@@ -15,26 +15,28 @@
 
         <activity
             android:name=".presentation.view.ui.AccessTokenActivity"
-            android:label="@string/app_name"
+            android:label="@string/title_activity_access_token"
             android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <!-- My custom URI scheme -->
                 <data
                     android:scheme="com.mydigipay.challenge"
                     android:host="oauth2redirect" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".presentation.view.ui.GithubReposActivity"
+            android:label="@string/title_activity_github_repos"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 </manifest>

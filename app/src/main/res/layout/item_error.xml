@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.mydigipay.challenge.presentation.model.ListItem.ErrorListItem" />
+
+        <variable
+            name="callback"
+            type="com.mydigipay.challenge.presentation.view.callback.ListItemCallback" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:onClick="@{() -> callback.onClick(item)}"
+        android:onLongClick="@{(view) -> callback.onLongClick(view, item)}"
+        android:padding="8dp"
+        android:translationZ="4dp"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="false">
+
+        <TextView
+            android:id="@+id/errorMsg"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginStart="@dimen/padding_24"
+            android:layout_marginEnd="@dimen/padding_24"
+            android:gravity="center"
+            android:text="@{item.errorMsg}" />
+    </androidx.cardview.widget.CardView>
+</layout>

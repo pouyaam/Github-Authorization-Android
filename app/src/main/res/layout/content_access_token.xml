@@ -5,7 +5,7 @@
     <data>
 
         <variable
-            name="isLoading"
+            name="loading"
             type="Boolean" />
     </data>
 
@@ -22,17 +22,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.google.android.material.button.MaterialButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/authorizeButton"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="256dp"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/authorize"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 app:strokeColor="@color/colorPrimary"
                 app:strokeWidth="1dp"
-                app:visibleGone="@{!isLoading}" />
+                app:visibleGone="@{!loading}"/>
 
             <ProgressBar
                 style="@style/Widget.AppCompat.ProgressBar"
@@ -42,7 +42,7 @@
                 android:indeterminate="true"
                 android:padding="@dimen/padding_16"
                 android:theme="@style/styleCircleProgress"
-                app:visibleGone="@{isLoading}" />
+                app:visibleGone="@{loading}"/>
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

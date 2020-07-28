@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.mydigipay.challenge.common.help.ViewModelFactory
 import com.mydigipay.challenge.framework.di.keys.ViewModelKey
 import com.mydigipay.challenge.presentation.viewmodel.AccessTokenViewModel
+import com.mydigipay.challenge.presentation.viewmodel.GithubReposViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -19,4 +20,9 @@ abstract class ViewModelModule {
     @Binds
     @ViewModelKey(AccessTokenViewModel::class)
     abstract fun provideAccessTokenViewModel(viewModel: AccessTokenViewModel): ViewModel
+
+    @IntoMap
+    @Binds
+    @ViewModelKey(GithubReposViewModel::class)
+    abstract fun provideGithubReposViewModel(viewModel: GithubReposViewModel): ViewModel
 }

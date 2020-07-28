@@ -83,4 +83,10 @@ class NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideRemoteGithubRepoService(@Named("rest_api") retrofit: Retrofit): RemoteGithubRepoService {
+        return retrofit.create(RemoteGithubRepoService::class.java)
+    }
 }

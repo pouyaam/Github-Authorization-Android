@@ -9,18 +9,15 @@ import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.mydigipay.challenge.AUTHORIZE_URL
+import com.mydigipay.challenge.REDIRECT_URI
 import com.mydigipay.challenge.CLIENT_ID
 import com.mydigipay.challenge.R
-import com.mydigipay.challenge.REDIRECT_URI
 import com.mydigipay.challenge.databinding.ActivityAccessTokenBinding
 import com.mydigipay.challenge.presentation.design.MviActivity
 import com.mydigipay.challenge.presentation.viewmodel.AccessTokenViewModel
-import com.mydigipay.challenge.presentation.viewstate.AccessTokenViewEffect
-import com.mydigipay.challenge.presentation.viewstate.AccessTokenViewEvent
-import com.mydigipay.challenge.presentation.viewstate.AccessTokenViewState
-import com.mydigipay.challenge.presentation.viewstate.FetchStatus
+import com.mydigipay.challenge.presentation.viewstate.*
+import com.mydigipay.challenge.presentation.viewstate.AccessTokenFetchStatus.Fetching
 import javax.inject.Inject
-
 
 class AccessTokenActivity :
     MviActivity<AccessTokenViewState, AccessTokenViewEffect, AccessTokenViewEvent, AccessTokenViewModel>() {
@@ -83,7 +80,7 @@ class AccessTokenActivity :
     }
 
     override fun setupNavigation() {
-        /* Nothing */
+        // Nothing
     }
 
     override fun setupObservers() {
@@ -97,33 +94,29 @@ class AccessTokenActivity :
     }
 
     override fun renderViewState(viewState: AccessTokenViewState) {
-        when (viewState.fetchStatus) {
-            is FetchStatus.Fetching -> with(dataBinding.content) {
-                isLoading = true
-                executePendingBindings()
-            }
-            is FetchStatus.Fetched -> with(dataBinding.content) {
-                isLoading = false
-                executePendingBindings()
-            }
-            is FetchStatus.NotFetched -> with(dataBinding.content) {
-                isLoading = false
-                executePendingBindings()
-            }
+        with(dataBinding.content) {
+            this.loading = viewState.fetchStatus == Fetching
+            executePendingBindings()
         }
     }
 
     override fun renderViewEffect(viewEffect: AccessTokenViewEffect) {
         when (viewEffect) {
-            AccessTokenViewEffect.StartAuthorizationAction -> startAuthorizationAction()
             is AccessTokenViewEffect.ShowToast -> showToast(viewEffect.message)
-            else -> throw IllegalArgumentException("Un-known view effect")
+            AccessTokenViewEffect.StartAuthorizationAction -> startAuthorizationAction()
+            AccessTokenViewEffect.NavigateToGithubRepos -> navigateToGithubRepos()
+            else -> throw IllegalArgumentException("Un-expected view effect")
         }
     }
 
     /**
      * Functionality
      */
+
+    private fun navigateToGithubRepos() {
+        val i: Intent = Intent(this, GithubReposActivity::class.java)
+        startActivity(i)
+    }
 
     private fun startAuthorizationAction() {
         val url = "$AUTHORIZE_URL" +
